@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-11 11:55+0200\n"
+"POT-Creation-Date: 2024-10-11 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,20 +27,28 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: src/application.c:138
+#: src/application.c:137
 msgid "Dependencies"
 msgstr ""
 
-#: data/ui/window.blp:17 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/ui/window.blp:34
+msgid "Main Menu"
+msgstr ""
+
+#: data/ui/window.blp:43 data/ui/window.blp:47
+msgid "Text"
+msgstr ""
+
+#: data/ui/window.blp:53 data/ui/window.blp:57
+msgid "File"
+msgstr ""
+
+#: data/ui/window.blp:70 data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr ""
 
-#: data/ui/window.blp:23
-msgid "Main Menu"
-msgstr ""
-
-#: data/ui/window.blp:34
+#: data/ui/window.blp:76
 msgid "About Lock"
 msgstr ""
 

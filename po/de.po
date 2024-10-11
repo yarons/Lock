@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-11 11:55+0200\n"
-"PO-Revision-Date: 2024-10-11 11:14+0200\n"
+"POT-Creation-Date: 2024-10-11 14:38+0200\n"
+"PO-Revision-Date: 2024-10-11 14:38+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -29,20 +29,28 @@ msgstr "Verarbeiten Sie Daten mit GnuPG"
 msgid "translator-credits"
 msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 
-#: src/application.c:138
+#: src/application.c:137
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: data/ui/window.blp:17 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/ui/window.blp:34
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: data/ui/window.blp:43 data/ui/window.blp:47
+msgid "Text"
+msgstr "Text"
+
+#: data/ui/window.blp:53 data/ui/window.blp:57
+msgid "File"
+msgstr "Datei"
+
+#: data/ui/window.blp:70 data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr "Schloss"
 
-#: data/ui/window.blp:23
-msgid "Main Menu"
-msgstr "Hauptmenü"
-
-#: data/ui/window.blp:34
+#: data/ui/window.blp:76
 msgid "About Lock"
 msgstr "Über Schloss"
 

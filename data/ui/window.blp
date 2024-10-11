@@ -8,6 +8,14 @@ template $LockWindow : Adw.ApplicationWindow {
     height-request: 500;
     icon-name: "com.konstantintutsch.Lock";
 
+    Adw.Breakpoint {
+        condition ("max-width: 550")
+        setters {
+            header_bar.title-widget: title;
+            switcher_bar.reveal: true;
+        }
+    }
+
     [content]
     Adw.ToolbarView view {
 
@@ -15,8 +23,9 @@ template $LockWindow : Adw.ApplicationWindow {
         Adw.HeaderBar header_bar {
 
             [title]
-            Adw.WindowTitle title {
-                title: _("Lock");
+            Adw.ViewSwitcher {
+                stack: stack;
+                policy: wide;
             }
 
             [end]
@@ -27,7 +36,38 @@ template $LockWindow : Adw.ApplicationWindow {
                 primary: true;
             }
         }
+
+        content: Adw.ViewStack stack {
+            Adw.ViewStackPage text_page {
+                name: "text_page";
+                title: _("Text");
+                icon-name: "format-text-rich-symbolic";
+
+                child: Gtk.Label {
+                    label: _("Text");
+                };
+            }
+
+            Adw.ViewStackPage file_page {
+                name: "file_page";
+                title: _("File");
+                icon-name: "document-send-symbolic";
+
+                child: Gtk.Label {
+                    label: _("File");
+                };
+            }
+        };
+
+        [bottom]
+        Adw.ViewSwitcherBar switcher_bar {
+            stack: stack;
+        }
     }
+}
+
+Adw.WindowTitle title {
+    title: _("Lock");
 }
 
 menu primary_menu {
