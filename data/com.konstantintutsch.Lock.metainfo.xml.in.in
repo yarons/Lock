@@ -35,6 +35,15 @@
             <caption>Dark Appearance</caption>
         </screenshot>
     </screenshots>
+    <recommends>
+        <display_length compare="ge">500</display_length>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </recommends>
+    <requires>
+        <display_length compare="gt">350</display_length>
+    </requires>
     <releases>
     </releases>
 </component>
