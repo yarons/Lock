@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="@ui_resource@">
+        <file preprocess="xml-stripblanks">window.ui</file>
+    </gresource>
+    <gresource prefix="@project_root@">
+        <file preprocess="xml-stripblanks">@project_id@.metainfo.xml</file>
+    </gresource>
+</gresources>

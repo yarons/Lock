@@ -1,0 +1,6 @@
+src/main.c
+src/application.c
+src/window.c
+data/ui/window.blp
+data/com.konstantintutsch.Lock.desktop.in.in
+data/com.konstantintutsch.Lock.metainfo.xml.in.in

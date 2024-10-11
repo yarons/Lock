@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>@project_id@</id>
+    <metadata_license>CC-BY-SA-4.0</metadata_license>
+    <project_license>MIT</project_license>
+    <name>Lock</name>
+    <summary>Process data with GnuPG</summary>
+    <description>
+        <p>This utility is a graphical front-end for GnuPG (GPG). Encrypt or sign text and files via a beautiful LibAdwaita GUI.</p>
+    </description>
+    <launchable type="desktop-id">@project_id@.desktop</launchable>
+    <categories>
+        <category>Utility</category>
+    </categories>
+    <content_rating type="oars-1.1" />
+    <url type="homepage">https://github.com/konstantintutsch/Lock</url>
+    <url type="vcs-browser">https://github.com/konstantintutsch/Lock</url>
+    <url type="bugtracker">https://github.com/konstantintutsch/Lock/issues</url>
+    <url type="translate">https://github.com/konstantintutsch/Lock/tree/main/po</url>
+    <update_contact>mail@konstantintutsch.com</update_contact>
+    <developer id="com.konstantintutsch">
+        <name translate="no">Konstantin Tutsch</name>
+    </developer>
+    <branding>
+        <color type="primary" scheme_preference="light">#c061cb</color>
+        <color type="primary" scheme_preference="dark">#c061cb</color>
+    </branding>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Light.png</image>
+            <caption>Light Appearance</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Dark.png</image>
+            <caption>Dark Appearance</caption>
+        </screenshot>
+    </screenshots>
+    <releases>
+    </releases>
+</component>

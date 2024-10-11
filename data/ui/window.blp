@@ -1,0 +1,38 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $LockWindow : Adw.ApplicationWindow {
+    default-width: 1100;
+    default-height: 700;
+    icon-name: "com.konstantintutsch.Lock";
+
+    [content]
+    Adw.ToolbarView view {
+
+        [top]
+        Adw.HeaderBar header_bar {
+
+            [title]
+            Adw.WindowTitle title {
+                title: _("Lock");
+            }
+
+            [end]
+            Gtk.MenuButton {
+                icon-name: "open-menu-symbolic";
+                tooltip-text: _("Main Menu");
+                menu-model: primary_menu;
+                primary: true;
+            }
+        }
+    }
+}
+
+menu primary_menu {
+    section {
+        item {
+            label: _("About Lock");
+            action: "app.about";
+        }
+    }
+}

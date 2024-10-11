@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Lock
+Comment=Process data with GnuPG
+Icon=@project_id@
+StartupNotify=true
+Exec=@project_exec@
+Terminal=false
+Categories=System

@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.konstantintutsch.Lock package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.konstantintutsch.Lock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-11 11:12+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/application.c:123 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
+msgid "Process data with GnuPG"
+msgstr ""
+
+#: src/application.c:134
+msgid "translator-credits"
+msgstr ""
+
+#: src/application.c:137
+msgid "Dependencies"
+msgstr ""
+
+#: data/ui/window.blp:17 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
+msgid "Lock"
+msgstr ""
+
+#: data/ui/window.blp:23
+msgid "Main Menu"
+msgstr ""
+
+#: data/ui/window.blp:34
+msgid "About Lock"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
+msgid ""
+"This utility is a graphical front-end for GnuPG (GPG). Encrypt or sign text "
+"and files via a beautiful LibAdwaita GUI."
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:31
+msgid "Light Appearance"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:35
+msgid "Dark Appearance"
+msgstr ""

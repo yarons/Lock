@@ -1,0 +1,16 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define PROJECT_NAME "@project_name@"
+#define PROJECT_ID "@project_id@"
+#define _PROJECT_ID(String) "@project_id@"String
+#define PROJECT_VERSION "@project_version@"
+
+#define LOCALEDIR "@localedir@"
+
+#define GETTEXT_PACKAGE "@gettext_package@"
+#define GRESOURCE_FILE "@gresource_file@"
+#define ROOT_RESOURCE(String) "@project_root@/"String
+#define UI_RESOURCE(String) "@ui_resource@/"String
+
+#endif // CONFIG_H

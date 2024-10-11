@@ -1,0 +1,63 @@
+# German translations for com.konstantintutsch.Lock package.
+# Copyright (C) 2024 THE com.konstantintutsch.Lock'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.konstantintutsch.Lock package.
+# Automatically generated, 2024.
+# Konstantin Tutsch <mail@konstantintutsch.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.konstantintutsch.Lock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-11 11:12+0200\n"
+"PO-Revision-Date: 2024-10-11 11:14+0200\n"
+"Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 47.0\n"
+
+#: src/application.c:123 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
+msgid "Process data with GnuPG"
+msgstr "Verarbeiten Sie Daten mit GnuPG"
+
+#: src/application.c:134
+msgid "translator-credits"
+msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
+
+#: src/application.c:137
+msgid "Dependencies"
+msgstr "Abhängigkeiten"
+
+#: data/ui/window.blp:17 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
+msgid "Lock"
+msgstr "Schloss"
+
+#: data/ui/window.blp:23
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: data/ui/window.blp:34
+msgid "About Lock"
+msgstr "Über Schloss"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
+msgid ""
+"This utility is a graphical front-end for GnuPG (GPG). Encrypt or sign text "
+"and files via a beautiful LibAdwaita GUI."
+msgstr ""
+"Dieses Dienstprogramm ist eine grafische Oberfläche für GnuPG (PGP). "
+"Verschlüsseln oder signieren Sie Text oder Dateien mit einem wunderschönen "
+"LibAdwaita GUI."
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:31
+msgid "Light Appearance"
+msgstr "Helles Erscheinungsbild"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:35
+msgid "Dark Appearance"
+msgstr "Dunkles Erscheinungsbild"

@@ -1,0 +1,5 @@
+*~
+/build
+/subprojects/blueprint-compiler
+/.flatpak-builder
+.xdp-*
