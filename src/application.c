@@ -16,8 +16,8 @@ struct _LockApplication {
 G_DEFINE_TYPE(LockApplication, lock_application, ADW_TYPE_APPLICATION);
 
 static void lock_application_show_about(GSimpleAction * self,
-                                            GVariant * parameter,
-                                            LockApplication * app);
+                                        GVariant * parameter,
+                                        LockApplication * app);
 
 /**
  * This function initializes a LockApplication.
@@ -59,7 +59,7 @@ static void lock_application_activate(GApplication *app)
  * @param hint https://docs.gtk.org/gio/signal.Application.open.html
  */
 static void lock_application_open(GApplication *self, GFile **files,
-                                      int n_files, const char *hint)
+                                  int n_files, const char *hint)
 {
     GList *windows;
     LockWindow *window;
@@ -103,12 +103,11 @@ LockApplication *lock_application_new()
  * @param app https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  */
 static void lock_application_show_about(GSimpleAction *self,
-                                            GVariant *parameter,
-                                            LockApplication *app)
+                                        GVariant *parameter,
+                                        LockApplication *app)
 {
     LockWindow *active_window =
-        LOCK_WINDOW(gtk_application_get_active_window
-                        (GTK_APPLICATION(app)));
+        LOCK_WINDOW(gtk_application_get_active_window(GTK_APPLICATION(app)));
 
     AdwAboutDialog *about =
         ADW_ABOUT_DIALOG(adw_about_dialog_new_from_appdata
@@ -119,8 +118,7 @@ static void lock_application_show_about(GSimpleAction *self,
     adw_about_dialog_set_version(about, PROJECT_VERSION);
 
     // Details
-    adw_about_dialog_set_comments(about,
-                                  _("Process data with GnuPG"));
+    adw_about_dialog_set_comments(about, _("Process data with GnuPG"));
 
     // Credits
     const char *developers[] =
@@ -133,7 +131,10 @@ static void lock_application_show_about(GSimpleAction *self,
     adw_about_dialog_set_designers(about, designers);
     adw_about_dialog_set_translator_credits(about, _("translator-credits"));
     const char *libraries[] =
-        { "The GNOME Project https://www.gnome.org", NULL };
+        { "The GNOME Project https://www.gnome.org",
+"The GNU Project https://gnu.org/",
+        "GnuPG Made Easy https://gnupg.org/software/gpgme/index.html", NULL
+    };
     adw_about_dialog_add_acknowledgement_section(about, _("Dependencies"),
                                                  libraries);
 
