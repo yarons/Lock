@@ -11,8 +11,9 @@ release:
 devel:
     flatpak-builder --user --install --force-clean build/devel build-aux/com.konstantintutsch.Lock.Devel.yaml 
 
-offline:
-    flatpak-builder --user --install --force-clean --disable-download build/devel build-aux/com.konstantintutsch.Lock.Devel.yaml 
+test:
+    flatpak-builder --user --install --force-clean --disable-download build/devel build-aux/com.konstantintutsch.Lock.Devel.yaml
+    GTK_DEBUG=interactive flatpak run com.konstantintutsch.Lock.Devel
 
 setup:
     sudo dnf install -y indent
