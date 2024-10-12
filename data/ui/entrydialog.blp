@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $LockEntryDialog : Adw.Dialog {
+    content-width: 300;
+    content-height: 100;
+    can-close: true;
+
+    child: Gtk.Box {
+        orientation: vertical;
+        valign: center;
+        halign: center;
+
+        Gtk.Box {
+            orientation: horizontal;
+            halign: fill;
+            spacing: 10;
+
+            Gtk.Entry entry {
+            }
+
+            Gtk.Button confirm_button {
+                css-classes: ["suggested-action"];
+                icon-name: "object-select-symbolic";
+            }
+        }
+    };
+}

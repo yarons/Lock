@@ -11,7 +11,9 @@ config_h = configure_file(
 src = files(
   'main.c',
   'application.c',
-  'window.c'
+  'window.c',
+  'entrydialog.c',
+  'cryptography.c'
 )
 
 internal_inc = include_directories('.')
@@ -20,6 +22,6 @@ exe = executable(
           project_exec,
                    src,
    include_directories: [internal_inc],
-          dependencies: [gtk_dep, adwaita_dep],
+          dependencies: [gtk_dep, adwaita_dep, gpgme_dep],
                install: true
 )

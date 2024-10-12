@@ -4,6 +4,8 @@
 #include "application.h"
 #include "config.h"
 
+#include "cryptography.h"
+
 /**
  * This function is the entry point of the program.
  * 
@@ -19,6 +21,9 @@ int main(int argc, char *argv[])
     bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
     bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
     textdomain(GETTEXT_PACKAGE);
+
+    // GnuPG Made Easy
+    cryptography_init();
 
     // GUI
     int status = g_application_run(G_APPLICATION(lock_application_new()), argc,

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-12 15:51+0200\n"
-"PO-Revision-Date: 2024-10-12 15:51+0200\n"
+"POT-Creation-Date: 2024-10-12 23:46+0200\n"
+"PO-Revision-Date: 2024-10-12 22:25+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -33,21 +33,29 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:48
+#: src/window.c:67
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
-#: src/window.c:118
+#: src/window.c:131
+msgid "Enter email to encrypt for …"
+msgstr "E-Mail zur Verschlüsselung eingeben …"
+
+#: src/window.c:156
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.c:122
+#: src/window.c:160
 msgid "Save"
 msgstr "Speichern"
 
-#: src/window.c:142
+#: src/window.c:207
 msgid "Text copied"
 msgstr "Text kopiert"
+
+#: src/window.c:228
+msgid "Text encrypted"
+msgstr "Text verschlüsselt"
 
 #: data/ui/window.blp:40
 msgid "Main Menu"

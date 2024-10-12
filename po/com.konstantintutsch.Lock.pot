@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-12 15:51+0200\n"
+"POT-Creation-Date: 2024-10-12 23:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,20 +31,28 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: src/window.c:48
+#: src/window.c:67
 msgid "Enter text …"
 msgstr ""
 
-#: src/window.c:118
+#: src/window.c:131
+msgid "Enter email to encrypt for …"
+msgstr ""
+
+#: src/window.c:156
 msgid "Copy"
 msgstr ""
 
-#: src/window.c:122
+#: src/window.c:160
 msgid "Save"
 msgstr ""
 
-#: src/window.c:142
+#: src/window.c:207
 msgid "Text copied"
+msgstr ""
+
+#: src/window.c:228
+msgid "Text encrypted"
 msgstr ""
 
 #: data/ui/window.blp:40

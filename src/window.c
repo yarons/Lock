@@ -4,7 +4,11 @@
 #include <glib/gi18n.h>
 #include <locale.h>
 #include "application.h"
+#include "entrydialog.h"
 #include "config.h"
+
+#include <gpgme.h>
+#include "cryptography.h"
 
 /**
  * This structure handles data of a window.
@@ -13,6 +17,8 @@ struct _LockWindow {
     AdwApplicationWindow parent;
 
     AdwViewStack *stack;
+
+    LockEntryDialog *encrypt_dialog;
     AdwSplitButton *action_button;
 
     AdwViewStackPage *text_page;
@@ -24,12 +30,18 @@ struct _LockWindow {
 
 G_DEFINE_TYPE(LockWindow, lock_window, ADW_TYPE_APPLICATION_WINDOW);
 
+static void lock_window_encrypt_dialog_present(GSimpleAction * self,
+                                               GVariant * parameter,
+                                               LockWindow * window);
+
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
                                            LockWindow * window);
 
 static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
+static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
+                                          LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -39,6 +51,13 @@ static void lock_window_text_view_copy(AdwSplitButton * self,
 static void lock_window_init(LockWindow *window)
 {
     gtk_widget_init_template(GTK_WIDGET(window));
+
+    g_autoptr(GSimpleAction) encrypt_text_action =
+        g_simple_action_new("encrypt_text", NULL);
+    g_signal_connect(encrypt_text_action, "activate",
+                     G_CALLBACK(lock_window_encrypt_dialog_present), window);
+    g_action_map_add_action(G_ACTION_MAP(window),
+                            G_ACTION(encrypt_text_action));
 
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
@@ -98,6 +117,25 @@ void lock_window_open(LockWindow *window, GFile *file)
 }
 
 /**
+ * This function present the encrypt dialog of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_encrypt_dialog_present(GSimpleAction *self,
+                                               GVariant *parameter,
+                                               LockWindow *window)
+{
+    window->encrypt_dialog =
+        lock_entry_dialog_new(_("Enter email to encrypt for …"));
+    g_signal_connect(window->encrypt_dialog, "entered",
+                     G_CALLBACK(lock_window_text_view_encrypt), window);
+
+    adw_dialog_present(ADW_DIALOG(window->encrypt_dialog), GTK_WIDGET(window));
+}
+
+/**
  * This function updates the UI on a change of a page of the stack of a LockWindow.
  *
  * @param self https://docs.gtk.org/gobject/signal.Object.notify.html
@@ -124,6 +162,38 @@ static void lock_window_stack_page_changed(AdwViewStack *self,
 }
 
 /**
+ * This function gets the text from the text view of a LockWindow.
+ *
+ * @param window Window to get the text from
+ *
+ * @return Text
+ */
+gchar *lock_window_text_view_get_text(LockWindow *window)
+{
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer(window->text_view);
+
+    GtkTextIter start_iter;
+    GtkTextIter end_iter;
+    gtk_text_buffer_get_start_iter(buffer, &start_iter);
+    gtk_text_buffer_get_end_iter(buffer, &end_iter);
+
+    return gtk_text_buffer_get_text(buffer, &start_iter, &end_iter, true);
+}
+
+/**
+ * This functions sets the text of the text view of a LockWindow.
+ *
+ * @param window Window to set the text in
+ * @param text Text to overwrite the text views buffer with
+ */
+static void lock_window_text_view_set_text(LockWindow *window, const char *text)
+{
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer(window->text_view);
+
+    gtk_text_buffer_set_text(buffer, text, -1);
+}
+
+/**
  * This function copies text from the text view of a LockWindow.
  *
  * @param self https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/signal.SplitButton.clicked.html
@@ -134,20 +204,35 @@ static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
     GdkClipboard *active_clipboard =
         gdk_display_get_clipboard(gdk_display_get_default());
 
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer(window->text_view);
-
-    GtkTextIter start_iter;
-    GtkTextIter end_iter;
-
     AdwToast *toast = adw_toast_new(_("Text copied"));
     adw_toast_set_timeout(toast, 2);
 
-    gtk_text_buffer_get_start_iter(buffer, &start_iter);
-    gtk_text_buffer_get_end_iter(buffer, &end_iter);
-
-    gchar *text =
-        gtk_text_buffer_get_text(buffer, &start_iter, &end_iter, true);
+    gchar *text = lock_window_text_view_get_text(window);
     gdk_clipboard_set_text(active_clipboard, text);
+
+    adw_toast_overlay_add_toast(window->text_toast, toast);
+}
+
+/**
+ * This function encrypts text from the text view of a LockWindow.
+ *
+ * @param self Dialog where an input was confirmed
+ * @param email Input entered in the dialog
+ * @param window Window in which the dialog was present
+ */
+static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
+                                          LockWindow *window)
+{
+    gchar *plain = lock_window_text_view_get_text(window);
+
+    AdwToast *toast = adw_toast_new(_("Text encrypted"));
+    adw_toast_set_timeout(toast, 3);
+
+    gpgme_key_t key = key_from_email(email);
+    char *armor = encrypt_text(plain, key);
+
+    lock_window_text_view_set_text(window, g_strdup(armor));
+    free(armor);
 
     adw_toast_overlay_add_toast(window->text_toast, toast);
 }
