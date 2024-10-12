@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-11 14:38+0200\n"
-"PO-Revision-Date: 2024-10-11 14:38+0200\n"
+"POT-Creation-Date: 2024-10-12 15:51+0200\n"
+"PO-Revision-Date: 2024-10-12 15:51+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -20,39 +20,71 @@ msgstr ""
 "X-Generator: Gtranslator 47.0\n"
 
 #. Details
-#: src/application.c:121 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
 msgid "Process data with GnuPG"
 msgstr "Verarbeiten Sie Daten mit GnuPG"
 
-#: src/application.c:132
+#: src/application.c:136
 msgid "translator-credits"
 msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 
-#: src/application.c:137
+#: src/application.c:141
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: data/ui/window.blp:34
+#: src/window.c:48
+msgid "Enter text …"
+msgstr "Text eingeben …"
+
+#: src/window.c:118
+msgid "Copy"
+msgstr "Kopieren"
+
+#: src/window.c:122
+msgid "Save"
+msgstr "Speichern"
+
+#: src/window.c:142
+msgid "Text copied"
+msgstr "Text kopiert"
+
+#: data/ui/window.blp:40
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: data/ui/window.blp:43 data/ui/window.blp:47
+#: data/ui/window.blp:49
 msgid "Text"
 msgstr "Text"
 
-#: data/ui/window.blp:53 data/ui/window.blp:57
+#: data/ui/window.blp:68 data/ui/window.blp:72
 msgid "File"
 msgstr "Datei"
 
-#: data/ui/window.blp:70 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/ui/window.blp:85 data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr "Schloss"
 
-#: data/ui/window.blp:76
+#: data/ui/window.blp:91
 msgid "About Lock"
 msgstr "Über Schloss"
+
+#: data/ui/window.blp:100
+msgid "Encrypt"
+msgstr "Verschlüsseln"
+
+#: data/ui/window.blp:104
+msgid "Decrypt"
+msgstr "Entschlüsseln"
+
+#: data/ui/window.blp:110
+msgid "Sign"
+msgstr "Signieren"
+
+#: data/ui/window.blp:114
+msgid "Verify"
+msgstr "Verifizieren"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
 msgid ""

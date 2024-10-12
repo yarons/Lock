@@ -22,6 +22,12 @@ template $LockWindow : Adw.ApplicationWindow {
         [top]
         Adw.HeaderBar header_bar {
 
+            [start]
+            Adw.SplitButton action_button {
+                css-classes: ["suggested-action"];
+                menu-model: action_menu;
+            }
+
             [title]
             Adw.ViewSwitcher {
                 stack: stack;
@@ -43,8 +49,17 @@ template $LockWindow : Adw.ApplicationWindow {
                 title: _("Text");
                 icon-name: "format-text-rich-symbolic";
 
-                child: Gtk.Label {
-                    label: _("Text");
+                child: Adw.ToastOverlay text_toast {
+                    child: Gtk.ScrolledWindow {
+                        child: Gtk.TextView text_view {
+                            css-classes: ["background", "body", "text-input"];
+                            left-margin: 5;
+
+                            editable: true;
+                            monospace: true;
+                            wrap-mode: none;
+                        };
+                    };
                 };
             }
 
@@ -75,6 +90,29 @@ menu primary_menu {
         item {
             label: _("About Lock");
             action: "app.about";
+        }
+    }
+}
+
+menu action_menu {
+    section {
+        item {
+            label: _("Encrypt");
+            action: "";
+        }
+        item {
+            label: _("Decrypt");
+            action: "";
+        }
+    }
+    section {
+        item {
+            label: _("Sign");
+            action: "";
+        }
+        item {
+            label: _("Verify");
+            action: "";
         }
     }
 }

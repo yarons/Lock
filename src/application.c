@@ -30,6 +30,10 @@ static void lock_application_init(LockApplication *app)
     GResource *resource = g_resource_load(GRESOURCE_FILE, NULL);
     g_resources_register(resource);
 
+    // Load styles
+    GtkCssProvider *style = gtk_css_provider_new();
+    gtk_css_provider_load_from_resource(style, ROOT_RESOURCE("style.css"));
+
     // Add actions
     g_autoptr(GSimpleAction) about_action = g_simple_action_new("about", NULL);
     g_signal_connect(about_action, "activate",
@@ -130,9 +134,8 @@ static void lock_application_show_about(GSimpleAction *self,
     };
     adw_about_dialog_set_designers(about, designers);
     adw_about_dialog_set_translator_credits(about, _("translator-credits"));
-    const char *libraries[] =
-        { "The GNOME Project https://www.gnome.org",
-"The GNU Project https://gnu.org/",
+    const char *libraries[] = { "The GNOME Project https://www.gnome.org",
+        "The GNU Project https://gnu.org/",
         "GnuPG Made Easy https://gnupg.org/software/gpgme/index.html", NULL
     };
     adw_about_dialog_add_acknowledgement_section(about, _("Dependencies"),
