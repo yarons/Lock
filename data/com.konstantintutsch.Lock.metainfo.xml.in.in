@@ -6,7 +6,7 @@
     <name>Lock</name>
     <summary>Process data with GnuPG</summary>
     <description>
-        <p>Lock is a graphical front-end for GnuPG (GPG). Encrypt or sign text and files via a beautiful LibAdwaita GUI.</p>
+        <p>Lock is a graphical front-end for GnuPG (GPG). Encrypt, decrypt, sign and verify text and files via a beautiful LibAdwaita GUI.</p>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>
     <categories>
