@@ -36,19 +36,19 @@
         </screenshot>
         <screenshot>
             <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Showcase.1Text.png</image>
-            <caption>Text to be encrypted</caption>
+            <caption>Plain text</caption>
         </screenshot>
         <screenshot>
             <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Showcase.2Email.png</image>
-            <caption>Text encrypted with key matching email</caption>
+            <caption>Email dialog</caption>
         </screenshot>
         <screenshot>
             <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Showcase.3Encrypted.png</image>
-            <caption>Text encrypted as OpenPGP ASCII armor</caption>
+            <caption>Encryption</caption>
         </screenshot>
         <screenshot>
             <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Showcase.4Decrypted.png</image>
-            <caption>Text decrypted</caption>
+            <caption>Decryption</caption>
         </screenshot>
     </screenshots>
     <recommends>

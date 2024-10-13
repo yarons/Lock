@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:35+0200\n"
+"POT-Creation-Date: 2024-10-13 17:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Decryption failed"
 msgstr ""
 
-#: src/window.c:315 data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+#: src/window.c:315
 msgid "Text decrypted"
 msgstr ""
 
@@ -179,13 +179,17 @@ msgid "Dark Appearance"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:39
-msgid "Text to be encrypted"
+msgid "Plain text"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:43
-msgid "Text encrypted with key matching email"
+msgid "Email dialog"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:47
-msgid "Text encrypted as OpenPGP ASCII armor"
+msgid "Encryption"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+msgid "Decryption"
 msgstr ""

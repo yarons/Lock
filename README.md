@@ -11,3 +11,8 @@ _Lock_ is a graphical front-end for GnuPG (GPG). Encrypt or sign text and files 
 ![Light](data/com.konstantintutsch.Lock.Screenshot.Light.png)
 
 ![Dark](data/com.konstantintutsch.Lock.Screenshot.Dark.png)
+
+![Plain text](data/com.konstantintutsch.Lock.Screenshot.Showcase.1Text.png)
+![Email dialog](data/com.konstantintutsch.Lock.Screenshot.Showcase.2Email.png)
+![Encryption](data/com.konstantintutsch.Lock.Screenshot.Showcase.3Encrypted.png)
+![Decryption](data/com.konstantintutsch.Lock.Screenshot.Showcase.4Decrypted.png)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:35+0200\n"
-"PO-Revision-Date: 2024-10-13 17:36+0200\n"
+"POT-Creation-Date: 2024-10-13 17:43+0200\n"
+"PO-Revision-Date: 2024-10-13 17:44+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -122,7 +122,7 @@ msgstr "Text verschlüsselt"
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:315 data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+#: src/window.c:315
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
@@ -185,16 +185,29 @@ msgid "Dark Appearance"
 msgstr "Dunkles Erscheinungsbild"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:39
-msgid "Text to be encrypted"
-msgstr "Zu verschlüsselnder Text"
+msgid "Plain text"
+msgstr "Klartext"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:43
-msgid "Text encrypted with key matching email"
-msgstr "Text verschlüsselt mit Schlüssel passend zur E-Mail"
+msgid "Email dialog"
+msgstr "E-Mail Dialog"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:47
-msgid "Text encrypted as OpenPGP ASCII armor"
-msgstr "Text verschlüsselt als OpenPGP ASCII Rüstung"
+msgid "Encryption"
+msgstr "Verschlüsselung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+msgid "Decryption"
+msgstr "Entschlüsselung"
+
+#~ msgid "Text to be encrypted"
+#~ msgstr "Zu verschlüsselnder Text"
+
+#~ msgid "Text encrypted with key matching email"
+#~ msgstr "Text verschlüsselt mit Schlüssel passend zur E-Mail"
+
+#~ msgid "Text encrypted as OpenPGP ASCII armor"
+#~ msgstr "Text verschlüsselt als OpenPGP ASCII Rüstung"
 
 #~ msgid "Enter email to encrypt for …"
 #~ msgstr "E-Mail zur Verschlüsselung eingeben …"
