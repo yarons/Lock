@@ -43,6 +43,8 @@ static void lock_window_decrypt(GSimpleAction * self, GVariant * parameter,
 
 static void lock_window_sign(GSimpleAction * self, GVariant * parameter,
                              LockWindow * window);
+static void lock_window_verify(GSimpleAction * self, GVariant * parameter,
+                               LockWindow * window);
 
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
@@ -55,6 +57,7 @@ static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
 static void lock_window_text_view_decrypt(LockWindow * window);
 
 static void lock_window_text_view_sign(LockWindow * window);
+static void lock_window_text_view_verify(LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -81,6 +84,12 @@ static void lock_window_init(LockWindow *window)
     g_signal_connect(sign_action, "activate", G_CALLBACK(lock_window_sign),
                      window);
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(sign_action));
+
+    g_autoptr(GSimpleAction) verify_action =
+        g_simple_action_new("verify", NULL);
+    g_signal_connect(verify_action, "activate", G_CALLBACK(lock_window_verify),
+                     window);
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(verify_action));
 
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
@@ -171,6 +180,25 @@ static void lock_window_sign(GSimpleAction *self, GVariant *parameter,
     switch (window->action_mode) {
     case ACTION_MODE_TEXT:
         lock_window_text_view_sign(window);
+        break;
+    case ACTION_MODE_FILE:
+        break;
+    }
+}
+
+/**
+ * This function handles verifying based on the action mode of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_verify(GSimpleAction *self, GVariant *parameter,
+                               LockWindow *window)
+{
+    switch (window->action_mode) {
+    case ACTION_MODE_TEXT:
+        lock_window_text_view_verify(window);
         break;
     case ACTION_MODE_FILE:
         break;
@@ -353,7 +381,7 @@ static void lock_window_text_view_decrypt(LockWindow *window)
 /**
  * This function signs text from the text view of a LockWindow.
  *
- * @param window Window containing the text view to decrypt
+ * @param window Window containing the text view to sign
  */
 static void lock_window_text_view_sign(LockWindow *window)
 {
@@ -369,6 +397,29 @@ static void lock_window_text_view_sign(LockWindow *window)
         lock_window_text_view_set_text(window, armor);
     }
     g_free(armor);
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function verifies text from the text view of a LockWindow.
+ *
+ * @param window Window containing the text view to verify
+ */
+static void lock_window_text_view_verify(LockWindow *window)
+{
+    gchar *armor = lock_window_text_view_get_text(window);
+    AdwToast *toast;
+
+    gchar *text = verify_text(armor);
+    if (text == NULL) {
+        toast = adw_toast_new(_("Verification failed"));
+    } else {
+        toast = adw_toast_new(_("Text verified"));
+
+        lock_window_text_view_set_text(window, text);
+    }
+    g_free(text);
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }

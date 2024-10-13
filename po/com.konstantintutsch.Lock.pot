@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 23:29+0200\n"
+"POT-Creation-Date: 2024-10-13 23:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid "Failed to %s: %s"
 msgstr ""
 
 #: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:125
-#: src/cryptography.c:170
+#: src/cryptography.c:170 src/cryptography.c:216
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr ""
@@ -79,6 +79,21 @@ msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr ""
 
+#: src/cryptography.c:222
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data from string"
+msgstr ""
+
+#: src/cryptography.c:226
+msgctxt "GPGME Error"
+msgid "create new verified GPGME data"
+msgstr ""
+
+#: src/cryptography.c:230
+msgctxt "GPGME Error"
+msgid "verify GPGME data from memory"
+msgstr ""
+
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
@@ -93,57 +108,65 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: src/window.c:90 data/ui/entrydialog.blp:33
+#: src/window.c:99 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr ""
 
-#: src/window.c:192
+#: src/window.c:220
 msgid "Encrypt for"
 msgstr ""
 
-#: src/window.c:192
+#: src/window.c:220
 msgid "Enter email …"
 msgstr ""
 
-#: src/window.c:227
+#: src/window.c:255
 msgid "Copy"
 msgstr ""
 
-#: src/window.c:233
+#: src/window.c:261
 msgid "Save"
 msgstr ""
 
-#: src/window.c:282
+#: src/window.c:310
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:308
+#: src/window.c:336
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
 
-#: src/window.c:319
+#: src/window.c:347
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:321
+#: src/window.c:349
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:342
+#: src/window.c:370
 msgid "Decryption failed"
 msgstr ""
 
-#: src/window.c:344
+#: src/window.c:372
 msgid "Text decrypted"
 msgstr ""
 
-#: src/window.c:365
+#: src/window.c:393
 msgid "Signing failed"
 msgstr ""
 
-#: src/window.c:367
+#: src/window.c:395
 msgid "Text signed"
+msgstr ""
+
+#: src/window.c:416
+msgid "Verification failed"
+msgstr ""
+
+#: src/window.c:418
+msgid "Text verified"
 msgstr ""
 
 #: data/ui/window.blp:9 data/ui/window.blp:86

@@ -196,3 +196,49 @@ char *sign_text(char *text)
 
     return armor;
 }
+
+/**
+ * This function verifies a text using a GPG key.
+ *
+ * @param armor Text to verify
+ *
+ * @return Verified text. Calling `free()` is required
+ */
+char *verify_text(char *armor)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t sign;
+    gpgme_data_t plain;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
+
+    gpgme_set_armor(context, 1);
+
+    error = gpgme_data_new_from_mem(&sign, armor, strlen(armor), 1);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new signed GPGME data from string"));
+
+    error = gpgme_data_new(&plain);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new verified GPGME data"));
+
+    error = gpgme_op_verify(context, sign, NULL, plain);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "verify GPGME data from memory"));
+
+    gpgme_release(context);
+    gpgme_data_release(sign);
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(plain, &length);
+
+    char *text = malloc(length + 1);
+    memcpy(text, buffer, length);
+    text[length] = '\0';
+    gpgme_free(buffer);
+
+    return text;
+}
