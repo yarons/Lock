@@ -179,8 +179,7 @@ char *sign_text(char *text)
                  C_("GPGME Error", "create new signed GPGME data"));
 
     error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "sign GPGME data from memory"));
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "sign GPGME data from memory"));
 
     gpgme_release(context);
     gpgme_data_release(plain);

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 23:21+0200\n"
-"PO-Revision-Date: 2024-10-13 23:22+0200\n"
+"POT-Creation-Date: 2024-10-13 23:26+0200\n"
+"PO-Revision-Date: 2024-10-13 23:27+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -78,7 +78,7 @@ msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr "Erstellen von neuen, signierten GPGME Daten"
 
-#: src/cryptography.c:183
+#: src/cryptography.c:182
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr "Signierung von GPGME Daten aus dem Hauptspeicher"
@@ -194,11 +194,12 @@ msgstr "Titel"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
 msgid ""
-"Lock is a graphical front-end for GnuPG (GPG). Encrypt or sign text and "
-"files via a beautiful LibAdwaita GUI."
+"Lock is a graphical front-end for GnuPG (GPG). Encrypt, decrypt, sign and "
+"verify text and files via a beautiful LibAdwaita GUI."
 msgstr ""
-"Schloss ist eine grafische Oberfläche für GnuPG (PGP). Verschlüsseln oder "
-"signieren Sie Text oder Dateien mit einem wunderschönen LibAdwaita GUI."
+"Schloss ist eine grafische Oberfläche für GnuPG (PGP). Verschlüsseln, "
+"entschlüsseln, signieren oder verifizieren Sie Text oder Dateien mit einem "
+"wunderschönen LibAdwaita GUI."
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:31
 msgid "Light Appearance"

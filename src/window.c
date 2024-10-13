@@ -41,8 +41,8 @@ static void lock_window_encrypt_dialog_present(GSimpleAction * self,
 static void lock_window_decrypt(GSimpleAction * self, GVariant * parameter,
                                 LockWindow * window);
 
-static void lock_window_sign(GSimpleAction *self, GVariant *parameter, LockWindow *window);
-
+static void lock_window_sign(GSimpleAction * self, GVariant * parameter,
+                             LockWindow * window);
 
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
@@ -54,7 +54,7 @@ static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
                                           LockWindow * window);
 static void lock_window_text_view_decrypt(LockWindow * window);
 
-static void lock_window_text_view_sign(LockWindow *window);
+static void lock_window_text_view_sign(LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -78,9 +78,9 @@ static void lock_window_init(LockWindow *window)
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(decrypt_action));
 
     g_autoptr(GSimpleAction) sign_action = g_simple_action_new("sign", NULL);
-    g_signal_connect(sign_action, "activate", G_CALLBACK(lock_window_sign), window);
+    g_signal_connect(sign_action, "activate", G_CALLBACK(lock_window_sign),
+                     window);
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(sign_action));
-
 
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
@@ -165,7 +165,8 @@ static void lock_window_decrypt(GSimpleAction *self, GVariant *parameter,
  * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  */
-static void lock_window_sign(GSimpleAction *self, GVariant *parameter, LockWindow *window)
+static void lock_window_sign(GSimpleAction *self, GVariant *parameter,
+                             LockWindow *window)
 {
     switch (window->action_mode) {
     case ACTION_MODE_TEXT:
@@ -175,7 +176,6 @@ static void lock_window_sign(GSimpleAction *self, GVariant *parameter, LockWindo
         break;
     }
 }
-
 
 /**
  * This function presents the encrypt dialog of a LockWindow and handles encryption based on the action mode of the window.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 23:21+0200\n"
+"POT-Creation-Date: 2024-10-13 23:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr ""
 
-#: src/cryptography.c:183
+#: src/cryptography.c:182
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr ""
@@ -190,8 +190,8 @@ msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
 msgid ""
-"Lock is a graphical front-end for GnuPG (GPG). Encrypt or sign text and "
-"files via a beautiful LibAdwaita GUI."
+"Lock is a graphical front-end for GnuPG (GPG). Encrypt, decrypt, sign and "
+"verify text and files via a beautiful LibAdwaita GUI."
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:31
