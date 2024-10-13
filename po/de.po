@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-12 23:46+0200\n"
-"PO-Revision-Date: 2024-10-12 22:25+0200\n"
+"POT-Creation-Date: 2024-10-13 09:18+0200\n"
+"PO-Revision-Date: 2024-10-13 09:20+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -18,6 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 47.0\n"
+
+#: src/cryptography.c:12
+#, c-format
+msgctxt "Error message constructor for failed GPGME operations"
+msgid "Failed to %s: %s"
+msgstr "Fehler beim %s: %s"
+
+#: src/cryptography.c:38 src/cryptography.c:72
+msgctxt "GPGME Error"
+msgid "create new GPGME context"
+msgstr "Erstellen eines neuen GPGME Kontexts"
+
+#: src/cryptography.c:50
+msgctxt "GPGME Error"
+msgid "find key matching email"
+msgstr "Finden eines Schlüssels mit passender E-Mail"
+
+#: src/cryptography.c:79
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from string"
+msgstr ""
+"Erstellen von neuen, entschlüsselten GPGME Daten aus einer Zeichenkette"
+
+#: src/cryptography.c:82
+msgctxt "GPGME Error"
+msgid "to create new encrypted GPGME data"
+msgstr "Erstellen von neuen, verschlüsselten GPGME Daten"
+
+#: src/cryptography.c:86
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from memory"
+msgstr "Verschlüsseln von GPGME Daten aus dem Hauptspeicher"
 
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
@@ -53,7 +85,16 @@ msgstr "Speichern"
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:228
+#: src/window.c:232
+#, c-format
+msgid "Failed to find key for email “%s”"
+msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
+
+#: src/window.c:245
+msgid "Encryption failed"
+msgstr "Verschlüsselung fehlgeschlagen"
+
+#: src/window.c:248
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 

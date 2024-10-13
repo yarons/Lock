@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-12 23:46+0200\n"
+"POT-Creation-Date: 2024-10-13 09:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,37 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/cryptography.c:12
+#, c-format
+msgctxt "Error message constructor for failed GPGME operations"
+msgid "Failed to %s: %s"
+msgstr ""
+
+#: src/cryptography.c:38 src/cryptography.c:72
+msgctxt "GPGME Error"
+msgid "create new GPGME context"
+msgstr ""
+
+#: src/cryptography.c:50
+msgctxt "GPGME Error"
+msgid "find key matching email"
+msgstr ""
+
+#: src/cryptography.c:79
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from string"
+msgstr ""
+
+#: src/cryptography.c:82
+msgctxt "GPGME Error"
+msgid "to create new encrypted GPGME data"
+msgstr ""
+
+#: src/cryptography.c:86
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from memory"
+msgstr ""
 
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
@@ -51,7 +82,16 @@ msgstr ""
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:228
+#: src/window.c:232
+#, c-format
+msgid "Failed to find key for email “%s”"
+msgstr ""
+
+#: src/window.c:245
+msgid "Encryption failed"
+msgstr ""
+
+#: src/window.c:248
 msgid "Text encrypted"
 msgstr ""
 

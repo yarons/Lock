@@ -225,13 +225,32 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
 {
     gchar *plain = lock_window_text_view_get_text(window);
 
-    AdwToast *toast = adw_toast_new(_("Text encrypted"));
-    adw_toast_set_timeout(toast, 3);
-
     gpgme_key_t key = key_from_email(email);
-    char *armor = encrypt_text(plain, key);
+    if (key == NULL) {
+        AdwToast *key_toast =
+            adw_toast_new(g_strdup_printf
+                          (_("Failed to find key for email “%s”"), email));
+        adw_toast_set_timeout(key_toast, 5);
+        adw_toast_overlay_add_toast(window->text_toast, key_toast);
 
-    lock_window_text_view_set_text(window, g_strdup(armor));
+        gpgme_key_release(key);
+        return;
+    }
+
+    AdwToast *toast;
+    char *armor = encrypt_text(plain, key);
+    gpgme_key_release(key);
+
+    if (armor == NULL) {
+        toast = adw_toast_new(_("Encryption failed"));
+        adw_toast_set_timeout(toast, 5);
+    } else {
+        toast = adw_toast_new(_("Text encrypted"));
+        adw_toast_set_timeout(toast, 3);
+
+        lock_window_text_view_set_text(window, g_strdup(armor));
+    }
+
     free(armor);
 
     adw_toast_overlay_add_toast(window->text_toast, toast);
