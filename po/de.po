@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 10:34+0200\n"
-"PO-Revision-Date: 2024-10-13 10:35+0200\n"
+"POT-Creation-Date: 2024-10-13 11:29+0200\n"
+"PO-Revision-Date: 2024-10-13 11:27+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -65,27 +65,31 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:67
+#: src/window.c:67 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
 #: src/window.c:131
-msgid "Enter email to encrypt for …"
-msgstr "E-Mail zur Verschlüsselung eingeben …"
+msgid "Encrypt for"
+msgstr "Verschlüsseln für"
 
-#: src/window.c:156
+#: src/window.c:131
+msgid "Enter email …"
+msgstr "E-Mail eingeben …"
+
+#: src/window.c:157
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.c:160
+#: src/window.c:161
 msgid "Save"
 msgstr "Speichern"
 
-#: src/window.c:207
+#: src/window.c:208
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:232
+#: src/window.c:233
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
@@ -135,6 +139,10 @@ msgstr "Signieren"
 msgid "Verify"
 msgstr "Verifizieren"
 
+#: data/ui/entrydialog.blp:22
+msgid "Title"
+msgstr "Titel"
+
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
 msgid ""
 "Lock is a graphical front-end for GnuPG (GPG). Encrypt or sign text and "
@@ -150,3 +158,6 @@ msgstr "Helles Erscheinungsbild"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:35
 msgid "Dark Appearance"
 msgstr "Dunkles Erscheinungsbild"
+
+#~ msgid "Enter email to encrypt for …"
+#~ msgstr "E-Mail zur Verschlüsselung eingeben …"

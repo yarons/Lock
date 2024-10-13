@@ -12,12 +12,20 @@
 struct _LockEntryDialog {
     AdwDialog parent;
 
-    GtkEntry *entry;
+    GtkLabel *title_label;
 
+    GtkEntry *entry;
     GtkButton *confirm_button;
 };
 
 G_DEFINE_TYPE(LockEntryDialog, lock_entry_dialog, ADW_TYPE_DIALOG);
+
+static void lock_entry_dialog_set_title(LockEntryDialog * dialog,
+                                        gchar * title);
+static void lock_entry_dialog_set_placeholder_text(LockEntryDialog * dialog,
+                                                   gchar * placeholder_text);
+static void lock_entry_dialog_set_input_purpose(LockEntryDialog * dialog,
+                                                GtkInputPurpose purpose);
 
 static void lock_entry_dialog_entry_confirm(GtkButton * self,
                                             LockEntryDialog * dialog);
@@ -46,6 +54,9 @@ static void lock_entry_dialog_class_init(LockEntryDialogClass *class)
                                                 UI_RESOURCE("entrydialog.ui"));
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class),
+                                         LockEntryDialog, title_label);
+
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class),
                                          LockEntryDialog, entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class),
                                          LockEntryDialog, confirm_button);
@@ -59,12 +70,57 @@ static void lock_entry_dialog_class_init(LockEntryDialogClass *class)
  * This function creates a new LockEntryDialog.
  *
  * @param title Title of the dialog
+ * @param placeholder_text Placeholder text in the entry of the dialog
  *
  * @return LockEntryDialog
  */
-LockEntryDialog *lock_entry_dialog_new(gchar *placeholder_text)
+LockEntryDialog *lock_entry_dialog_new(gchar *title, gchar *placeholder_text,
+                                       GtkInputPurpose input_purpose)
 {
-    return g_object_new(LOCK_TYPE_ENTRY_DIALOG, NULL);
+    LockEntryDialog *dialog = g_object_new(LOCK_TYPE_ENTRY_DIALOG, NULL);
+
+    /* TODO: implement g_object_class_install_property() */
+    lock_entry_dialog_set_title(dialog, title);
+    lock_entry_dialog_set_placeholder_text(dialog, placeholder_text);
+    lock_entry_dialog_set_input_purpose(dialog, input_purpose);
+
+    return dialog;
+}
+
+/**
+ * This function sets the title of a LockEntryDialog.
+ *
+ * @param dialog Dialog to update the title of
+ * @param title Text to use as the title 
+ */
+static void lock_entry_dialog_set_title(LockEntryDialog *dialog, gchar *title)
+{
+    adw_dialog_set_title(ADW_DIALOG(dialog), title);
+    gtk_label_set_label(dialog->title_label, title);
+}
+
+/**
+ * This function sets the placeholder text of the entry of a LockEntryDialog.
+ *
+ * @param dialog Dialog to update the placeholder text of
+ * @param placeholder_text Text to use as placeholder text of the entry
+ */
+static void lock_entry_dialog_set_placeholder_text(LockEntryDialog *dialog,
+                                                   gchar *placeholder_text)
+{
+    gtk_entry_set_placeholder_text(dialog->entry, placeholder_text);
+}
+
+/**
+ * This functions sets the input purpose of the entry of a LockEntryDialog.
+ *
+ * @param self Dialog to update the input purpose of
+ * @param purpose Input purpose
+ */
+static void lock_entry_dialog_set_input_purpose(LockEntryDialog *dialog,
+                                                GtkInputPurpose purpose)
+{
+    gtk_entry_set_input_purpose(dialog->entry, purpose);
 }
 
 /**

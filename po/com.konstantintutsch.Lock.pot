@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 10:34+0200\n"
+"POT-Creation-Date: 2024-10-13 11:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,27 +62,31 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: src/window.c:67
+#: src/window.c:67 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr ""
 
 #: src/window.c:131
-msgid "Enter email to encrypt for …"
+msgid "Encrypt for"
 msgstr ""
 
-#: src/window.c:156
+#: src/window.c:131
+msgid "Enter email …"
+msgstr ""
+
+#: src/window.c:157
 msgid "Copy"
 msgstr ""
 
-#: src/window.c:160
+#: src/window.c:161
 msgid "Save"
 msgstr ""
 
-#: src/window.c:207
+#: src/window.c:208
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:232
+#: src/window.c:233
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
@@ -130,6 +134,10 @@ msgstr ""
 
 #: data/ui/window.blp:114
 msgid "Verify"
+msgstr ""
+
+#: data/ui/entrydialog.blp:22
+msgid "Title"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9

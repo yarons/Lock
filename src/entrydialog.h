@@ -9,7 +9,8 @@
 G_DECLARE_FINAL_TYPE(LockEntryDialog, lock_entry_dialog, LOCK, ENTRY_DIALOG,
                      AdwDialog);
 
-LockEntryDialog *lock_entry_dialog_new(gchar * placeholder_text);
+LockEntryDialog *lock_entry_dialog_new(gchar * title, gchar * placeholder_text,
+                                       GtkInputPurpose purpose);
 
 const char *lock_entry_dialog_get_text(LockEntryDialog * dialog);
 

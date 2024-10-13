@@ -128,7 +128,8 @@ static void lock_window_encrypt_dialog_present(GSimpleAction *self,
                                                LockWindow *window)
 {
     window->encrypt_dialog =
-        lock_entry_dialog_new(_("Enter email to encrypt for …"));
+        lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
+                              GTK_INPUT_PURPOSE_EMAIL);
     g_signal_connect(window->encrypt_dialog, "entered",
                      G_CALLBACK(lock_window_text_view_encrypt), window);
 
@@ -238,8 +239,7 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
     }
 
     AdwToast *toast;
-    char *armor = encrypt_text(plain, key);
-    gpgme_key_release(key);
+    gchar *armor = encrypt_text(plain, key);
 
     if (armor == NULL) {
         toast = adw_toast_new(_("Encryption failed"));
@@ -248,10 +248,9 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
         toast = adw_toast_new(_("Text encrypted"));
         adw_toast_set_timeout(toast, 3);
 
-        lock_window_text_view_set_text(window, g_strdup(armor));
+        lock_window_text_view_set_text(window, armor);
     }
 
-    free(armor);
-
+    g_free(armor);
     adw_toast_overlay_add_toast(window->text_toast, toast);
 }

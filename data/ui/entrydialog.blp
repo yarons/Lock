@@ -2,6 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $LockEntryDialog : Adw.Dialog {
+    follows-content-size: false;
     content-width: 300;
     content-height: 100;
     can-close: true;
@@ -10,6 +11,17 @@ template $LockEntryDialog : Adw.Dialog {
         orientation: vertical;
         valign: center;
         halign: center;
+        spacing: 10;
+
+        Gtk.Box {
+            orientation: horizontal;
+            halign: start;
+
+            Gtk.Label title_label {
+                css-classes: ["heading"];
+                label: _("Title");
+            }
+        }
 
         Gtk.Box {
             orientation: horizontal;
@@ -17,6 +29,8 @@ template $LockEntryDialog : Adw.Dialog {
             spacing: 10;
 
             Gtk.Entry entry {
+                max-width-chars: 22;
+                placeholder-text: _("Enter text …");
             }
 
             Gtk.Button confirm_button {
