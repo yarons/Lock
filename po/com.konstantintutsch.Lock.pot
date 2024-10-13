@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 11:38+0200\n"
+"POT-Creation-Date: 2024-10-13 11:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,40 +99,41 @@ msgstr ""
 msgid "Text encrypted"
 msgstr ""
 
-#: data/ui/window.blp:40
-msgid "Main Menu"
-msgstr ""
-
-#: data/ui/window.blp:50
-msgid "Text"
-msgstr ""
-
-#: data/ui/window.blp:67 data/ui/window.blp:71
-msgid "File"
-msgstr ""
-
-#: data/ui/window.blp:85 data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/ui/window.blp:9 data/ui/window.blp:86
+#: data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr ""
 
-#: data/ui/window.blp:91
+#: data/ui/window.blp:41
+msgid "Main Menu"
+msgstr ""
+
+#: data/ui/window.blp:51
+msgid "Text"
+msgstr ""
+
+#: data/ui/window.blp:68 data/ui/window.blp:72
+msgid "File"
+msgstr ""
+
+#: data/ui/window.blp:92
 msgid "About Lock"
 msgstr ""
 
-#: data/ui/window.blp:100
+#: data/ui/window.blp:101
 msgid "Encrypt"
 msgstr ""
 
-#: data/ui/window.blp:104
+#: data/ui/window.blp:105
 msgid "Decrypt"
 msgstr ""
 
-#: data/ui/window.blp:110
+#: data/ui/window.blp:111
 msgid "Sign"
 msgstr ""
 
-#: data/ui/window.blp:114
+#: data/ui/window.blp:115
 msgid "Verify"
 msgstr ""
 
