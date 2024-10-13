@@ -135,7 +135,7 @@ static void lock_application_show_about(GSimpleAction *self,
     adw_about_dialog_set_designers(about, designers);
     adw_about_dialog_set_translator_credits(about, _("translator-credits"));
     const char *libraries[] = { "The GNOME Project https://www.gnome.org",
-        "The GNU Project https://gnu.org/",
+        "The GNU Privacy Guard https://gnupg.org/",
         "GnuPG Made Easy https://gnupg.org/software/gpgme/index.html", NULL
     };
     adw_about_dialog_add_acknowledgement_section(about, _("Dependencies"),
