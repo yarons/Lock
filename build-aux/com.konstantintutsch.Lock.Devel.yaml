@@ -11,6 +11,7 @@ finish-args:
   - --filesystem=xdg-run/gnupg:ro
   - --filesystem=~/.gnupg:create
   - --socket=gpg-agent
+  - --socket=session-bus
 cleanup:
   - /include
   - /share/pkgconfig
