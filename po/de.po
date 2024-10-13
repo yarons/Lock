@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:43+0200\n"
-"PO-Revision-Date: 2024-10-13 17:44+0200\n"
+"POT-Creation-Date: 2024-10-13 23:21+0200\n"
+"PO-Revision-Date: 2024-10-13 23:22+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -26,6 +26,7 @@ msgid "Failed to %s: %s"
 msgstr "Fehler beim %s: %s"
 
 #: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:124
+#: src/cryptography.c:168
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "Erstellen eines neuen GPGME Kontexts"
@@ -67,6 +68,21 @@ msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr "Entschlüsseln von GPGME Daten aus dem Hauptspeicher"
 
+#: src/cryptography.c:175
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data from string"
+msgstr "Erstellen von neuen, unsignierten GPGME Daten aus einer Zeichenkette"
+
+#: src/cryptography.c:179
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data"
+msgstr "Erstellen von neuen, signierten GPGME Daten"
+
+#: src/cryptography.c:183
+msgctxt "GPGME Error"
+msgid "sign GPGME data from memory"
+msgstr "Signierung von GPGME Daten aus dem Hauptspeicher"
+
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
@@ -81,50 +97,58 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:80 data/ui/entrydialog.blp:33
+#: src/window.c:90 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
-#: src/window.c:163
+#: src/window.c:192
 msgid "Encrypt for"
 msgstr "Verschlüsseln für"
 
-#: src/window.c:163
+#: src/window.c:192
 msgid "Enter email …"
 msgstr "E-Mail eingeben …"
 
-#: src/window.c:198
+#: src/window.c:227
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.c:204
+#: src/window.c:233
 msgid "Save"
 msgstr "Speichern"
 
-#: src/window.c:253
+#: src/window.c:282
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:279
+#: src/window.c:308
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:290
+#: src/window.c:319
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:292
+#: src/window.c:321
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:313
+#: src/window.c:342
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:315
+#: src/window.c:344
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
+
+#: src/window.c:365
+msgid "Signing failed"
+msgstr "Signierung fehlgeschlagen"
+
+#: src/window.c:367
+msgid "Text signed"
+msgstr "Text signiert"
 
 #: data/ui/window.blp:9 data/ui/window.blp:86
 #: data/com.konstantintutsch.Lock.desktop.in.in:4

@@ -148,3 +148,49 @@ char *decrypt_text(char *armor)
 
     return text;
 }
+
+/**
+ * This function signs a text using a GPG key.
+ *
+ * @param text Text to sign
+ *
+ * @return Signed text as an OpenPGP ASCII armor. Calling `free()` is required
+ */
+char *sign_text(char *text)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t plain;
+    gpgme_data_t sign;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
+
+    gpgme_set_armor(context, 1);
+
+    error = gpgme_data_new_from_mem(&plain, text, strlen(text), 1);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "create new unsigned GPGME data from string"));
+
+    error = gpgme_data_new(&sign);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new signed GPGME data"));
+
+    error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "sign GPGME data from memory"));
+
+    gpgme_release(context);
+    gpgme_data_release(plain);
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(sign, &length);
+
+    char *armor = malloc(length);
+    memcpy(armor, buffer, length);
+    gpgme_free(buffer);
+
+    return armor;
+}

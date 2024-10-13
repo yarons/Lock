@@ -12,4 +12,6 @@ gpgme_key_t key_from_email(char *email);
 char *encrypt_text(char *text, gpgme_key_t key);
 char *decrypt_text(char *armor);
 
+char *sign_text(char *text);
+
 #endif                          // CRYPTOGRAPHY_H

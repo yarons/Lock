@@ -41,6 +41,9 @@ static void lock_window_encrypt_dialog_present(GSimpleAction * self,
 static void lock_window_decrypt(GSimpleAction * self, GVariant * parameter,
                                 LockWindow * window);
 
+static void lock_window_sign(GSimpleAction *self, GVariant *parameter, LockWindow *window);
+
+
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
                                            LockWindow * window);
@@ -50,6 +53,8 @@ static void lock_window_text_view_copy(AdwSplitButton * self,
 static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
                                           LockWindow * window);
 static void lock_window_text_view_decrypt(LockWindow * window);
+
+static void lock_window_text_view_sign(LockWindow *window);
 
 /**
  * This function initializes a LockWindow.
@@ -71,6 +76,11 @@ static void lock_window_init(LockWindow *window)
     g_signal_connect(decrypt_action, "activate",
                      G_CALLBACK(lock_window_decrypt), window);
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(decrypt_action));
+
+    g_autoptr(GSimpleAction) sign_action = g_simple_action_new("sign", NULL);
+    g_signal_connect(sign_action, "activate", G_CALLBACK(lock_window_sign), window);
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(sign_action));
+
 
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
@@ -147,6 +157,25 @@ static void lock_window_decrypt(GSimpleAction *self, GVariant *parameter,
         break;
     }
 }
+
+/**
+ * This function handles signing based on the action mode of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_sign(GSimpleAction *self, GVariant *parameter, LockWindow *window)
+{
+    switch (window->action_mode) {
+    case ACTION_MODE_TEXT:
+        lock_window_text_view_sign(window);
+        break;
+    case ACTION_MODE_FILE:
+        break;
+    }
+}
+
 
 /**
  * This function presents the encrypt dialog of a LockWindow and handles encryption based on the action mode of the window.
@@ -317,6 +346,29 @@ static void lock_window_text_view_decrypt(LockWindow *window)
         lock_window_text_view_set_text(window, text);
     }
     g_free(text);
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function signs text from the text view of a LockWindow.
+ *
+ * @param window Window containing the text view to decrypt
+ */
+static void lock_window_text_view_sign(LockWindow *window)
+{
+    gchar *plain = lock_window_text_view_get_text(window);
+    AdwToast *toast;
+
+    gchar *armor = sign_text(plain);
+    if (armor == NULL) {
+        toast = adw_toast_new(_("Signing failed"));
+    } else {
+        toast = adw_toast_new(_("Text signed"));
+
+        lock_window_text_view_set_text(window, armor);
+    }
+    g_free(armor);
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
