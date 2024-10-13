@@ -8,7 +8,9 @@ finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
-  - --filesystem=~/.gnupg
+  - --filesystem=host-os
+  - --filesystem=~/.gnupg:create
+  - --socket=gpg-agent
 cleanup:
   - /include
   - /share/pkgconfig

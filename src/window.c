@@ -10,6 +10,9 @@
 #include <gpgme.h>
 #include "cryptography.h"
 
+#define ACTION_MODE_TEXT 0
+#define ACTION_MODE_FILE 1
+
 /**
  * This structure handles data of a window.
  */
@@ -18,6 +21,8 @@ struct _LockWindow {
 
     AdwToastOverlay *toast_overlay;
     AdwViewStack *stack;
+
+    unsigned int action_mode;
 
     LockEntryDialog *encrypt_dialog;
     AdwSplitButton *action_button;
@@ -33,6 +38,8 @@ G_DEFINE_TYPE(LockWindow, lock_window, ADW_TYPE_APPLICATION_WINDOW);
 static void lock_window_encrypt_dialog_present(GSimpleAction * self,
                                                GVariant * parameter,
                                                LockWindow * window);
+static void lock_window_decrypt(GSimpleAction * self, GVariant * parameter,
+                                LockWindow * window);
 
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
@@ -42,6 +49,7 @@ static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
 static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
                                           LockWindow * window);
+static void lock_window_text_view_decrypt(LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -52,12 +60,17 @@ static void lock_window_init(LockWindow *window)
 {
     gtk_widget_init_template(GTK_WIDGET(window));
 
-    g_autoptr(GSimpleAction) encrypt_text_action =
-        g_simple_action_new("encrypt_text", NULL);
-    g_signal_connect(encrypt_text_action, "activate",
+    g_autoptr(GSimpleAction) encrypt_action =
+        g_simple_action_new("encrypt", NULL);
+    g_signal_connect(encrypt_action, "activate",
                      G_CALLBACK(lock_window_encrypt_dialog_present), window);
-    g_action_map_add_action(G_ACTION_MAP(window),
-                            G_ACTION(encrypt_text_action));
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(encrypt_action));
+
+    g_autoptr(GSimpleAction) decrypt_action =
+        g_simple_action_new("decrypt", NULL);
+    g_signal_connect(decrypt_action, "activate",
+                     G_CALLBACK(lock_window_decrypt), window);
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(decrypt_action));
 
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
@@ -117,7 +130,26 @@ void lock_window_open(LockWindow *window, GFile *file)
 }
 
 /**
- * This function present the encrypt dialog of a LockWindow.
+ * This function handles decryption based on the action mode of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_decrypt(GSimpleAction *self, GVariant *parameter,
+                                LockWindow *window)
+{
+    switch (window->action_mode) {
+    case ACTION_MODE_TEXT:
+        lock_window_text_view_decrypt(window);
+        break;
+    case ACTION_MODE_FILE:
+        break;
+    }
+}
+
+/**
+ * This function presents the encrypt dialog of a LockWindow and handles encryption based on the action mode of the window.
  *
  * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
@@ -130,8 +162,17 @@ static void lock_window_encrypt_dialog_present(GSimpleAction *self,
     window->encrypt_dialog =
         lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
                               GTK_INPUT_PURPOSE_EMAIL);
-    g_signal_connect(window->encrypt_dialog, "entered",
-                     G_CALLBACK(lock_window_text_view_encrypt), window);
+
+    void *callback = lock_window_text_view_encrypt;
+    switch (window->action_mode) {
+    case ACTION_MODE_TEXT:
+        callback = lock_window_text_view_encrypt;
+        break;
+    case ACTION_MODE_FILE:
+        break;
+    }
+    g_signal_connect(window->encrypt_dialog, "entered", G_CALLBACK(callback),
+                     window);
 
     adw_dialog_present(ADW_DIALOG(window->encrypt_dialog), GTK_WIDGET(window));
 }
@@ -157,8 +198,12 @@ static void lock_window_stack_page_changed(AdwViewStack *self,
         adw_split_button_set_label(action_button, _("Copy"));
         g_signal_connect(action_button, "clicked",
                          G_CALLBACK(lock_window_text_view_copy), window);
+
+        window->action_mode = ACTION_MODE_TEXT;
     } else if (visible_page == window->file_page) {
         adw_split_button_set_label(action_button, _("Save"));
+
+        window->action_mode = ACTION_MODE_FILE;
     }
 }
 
@@ -249,6 +294,29 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
         lock_window_text_view_set_text(window, armor);
     }
     g_free(armor);
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function decrypts text from the text view of a LockWindow.
+ *
+ * @param window Window containing the text view to decrypt
+ */
+static void lock_window_text_view_decrypt(LockWindow *window)
+{
+    gchar *armor = lock_window_text_view_get_text(window);
+    AdwToast *toast;
+
+    gchar *text = decrypt_text(armor);
+    if (text == NULL) {
+        toast = adw_toast_new(_("Decryption failed"));
+    } else {
+        toast = adw_toast_new(_("Text decrypted"));
+
+        lock_window_text_view_set_text(window, text);
+    }
+    g_free(text);
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }

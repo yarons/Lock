@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 11:54+0200\n"
-"PO-Revision-Date: 2024-10-13 11:27+0200\n"
+"POT-Creation-Date: 2024-10-13 17:35+0200\n"
+"PO-Revision-Date: 2024-10-13 17:36+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -19,37 +19,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 47.0\n"
 
-#: src/cryptography.c:12
+#: src/cryptography.c:16
 #, c-format
 msgctxt "Error message constructor for failed GPGME operations"
 msgid "Failed to %s: %s"
 msgstr "Fehler beim %s: %s"
 
-#: src/cryptography.c:38 src/cryptography.c:72
+#: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:124
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "Erstellen eines neuen GPGME Kontexts"
 
-#: src/cryptography.c:50
+#: src/cryptography.c:54
 msgctxt "GPGME Error"
 msgid "find key matching email"
 msgstr "Finden eines Schlüssels mit passender E-Mail"
 
-#: src/cryptography.c:79
+#: src/cryptography.c:83
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from string"
 msgstr ""
 "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:82
+#: src/cryptography.c:87
 msgctxt "GPGME Error"
-msgid "to create new encrypted GPGME data"
+msgid "create new encrypted GPGME data"
 msgstr "Erstellen von neuen, verschlüsselten GPGME Daten"
 
-#: src/cryptography.c:86
+#: src/cryptography.c:92
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr "Verschlüsseln von GPGME Daten aus dem Hauptspeicher"
+
+#: src/cryptography.c:129
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data from string"
+msgstr ""
+"Erstellen von neuen, verschlüsselten GPGME Daten aus einer Zeichenkette"
+
+#: src/cryptography.c:133
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data"
+msgstr "Erstellen von neuen, entschlüsselten GPGME Daten"
+
+#: src/cryptography.c:137
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from memory"
+msgstr "Entschlüsseln von GPGME Daten aus dem Hauptspeicher"
 
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
@@ -65,42 +81,50 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:67 data/ui/entrydialog.blp:33
+#: src/window.c:80 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
-#: src/window.c:131
+#: src/window.c:163
 msgid "Encrypt for"
 msgstr "Verschlüsseln für"
 
-#: src/window.c:131
+#: src/window.c:163
 msgid "Enter email …"
 msgstr "E-Mail eingeben …"
 
-#: src/window.c:157
+#: src/window.c:198
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.c:161
+#: src/window.c:204
 msgid "Save"
 msgstr "Speichern"
 
-#: src/window.c:208
+#: src/window.c:253
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:234
+#: src/window.c:279
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:245
+#: src/window.c:290
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:247
+#: src/window.c:292
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
+
+#: src/window.c:313
+msgid "Decryption failed"
+msgstr "Entschlüsselung fehlgeschlagen"
+
+#: src/window.c:315 data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+msgid "Text decrypted"
+msgstr "Text entschlüsselt"
 
 #: data/ui/window.blp:9 data/ui/window.blp:86
 #: data/com.konstantintutsch.Lock.desktop.in.in:4
@@ -159,6 +183,18 @@ msgstr "Helles Erscheinungsbild"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:35
 msgid "Dark Appearance"
 msgstr "Dunkles Erscheinungsbild"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:39
+msgid "Text to be encrypted"
+msgstr "Zu verschlüsselnder Text"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:43
+msgid "Text encrypted with key matching email"
+msgstr "Text verschlüsselt mit Schlüssel passend zur E-Mail"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:47
+msgid "Text encrypted as OpenPGP ASCII armor"
+msgstr "Text verschlüsselt als OpenPGP ASCII Rüstung"
 
 #~ msgid "Enter email to encrypt for …"
 #~ msgstr "E-Mail zur Verschlüsselung eingeben …"
