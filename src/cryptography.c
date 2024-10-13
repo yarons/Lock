@@ -98,8 +98,9 @@ char *encrypt_text(char *text, gpgme_key_t key)
     size_t length;
     char *buffer = gpgme_data_release_and_get_mem(encrypted, &length);
 
-    char *armor = malloc(length);
+    char *armor = malloc(length + 1);
     memcpy(armor, buffer, length);
+    armor[length] = '\0';
     gpgme_free(buffer);
 
     return armor;
@@ -142,8 +143,9 @@ char *decrypt_text(char *armor)
     size_t length;
     char *buffer = gpgme_data_release_and_get_mem(decrypted, &length);
 
-    char *text = malloc(length);
+    char *text = malloc(length + 1);
     memcpy(text, buffer, length);
+    text[length] = '\0';
     gpgme_free(buffer);
 
     return text;
@@ -187,8 +189,9 @@ char *sign_text(char *text)
     size_t length;
     char *buffer = gpgme_data_release_and_get_mem(sign, &length);
 
-    char *armor = malloc(length);
+    char *armor = malloc(length + 1);
     memcpy(armor, buffer, length);
+    armor[length] = '\0';
     gpgme_free(buffer);
 
     return armor;

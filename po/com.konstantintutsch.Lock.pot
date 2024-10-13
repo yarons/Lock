@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 23:26+0200\n"
+"POT-Creation-Date: 2024-10-13 23:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,8 @@ msgctxt "Error message constructor for failed GPGME operations"
 msgid "Failed to %s: %s"
 msgstr ""
 
-#: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:124
-#: src/cryptography.c:168
+#: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:125
+#: src/cryptography.c:170
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr ""
@@ -49,32 +49,32 @@ msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:129
+#: src/cryptography.c:130
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:133
+#: src/cryptography.c:134
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr ""
 
-#: src/cryptography.c:137
+#: src/cryptography.c:138
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:175
+#: src/cryptography.c:177
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:179
+#: src/cryptography.c:181
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr ""
 
-#: src/cryptography.c:182
+#: src/cryptography.c:184
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr ""
