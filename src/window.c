@@ -16,13 +16,13 @@
 struct _LockWindow {
     AdwApplicationWindow parent;
 
+    AdwToastOverlay *toast_overlay;
     AdwViewStack *stack;
 
     LockEntryDialog *encrypt_dialog;
     AdwSplitButton *action_button;
 
     AdwViewStackPage *text_page;
-    AdwToastOverlay *text_toast;
     GtkTextView *text_view;
 
     AdwViewStackPage *file_page;
@@ -78,14 +78,14 @@ static void lock_window_class_init(LockWindowClass *class)
                                                 UI_RESOURCE("window.ui"));
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
+                                         toast_overlay);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          stack);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          action_button);
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          text_page);
-    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
-                                         text_toast);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          text_view);
 
@@ -211,7 +211,7 @@ static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
     gchar *text = lock_window_text_view_get_text(window);
     gdk_clipboard_set_text(active_clipboard, text);
 
-    adw_toast_overlay_add_toast(window->text_toast, toast);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
 
 /**
@@ -225,32 +225,30 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
                                           LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
+    AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
     if (key == NULL) {
-        AdwToast *key_toast =
+        toast =
             adw_toast_new(g_strdup_printf
                           (_("Failed to find key for email “%s”"), email));
-        adw_toast_set_timeout(key_toast, 5);
-        adw_toast_overlay_add_toast(window->text_toast, key_toast);
+        adw_toast_set_timeout(toast, 4);
 
         gpgme_key_release(key);
+
+        adw_toast_overlay_add_toast(window->toast_overlay, toast);
         return;
     }
 
-    AdwToast *toast;
     gchar *armor = encrypt_text(plain, key);
-
     if (armor == NULL) {
         toast = adw_toast_new(_("Encryption failed"));
-        adw_toast_set_timeout(toast, 5);
     } else {
         toast = adw_toast_new(_("Text encrypted"));
-        adw_toast_set_timeout(toast, 3);
 
         lock_window_text_view_set_text(window, armor);
     }
-
     g_free(armor);
-    adw_toast_overlay_add_toast(window->text_toast, toast);
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }

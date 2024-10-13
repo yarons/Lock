@@ -43,13 +43,13 @@ template $LockWindow : Adw.ApplicationWindow {
             }
         }
 
-        content: Adw.ViewStack stack {
-            Adw.ViewStackPage text_page {
-                name: "text_page";
-                title: _("Text");
-                icon-name: "format-text-rich-symbolic";
+        content: Adw.ToastOverlay toast_overlay {
+            Adw.ViewStack stack {
+                Adw.ViewStackPage text_page {
+                    name: "text_page";
+                    title: _("Text");
+                    icon-name: "format-text-rich-symbolic";
 
-                child: Adw.ToastOverlay text_toast {
                     child: Gtk.ScrolledWindow {
                         child: Gtk.TextView text_view {
                             css-classes: ["background", "body", "text-input"];
@@ -60,17 +60,17 @@ template $LockWindow : Adw.ApplicationWindow {
                             wrap-mode: none;
                         };
                     };
-                };
-            }
+                }
 
-            Adw.ViewStackPage file_page {
-                name: "file_page";
-                title: _("File");
-                icon-name: "document-send-symbolic";
+                Adw.ViewStackPage file_page {
+                    name: "file_page";
+                    title: _("File");
+                    icon-name: "document-send-symbolic";
 
-                child: Gtk.Label {
-                    label: _("File");
-                };
+                    child: Gtk.Label {
+                        label: _("File");
+                    };
+                }
             }
         };
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 11:29+0200\n"
+"POT-Creation-Date: 2024-10-13 11:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:233
+#: src/window.c:234
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:248
+#: src/window.c:247
 msgid "Text encrypted"
 msgstr ""
 
@@ -103,11 +103,11 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: data/ui/window.blp:49
+#: data/ui/window.blp:50
 msgid "Text"
 msgstr ""
 
-#: data/ui/window.blp:68 data/ui/window.blp:72
+#: data/ui/window.blp:67 data/ui/window.blp:71
 msgid "File"
 msgstr ""
 
