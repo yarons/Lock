@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 17:09+0200\n"
-"PO-Revision-Date: 2024-10-14 16:54+0200\n"
+"POT-Creation-Date: 2024-10-14 17:14+0200\n"
+"PO-Revision-Date: 2024-10-14 17:15+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -286,12 +286,12 @@ msgid "Supported are"
 msgstr "Unterstützt sind"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:55
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:59
 msgid "Encryption"
 msgstr "Verschlüsselung"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:59
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:63
 msgid "Decryption"
 msgstr "Entschlüsselung"
 
@@ -316,10 +316,14 @@ msgid "Dark Appearance"
 msgstr "Dunkles Erscheinungsbild"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:47
+msgid "File processing"
+msgstr "Dateiverarbeitung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
 msgid "Plain text"
 msgstr "Klartext"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:51
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:55
 msgid "Email dialog"
 msgstr "E-Mail Dialog"
 

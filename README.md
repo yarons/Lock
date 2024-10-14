@@ -4,15 +4,31 @@
 
 Process data with GnuPG
 
-_Lock_ is a graphical front-end for GnuPG (GPG). Encrypt, decrypt, sign and verify text and files via a beautiful LibAdwaita GUI.
+_Lock_ is a graphical front-end for GnuPG (GPG) making use of a beautiful LibAdwaita GUI.
+
+Supported are
+
+- Encryption
+- Decryption
+- Signing
+- Verification
+
+of text and files.
 
 ## Showcase
 
-![Light](data/com.konstantintutsch.Lock.Screenshot.Light.png)
+![Light Appearance](data/com.konstantintutsch.Lock.Screenshot.Light.png)
 
-![Dark](data/com.konstantintutsch.Lock.Screenshot.Dark.png)
+![Dark Appearance](data/com.konstantintutsch.Lock.Screenshot.Dark.png)
+
+![File processing](data/com.konstantintutsch.Lock.Screenshot.File.png)
+
+### Usage
 
 ![Plain text](data/com.konstantintutsch.Lock.Screenshot.Showcase.1Text.png)
+
 ![Email dialog](data/com.konstantintutsch.Lock.Screenshot.Showcase.2Email.png)
+
 ![Encryption](data/com.konstantintutsch.Lock.Screenshot.Showcase.3Encrypted.png)
+
 ![Decryption](data/com.konstantintutsch.Lock.Screenshot.Showcase.4Decrypted.png)
