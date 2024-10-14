@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 17:46+0200\n"
+"POT-Creation-Date: 2024-10-14 18:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,7 +211,7 @@ msgstr ""
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:394 src/window.c:583
+#: src/window.c:394 src/window.c:585
 msgid "Decryption failed"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Text decrypted"
 msgstr ""
 
-#: src/window.c:422 src/window.c:609
+#: src/window.c:422 src/window.c:611
 msgid "Signing failed"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "Text signed"
 msgstr ""
 
-#: src/window.c:451 src/window.c:635
+#: src/window.c:451 src/window.c:639
 msgid "Verification failed"
 msgstr ""
 
@@ -239,15 +239,15 @@ msgstr ""
 msgid "File encrypted"
 msgstr ""
 
-#: src/window.c:585
+#: src/window.c:587
 msgid "File decrypted"
 msgstr ""
 
-#: src/window.c:611
+#: src/window.c:613
 msgid "File signed"
 msgstr ""
 
-#: src/window.c:637
+#: src/window.c:641
 msgid "File verified"
 msgstr ""
 

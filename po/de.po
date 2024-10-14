@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 17:46+0200\n"
+"POT-Creation-Date: 2024-10-14 18:30+0200\n"
 "PO-Revision-Date: 2024-10-14 17:30+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
@@ -215,7 +215,7 @@ msgstr "Verschlüsselung fehlgeschlagen"
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:394 src/window.c:583
+#: src/window.c:394 src/window.c:585
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
@@ -223,7 +223,7 @@ msgstr "Entschlüsselung fehlgeschlagen"
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:422 src/window.c:609
+#: src/window.c:422 src/window.c:611
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
@@ -231,7 +231,7 @@ msgstr "Signierung fehlgeschlagen"
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:451 src/window.c:635
+#: src/window.c:451 src/window.c:639
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
@@ -243,15 +243,15 @@ msgstr "Text verifiziert"
 msgid "File encrypted"
 msgstr "Datei verschlüsselt"
 
-#: src/window.c:585
+#: src/window.c:587
 msgid "File decrypted"
 msgstr "Datei entschlüsselt"
 
-#: src/window.c:611
+#: src/window.c:613
 msgid "File signed"
 msgstr "Datei signiert"
 
-#: src/window.c:637
+#: src/window.c:641
 msgid "File verified"
 msgstr "Datei verifiziert"
 

@@ -73,5 +73,16 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.1.0" date="2024-10-14">
+            <description translate="no">
+                <p>This is the first release of Lock.</p>
+                <p>Features now fully functional are:</p>
+                <ul>
+                    <li>Cryptography operations on text</li>
+                    <li>Encrypting and signing of files</li>
+                </ul>
+                <p>Decryption and verification of files is limited. Output will not be written to a file. This will be fixed once GPG Made Easy version 1.24.0 is released and supports a clean implementation of this functionality.</p>
+            </description>
+        </release>
     </releases>
 </component>
