@@ -574,6 +574,8 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, char *email,
  */
 static void lock_window_file_decrypt(GtkButton *self, LockWindow *window)
 {
+    // FIXME: cannot write to file until GPGME version 1.24
+
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
     AdwToast *toast;
@@ -626,6 +628,8 @@ static void lock_window_file_sign(GtkButton *self, LockWindow *window)
  */
 static void lock_window_file_verify(GtkButton *self, LockWindow *window)
 {
+    // FIXME: cannot write to file until GPGME version 1.24
+
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
     AdwToast *toast;

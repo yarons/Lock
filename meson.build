@@ -70,7 +70,7 @@ gnome = import('gnome')
 
 gtk_dep = dependency('gtk4')
 adwaita_dep = dependency('libadwaita-1', version: '>=1.4')
-gpgme_dep = dependency('gpgme')
+gpgme_dep = dependency('gpgme', version: '>=1.23')
 
 #
 # Subdirectories
