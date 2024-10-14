@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 23:56+0200\n"
+"POT-Creation-Date: 2024-10-14 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,86 +124,98 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: src/window.c:261
+#: src/window.c:257
+msgid "Copy the text"
+msgstr ""
+
+#: src/window.c:263
 msgid "Save"
 msgstr ""
 
-#: src/window.c:310
+#: src/window.c:265
+msgid "Save the file as …"
+msgstr ""
+
+#: src/window.c:314
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:336
+#: src/window.c:340
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
 
-#: src/window.c:347
+#: src/window.c:351
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:349
+#: src/window.c:353
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:370
+#: src/window.c:374
 msgid "Decryption failed"
 msgstr ""
 
-#: src/window.c:372
+#: src/window.c:376
 msgid "Text decrypted"
 msgstr ""
 
-#: src/window.c:393
+#: src/window.c:397
 msgid "Signing failed"
 msgstr ""
 
-#: src/window.c:395
+#: src/window.c:399
 msgid "Text signed"
 msgstr ""
 
-#: src/window.c:416
+#: src/window.c:420
 msgid "Verification failed"
 msgstr ""
 
-#: src/window.c:418
+#: src/window.c:422
 msgid "Text verified"
 msgstr ""
 
-#: data/ui/window.blp:9 data/ui/window.blp:86
+#: data/ui/window.blp:9 data/ui/window.blp:87
 #: data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr ""
 
-#: data/ui/window.blp:41
+#: data/ui/window.blp:30
+msgid "Cryptography operations"
+msgstr ""
+
+#: data/ui/window.blp:42
 msgid "Main Menu"
 msgstr ""
 
-#: data/ui/window.blp:51
+#: data/ui/window.blp:52
 msgid "Text"
 msgstr ""
 
-#: data/ui/window.blp:68 data/ui/window.blp:72
+#: data/ui/window.blp:69 data/ui/window.blp:73
 msgid "File"
 msgstr ""
 
-#: data/ui/window.blp:92
+#: data/ui/window.blp:93
 msgid "About Lock"
 msgstr ""
 
-#: data/ui/window.blp:101
+#: data/ui/window.blp:102
 msgid "Encrypt"
 msgstr ""
 
-#: data/ui/window.blp:105
+#: data/ui/window.blp:106
 msgid "Decrypt"
 msgstr ""
 
-#: data/ui/window.blp:111
+#: data/ui/window.blp:112
 msgid "Sign"
 msgstr ""
 
-#: data/ui/window.blp:115
+#: data/ui/window.blp:116
 msgid "Verify"
 msgstr ""
 

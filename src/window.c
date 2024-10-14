@@ -253,12 +253,16 @@ static void lock_window_stack_page_changed(AdwViewStack *self,
 
     if (visible_page == window->text_page) {
         adw_split_button_set_label(action_button, _("Copy"));
+        gtk_widget_set_tooltip_text(GTK_WIDGET(action_button),
+                                    _("Copy the text"));
         g_signal_connect(action_button, "clicked",
                          G_CALLBACK(lock_window_text_view_copy), window);
 
         window->action_mode = ACTION_MODE_TEXT;
     } else if (visible_page == window->file_page) {
         adw_split_button_set_label(action_button, _("Save"));
+        gtk_widget_set_tooltip_text(GTK_WIDGET(action_button),
+                                    _("Save the file as …"));
 
         window->action_mode = ACTION_MODE_FILE;
     }
