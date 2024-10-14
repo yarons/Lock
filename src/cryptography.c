@@ -41,6 +41,9 @@ gpgme_key_t key_from_email(char *email)
     error = gpgme_new(&context);
     HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
 
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
     error = gpgme_op_keylist_start(context, NULL, 0);
     while (!error) {
         error = gpgme_op_keylist_next(context, &key);
@@ -74,6 +77,9 @@ char *encrypt_text(char *text, gpgme_key_t key)
 
     error = gpgme_new(&context);
     HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
 
     gpgme_set_armor(context, 1);
 
@@ -124,6 +130,12 @@ char *decrypt_text(char *armor)
     error = gpgme_new(&context);
     HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
 
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set pinentry mode of GPGME context to ask"));
+
     error = gpgme_data_new_from_mem(&encrypted, armor, strlen(armor), 1);
     HANDLE_ERROR(NULL, error,
                  C_("GPGME Error",
@@ -168,6 +180,12 @@ char *sign_text(char *text)
 
     error = gpgme_new(&context);
     HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set pinentry mode of GPGME context to ask"));
 
     gpgme_set_armor(context, 1);
 
@@ -214,6 +232,9 @@ char *verify_text(char *armor)
 
     error = gpgme_new(&context);
     HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
 
     gpgme_set_armor(context, 1);
 
@@ -263,6 +284,9 @@ bool encrypt_file(char *input_path, char *output_path, gpgme_key_t key)
     error = gpgme_new(&context);
     HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
 
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
     error = gpgme_data_new_from_file(&decrypted, input_path, 1);
     HANDLE_ERROR(false, error,
                  C_("GPGME Error",
@@ -307,6 +331,12 @@ bool decrypt_file(char *input_path, char *output_path)
 
     error = gpgme_new(&context);
     HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "set pinentry mode of GPGME context to ask"));
 
     error = gpgme_data_new_from_file(&encrypted, input_path, 1);
     HANDLE_ERROR(false, error,
