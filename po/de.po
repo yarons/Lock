@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 12:33+0200\n"
-"PO-Revision-Date: 2024-10-14 12:29+0200\n"
+"POT-Creation-Date: 2024-10-14 14:31+0200\n"
+"PO-Revision-Date: 2024-10-14 14:12+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -26,7 +26,8 @@ msgid "Failed to %s: %s"
 msgstr "Fehler beim %s: %s"
 
 #: src/cryptography.c:42 src/cryptography.c:76 src/cryptography.c:125
-#: src/cryptography.c:170 src/cryptography.c:216
+#: src/cryptography.c:170 src/cryptography.c:216 src/cryptography.c:264
+#: src/cryptography.c:309
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "Erstellen eines neuen GPGME Kontexts"
@@ -42,7 +43,7 @@ msgid "create new decrypted GPGME data from string"
 msgstr ""
 "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:87
+#: src/cryptography.c:87 src/cryptography.c:273 src/cryptography.c:313
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data"
 msgstr "Erstellen von neuen, verschlüsselten GPGME Daten"
@@ -58,7 +59,7 @@ msgid "create new encrypted GPGME data from string"
 msgstr ""
 "Erstellen von neuen, verschlüsselten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:134
+#: src/cryptography.c:134 src/cryptography.c:317
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr "Erstellen von neuen, entschlüsselten GPGME Daten"
@@ -98,6 +99,31 @@ msgctxt "GPGME Error"
 msgid "verify GPGME data from memory"
 msgstr "Verifizierung von GPGME Daten aus dem Hauptspeicher"
 
+#: src/cryptography.c:269
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from file"
+msgstr "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Datei"
+
+#: src/cryptography.c:277
+msgctxt "GPGME Error"
+msgid "set file path of encrypted GPGME data"
+msgstr "Setzen des Dateipfades von verschlüsselten GPGME Daten"
+
+#: src/cryptography.c:282
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from file"
+msgstr "Verschlüsseln von GPGME Daten aus Datei"
+
+#: src/cryptography.c:321
+msgctxt "GPGME Error"
+msgid "set file path of decrypted GPGME data"
+msgstr "Setzen des Dateipfades von entschlüsselten GPGME Daten"
+
+#: src/cryptography.c:325
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from file"
+msgstr "Entschlüsseln von GPGME Daten aus Datei"
+
 #. Details
 #: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
@@ -112,88 +138,96 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:120 data/ui/entrydialog.blp:33
-msgid "Enter text …"
-msgstr "Text eingeben …"
-
-#: src/window.c:247
-msgid "Encrypt for"
-msgstr "Verschlüsseln für"
-
-#: src/window.c:247
-msgid "Enter email …"
-msgstr "E-Mail eingeben …"
-
-#. Action button
-#: src/window.c:283
-msgid "Copy"
-msgstr "Kopieren"
-
-#: src/window.c:285
-msgid "Copy the text"
-msgstr "Text kopieren"
-
-#. Action button
-#: src/window.c:297
-msgid "Save"
-msgstr "Speichern"
-
-#: src/window.c:299
-msgid "Save the file as …"
-msgstr "Datei speichern als …"
-
-#: src/window.c:356
-msgid "Text copied"
-msgstr "Text kopiert"
-
-#: src/window.c:382
+#: src/window.c:19
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:393
+#: src/window.c:135 data/ui/entrydialog.blp:33
+msgid "Enter text …"
+msgstr "Text eingeben …"
+
+#: src/window.c:263
+msgid "Encrypt for"
+msgstr "Verschlüsseln für"
+
+#: src/window.c:263
+msgid "Enter email …"
+msgstr "E-Mail eingeben …"
+
+#. Action button
+#: src/window.c:300
+msgid "Copy"
+msgstr "Kopieren"
+
+#: src/window.c:302
+msgid "Copy the text"
+msgstr "Text kopieren"
+
+#. Action button
+#: src/window.c:314
+msgid "Save"
+msgstr "Speichern"
+
+#: src/window.c:316
+msgid "Save the file as …"
+msgstr "Datei speichern als …"
+
+#: src/window.c:373
+msgid "Text copied"
+msgstr "Text kopiert"
+
+#: src/window.c:400 src/window.c:594
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:395
+#: src/window.c:402
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:416
+#: src/window.c:425 src/window.c:619
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:418
+#: src/window.c:427
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:439
+#: src/window.c:450
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
-#: src/window.c:441
+#: src/window.c:452
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:462
+#: src/window.c:475
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
-#: src/window.c:464
+#: src/window.c:477
 msgid "Text verified"
 msgstr "Text verifiziert"
 
-#: src/window.c:490
+#: src/window.c:505
 msgid "Selected file"
 msgstr "Datei ausgewählt"
 
-#: src/window.c:513
+#: src/window.c:528
 msgid "Saved file"
 msgstr "Datei gespeichert"
 
-#: src/window.c:546
+#: src/window.c:561
 msgid "No file to be saved has been opened"
 msgstr "Keine zu speichernde Datei wurde geöffnet"
+
+#: src/window.c:596
+msgid "File encrypted"
+msgstr "Datei verschlüsselt"
+
+#: src/window.c:621
+msgid "File decrypted"
+msgstr "Datei entschlüsselt"
 
 #: data/ui/window.blp:9 data/ui/window.blp:94
 #: data/com.konstantintutsch.Lock.desktop.in.in:4

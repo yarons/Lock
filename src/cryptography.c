@@ -242,3 +242,91 @@ char *verify_text(char *armor)
 
     return text;
 }
+
+/**
+ * This function encrypts a file using a GPG key.
+ *
+ * @param input_path Path to the file to encrypt
+ * @param output_path Path to write the encrypted file to
+ * @param key Key to encrypt for
+ *
+ * @return Success
+ */
+bool encrypt_file(char *input_path, char *output_path, gpgme_key_t key)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t decrypted;
+    gpgme_data_t encrypted;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_data_new_from_file(&decrypted, input_path, 1);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error",
+                    "create new decrypted GPGME data from file"));
+
+    error = gpgme_data_new(&encrypted);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new encrypted GPGME data"));
+
+    error = gpgme_data_set_file_name(encrypted, output_path);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set file path of encrypted GPGME data"));
+
+    error = gpgme_op_encrypt(context, (gpgme_key_t[]) {
+                             key, NULL}, 0, decrypted, encrypted);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "encrypt GPGME data from file"));
+
+    gpgme_release(context);
+    gpgme_data_release(decrypted);
+    gpgme_data_release(encrypted);
+    gpgme_key_release(key);
+
+    return true;
+}
+
+/**
+ * This function decrypts a file.
+ *
+ * @param input_path Path to the file to decrypt
+ * @param output_path Path to write the decrypted file to
+ *
+ * @return Success
+ */
+bool decrypt_file(char *input_path, char *output_path)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t encrypted;
+    gpgme_data_t decrypted;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_data_new_from_file(&encrypted, input_path, 1);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new encrypted GPGME data"));
+
+    error = gpgme_data_new(&decrypted);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new decrypted GPGME data"));
+
+    error = gpgme_data_set_file_name(decrypted, output_path);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set file path of decrypted GPGME data"));
+
+    error = gpgme_op_decrypt(context, encrypted, decrypted);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "decrypt GPGME data from file"));
+
+    gpgme_release(context);
+    gpgme_data_release(decrypted);
+    gpgme_data_release(encrypted);
+
+    return true;
+}

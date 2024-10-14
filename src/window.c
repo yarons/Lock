@@ -13,6 +13,18 @@
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
 
+#define HANDLE_ERROR_EMAIL(Return, Toast, ToastOverlay, Key, Email) if (Key == NULL) { \
+        Toast = \
+            adw_toast_new(g_strdup_printf \
+                          (_("Failed to find key for email “%s”"), Email)); \
+        adw_toast_set_timeout(Toast, 4); \
+        \
+        gpgme_key_release(Key); \
+        \
+        adw_toast_overlay_add_toast(ToastOverlay, Toast); \
+        return Return; \
+    }
+
 /**
  * This structure handles data of a window.
  */
@@ -73,6 +85,9 @@ static void lock_window_file_open_dialog_present(GtkButton * self,
                                                  LockWindow * window);
 static void lock_window_file_save_dialog_present(GtkButton * self,
                                                  LockWindow * window);
+static void lock_window_file_encrypt(LockEntryDialog * dialog, char *email,
+                                     LockWindow * window);
+static void lock_window_file_decrypt(LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -190,6 +205,7 @@ static void lock_window_decrypt(GSimpleAction *self, GVariant *parameter,
         lock_window_text_view_decrypt(window);
         break;
     case ACTION_MODE_FILE:
+        lock_window_file_decrypt(window);
         break;
     }
 }
@@ -253,6 +269,7 @@ static void lock_window_encrypt_dialog_present(GSimpleAction *self,
         callback = lock_window_text_view_encrypt;
         break;
     case ACTION_MODE_FILE:
+        callback = lock_window_file_encrypt;
         break;
     }
     g_signal_connect(window->encrypt_dialog, "entered", G_CALLBACK(callback),
@@ -376,17 +393,7 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
     AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
-    if (key == NULL) {
-        toast =
-            adw_toast_new(g_strdup_printf
-                          (_("Failed to find key for email “%s”"), email));
-        adw_toast_set_timeout(toast, 4);
-
-        gpgme_key_release(key);
-
-        adw_toast_overlay_add_toast(window->toast_overlay, toast);
-        return;
-    }
+    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email);
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -396,7 +403,9 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
 
         lock_window_text_view_set_text(window, armor);
     }
+
     g_free(armor);
+
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
@@ -419,7 +428,9 @@ static void lock_window_text_view_decrypt(LockWindow *window)
 
         lock_window_text_view_set_text(window, text);
     }
+
     g_free(text);
+
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
@@ -442,7 +453,9 @@ static void lock_window_text_view_sign(LockWindow *window)
 
         lock_window_text_view_set_text(window, armor);
     }
+
     g_free(armor);
+
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
@@ -465,7 +478,9 @@ static void lock_window_text_view_verify(LockWindow *window)
 
         lock_window_text_view_set_text(window, text);
     }
+
     g_free(text);
+
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
@@ -555,4 +570,60 @@ lock_window_file_save_dialog_present(GtkButton *self, LockWindow *window)
 
     gtk_file_dialog_save(dialog, GTK_WINDOW(window),
                          cancel, lock_window_file_save, window);
+}
+
+/**
+ * This function encrypts the file of a LockWindow.
+ *
+ * @param self Dialog where an input was confirmed
+ * @param email Input entered in the dialog
+ * @param window Window in which the dialog was present
+ */
+static void lock_window_file_encrypt(LockEntryDialog *dialog, char *email,
+                                     LockWindow *window)
+{
+    char *input_path = g_file_get_path(window->file_opened);
+    char *output_path = g_file_get_path(window->file_saved);
+    AdwToast *toast;
+
+    gpgme_key_t key = key_from_email(email);
+    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email);
+
+    bool success = encrypt_file(input_path, output_path, key);
+    if (!success) {
+        toast = adw_toast_new(_("Encryption failed"));
+    } else {
+        toast = adw_toast_new(_("File encrypted"));
+    }
+
+    g_free(input_path);
+    g_free(output_path);
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function decrypts the file of a LockWindow.
+ *
+ * @param window Window to decrypt the file of
+ */
+static void lock_window_file_decrypt(LockWindow *window)
+{
+    char *input_path = g_file_get_path(window->file_opened);
+    char *output_path = g_file_get_path(window->file_saved);
+    AdwToast *toast;
+
+    bool success = decrypt_file(input_path, output_path);
+    if (!success) {
+        toast = adw_toast_new(_("Decryption failed"));
+    } else {
+        toast = adw_toast_new(_("File decrypted"));
+    }
+
+    g_free(input_path);
+    g_free(output_path);
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 }
