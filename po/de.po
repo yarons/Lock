@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 17:31+0200\n"
+"POT-Creation-Date: 2024-10-14 17:46+0200\n"
 "PO-Revision-Date: 2024-10-14 17:30+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
@@ -87,7 +87,7 @@ msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:207 src/cryptography.c:412
+#: src/cryptography.c:207 src/cryptography.c:412 src/cryptography.c:453
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr "Erstellen von neuen, signierten GPGME Daten"
@@ -147,7 +147,7 @@ msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:416
+#: src/cryptography.c:416 src/cryptography.c:457
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr "Setzen des Dateipfades von signierten GPGME Daten"
@@ -157,22 +157,17 @@ msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr "Signieren von GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:453
-msgctxt "GPGME Error"
-msgid "create new signed GPGME data from file"
-msgstr "Erstellen von neuen, signierten GPGME Daten aus einer Datei"
-
-#: src/cryptography.c:457
+#: src/cryptography.c:461
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten"
 
-#: src/cryptography.c:461
+#: src/cryptography.c:465
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr "Setzen des Dateipfades von unsignierten GPGME Daten"
 
-#: src/cryptography.c:465
+#: src/cryptography.c:469
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr "Verifiezieren von GPGME Daten aus einer Datei"
@@ -375,6 +370,10 @@ msgstr "Klartext"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:55
 msgid "Email dialog"
 msgstr "E-Mail Dialog"
+
+#~ msgctxt "GPGME Error"
+#~ msgid "create new signed GPGME data from file"
+#~ msgstr "Erstellen von neuen, signierten GPGME Daten aus einer Datei"
 
 #~ msgid "Save"
 #~ msgstr "Speichern"

@@ -448,9 +448,13 @@ bool verify_file(char *input_path, char *output_path)
     HANDLE_ERROR(NULL, error,
                  C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
 
-    error = gpgme_data_new_from_file(&sign, input_path, 1);
+    error = gpgme_data_new(&sign);
     HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new signed GPGME data from file"));
+                 C_("GPGME Error", "create new signed GPGME data"));
+
+    error = gpgme_data_set_file_name(sign, input_path);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set file path of signed GPGME data"));
 
     error = gpgme_data_new(&plain);
     HANDLE_ERROR(false, error,

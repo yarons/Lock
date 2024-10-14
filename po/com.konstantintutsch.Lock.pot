@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 17:31+0200\n"
+"POT-Creation-Date: 2024-10-14 17:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:207 src/cryptography.c:412
+#: src/cryptography.c:207 src/cryptography.c:412 src/cryptography.c:453
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr ""
@@ -143,7 +143,7 @@ msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:416
+#: src/cryptography.c:416 src/cryptography.c:457
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr ""
@@ -153,22 +153,17 @@ msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:453
-msgctxt "GPGME Error"
-msgid "create new signed GPGME data from file"
-msgstr ""
-
-#: src/cryptography.c:457
+#: src/cryptography.c:461
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr ""
 
-#: src/cryptography.c:461
+#: src/cryptography.c:465
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr ""
 
-#: src/cryptography.c:465
+#: src/cryptography.c:469
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr ""
