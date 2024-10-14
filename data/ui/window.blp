@@ -24,10 +24,18 @@ template $LockWindow : Adw.ApplicationWindow {
         Adw.HeaderBar header_bar {
 
             [start]
-            Adw.SplitButton action_button {
-                css-classes: ["suggested-action"];
-                menu-model: action_menu;
-                dropdown-tooltip: _("Cryptography operations");
+            Gtk.Revealer text_button_revealer {
+                transition-duration: 0;
+                transition-type: none;
+
+                child: Adw.SplitButton text_button {
+                    css-classes: ["suggested-action"];
+                    label: _("Copy");
+                    tooltip-text: _("Copy the text");
+
+                    menu-model: text_menu;
+                    dropdown-tooltip: _("Cryptography operations");
+                };
             }
 
             [title]
@@ -69,15 +77,86 @@ template $LockWindow : Adw.ApplicationWindow {
                     title: _("File");
                     icon-name: "document-send-symbolic";
 
-                    child: Gtk.Box {
-                        orientation: vertical;
-                        halign: center;
-                        valign: center;
+                    child: Adw.Clamp {
+                        maximum-size: 400;
+                        tightening-threshold: 200;
+                        unit: sp;
 
-                        Gtk.Button file_button {
-                            css-classes: ["pill", "suggested-action"];
-                            label: _("Open File");
-                        }
+                        child: Gtk.Box {
+                            orientation: vertical;
+                            halign: fill;
+                            valign: center;
+                            spacing: 24;
+
+                            Gtk.ListBox {
+                                css-classes: ["boxed-list"];
+
+                                Adw.ActionRow file_input_row {
+                                    css-classes: ["property"];
+                                    title: _("Input File");
+
+                                    Gtk.Box {
+                                        orientation: horizontal;
+                                        valign: center;
+
+                                        Gtk.Button file_input_button {
+                                            css-classes: ["flat"];
+                                            icon-name: "document-open-symbolic";
+                                        }
+                                    }
+                                }
+
+                                Adw.ActionRow file_output_row {
+                                    css-classes: ["property"];
+                                    title: _("Output File");
+
+                                    Gtk.Box {
+                                        orientation: horizontal;
+                                        valign: center;
+
+                                        Gtk.Button file_output_button {
+                                            css-classes: ["flat"];
+                                            icon-name: "document-new-symbolic";
+                                        }
+                                    }
+                                }
+                            }
+
+                            Gtk.Box {
+                                orientation: horizontal;
+                                valign: center;
+                                halign: center;
+                                spacing: 15;
+
+                                Gtk.Button file_encrypt_button {
+                                    css-classes: ["suggested-action", "circular"];
+
+                                    icon-name: "system-lock-screen-symbolic";
+                                    tooltip-text: _("Encrypt");
+                                }
+
+                                Gtk.Button file_decrypt_button {
+                                    css-classes: ["suggested-action", "circular"];
+
+                                    icon-name: "dialog-password-symbolic";
+                                    tooltip-text: _("Decrypt");
+                                }
+
+                                Gtk.Button file_sign_button {
+                                    css-classes: ["suggested-action", "circular"];
+
+                                    icon-name: "emblem-ok-symbolic";
+                                    tooltip-text: _("Sign");
+                                }
+
+                                Gtk.Button file_verify_button {
+                                    css-classes: ["suggested-action", "circular"];
+
+                                    icon-name: "dialog-question-symbolic";
+                                    tooltip-text: _("Verify");
+                                }
+                            }
+                        };
                     };
                 }
             }
@@ -103,25 +182,25 @@ menu primary_menu {
     }
 }
 
-menu action_menu {
+menu text_menu {
     section {
         item {
             label: _("Encrypt");
-            action: "win.encrypt";
+            action: "win.encrypt_text";
         }
         item {
             label: _("Decrypt");
-            action: "win.decrypt";
+            action: "win.decrypt_text";
         }
     }
     section {
         item {
             label: _("Sign");
-            action: "win.sign";
+            action: "win.sign_text";
         }
         item {
             label: _("Verify");
-            action: "win.verify";
+            action: "win.verify_text";
         }
     }
 }
