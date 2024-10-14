@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 10:36+0200\n"
-"PO-Revision-Date: 2024-10-14 10:37+0200\n"
+"POT-Creation-Date: 2024-10-14 12:33+0200\n"
+"PO-Revision-Date: 2024-10-14 12:29+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -112,76 +112,90 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:99 data/ui/entrydialog.blp:33
+#: src/window.c:120 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
-#: src/window.c:220
+#: src/window.c:247
 msgid "Encrypt for"
 msgstr "Verschlüsseln für"
 
-#: src/window.c:220
+#: src/window.c:247
 msgid "Enter email …"
 msgstr "E-Mail eingeben …"
 
-#: src/window.c:255
+#. Action button
+#: src/window.c:283
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.c:257
+#: src/window.c:285
 msgid "Copy the text"
 msgstr "Text kopieren"
 
-#: src/window.c:263
+#. Action button
+#: src/window.c:297
 msgid "Save"
 msgstr "Speichern"
 
-#: src/window.c:265
+#: src/window.c:299
 msgid "Save the file as …"
 msgstr "Datei speichern als …"
 
-#: src/window.c:314
+#: src/window.c:356
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:340
+#: src/window.c:382
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:351
+#: src/window.c:393
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:353
+#: src/window.c:395
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:374
+#: src/window.c:416
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:376
+#: src/window.c:418
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:397
+#: src/window.c:439
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
-#: src/window.c:399
+#: src/window.c:441
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:420
+#: src/window.c:462
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
-#: src/window.c:422
+#: src/window.c:464
 msgid "Text verified"
 msgstr "Text verifiziert"
 
-#: data/ui/window.blp:9 data/ui/window.blp:87
+#: src/window.c:490
+msgid "Selected file"
+msgstr "Datei ausgewählt"
+
+#: src/window.c:513
+msgid "Saved file"
+msgstr "Datei gespeichert"
+
+#: src/window.c:546
+msgid "No file to be saved has been opened"
+msgstr "Keine zu speichernde Datei wurde geöffnet"
+
+#: data/ui/window.blp:9 data/ui/window.blp:94
 #: data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
@@ -199,27 +213,31 @@ msgstr "Hauptmenü"
 msgid "Text"
 msgstr "Text"
 
-#: data/ui/window.blp:69 data/ui/window.blp:73
+#: data/ui/window.blp:69
 msgid "File"
 msgstr "Datei"
 
-#: data/ui/window.blp:93
+#: data/ui/window.blp:79
+msgid "Open File"
+msgstr "Datei öffnen"
+
+#: data/ui/window.blp:100
 msgid "About Lock"
 msgstr "Über Schloss"
 
-#: data/ui/window.blp:102
+#: data/ui/window.blp:109
 msgid "Encrypt"
 msgstr "Verschlüsseln"
 
-#: data/ui/window.blp:106
+#: data/ui/window.blp:113
 msgid "Decrypt"
 msgstr "Entschlüsseln"
 
-#: data/ui/window.blp:112
+#: data/ui/window.blp:119
 msgid "Sign"
 msgstr "Signieren"
 
-#: data/ui/window.blp:116
+#: data/ui/window.blp:123
 msgid "Verify"
 msgstr "Verifizieren"
 

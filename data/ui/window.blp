@@ -69,8 +69,15 @@ template $LockWindow : Adw.ApplicationWindow {
                     title: _("File");
                     icon-name: "document-send-symbolic";
 
-                    child: Gtk.Label {
-                        label: _("File");
+                    child: Gtk.Box {
+                        orientation: vertical;
+                        halign: center;
+                        valign: center;
+
+                        Gtk.Button file_button {
+                            css-classes: ["pill", "suggested-action"];
+                            label: _("Open File");
+                        }
                     };
                 }
             }

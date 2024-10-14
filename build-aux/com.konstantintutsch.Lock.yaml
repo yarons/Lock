@@ -12,6 +12,7 @@ finish-args:
   - --filesystem=~/.gnupg:create
   - --socket=gpg-agent
   - --socket=session-bus
+  - --filesystem=xdg-run/gvfsd
 cleanup:
   - /include
   - /share/pkgconfig
