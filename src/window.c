@@ -96,6 +96,8 @@ static void lock_window_file_save_dialog_present(GtkButton * self,
 static void lock_window_file_encrypt(LockEntryDialog * dialog, char *email,
                                      LockWindow * window);
 static void lock_window_file_decrypt(GtkButton * self, LockWindow * window);
+static void lock_window_file_sign(GtkButton * self, LockWindow * window);
+static void lock_window_file_verify(GtkButton * self, LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -154,6 +156,12 @@ static void lock_window_init(LockWindow *window)
     // Decrypt
     g_signal_connect(window->file_decrypt_button, "clicked",
                      G_CALLBACK(lock_window_file_decrypt), window);
+    // Sign
+    g_signal_connect(window->file_sign_button, "clicked",
+                     G_CALLBACK(lock_window_file_sign), window);
+    // Verify
+    g_signal_connect(window->file_verify_button, "clicked",
+                     G_CALLBACK(lock_window_file_verify), window);
 }
 
 /**
@@ -575,6 +583,58 @@ static void lock_window_file_decrypt(GtkButton *self, LockWindow *window)
         toast = adw_toast_new(_("Decryption failed"));
     } else {
         toast = adw_toast_new(_("File decrypted"));
+    }
+
+    g_free(input_path);
+    g_free(output_path);
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function signs the file of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+static void lock_window_file_sign(GtkButton *self, LockWindow *window)
+{
+    char *input_path = g_file_get_path(window->file_input);
+    char *output_path = g_file_get_path(window->file_output);
+    AdwToast *toast;
+
+    bool success = sign_file(input_path, output_path);
+    if (!success) {
+        toast = adw_toast_new(_("Signing failed"));
+    } else {
+        toast = adw_toast_new(_("File signed"));
+    }
+
+    g_free(input_path);
+    g_free(output_path);
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+}
+
+/**
+ * This function verifies the file of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+static void lock_window_file_verify(GtkButton *self, LockWindow *window)
+{
+    char *input_path = g_file_get_path(window->file_input);
+    char *output_path = g_file_get_path(window->file_output);
+    AdwToast *toast;
+
+    bool success = verify_file(input_path, output_path);
+    if (!success) {
+        toast = adw_toast_new(_("Verification failed"));
+    } else {
+        toast = adw_toast_new(_("File verified"));
     }
 
     g_free(input_path);

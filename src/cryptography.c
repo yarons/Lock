@@ -353,7 +353,8 @@ bool decrypt_file(char *input_path, char *output_path)
 
     error = gpgme_data_new_from_file(&encrypted, input_path, 1);
     HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new encrypted GPGME data"));
+                 C_("GPGME Error",
+                    "create new encrypted GPGME data from file"));
 
     error = gpgme_data_new(&decrypted);
     HANDLE_ERROR(false, error,
@@ -370,6 +371,102 @@ bool decrypt_file(char *input_path, char *output_path)
     gpgme_release(context);
     gpgme_data_release(decrypted);
     gpgme_data_release(encrypted);
+
+    return true;
+}
+
+/**
+ * This function signs a file using a GPG key.
+ *
+ * @param input_path Path to the file to sign
+ * @param output_path Path to write the signed file to
+ *
+ * @return Success
+ */
+bool sign_file(char *input_path, char *output_path)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t plain;
+    gpgme_data_t sign;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "set pinentry mode of GPGME context to ask"));
+
+    error = gpgme_data_new_from_file(&plain, input_path, 1);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new unsigned GPGME data from file"));
+
+    error = gpgme_data_new(&sign);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new signed GPGME data"));
+
+    error = gpgme_data_set_file_name(sign, output_path);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set file path of signed GPGME data"));
+
+    error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "sign GPGME data from file"));
+
+    gpgme_release(context);
+    gpgme_data_release(plain);
+    gpgme_data_release(sign);
+
+    return true;
+}
+
+/**
+ * This function verifies a file.
+ *
+ * @param input_path Path to the file to verify
+ * @param output_path Path to write the verified file to
+ *
+ * @return Success
+ */
+bool verify_file(char *input_path, char *output_path)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t sign;
+    gpgme_data_t plain;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"));
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"));
+
+    error = gpgme_data_new_from_file(&sign, input_path, 1);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new signed GPGME data from file"));
+
+    error = gpgme_data_new(&plain);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create new unsigned GPGME data"));
+
+    error = gpgme_data_set_file_name(plain, output_path);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set file path of unsigned GPGME data"));
+
+    error = gpgme_op_verify(context, sign, NULL, plain);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "verify GPGME data from file"));
+
+    gpgme_release(context);
+    gpgme_data_release(sign);
+    gpgme_data_release(plain);
 
     return true;
 }
