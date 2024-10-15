@@ -29,7 +29,7 @@ template $LockWindow : Adw.ApplicationWindow {
                 transition-type: none;
 
                 child: Adw.SplitButton text_button {
-                    css-classes: ["suggested-action"];
+                    styles ["suggested-action"]
                     label: _("Copy");
                     tooltip-text: _("Copy the text");
 
@@ -62,7 +62,7 @@ template $LockWindow : Adw.ApplicationWindow {
 
                     child: Gtk.ScrolledWindow {
                         child: Gtk.TextView text_view {
-                            css-classes: ["background", "body", "text-input"];
+                            styles ["background", "body", "text-input"]
                             left-margin: 5;
 
                             editable: true;
@@ -89,10 +89,10 @@ template $LockWindow : Adw.ApplicationWindow {
                             spacing: 24;
 
                             Gtk.ListBox {
-                                css-classes: ["boxed-list"];
+                                styles ["boxed-list"]
 
                                 Adw.ActionRow file_input_row {
-                                    css-classes: ["property"];
+                                    styles ["property"]
                                     title: _("Input File");
 
                                     Gtk.Box {
@@ -100,14 +100,14 @@ template $LockWindow : Adw.ApplicationWindow {
                                         valign: center;
 
                                         Gtk.Button file_input_button {
-                                            css-classes: ["flat"];
+                                            styles ["flat"]
                                             icon-name: "document-open-symbolic";
                                         }
                                     }
                                 }
 
                                 Adw.ActionRow file_output_row {
-                                    css-classes: ["property"];
+                                    styles ["property"]
                                     title: _("Output File");
 
                                     Gtk.Box {
@@ -115,7 +115,7 @@ template $LockWindow : Adw.ApplicationWindow {
                                         valign: center;
 
                                         Gtk.Button file_output_button {
-                                            css-classes: ["flat"];
+                                            styles ["flat"]
                                             icon-name: "document-new-symbolic";
                                         }
                                     }
@@ -129,28 +129,28 @@ template $LockWindow : Adw.ApplicationWindow {
                                 spacing: 15;
 
                                 Gtk.Button file_encrypt_button {
-                                    css-classes: ["suggested-action", "circular"];
+                                    styles ["suggested-action", "circular"]
 
                                     icon-name: "system-lock-screen-symbolic";
                                     tooltip-text: _("Encrypt");
                                 }
 
                                 Gtk.Button file_decrypt_button {
-                                    css-classes: ["suggested-action", "circular"];
+                                    styles ["suggested-action", "circular"]
 
                                     icon-name: "dialog-password-symbolic";
                                     tooltip-text: _("Decrypt");
                                 }
 
                                 Gtk.Button file_sign_button {
-                                    css-classes: ["suggested-action", "circular"];
+                                    styles ["suggested-action", "circular"]
 
                                     icon-name: "emblem-ok-symbolic";
                                     tooltip-text: _("Sign");
                                 }
 
                                 Gtk.Button file_verify_button {
-                                    css-classes: ["suggested-action", "circular"];
+                                    styles ["suggested-action", "circular"]
 
                                     icon-name: "dialog-question-symbolic";
                                     tooltip-text: _("Verify");

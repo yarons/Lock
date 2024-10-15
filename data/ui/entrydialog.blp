@@ -18,7 +18,7 @@ template $LockEntryDialog : Adw.Dialog {
             halign: start;
 
             Gtk.Label title_label {
-                css-classes: ["heading"];
+                styles ["heading"]
                 label: _("Title");
             }
         }
@@ -34,7 +34,7 @@ template $LockEntryDialog : Adw.Dialog {
             }
 
             Gtk.Button confirm_button {
-                css-classes: ["suggested-action"];
+                styles ["suggested-action"]
                 icon-name: "object-select-symbolic";
             }
         }
