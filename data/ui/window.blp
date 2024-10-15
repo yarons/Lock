@@ -62,7 +62,8 @@ template $LockWindow : Adw.ApplicationWindow {
 
                     child: Gtk.ScrolledWindow {
                         child: Gtk.TextView text_view {
-                            styles ["background", "body", "text-input"]
+                            css-classes: ["background"];
+                            styles ["body", "text-input"]
                             left-margin: 5;
 
                             editable: true;
