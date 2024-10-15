@@ -4,13 +4,13 @@ First of all, thank you for investing your time to improve this project!
 
 ## Issues
 
-Found a bug? Just open an issue in [GitHub](https://github.com/konstantintutsch/Lock/issues)'s or [Codeberg](https://codeberg.org/konstantintutsch/Lock/issues)'s bug tracker.
+Found a bug? Just open an issue in [GitHub](https://github.com/konstantintutsch/Lock/issues)'s bug tracker.
 
 Make sure to describe the idea you've had or the problem you've experienced in detail. Thank you!
 
 ## Pull Requests
 
-You want to directly contribute to this project? Great! Open a pull request via [GitHub](https://github.com/konstantintutsch/Lock) or [Codeberg](https://codeberg.org/konstantintutsch/Lock).
+You want to directly contribute to this project? Great! Open a pull request via [GitHub](https://github.com/konstantintutsch/Lock).
 
 ### Translations
 
