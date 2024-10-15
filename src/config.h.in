@@ -5,6 +5,7 @@
 #define PROJECT_ID "@project_id@"
 #define _PROJECT_ID(String) "@project_id@"String
 #define PROJECT_VERSION "@project_version@"
+#define PROJECT_BUILD "@project_build@"
 
 #define LOCALEDIR "@localedir@"
 

@@ -116,10 +116,10 @@ static void lock_application_show_about(GSimpleAction *self,
     AdwAboutDialog *about =
         ADW_ABOUT_DIALOG(adw_about_dialog_new_from_appdata
                          (ROOT_RESOURCE(_PROJECT_ID(".metainfo.xml")),
-                          "0.1.0"));
+                          PROJECT_VERSION));
 
     // Show version suffix
-    adw_about_dialog_set_version(about, PROJECT_VERSION);
+    adw_about_dialog_set_version(about, PROJECT_BUILD);
 
     // Details
     adw_about_dialog_set_comments(about, _("Process data with GnuPG"));

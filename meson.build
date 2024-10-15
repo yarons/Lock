@@ -27,13 +27,15 @@ endif
 project_name = meson.project_name()
 project_id = base_id + id_suffix
 project_root = '/' + project_id.replace('.', '/')
-project_version = meson.project_version() + version_suffix
+project_version = meson.project_version()
+project_build = meson.project_version() + version_suffix
 project_exec = project_id
 
 conf.set('project_name', project_name)
 conf.set('project_id', project_id)
 conf.set('project_root', project_root)
 conf.set('project_version', project_version)
+conf.set('project_build', project_build)
 conf.set('project_exec', project_exec)
 
 #
