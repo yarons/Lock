@@ -73,6 +73,14 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.1.1" date="2024-10-16">
+            <description translate="no">
+                <ul>
+                    <li>Extend memory management (internal)</li>
+                    <li>Add application keywords</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.0" date="2024-10-14">
             <description translate="no">
                 <p>This is the first release of Lock.</p>
