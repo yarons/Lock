@@ -6,4 +6,5 @@ Icon=@project_id@
 StartupNotify=true
 Exec=@project_exec@
 Terminal=false
-Categories=System
+Categories=Utility;System;Security;
+Keywords=gpg;gnupg;cryptography;openpgp;encrypt;decrypt;sign;verify;
