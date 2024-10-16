@@ -26,8 +26,13 @@ int main(int argc, char *argv[])
     cryptography_init();
 
     // GUI
-    int status = g_application_run(G_APPLICATION(lock_application_new()), argc,
+    LockApplication *application = lock_application_new();
+    int status = g_application_run(G_APPLICATION(application), argc,
                                    argv);
+
+    /* Cleanup */
+    g_object_unref(application);
+    application = NULL;
 
     return status;
 }

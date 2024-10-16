@@ -21,9 +21,10 @@ struct _LockEntryDialog {
 G_DEFINE_TYPE(LockEntryDialog, lock_entry_dialog, ADW_TYPE_DIALOG);
 
 static void lock_entry_dialog_set_title(LockEntryDialog * dialog,
-                                        gchar * title);
+                                        const gchar * title);
 static void lock_entry_dialog_set_placeholder_text(LockEntryDialog * dialog,
-                                                   gchar * placeholder_text);
+                                                   const gchar *
+                                                   placeholder_text);
 static void lock_entry_dialog_set_input_purpose(LockEntryDialog * dialog,
                                                 GtkInputPurpose purpose);
 
@@ -74,7 +75,8 @@ static void lock_entry_dialog_class_init(LockEntryDialogClass *class)
  *
  * @return LockEntryDialog
  */
-LockEntryDialog *lock_entry_dialog_new(gchar *title, gchar *placeholder_text,
+LockEntryDialog *lock_entry_dialog_new(const gchar *title,
+                                       const gchar *placeholder_text,
                                        GtkInputPurpose input_purpose)
 {
     LockEntryDialog *dialog = g_object_new(LOCK_TYPE_ENTRY_DIALOG, NULL);
@@ -93,7 +95,8 @@ LockEntryDialog *lock_entry_dialog_new(gchar *title, gchar *placeholder_text,
  * @param dialog Dialog to update the title of
  * @param title Text to use as the title 
  */
-static void lock_entry_dialog_set_title(LockEntryDialog *dialog, gchar *title)
+static void lock_entry_dialog_set_title(LockEntryDialog *dialog,
+                                        const gchar *title)
 {
     adw_dialog_set_title(ADW_DIALOG(dialog), title);
     gtk_label_set_label(dialog->title_label, title);
@@ -106,7 +109,8 @@ static void lock_entry_dialog_set_title(LockEntryDialog *dialog, gchar *title)
  * @param placeholder_text Text to use as placeholder text of the entry
  */
 static void lock_entry_dialog_set_placeholder_text(LockEntryDialog *dialog,
-                                                   gchar *placeholder_text)
+                                                   const gchar
+                                                   *placeholder_text)
 {
     gtk_entry_set_placeholder_text(dialog->entry, placeholder_text);
 }
@@ -130,7 +134,7 @@ static void lock_entry_dialog_set_input_purpose(LockEntryDialog *dialog,
  *
  * @return Text
  */
-const char *lock_entry_dialog_get_text(LockEntryDialog *dialog)
+const gchar *lock_entry_dialog_get_text(LockEntryDialog *dialog)
 {
     GtkEntryBuffer *buffer = gtk_entry_get_buffer(dialog->entry);
 
@@ -146,7 +150,7 @@ const char *lock_entry_dialog_get_text(LockEntryDialog *dialog)
 static void lock_entry_dialog_entry_confirm(GtkButton *self,
                                             LockEntryDialog *dialog)
 {
-    const char *text = lock_entry_dialog_get_text(dialog);
+    const gchar *text = lock_entry_dialog_get_text(dialog);
 
     if (!(strlen(text) > 0) || text == NULL)
         return;

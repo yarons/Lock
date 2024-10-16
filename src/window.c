@@ -13,15 +13,17 @@
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
 
-#define HANDLE_ERROR_EMAIL(Return, Toast, ToastOverlay, Key, Email) if (Key == NULL) { \
+#define HANDLE_ERROR_EMAIL(Return, Toast, ToastOverlay, Key, Email, FreeCode) if (Key == NULL) { \
         Toast = \
             adw_toast_new(g_strdup_printf \
                           (_("Failed to find key for email “%s”"), Email)); \
         adw_toast_set_timeout(Toast, 4); \
+        adw_toast_overlay_add_toast(ToastOverlay, Toast); \
         \
         gpgme_key_release(Key); \
         \
-        adw_toast_overlay_add_toast(ToastOverlay, Toast); \
+        FreeCode \
+        \
         return Return; \
     }
 
@@ -72,7 +74,8 @@ static void lock_window_stack_page_changed(AdwViewStack * self,
 /* Text */
 static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
-static void lock_window_text_view_encrypt(LockEntryDialog * self, char *email,
+static void lock_window_text_view_encrypt(LockEntryDialog * self,
+                                          const char *email,
                                           LockWindow * window);
 static void lock_window_text_view_decrypt(GSimpleAction * self,
                                           GVariant * parameter,
@@ -93,8 +96,8 @@ static void lock_window_file_open_dialog_present(GtkButton * self,
                                                  LockWindow * window);
 static void lock_window_file_save_dialog_present(GtkButton * self,
                                                  LockWindow * window);
-static void lock_window_file_encrypt(LockEntryDialog * dialog, char *email,
-                                     LockWindow * window);
+static void lock_window_file_encrypt(LockEntryDialog * dialog,
+                                     const char *email, LockWindow * window);
 static void lock_window_file_decrypt(GtkButton * self, LockWindow * window);
 static void lock_window_file_sign(GtkButton * self, LockWindow * window);
 static void lock_window_file_verify(GtkButton * self, LockWindow * window);
@@ -264,6 +267,9 @@ static void lock_window_encrypt_dialog_present(GSimpleAction *self,
                      window);
 
     adw_dialog_present(ADW_DIALOG(window->encrypt_dialog), GTK_WIDGET(window));
+
+    /* Cleanup */
+    callback = NULL;
 }
 
 /**
@@ -290,6 +296,10 @@ static void lock_window_stack_page_changed(AdwViewStack *self,
 
         gtk_revealer_set_reveal_child(window->text_button_revealer, false);
     }
+
+    /* Cleanup */
+    visible_child = NULL;
+    visible_page = NULL;
 }
 
 /**
@@ -297,7 +307,7 @@ static void lock_window_stack_page_changed(AdwViewStack *self,
  *
  * @param window Window to get the text from
  *
- * @return Text
+ * @return Text. Freeing required
  */
 gchar *lock_window_text_view_get_text(LockWindow *window)
 {
@@ -342,6 +352,10 @@ static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
     gdk_clipboard_set_text(active_clipboard, text);
 
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(text);
+    text = NULL;
 }
 
 /**
@@ -351,14 +365,17 @@ static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
  * @param email Input entered in the dialog
  * @param window Window in which the dialog was present
  */
-static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
-                                          LockWindow *window)
+static void lock_window_text_view_encrypt(LockEntryDialog *self,
+                                          const char *email, LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
     AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email);
+    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
+                       g_free(plain);
+                       plain = NULL;
+        );
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -369,10 +386,15 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self, char *email,
         lock_window_text_view_set_text(window, armor);
     }
 
-    g_free(armor);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(plain);
+    plain = NULL;
+
+    g_free(armor);
+    armor = NULL;
 }
 
 /**
@@ -398,10 +420,15 @@ static void lock_window_text_view_decrypt(GSimpleAction *self,
         lock_window_text_view_set_text(window, text);
     }
 
-    g_free(text);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(armor);
+    armor = NULL;
+
+    g_free(text);
+    text = NULL;
 }
 
 /**
@@ -426,10 +453,15 @@ static void lock_window_text_view_sign(GSimpleAction *self, GVariant *parameter,
         lock_window_text_view_set_text(window, armor);
     }
 
-    g_free(armor);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(plain);
+    plain = NULL;
+
+    g_free(armor);
+    armor = NULL;
 }
 
 /**
@@ -455,10 +487,15 @@ static void lock_window_text_view_verify(GSimpleAction *self,
         lock_window_text_view_set_text(window, text);
     }
 
-    g_free(text);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(armor);
+    armor = NULL;
+
+    g_free(text);
+    text = NULL;
 }
 
 /**
@@ -475,11 +512,24 @@ static void lock_window_file_open(GObject *source_object, GAsyncResult *res,
     LockWindow *window = LOCK_WINDOW(data);
 
     window->file_input = gtk_file_dialog_open_finish(dialog, res, NULL);
-    if (window->file_input == NULL)
+    if (window->file_input == NULL) {
+        /* Cleanup */
+        g_object_unref(dialog);
+        dialog = NULL;
+
+        window = NULL;
+
         return;
+    }
 
     adw_action_row_set_subtitle(window->file_input_row,
                                 g_file_get_basename(window->file_input));
+
+    /* Cleanup */
+    g_object_unref(dialog);
+    dialog = NULL;
+
+    window = NULL;
 }
 
 /**
@@ -496,11 +546,24 @@ static void lock_window_file_save(GObject *source_object,
     LockWindow *window = LOCK_WINDOW(data);
 
     window->file_output = gtk_file_dialog_save_finish(dialog, res, NULL);
-    if (window->file_output == NULL)
+    if (window->file_output == NULL) {
+        /* Cleanup */
+        g_object_unref(dialog);
+        dialog = NULL;
+
+        window = NULL;
+
         return;
+    }
 
     adw_action_row_set_subtitle(window->file_output_row,
                                 g_file_get_basename(window->file_output));
+
+    /* Cleanup */
+    g_object_unref(dialog);
+    dialog = NULL;
+
+    window = NULL;
 }
 
 /**
@@ -542,7 +605,7 @@ lock_window_file_save_dialog_present(GtkButton *self, LockWindow *window)
  * @param email Input entered in the dialog
  * @param window Window in which the dialog was present
  */
-static void lock_window_file_encrypt(LockEntryDialog *dialog, char *email,
+static void lock_window_file_encrypt(LockEntryDialog *dialog, const char *email,
                                      LockWindow *window)
 {
     char *input_path = g_file_get_path(window->file_input);
@@ -550,7 +613,12 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, char *email,
     AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email);
+    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
+                       /* Cleanup */
+                       g_free(input_path);
+                       input_path = NULL; g_free(output_path);
+                       output_path = NULL;
+        );
 
     bool success = encrypt_file(input_path, output_path, key);
     if (!success) {
@@ -559,11 +627,15 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, char *email,
         toast = adw_toast_new(_("File encrypted"));
     }
 
-    g_free(input_path);
-    g_free(output_path);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(input_path);
+    input_path = NULL;
+
+    g_free(output_path);
+    output_path = NULL;
 }
 
 /**
@@ -587,11 +659,15 @@ static void lock_window_file_decrypt(GtkButton *self, LockWindow *window)
         toast = adw_toast_new(_("File decrypted"));
     }
 
-    g_free(input_path);
-    g_free(output_path);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(input_path);
+    input_path = NULL;
+
+    g_free(output_path);
+    output_path = NULL;
 }
 
 /**
@@ -613,11 +689,15 @@ static void lock_window_file_sign(GtkButton *self, LockWindow *window)
         toast = adw_toast_new(_("File signed"));
     }
 
-    g_free(input_path);
-    g_free(output_path);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(input_path);
+    input_path = NULL;
+
+    g_free(output_path);
+    output_path = NULL;
 }
 
 /**
@@ -641,9 +721,13 @@ static void lock_window_file_verify(GtkButton *self, LockWindow *window)
         toast = adw_toast_new(_("File verified"));
     }
 
-    g_free(input_path);
-    g_free(output_path);
-
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_free(input_path);
+    input_path = NULL;
+
+    g_free(output_path);
+    output_path = NULL;
 }
