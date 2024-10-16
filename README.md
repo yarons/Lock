@@ -15,6 +15,8 @@ Supported are
 
 of text and files.
 
+<a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>
+
 ## Showcase
 
 ![Light Appearance](data/com.konstantintutsch.Lock.Screenshot.Light.png)
