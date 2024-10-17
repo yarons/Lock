@@ -2,8 +2,9 @@ src/main.c
 src/cryptography.c
 src/application.c
 src/window.c
-data/ui/window.blp
 src/entrydialog.c
+src/threading.c
+data/ui/window.blp
 data/ui/entrydialog.blp
 data/com.konstantintutsch.Lock.desktop.in.in
 data/com.konstantintutsch.Lock.metainfo.xml.in.in

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-17 09:09+0200\n"
+"POT-Creation-Date: 2024-10-17 22:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,81 +194,128 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: src/window.c:19
+#: src/window.c:20
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
 
-#: src/window.c:137 data/ui/entrydialog.blp:33
+#: src/window.c:124 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr ""
 
-#: src/window.c:285
+#: src/window.c:304
 msgid "Key import failed"
 msgstr ""
 
-#: src/window.c:299
+#: src/window.c:318
 msgid "Imported key"
 msgstr ""
 
-#: src/window.c:341
-msgid "Encrypt for"
-msgstr ""
-
-#: src/window.c:341
-msgid "Enter email …"
-msgstr ""
-
-#: src/window.c:435
+#: src/window.c:393
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:469 src/window.c:714
+#: src/window.c:518
+msgid "Encrypt for"
+msgstr ""
+
+#: src/window.c:518
+msgid "Enter email …"
+msgstr ""
+
+#: src/window.c:561 src/window.c:605
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:471
+#: src/window.c:563
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:505 src/window.c:748
-msgid "Decryption failed"
-msgstr ""
-
-#: src/window.c:507
-msgid "Text decrypted"
-msgstr ""
-
-#: src/window.c:538 src/window.c:778
-msgid "Signing failed"
-msgstr ""
-
-#: src/window.c:540
-msgid "Text signed"
-msgstr ""
-
-#: src/window.c:572 src/window.c:810
-msgid "Verification failed"
-msgstr ""
-
-#: src/window.c:574
-msgid "Text verified"
-msgstr ""
-
-#: src/window.c:716
+#: src/window.c:607
 msgid "File encrypted"
 msgstr ""
 
-#: src/window.c:750
+#: src/window.c:637 src/window.c:672
+msgid "Decryption failed"
+msgstr ""
+
+#: src/window.c:639
+msgid "Text decrypted"
+msgstr ""
+
+#: src/window.c:674
 msgid "File decrypted"
 msgstr ""
 
-#: src/window.c:780
+#: src/window.c:704 src/window.c:737
+msgid "Signing failed"
+msgstr ""
+
+#: src/window.c:706
+msgid "Text signed"
+msgstr ""
+
+#: src/window.c:739
 msgid "File signed"
 msgstr ""
 
-#: src/window.c:812
+#: src/window.c:769 src/window.c:804
+msgid "Verification failed"
+msgstr ""
+
+#: src/window.c:771
+msgid "Text verified"
+msgstr ""
+
+#: src/window.c:806
 msgid "File verified"
+msgstr ""
+
+#: src/threading.c:15
+#, c-format
+msgctxt ""
+"First format specifier is a translation string marked as “Thread Error”"
+msgid "Failed to create %s thread: %s"
+msgstr ""
+
+#: src/threading.c:32
+msgctxt "Thread Error"
+msgid "text encryption"
+msgstr ""
+
+#: src/threading.c:45
+msgctxt "Thread Error"
+msgid "file encryption"
+msgstr ""
+
+#: src/threading.c:60
+msgctxt "Thread Error"
+msgid "text decryption"
+msgstr ""
+
+#: src/threading.c:73
+msgctxt "Thread Error"
+msgid "file decryption"
+msgstr ""
+
+#: src/threading.c:87
+msgctxt "Thread Error"
+msgid "text signing"
+msgstr ""
+
+#: src/threading.c:99
+msgctxt "Thread Error"
+msgid "file signing"
+msgstr ""
+
+#: src/threading.c:114
+msgctxt "Thread Error"
+msgid "text verification"
+msgstr ""
+
+#: src/threading.c:127
+msgctxt "Thread Error"
+msgid "file verification"
 msgstr ""
 
 #: data/ui/window.blp:9 data/ui/window.blp:174

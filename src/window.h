@@ -12,4 +12,21 @@ G_DECLARE_FINAL_TYPE(LockWindow, lock_window, LOCK, WINDOW,
 LockWindow *lock_window_new(LockApplication * app);
 void lock_window_open(LockWindow * window, GFile * file);
 
+/* Cryptography */
+
+// Encryption
+void lock_window_encrypt_dialog(LockWindow * window);
+
+// Decryption
+void lock_window_decrypt_text(LockWindow * window);
+void lock_window_decrypt_file(LockWindow * window);
+
+// Signing
+void lock_window_sign_text(LockWindow * window);
+void lock_window_sign_file(LockWindow * window);
+
+// Verification
+void lock_window_verify_text(LockWindow * window);
+void lock_window_verify_file(LockWindow * window);
+
 #endif                          // WINDOW_H

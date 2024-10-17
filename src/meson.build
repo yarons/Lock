@@ -13,6 +13,7 @@ src = files(
   'application.c',
   'window.c',
   'entrydialog.c',
+  'threading.c',
   'cryptography.c'
 )
 
