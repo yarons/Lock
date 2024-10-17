@@ -13,7 +13,12 @@
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
 
-#define HANDLE_ERROR_EMAIL(Return, Toast, ToastOverlay, Key, Email, FreeCode) if (Key == NULL) { \
+#define ENCRYPT_TEXT_ACTION "encrypt_text"
+#define DECRYPT_TEXT_ACTION "decrypt_text"
+#define SIGN_TEXT_ACTION "sign_text"
+#define VERIFY_TEXT_ACTION "verify_text"
+
+#define HANDLE_ERROR_EMAIL(Toast, ToastOverlay, Key, Email, FreeCode) if (Key == NULL) { \
         Toast = \
             adw_toast_new(g_strdup_printf \
                           (_("Failed to find key for email “%s”"), Email)); \
@@ -24,7 +29,7 @@
         \
         FreeCode \
         \
-        return Return; \
+        g_thread_exit(0); \
     }
 
 /**
@@ -64,9 +69,7 @@ struct _LockWindow {
 
 G_DEFINE_TYPE(LockWindow, lock_window, ADW_TYPE_APPLICATION_WINDOW);
 
-static void lock_window_encrypt_dialog_present(GSimpleAction * self,
-                                               GVariant * parameter,
-                                               LockWindow * window);
+static void lock_window_encrypt_dialog_present(LockWindow * window);
 static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
                                            LockWindow * window);
@@ -79,18 +82,15 @@ static void lock_window_key_file_dialog_present(GSimpleAction * self,
 /* Text */
 static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
+static void lock_window_cryptography_text_thread(GSimpleAction * self,
+                                                 GVariant * parameter,
+                                                 LockWindow * window);
 static void lock_window_text_view_encrypt(LockEntryDialog * self,
                                           const char *email,
                                           LockWindow * window);
-static void lock_window_text_view_decrypt(GSimpleAction * self,
-                                          GVariant * parameter,
-                                          LockWindow * window);
-static void lock_window_text_view_sign(GSimpleAction * self,
-                                       GVariant * parameter,
-                                       LockWindow * window);
-static void lock_window_text_view_verify(GSimpleAction * self,
-                                         GVariant * parameter,
-                                         LockWindow * window);
+static void lock_window_text_view_decrypt(LockWindow * window);
+static void lock_window_text_view_sign(LockWindow * window);
+static void lock_window_text_view_verify(LockWindow * window);
 
 /* File */
 static void lock_window_file_open(GObject * source_object, GAsyncResult * res,
@@ -101,11 +101,13 @@ static void lock_window_file_open_dialog_present(GtkButton * self,
                                                  LockWindow * window);
 static void lock_window_file_save_dialog_present(GtkButton * self,
                                                  LockWindow * window);
+static void lock_window_cryptography_file_thread(GtkButton * self,
+                                                 LockWindow * window);
 static void lock_window_file_encrypt(LockEntryDialog * dialog,
                                      const char *email, LockWindow * window);
-static void lock_window_file_decrypt(GtkButton * self, LockWindow * window);
-static void lock_window_file_sign(GtkButton * self, LockWindow * window);
-static void lock_window_file_verify(GtkButton * self, LockWindow * window);
+static void lock_window_file_decrypt(LockWindow * window);
+static void lock_window_file_sign(LockWindow * window);
+static void lock_window_file_verify(LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -137,29 +139,29 @@ static void lock_window_init(LockWindow *window)
                              _("Enter text …"), -1);
     // Encrypt
     g_autoptr(GSimpleAction) encrypt_text_action =
-        g_simple_action_new("encrypt_text", NULL);
+        g_simple_action_new(ENCRYPT_TEXT_ACTION, NULL);
     g_signal_connect(encrypt_text_action, "activate",
-                     G_CALLBACK(lock_window_encrypt_dialog_present), window);
+                     G_CALLBACK(lock_window_cryptography_text_thread), window);
     g_action_map_add_action(G_ACTION_MAP(window),
                             G_ACTION(encrypt_text_action));
     // Decrypt
     g_autoptr(GSimpleAction) decrypt_text_action =
-        g_simple_action_new("decrypt_text", NULL);
+        g_simple_action_new(DECRYPT_TEXT_ACTION, NULL);
     g_signal_connect(decrypt_text_action, "activate",
-                     G_CALLBACK(lock_window_text_view_decrypt), window);
+                     G_CALLBACK(lock_window_cryptography_text_thread), window);
     g_action_map_add_action(G_ACTION_MAP(window),
                             G_ACTION(decrypt_text_action));
     // Sign
     g_autoptr(GSimpleAction) sign_text_action =
-        g_simple_action_new("sign_text", NULL);
+        g_simple_action_new(SIGN_TEXT_ACTION, NULL);
     g_signal_connect(sign_text_action, "activate",
-                     G_CALLBACK(lock_window_text_view_sign), window);
+                     G_CALLBACK(lock_window_cryptography_text_thread), window);
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(sign_text_action));
     // Verify
     g_autoptr(GSimpleAction) verify_text_action =
-        g_simple_action_new("verify_text", NULL);
+        g_simple_action_new(VERIFY_TEXT_ACTION, NULL);
     g_signal_connect(verify_text_action, "activate",
-                     G_CALLBACK(lock_window_text_view_verify), window);
+                     G_CALLBACK(lock_window_cryptography_text_thread), window);
     g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(verify_text_action));
 
     /* File */
@@ -169,16 +171,16 @@ static void lock_window_init(LockWindow *window)
                      G_CALLBACK(lock_window_file_save_dialog_present), window);
     // Encrypt
     g_signal_connect(window->file_encrypt_button, "clicked",
-                     G_CALLBACK(lock_window_encrypt_dialog_present), window);
+                     G_CALLBACK(lock_window_cryptography_file_thread), window);
     // Decrypt
     g_signal_connect(window->file_decrypt_button, "clicked",
-                     G_CALLBACK(lock_window_file_decrypt), window);
+                     G_CALLBACK(lock_window_cryptography_file_thread), window);
     // Sign
     g_signal_connect(window->file_sign_button, "clicked",
-                     G_CALLBACK(lock_window_file_sign), window);
+                     G_CALLBACK(lock_window_cryptography_file_thread), window);
     // Verify
     g_signal_connect(window->file_verify_button, "clicked",
-                     G_CALLBACK(lock_window_file_verify), window);
+                     G_CALLBACK(lock_window_cryptography_file_thread), window);
 }
 
 /**
@@ -251,6 +253,73 @@ LockWindow *lock_window_new(LockApplication *app)
 
 void lock_window_open(LockWindow *window, GFile *file)
 {
+}
+
+/**
+ * This function handles threading of text cryptography operations of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_cryptography_text_thread(GSimpleAction *self,
+                                                 GVariant *parameter,
+                                                 LockWindow *window)
+{
+    const gchar *action_name = g_action_get_name(G_ACTION(self));
+    gpointer callback = lock_window_encrypt_dialog_present;
+
+    if (strcmp(action_name, ENCRYPT_TEXT_ACTION) == 0) {
+        callback = lock_window_encrypt_dialog_present;
+    } else if (strcmp(action_name, DECRYPT_TEXT_ACTION) == 0) {
+        callback = lock_window_text_view_decrypt;
+    } else if (strcmp(action_name, SIGN_TEXT_ACTION) == 0) {
+        callback = lock_window_text_view_sign;
+    } else if (strcmp(action_name, VERIFY_TEXT_ACTION) == 0) {
+        callback = lock_window_text_view_verify;
+    }
+
+    GError *error;
+    g_thread_try_new(action_name, callback, window, &error);
+    if (error != NULL) {
+        g_warning(_
+                  ("Failed to create a thread for %s: %s"), action_name,
+                  error->message);
+
+        g_error_free(error);
+    }
+}
+
+/**
+ * This function handles threading of file cryptography operations of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+static void lock_window_cryptography_file_thread(GtkButton *self,
+                                                 LockWindow *window)
+{
+    gpointer callback = lock_window_encrypt_dialog_present;
+
+    if (self == window->file_encrypt_button) {
+        callback = lock_window_encrypt_dialog_present;
+    } else if (self == window->file_decrypt_button) {
+        callback = lock_window_file_decrypt;
+    } else if (self == window->file_sign_button) {
+        callback = lock_window_file_sign;
+    } else if (self == window->file_verify_button) {
+        callback = lock_window_file_verify;
+    }
+
+    GError *error;
+    g_thread_try_new("file_cryptography", callback, window, &error);
+    if (error != NULL) {
+        g_warning(_
+                  ("Failed to create a thread for file cryptography: %s"),
+                  error->message);
+
+        g_error_free(error);
+    }
 }
 
 /**
@@ -329,14 +398,13 @@ static void lock_window_key_file_dialog_present(GSimpleAction *self,
 /**
  * This function presents the encrypt dialog of a LockWindow and handles encryption based on the action mode of the window.
  *
- * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_encrypt_dialog_present(GSimpleAction *self,
-                                               GVariant *parameter,
-                                               LockWindow *window)
+static void lock_window_encrypt_dialog_present(LockWindow *window)
 {
+    if (window->encrypt_dialog != NULL)
+        window->encrypt_dialog = NULL;
+
     window->encrypt_dialog =
         lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
                               GTK_INPUT_PURPOSE_EMAIL);
@@ -357,6 +425,8 @@ static void lock_window_encrypt_dialog_present(GSimpleAction *self,
 
     /* Cleanup */
     callback = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
@@ -459,10 +529,8 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self,
     AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
-                       g_free(plain);
-                       plain = NULL;
-        );
+    HANDLE_ERROR_EMAIL(toast, window->toast_overlay, key, email, g_free(plain);
+                       plain = NULL;);
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -489,13 +557,9 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self,
 /**
  * This function decrypts text from the text view of a LockWindow.
  *
- * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_text_view_decrypt(GSimpleAction *self,
-                                          GVariant *parameter,
-                                          LockWindow *window)
+static void lock_window_text_view_decrypt(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
     AdwToast *toast;
@@ -518,17 +582,16 @@ static void lock_window_text_view_decrypt(GSimpleAction *self,
 
     g_free(text);
     text = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
  * This function signs text from the text view of a LockWindow.
  *
- * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_text_view_sign(GSimpleAction *self, GVariant *parameter,
-                                       LockWindow *window)
+static void lock_window_text_view_sign(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
     AdwToast *toast;
@@ -551,18 +614,16 @@ static void lock_window_text_view_sign(GSimpleAction *self, GVariant *parameter,
 
     g_free(armor);
     armor = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
  * This function verifies text from the text view of a LockWindow.
  *
- * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
- * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_text_view_verify(GSimpleAction *self,
-                                         GVariant *parameter,
-                                         LockWindow *window)
+static void lock_window_text_view_verify(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
     AdwToast *toast;
@@ -585,6 +646,8 @@ static void lock_window_text_view_verify(GSimpleAction *self,
 
     g_free(text);
     text = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
@@ -702,12 +765,10 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, const char *email,
     AdwToast *toast;
 
     gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
+    HANDLE_ERROR_EMAIL(toast, window->toast_overlay, key, email,
                        /* Cleanup */
-                       g_free(input_path);
-                       input_path = NULL; g_free(output_path);
-                       output_path = NULL;
-        );
+                       g_free(input_path); input_path = NULL;
+                       g_free(output_path); output_path = NULL;);
 
     bool success = encrypt_file(input_path, output_path, key);
     if (!success) {
@@ -732,10 +793,9 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, const char *email,
 /**
  * This function decrypts the file of a LockWindow.
  *
- * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
- * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_file_decrypt(GtkButton *self, LockWindow *window)
+static void lock_window_file_decrypt(LockWindow *window)
 {
     // FIXME: cannot write to file until GPGME version 1.24
 
@@ -759,15 +819,16 @@ static void lock_window_file_decrypt(GtkButton *self, LockWindow *window)
 
     g_free(output_path);
     output_path = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
  * This function signs the file of a LockWindow.
  *
- * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
- * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_file_sign(GtkButton *self, LockWindow *window)
+static void lock_window_file_sign(LockWindow *window)
 {
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
@@ -789,15 +850,16 @@ static void lock_window_file_sign(GtkButton *self, LockWindow *window)
 
     g_free(output_path);
     output_path = NULL;
+
+    g_thread_exit(0);
 }
 
 /**
  * This function verifies the file of a LockWindow.
  *
- * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
- * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
  */
-static void lock_window_file_verify(GtkButton *self, LockWindow *window)
+static void lock_window_file_verify(LockWindow *window)
 {
     // FIXME: cannot write to file until GPGME version 1.24
 
@@ -821,4 +883,6 @@ static void lock_window_file_verify(GtkButton *self, LockWindow *window)
 
     g_free(output_path);
     output_path = NULL;
+
+    g_thread_exit(0);
 }
