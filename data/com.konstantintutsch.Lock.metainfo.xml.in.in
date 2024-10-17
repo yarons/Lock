@@ -30,8 +30,8 @@
         <name translate="no">Konstantin Tutsch</name>
     </developer>
     <branding>
-        <color type="primary" scheme_preference="light">#c061cb</color>
-        <color type="primary" scheme_preference="dark">#c061cb</color>
+        <color type="primary" scheme_preference="light">#dc8add</color>
+        <color type="primary" scheme_preference="dark">#613583</color>
     </branding>
     <screenshots>
         <screenshot type="default">
