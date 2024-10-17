@@ -72,6 +72,46 @@ gpgme_key_t key_from_email(const char *email)
 }
 
 /**
+ * This function imports a key from a file.
+ *
+ * @param path Path of the file to import as a key
+ *
+ * @return Success
+ */
+bool key_import_from_file(const char *path)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t keydata;
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    error = gpgme_data_new_from_file(&keydata, path, 1);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "load GPGME key data from file"), context,
+                 gpgme_data_release(keydata);
+        );
+
+    error = gpgme_op_import(context, keydata);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "import GPG key from file"),
+                 context, gpgme_data_release(keydata);
+        );
+
+    /* Cleanup */
+    gpgme_release(context);
+    gpgme_data_release(keydata);
+
+    return true;
+}
+
+/**
  * This function encrypts a text using a GPG key.
  *
  * @param text Text to encrypt

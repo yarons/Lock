@@ -71,6 +71,11 @@ static void lock_window_stack_page_changed(AdwViewStack * self,
                                            GParamSpec * pspec,
                                            LockWindow * window);
 
+/* Key */
+static void lock_window_key_file_dialog_present(GSimpleAction * self,
+                                                GVariant * parameter,
+                                                LockWindow * window);
+
 /* Text */
 static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
@@ -115,6 +120,15 @@ static void lock_window_init(LockWindow *window)
     g_signal_connect(window->stack, "notify::visible-child",
                      G_CALLBACK(lock_window_stack_page_changed), window);
     lock_window_stack_page_changed(window->stack, NULL, window);
+
+    /* Key */
+
+    // Import
+    g_autoptr(GSimpleAction) import_key_action =
+        g_simple_action_new("import_key", NULL);
+    g_signal_connect(import_key_action, "activate",
+                     G_CALLBACK(lock_window_key_file_dialog_present), window);
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(import_key_action));
 
     /* Text */
     g_signal_connect(window->text_button, "clicked",
@@ -237,6 +251,79 @@ LockWindow *lock_window_new(LockApplication *app)
 
 void lock_window_open(LockWindow *window, GFile *file)
 {
+}
+
+/**
+ * This function imports a key to GPG from a file dialog of a LockWindow.
+ *
+ * @param object https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ * @param result https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ * @param user_data https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ */
+static void lock_window_key_import(GObject *source_object, GAsyncResult *res,
+                                   gpointer data)
+{
+    GtkFileDialog *dialog = GTK_FILE_DIALOG(source_object);
+    GFile *file;
+
+    LockWindow *window = LOCK_WINDOW(data);
+    AdwToast *toast;
+
+    file = gtk_file_dialog_open_finish(dialog, res, NULL);
+    if (file == NULL) {
+        /* Cleanup */
+        g_object_unref(dialog);
+        dialog = NULL;
+
+        window = NULL;
+
+        return;
+    }
+
+    bool success = key_import_from_file(g_file_get_path(file));
+    if (!success) {
+        toast = adw_toast_new(_("Key import failed"));
+        adw_toast_set_timeout(toast, 2);
+
+        adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+        /* Cleanup */
+        g_object_unref(dialog);
+        dialog = NULL;
+
+        window = NULL;
+
+        return;
+    }
+
+    toast = adw_toast_new(_("Imported key"));
+    adw_toast_set_timeout(toast, 2);
+
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Cleanup */
+    g_object_unref(dialog);
+    dialog = NULL;
+
+    window = NULL;
+}
+
+/**
+ * This function opens an open file dialog to import a GPG key for a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+static void lock_window_key_file_dialog_present(GSimpleAction *self,
+                                                GVariant *parameter,
+                                                LockWindow *window)
+{
+    GtkFileDialog *dialog = gtk_file_dialog_new();
+    GCancellable *cancel = g_cancellable_new();
+
+    gtk_file_dialog_open(dialog, GTK_WINDOW(window),
+                         cancel, lock_window_key_import, window);
 }
 
 /**

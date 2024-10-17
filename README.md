@@ -8,12 +8,9 @@ _Lock_ is a graphical front-end for GnuPG (GPG) making use of a beautiful LibAdw
 
 Supported are
 
-- Encryption
-- Decryption
-- Signing
-- Verification
-
-of text and files.
+- Encryption and Decryption of text and files
+- Signing and Verification of text and files
+- Importing of keys via files
 
 <a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>
 

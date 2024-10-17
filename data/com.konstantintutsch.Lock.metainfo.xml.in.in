@@ -9,12 +9,10 @@
         <p>Lock is a graphical front-end for GnuPG (GPG) making use of a beautiful LibAdwaita GUI.</p>
         <p>Supported are</p>
         <ul>
-            <li>Encryption</li>
-            <li>Decryption</li>
-            <li>Signing</li>
-            <li>Verification</li>
+            <li>Encryption and Decryption of text and files</li>
+            <li>Signing and Verification of text and files</li>
+            <li>Importing of keys via files</li>
         </ul>
-        <p>of text and files.</p>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>
     <categories>
