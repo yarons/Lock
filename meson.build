@@ -70,8 +70,11 @@ conf.set('ui_resource', ui_resource)
 i18n = import('i18n')
 gnome = import('gnome')
 
-gtk_dep = dependency('gtk4')
 adwaita_dep = dependency('libadwaita-1', version: '>=1.4')
+gtk_dep = dependency('gtk4', version: '>=4.14')
+gdk_dep = dependency('gdk-pixbuf-2.0', version: '>=2.42')
+glib_dep = dependency('glib-2.0', version: '>=2.80')
+gio_dep = dependency('gio-2.0', version: '>=2.80')
 gpgme_dep = dependency('gpgme', version: '>=1.23')
 
 #
