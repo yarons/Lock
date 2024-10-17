@@ -71,6 +71,14 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.1.2" date="2024-10-17">
+            <description translate="no">
+                <ul>
+                    <li>Add key imports from files</li>
+                    <li>Decrease default window size</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.1" date="2024-10-16">
             <description translate="no">
                 <ul>

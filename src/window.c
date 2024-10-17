@@ -460,7 +460,9 @@ static void lock_window_text_view_encrypt(LockEntryDialog *self,
 
     gpgme_key_t key = key_from_email(email);
     HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
-                       g_free(plain); plain = NULL;);
+                       g_free(plain);
+                       plain = NULL;
+        );
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -702,8 +704,10 @@ static void lock_window_file_encrypt(LockEntryDialog *dialog, const char *email,
     gpgme_key_t key = key_from_email(email);
     HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
                        /* Cleanup */
-                       g_free(input_path); input_path = NULL;
-                       g_free(output_path); output_path = NULL;);
+                       g_free(input_path);
+                       input_path = NULL; g_free(output_path);
+                       output_path = NULL;
+        );
 
     bool success = encrypt_file(input_path, output_path, key);
     if (!success) {
