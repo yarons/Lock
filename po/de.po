@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-17 22:54+0200\n"
+"POT-Creation-Date: 2024-10-18 14:28+0200\n"
 "PO-Revision-Date: 2024-10-17 22:09+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
@@ -25,18 +25,18 @@ msgctxt "Error message constructor for failed GPGME operations"
 msgid "Failed to %s: %s"
 msgstr "Fehler beim %s: %s"
 
-#: src/cryptography.c:47 src/cryptography.c:89 src/cryptography.c:130
-#: src/cryptography.c:195 src/cryptography.c:262 src/cryptography.c:330
-#: src/cryptography.c:396 src/cryptography.c:458 src/cryptography.c:524
-#: src/cryptography.c:588
+#: src/cryptography.c:47 src/cryptography.c:88 src/cryptography.c:131
+#: src/cryptography.c:191 src/cryptography.c:253 src/cryptography.c:316
+#: src/cryptography.c:377 src/cryptography.c:433 src/cryptography.c:493
+#: src/cryptography.c:550
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "Erstellen eines neuen GPGME Kontexts"
 
-#: src/cryptography.c:52 src/cryptography.c:94 src/cryptography.c:135
-#: src/cryptography.c:200 src/cryptography.c:267 src/cryptography.c:335
-#: src/cryptography.c:401 src/cryptography.c:463 src/cryptography.c:529
-#: src/cryptography.c:593
+#: src/cryptography.c:52 src/cryptography.c:93 src/cryptography.c:136
+#: src/cryptography.c:196 src/cryptography.c:258 src/cryptography.c:321
+#: src/cryptography.c:382 src/cryptography.c:438 src/cryptography.c:498
+#: src/cryptography.c:555
 msgctxt "GPGME Error"
 msgid "set protocol of GPGME context to OpenPGP"
 msgstr "Festlegen des Protokolls des GPGME Kontexts auf OpenPGP"
@@ -46,7 +46,7 @@ msgctxt "GPGME Error"
 msgid "find key matching email"
 msgstr "Finden eines Schlüssels mit passender E-Mail"
 
-#: src/cryptography.c:99
+#: src/cryptography.c:98
 msgctxt "GPGME Error"
 msgid "load GPGME key data from file"
 msgstr "Laden von GPGME Schlüsseldaten aus einer Datei"
@@ -56,130 +56,130 @@ msgctxt "GPGME Error"
 msgid "import GPG key from file"
 msgstr "Importieren von einem GPG Schlüssel aus einer Datei"
 
-#: src/cryptography.c:143
+#: src/cryptography.c:144
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from string"
 msgstr ""
 "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:149 src/cryptography.c:413
+#: src/cryptography.c:149 src/cryptography.c:393
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data"
 msgstr "Erstellen von neuen, verschlüsselten GPGME Daten"
 
-#: src/cryptography.c:157
+#: src/cryptography.c:155
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr "Verschlüsseln von GPGME Daten aus dem Hauptspeicher"
 
-#: src/cryptography.c:206 src/cryptography.c:273 src/cryptography.c:469
-#: src/cryptography.c:535
+#: src/cryptography.c:202 src/cryptography.c:264 src/cryptography.c:444
+#: src/cryptography.c:504
 msgctxt "GPGME Error"
 msgid "set pinentry mode of GPGME context to ask"
 msgstr "Festlegen des Pinentry Modus des GPGME Kontexts auf Fragen"
 
-#: src/cryptography.c:211
+#: src/cryptography.c:207
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from string"
 msgstr ""
 "Erstellen von neuen, verschlüsselten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:217 src/cryptography.c:480
+#: src/cryptography.c:212 src/cryptography.c:454
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr "Erstellen von neuen, entschlüsselten GPGME Daten"
 
-#: src/cryptography.c:224
+#: src/cryptography.c:217
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr "Entschlüsseln von GPGME Daten aus dem Hauptspeicher"
 
-#: src/cryptography.c:280
+#: src/cryptography.c:271
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:286 src/cryptography.c:545 src/cryptography.c:598
+#: src/cryptography.c:276 src/cryptography.c:513 src/cryptography.c:560
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr "Erstellen von neuen, signierten GPGME Daten"
 
-#: src/cryptography.c:292
+#: src/cryptography.c:280
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr "Signieren von GPGME Daten aus dem Hauptspeicher"
 
-#: src/cryptography.c:342
+#: src/cryptography.c:328
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data from string"
 msgstr "Erstellen von neuen, signierten GPGME Daten aus einer Zeichenkette"
 
-#: src/cryptography.c:348
+#: src/cryptography.c:333
 msgctxt "GPGME Error"
 msgid "create new verified GPGME data"
 msgstr "Erstellen von neuen, verifizierten GPGME Daten"
 
-#: src/cryptography.c:355
+#: src/cryptography.c:338
 msgctxt "GPGME Error"
 msgid "verify GPGME data from memory"
 msgstr "Verifizieren von GPGME Daten aus dem Hauptspeicher"
 
-#: src/cryptography.c:407
+#: src/cryptography.c:388
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from file"
 msgstr "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:420
+#: src/cryptography.c:398
 msgctxt "GPGME Error"
 msgid "set file path of encrypted GPGME data"
 msgstr "Setzen des Dateipfades von verschlüsselten GPGME Daten"
 
-#: src/cryptography.c:428
+#: src/cryptography.c:405
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from file"
 msgstr "Verschlüsseln von GPGME Daten aus Datei"
 
-#: src/cryptography.c:474
+#: src/cryptography.c:449
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from file"
 msgstr "Erstellen von neuen, entschlüsselten GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:487
+#: src/cryptography.c:459
 msgctxt "GPGME Error"
 msgid "set file path of decrypted GPGME data"
 msgstr "Setzen des Dateipfades von entschlüsselten GPGME Daten"
 
-#: src/cryptography.c:494
+#: src/cryptography.c:465
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from file"
 msgstr "Entschlüsseln von GPGME Daten aus Datei"
 
-#: src/cryptography.c:539
+#: src/cryptography.c:508
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:552 src/cryptography.c:604
+#: src/cryptography.c:518 src/cryptography.c:565
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr "Setzen des Dateipfades von signierten GPGME Daten"
 
-#: src/cryptography.c:558
+#: src/cryptography.c:522
 msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr "Signieren von GPGME Daten aus einer Datei"
 
-#: src/cryptography.c:610
+#: src/cryptography.c:570
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr "Erstellen von neuen, unsignierten GPGME Daten"
 
-#: src/cryptography.c:617
+#: src/cryptography.c:575
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr "Setzen des Dateipfades von unsignierten GPGME Daten"
 
-#: src/cryptography.c:624
+#: src/cryptography.c:580
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr "Verifiezieren von GPGME Daten aus einer Datei"
@@ -198,126 +198,126 @@ msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: src/window.c:20
+#: src/window.c:144 data/ui/entrydialog.blp:33
+msgid "Enter text …"
+msgstr "Text eingeben …"
+
+#: src/window.c:328
+msgid "Key import failed"
+msgstr "Schlüsselimport fehlgeschlagen"
+
+#: src/window.c:342
+msgid "Imported key"
+msgstr "Schlüssel importiert"
+
+#: src/window.c:417
+msgid "Text copied"
+msgstr "Text kopiert"
+
+#: src/window.c:586 src/window.c:604
+msgid "Encrypt for"
+msgstr "Verschlüsseln für"
+
+#: src/window.c:586 src/window.c:604
+msgid "Enter email …"
+msgstr "E-Mail eingeben …"
+
+#: src/window.c:666 src/window.c:742
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:124 data/ui/entrydialog.blp:33
-msgid "Enter text …"
-msgstr "Text eingeben …"
-
-#: src/window.c:304
-msgid "Key import failed"
-msgstr "Schlüsselimport fehlgeschlagen"
-
-#: src/window.c:318
-msgid "Imported key"
-msgstr "Schlüssel importiert"
-
-#: src/window.c:393
-msgid "Text copied"
-msgstr "Text kopiert"
-
-#: src/window.c:518
-msgid "Encrypt for"
-msgstr "Verschlüsseln für"
-
-#: src/window.c:518
-msgid "Enter email …"
-msgstr "E-Mail eingeben …"
-
-#: src/window.c:561 src/window.c:605
+#: src/window.c:671 src/window.c:747
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:563
+#: src/window.c:673
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:607
+#: src/window.c:749
 msgid "File encrypted"
 msgstr "Datei verschlüsselt"
 
-#: src/window.c:637 src/window.c:672
+#: src/window.c:805 src/window.c:867
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:639
+#: src/window.c:807
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:674
+#: src/window.c:869
 msgid "File decrypted"
 msgstr "Datei entschlüsselt"
 
-#: src/window.c:704 src/window.c:737
+#: src/window.c:927 src/window.c:987
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
-#: src/window.c:706
+#: src/window.c:929
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:739
+#: src/window.c:989
 msgid "File signed"
 msgstr "Datei signiert"
 
-#: src/window.c:769 src/window.c:804
+#: src/window.c:1045 src/window.c:1107
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
-#: src/window.c:771
+#: src/window.c:1047
 msgid "Text verified"
 msgstr "Text verifiziert"
 
-#: src/window.c:806
+#: src/window.c:1109
 msgid "File verified"
 msgstr "Datei verifiziert"
 
-#: src/threading.c:15
+#: src/threading.c:18
 #, c-format
 msgctxt ""
 "First format specifier is a translation string marked as “Thread Error”"
 msgid "Failed to create %s thread: %s"
 msgstr "Fehler beim Erstellen eines Threads für %s: %s"
 
-#: src/threading.c:32
+#: src/threading.c:37
 msgctxt "Thread Error"
 msgid "text encryption"
 msgstr "Text Verschlüsselung"
 
-#: src/threading.c:45
+#: src/threading.c:56
 msgctxt "Thread Error"
 msgid "file encryption"
 msgstr "Datei Verschlüsselung"
 
-#: src/threading.c:60
+#: src/threading.c:73
 msgctxt "Thread Error"
 msgid "text decryption"
 msgstr "Text Entschlüsselung"
 
-#: src/threading.c:73
+#: src/threading.c:86
 msgctxt "Thread Error"
 msgid "file decryption"
 msgstr "Datei Entschlüsselung"
 
-#: src/threading.c:87
+#: src/threading.c:100
 msgctxt "Thread Error"
 msgid "text signing"
 msgstr "Text Signierung"
 
-#: src/threading.c:99
+#: src/threading.c:112
 msgctxt "Thread Error"
 msgid "file signing"
 msgstr "Datei Signierung"
 
-#: src/threading.c:114
+#: src/threading.c:127
 msgctxt "Thread Error"
 msgid "text verification"
 msgstr "Text Verifikation"
 
-#: src/threading.c:127
+#: src/threading.c:140
 msgctxt "Thread Error"
 msgid "file verification"
 msgstr "Datei Verifikation"

@@ -3,11 +3,13 @@
 
 #include <adwaita.h>
 #include "window.h"
+#include "entrydialog.h"
 
 /* Encrypt */
-void thread_encrypt_text(GSimpleAction * self, GVariant * parameter,
+void thread_encrypt_text(LockEntryDialog * self, const char *email,
                          LockWindow * window);
-void thread_encrypt_file(GtkButton * self, LockWindow * window);
+void thread_encrypt_file(LockEntryDialog * self, const char *email,
+                         LockWindow * window);
 
 /* Decrypt */
 void thread_decrypt_text(GSimpleAction * self, GVariant * parameter,

@@ -14,18 +14,14 @@
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
 
-#define HANDLE_ERROR_EMAIL(Return, Toast, ToastOverlay, Key, Email, FreeCode) if (Key == NULL) { \
-        Toast = \
-            adw_toast_new(g_strdup_printf \
-                          (_("Failed to find key for email “%s”"), Email)); \
-        adw_toast_set_timeout(Toast, 4); \
-        adw_toast_overlay_add_toast(ToastOverlay, Toast); \
+#define HANDLE_ERROR_EMAIL(status, key, ui_function, ui_data, memory) if (key == NULL) { \
         \
-        gpgme_key_release(Key); \
+        gpgme_key_release(key); \
         \
-        FreeCode \
+        memory \
         \
-        return Return; \
+        g_idle_add((GSourceFunc) ui_function, ui_data); \
+        return status; \
     }
 
 /**
@@ -39,14 +35,18 @@ struct _LockWindow {
     AdwViewStack *stack;
     unsigned int action_mode;
 
+    gchar *email; /**< Stores the entered email during an encryption process. */
+
     /* Text */
     AdwViewStackPage *text_page;
     GtkRevealer *text_button_revealer;
     AdwSplitButton *text_button;
+    GtkTextBuffer *text_queue; /**< Text from the last cryptography operation on text */
     GtkTextView *text_view;
 
     /* File */
     AdwViewStackPage *file_page;
+    gboolean file_success; /**< Success of the last cryptography operation on files */
     GFile *file_input;
     GFile *file_output;
 
@@ -65,9 +65,25 @@ struct _LockWindow {
 G_DEFINE_TYPE(LockWindow, lock_window, ADW_TYPE_APPLICATION_WINDOW);
 
 /* UI */
-static void lock_window_stack_page_changed(AdwViewStack * self,
-                                           GParamSpec * pspec,
-                                           LockWindow * window);
+static void lock_window_stack_page_on_changed(AdwViewStack * self,
+                                              GParamSpec * pspec,
+                                              LockWindow * window);
+
+// Encryption
+gboolean lock_window_encrypt_text_on_completed(LockWindow * window);
+gboolean lock_window_encrypt_file_on_completed(LockWindow * window);
+
+// Decryption
+gboolean lock_window_decrypt_text_on_completed(LockWindow * window);
+gboolean lock_window_decrypt_file_on_completed(LockWindow * window);
+
+// Signing
+gboolean lock_window_sign_text_on_completed(LockWindow * window);
+gboolean lock_window_sign_file_on_completed(LockWindow * window);
+
+// Verification
+gboolean lock_window_verify_text_on_completed(LockWindow * window);
+gboolean lock_window_verify_file_on_completed(LockWindow * window);
 
 /* Key */
 static void lock_window_key_file_dialog_present(GSimpleAction * self,
@@ -77,6 +93,8 @@ static void lock_window_key_file_dialog_present(GSimpleAction * self,
 /* Text */
 static void lock_window_text_view_copy(AdwSplitButton * self,
                                        LockWindow * window);
+static void lock_window_text_queue_set_text(LockWindow * window,
+                                            const char *text);
 
 /* File */
 static void lock_window_file_open(GObject * source_object, GAsyncResult * res,
@@ -89,10 +107,9 @@ static void lock_window_file_save_dialog_present(GtkButton * self,
                                                  LockWindow * window);
 
 /* Encryption */
-void lock_window_encrypt_text(LockEntryDialog * self,
-                              const char *email, LockWindow * window);
-void lock_window_encrypt_file(LockEntryDialog * self,
-                              const char *email, LockWindow * window);
+void lock_window_encrypt_text_dialog(GSimpleAction * self, GVariant * parameter,
+                                     LockWindow * window);
+void lock_window_encrypt_file_dialog(GtkButton * self, LockWindow * window);
 
 /**
  * This function initializes a LockWindow.
@@ -103,10 +120,13 @@ static void lock_window_init(LockWindow *window)
 {
     gtk_widget_init_template(GTK_WIDGET(window));
 
+    window->email = malloc(1024 * sizeof(char));
+    strcpy(window->email, "");
+
     /* Page changed */
     g_signal_connect(window->stack, "notify::visible-child",
-                     G_CALLBACK(lock_window_stack_page_changed), window);
-    lock_window_stack_page_changed(window->stack, NULL, window);
+                     G_CALLBACK(lock_window_stack_page_on_changed), window);
+    lock_window_stack_page_on_changed(window->stack, NULL, window);
 
     /* Key */
 
@@ -122,11 +142,15 @@ static void lock_window_init(LockWindow *window)
                      G_CALLBACK(lock_window_text_view_copy), window);
     gtk_text_buffer_set_text(gtk_text_view_get_buffer(window->text_view),
                              _("Enter text …"), -1);
+
+    window->text_queue = gtk_text_buffer_new(NULL);
+    lock_window_text_queue_set_text(window, "");
+
     // Encrypt
     g_autoptr(GSimpleAction) encrypt_text_action =
         g_simple_action_new("encrypt_text", NULL);
     g_signal_connect(encrypt_text_action, "activate",
-                     G_CALLBACK(thread_encrypt_text), window);
+                     G_CALLBACK(lock_window_encrypt_text_dialog), window);
     g_action_map_add_action(G_ACTION_MAP(window),
                             G_ACTION(encrypt_text_action));
     // Decrypt
@@ -156,7 +180,7 @@ static void lock_window_init(LockWindow *window)
                      G_CALLBACK(lock_window_file_save_dialog_present), window);
     // Encrypt
     g_signal_connect(window->file_encrypt_button, "clicked",
-                     G_CALLBACK(thread_encrypt_file), window);
+                     G_CALLBACK(lock_window_encrypt_file_dialog), window);
     // Decrypt
     g_signal_connect(window->file_decrypt_button, "clicked",
                      G_CALLBACK(thread_decrypt_file), window);
@@ -241,15 +265,15 @@ void lock_window_open(LockWindow *window, GFile *file)
 }
 
 /**
- * This function updates the UI on a change of a page of the stack of a LockWindow.
+ * This function updates the UI on a change of a page of the stack page of a LockWindow.
  *
  * @param self https://docs.gtk.org/gobject/signal.Object.notify.html
  * @param pspec https://docs.gtk.org/gobject/signal.Object.notify.html
  * @param window https://docs.gtk.org/gobject/signal.Object.notify.html
  */
-static void lock_window_stack_page_changed(AdwViewStack *self,
-                                           GParamSpec *pspec,
-                                           LockWindow *window)
+static void lock_window_stack_page_on_changed(AdwViewStack *self,
+                                              GParamSpec *pspec,
+                                              LockWindow *window)
 {
     GtkWidget *visible_child = adw_view_stack_get_visible_child(self);
     AdwViewStackPage *visible_page =
@@ -403,6 +427,36 @@ static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
     text = NULL;
 }
 
+/**
+ * This function gets the text from the text queue of a LockWindow.
+ *
+ * @param window Window to get the text of the queue from
+ *
+ * @return Text. Freeing required
+ */
+gchar *lock_window_text_queue_get_text(LockWindow *window)
+{
+    GtkTextIter start_iter;
+    GtkTextIter end_iter;
+    gtk_text_buffer_get_start_iter(window->text_queue, &start_iter);
+    gtk_text_buffer_get_end_iter(window->text_queue, &end_iter);
+
+    return gtk_text_buffer_get_text(window->text_queue, &start_iter, &end_iter,
+                                    true);
+}
+
+/**
+ * This functions sets the text of the text queue of a LockWindow.
+ *
+ * @param window Window to set the text in
+ * @param text Text to overwrite the text queue buffer with
+ */
+static void lock_window_text_queue_set_text(LockWindow *window,
+                                            const char *text)
+{
+    gtk_text_buffer_set_text(window->text_queue, text, -1);
+}
+
 /**** File ****/
 
 /**
@@ -508,56 +562,112 @@ lock_window_file_save_dialog_present(GtkButton *self, LockWindow *window)
 /**** Encryption ****/
 
 /**
- * This function handles user input to select the target key for an encryption process of a LockWindow.
+ * This function overwrites the email of a LockWindow.
  *
- * @param window https://docs.gtk.org/glib/callback.ThreadFunc.html
+ * @param window Window to overwrite the email of
+ * @param email Email to overwrite with
  */
-void lock_window_encrypt_dialog(LockWindow *window)
+void lock_window_set_email(LockWindow *window, const char *email)
+{
+    strcpy(window->email, email);
+}
+
+/**
+ * This function handles user input to select the target key for a text encryption process of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
+ */
+void lock_window_encrypt_text_dialog(GSimpleAction *self, GVariant *parameter,
+                                     LockWindow *window)
 {
     LockEntryDialog *dialog =
         lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
                               GTK_INPUT_PURPOSE_EMAIL);
 
-    void *callback = NULL;
-    switch (window->action_mode) {
-    case ACTION_MODE_TEXT:
-        callback = lock_window_encrypt_text;
-        break;
-    case ACTION_MODE_FILE:
-        callback = lock_window_encrypt_file;
-        break;
-    }
-    g_signal_connect(dialog, "entered", G_CALLBACK(callback), window);
+    g_signal_connect(dialog, "entered", G_CALLBACK(thread_encrypt_text),
+                     window);
 
     adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(window));
+}
 
-    /* Cleanup */
-    callback = NULL;
+/**
+ * This function handles user input to select the target key for a file encryption process of a LockWindow.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param window https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+void lock_window_encrypt_file_dialog(GtkButton *self, LockWindow *window)
+{
+    LockEntryDialog *dialog =
+        lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
+                              GTK_INPUT_PURPOSE_EMAIL);
 
-    g_thread_exit(0);
+    g_signal_connect(dialog, "entered", G_CALLBACK(thread_encrypt_file),
+                     window);
+
+    adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(window));
 }
 
 /**
  * This function encrypts text from the text view of a LockWindow.
  *
- * @param self LockEntryDialog::entered
- * @param email LockEntryDialog::entered
- * @param window LockEntryDialog::entered
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
  */
-void lock_window_encrypt_text(LockEntryDialog *self,
-                              const char *email, LockWindow *window)
+void lock_window_encrypt_text(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
-    AdwToast *toast;
 
-    gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
-                       g_free(plain);
-                       plain = NULL;
-        );
+    gpgme_key_t key = key_from_email(window->email);
+    HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
+                       g_free(plain); plain = NULL;);
+    strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
+        lock_window_text_queue_set_text(window, "");
+    } else {
+        lock_window_text_queue_set_text(window, armor);
+    }
+
+    /* Cleanup */
+    g_free(plain);
+    plain = NULL;
+
+    g_free(armor);
+    armor = NULL;
+
+    gpgme_key_release(key);
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_encrypt_text_on_completed, window);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for text encryption and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_encrypt_text_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    gchar *armor = lock_window_text_queue_get_text(window);
+    lock_window_text_queue_set_text(window, "");
+
+    if (strlen(window->email) > 0) {
+        toast =
+            adw_toast_new(g_strdup_printf
+                          (_("Failed to find key for email “%s”"),
+                           window->email));
+
+        strcpy(window->email, "");
+    } else if (strcmp(armor, "") == 0) {
         toast = adw_toast_new(_("Encryption failed"));
     } else {
         toast = adw_toast_new(_("Text encrypted"));
@@ -569,46 +679,36 @@ void lock_window_encrypt_text(LockEntryDialog *self,
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
-    g_free(plain);
-    plain = NULL;
-
     g_free(armor);
     armor = NULL;
 
-    gpgme_key_release(key);
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**
  * This function encrypts the file of a LockWindow.
  *
- * @param self LockEntryDialog::entered
- * @param email LockEntryDialog::entered
- * @param window LockEntryDialog::entered
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
  */
-void lock_window_encrypt_file(LockEntryDialog *dialog, const char *email,
-                              LockWindow *window)
+void lock_window_encrypt_file(LockWindow *window)
 {
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
-    AdwToast *toast;
 
-    gpgme_key_t key = key_from_email(email);
-    HANDLE_ERROR_EMAIL(, toast, window->toast_overlay, key, email,
+    gpgme_key_t key = key_from_email(window->email);
+    HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
                        /* Cleanup */
-                       g_free(input_path);
-                       input_path = NULL; g_free(output_path);
-                       output_path = NULL;
-        );
+                       g_free(input_path); input_path = NULL;
+                       g_free(output_path); output_path = NULL;);
+    strcpy(window->email, "");  // Mark email search as successful
 
     bool success = encrypt_file(input_path, output_path, key);
     if (!success) {
-        toast = adw_toast_new(_("Encryption failed"));
+        window->file_success = false;
     } else {
-        toast = adw_toast_new(_("File encrypted"));
+        window->file_success = true;
     }
-
-    adw_toast_set_timeout(toast, 3);
-    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
     g_free(input_path);
@@ -618,6 +718,42 @@ void lock_window_encrypt_file(LockEntryDialog *dialog, const char *email,
     output_path = NULL;
 
     gpgme_key_release(key);
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_encrypt_file_on_completed, window);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for file encryption and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_encrypt_file_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    if (strlen(window->email) > 0) {
+        toast =
+            adw_toast_new(g_strdup_printf
+                          (_("Failed to find key for email “%s”"),
+                           window->email));
+
+        strcpy(window->email, "");
+    } else if (!window->file_success) {
+        toast = adw_toast_new(_("Encryption failed"));
+    } else {
+        toast = adw_toast_new(_("File encrypted"));
+    }
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**** Decryption ****/
@@ -630,28 +766,58 @@ void lock_window_encrypt_file(LockEntryDialog *dialog, const char *email,
 void lock_window_decrypt_text(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
+
+    gchar *plain = decrypt_text(armor);
+    if (plain == NULL) {
+        lock_window_text_queue_set_text(window, "");
+    } else {
+        lock_window_text_queue_set_text(window, plain);
+    }
+
+    /* Cleanup */
+    g_free(armor);
+    armor = NULL;
+
+    g_free(plain);
+    plain = NULL;
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_decrypt_text_on_completed, window);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for text decryption and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_decrypt_text_on_completed(LockWindow *window)
+{
     AdwToast *toast;
 
-    gchar *text = decrypt_text(armor);
-    if (text == NULL) {
+    gchar *plain = lock_window_text_queue_get_text(window);
+    lock_window_text_queue_set_text(window, "");
+
+    if (strcmp(plain, "") == 0) {
         toast = adw_toast_new(_("Decryption failed"));
     } else {
         toast = adw_toast_new(_("Text decrypted"));
 
-        lock_window_text_view_set_text(window, text);
+        lock_window_text_view_set_text(window, plain);
     }
 
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
-    g_free(armor);
-    armor = NULL;
+    g_free(plain);
+    plain = NULL;
 
-    g_free(text);
-    text = NULL;
-
-    g_thread_exit(0);
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**
@@ -665,17 +831,13 @@ void lock_window_decrypt_file(LockWindow *window)
 
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
-    AdwToast *toast;
 
     bool success = decrypt_file(input_path, output_path);
     if (!success) {
-        toast = adw_toast_new(_("Decryption failed"));
+        window->file_success = false;
     } else {
-        toast = adw_toast_new(_("File decrypted"));
+        window->file_success = true;
     }
-
-    adw_toast_set_timeout(toast, 3);
-    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
     g_free(input_path);
@@ -684,7 +846,34 @@ void lock_window_decrypt_file(LockWindow *window)
     g_free(output_path);
     output_path = NULL;
 
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_decrypt_file_on_completed, window);
+
     g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for file decryption and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_decrypt_file_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    if (!window->file_success) {
+        toast = adw_toast_new(_("Decryption failed"));
+    } else {
+        toast = adw_toast_new(_("File decrypted"));
+    }
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**** Signing ****/
@@ -697,10 +886,44 @@ void lock_window_decrypt_file(LockWindow *window)
 void lock_window_sign_text(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
-    AdwToast *toast;
+
+    strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = sign_text(plain);
     if (armor == NULL) {
+        lock_window_text_queue_set_text(window, "");
+    } else {
+        lock_window_text_queue_set_text(window, armor);
+    }
+
+    /* Cleanup */
+    g_free(plain);
+    plain = NULL;
+
+    g_free(armor);
+    armor = NULL;
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_sign_text_on_completed, window);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for text signing and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_sign_text_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    gchar *armor = lock_window_text_queue_get_text(window);
+    lock_window_text_queue_set_text(window, "");
+
+    if (strcmp(armor, "") == 0) {
         toast = adw_toast_new(_("Signing failed"));
     } else {
         toast = adw_toast_new(_("Text signed"));
@@ -712,13 +935,11 @@ void lock_window_sign_text(LockWindow *window)
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
-    g_free(plain);
-    plain = NULL;
-
     g_free(armor);
     armor = NULL;
 
-    g_thread_exit(0);
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**
@@ -730,17 +951,13 @@ void lock_window_sign_file(LockWindow *window)
 {
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
-    AdwToast *toast;
 
     bool success = sign_file(input_path, output_path);
     if (!success) {
-        toast = adw_toast_new(_("Signing failed"));
+        window->file_success = false;
     } else {
-        toast = adw_toast_new(_("File signed"));
+        window->file_success = true;
     }
-
-    adw_toast_set_timeout(toast, 3);
-    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
     g_free(input_path);
@@ -749,7 +966,34 @@ void lock_window_sign_file(LockWindow *window)
     g_free(output_path);
     output_path = NULL;
 
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_sign_file_on_completed, window);
+
     g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for file signing and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_sign_file_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    if (!window->file_success) {
+        toast = adw_toast_new(_("Signing failed"));
+    } else {
+        toast = adw_toast_new(_("File signed"));
+    }
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**** Verification ****/
@@ -762,28 +1006,58 @@ void lock_window_sign_file(LockWindow *window)
 void lock_window_verify_text(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
+
+    gchar *plain = verify_text(armor);
+    if (plain == NULL) {
+        lock_window_text_queue_set_text(window, "");
+    } else {
+        lock_window_text_queue_set_text(window, plain);
+    }
+
+    /* Cleanup */
+    g_free(armor);
+    armor = NULL;
+
+    g_free(plain);
+    plain = NULL;
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_verify_text_on_completed, window);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for text verification and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_verify_text_on_completed(LockWindow *window)
+{
     AdwToast *toast;
 
-    gchar *text = verify_text(armor);
-    if (text == NULL) {
+    gchar *plain = lock_window_text_queue_get_text(window);
+    lock_window_text_queue_set_text(window, "");
+
+    if (strcmp(plain, "") == 0) {
         toast = adw_toast_new(_("Verification failed"));
     } else {
         toast = adw_toast_new(_("Text verified"));
 
-        lock_window_text_view_set_text(window, text);
+        lock_window_text_view_set_text(window, plain);
     }
 
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
-    g_free(armor);
-    armor = NULL;
+    g_free(plain);
+    plain = NULL;
 
-    g_free(text);
-    text = NULL;
-
-    g_thread_exit(0);
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
 
 /**
@@ -797,17 +1071,13 @@ void lock_window_verify_file(LockWindow *window)
 
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
-    AdwToast *toast;
 
     bool success = verify_file(input_path, output_path);
     if (!success) {
-        toast = adw_toast_new(_("Verification failed"));
+        window->file_success = false;
     } else {
-        toast = adw_toast_new(_("File verified"));
+        window->file_success = true;
     }
-
-    adw_toast_set_timeout(toast, 3);
-    adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
     /* Cleanup */
     g_free(input_path);
@@ -816,5 +1086,32 @@ void lock_window_verify_file(LockWindow *window)
     g_free(output_path);
     output_path = NULL;
 
+    /* UI */
+    g_idle_add((GSourceFunc) lock_window_verify_file_on_completed, window);
+
     g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for file verification and is supposed to be called via g_idle_add().
+ *
+ * @param window https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_window_verify_file_on_completed(LockWindow *window)
+{
+    AdwToast *toast;
+
+    if (!window->file_success) {
+        toast = adw_toast_new(_("Verification failed"));
+    } else {
+        toast = adw_toast_new(_("File verified"));
+    }
+
+    adw_toast_set_timeout(toast, 3);
+    adw_toast_overlay_add_toast(window->toast_overlay, toast);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }
