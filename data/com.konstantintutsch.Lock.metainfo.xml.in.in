@@ -71,6 +71,16 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.2.0" date="2024-10-18">
+            <description translate="no">
+                <p>Cryptography operations are now multithreaded!</p>
+                <p>This results in these improvements:</p>
+                <ul>
+                    <li>Increased responsiveness of UI</li>
+                    <li>Removed UI lags during cryptography operations</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.2" date="2024-10-17">
             <description translate="no">
                 <ul>
