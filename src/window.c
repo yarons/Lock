@@ -85,10 +85,9 @@ gboolean lock_window_sign_file_on_completed(LockWindow * window);
 gboolean lock_window_verify_text_on_completed(LockWindow * window);
 gboolean lock_window_verify_file_on_completed(LockWindow * window);
 
-/* Key */
-static void lock_window_key_file_dialog_present(GSimpleAction * self,
-                                                GVariant * parameter,
-                                                LockWindow * window);
+/* Key management */
+static void lock_window_key_dialog(GSimpleAction * action, GVariant * parameter,
+                                   LockWindow * window);
 
 /* Text */
 static void lock_window_text_view_copy(AdwSplitButton * self,
@@ -128,14 +127,13 @@ static void lock_window_init(LockWindow *window)
                      G_CALLBACK(lock_window_stack_page_on_changed), window);
     lock_window_stack_page_on_changed(window->stack, NULL, window);
 
-    /* Key */
+    /* Key management */
 
-    // Import
-    g_autoptr(GSimpleAction) import_key_action =
-        g_simple_action_new("import_key", NULL);
-    g_signal_connect(import_key_action, "activate",
-                     G_CALLBACK(lock_window_key_file_dialog_present), window);
-    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(import_key_action));
+    g_autoptr(GSimpleAction) manage_keys_action =
+        g_simple_action_new("manage_keys", NULL);
+    g_signal_connect(manage_keys_action, "activate",
+                     G_CALLBACK(lock_window_key_dialog), window);
+    g_action_map_add_action(G_ACTION_MAP(window), G_ACTION(manage_keys_action));
 
     /* Text */
     g_signal_connect(window->text_button, "clicked",
@@ -264,6 +262,8 @@ void lock_window_open(LockWindow *window, GFile *file)
 {
 }
 
+/**** UI ****/
+
 /**
  * This function updates the UI on a change of a page of the stack page of a LockWindow.
  *
@@ -294,79 +294,18 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
     visible_page = NULL;
 }
 
-/**** Key *****/
+/**** Key management ****/
 
 /**
- * This function imports a key to GPG from a file dialog of a LockWindow.
- *
- * @param object https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
- * @param result https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
- * @param user_data https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
- */
-static void lock_window_key_import(GObject *source_object, GAsyncResult *res,
-                                   gpointer data)
-{
-    GtkFileDialog *dialog = GTK_FILE_DIALOG(source_object);
-    GFile *file;
-
-    LockWindow *window = LOCK_WINDOW(data);
-    AdwToast *toast;
-
-    file = gtk_file_dialog_open_finish(dialog, res, NULL);
-    if (file == NULL) {
-        /* Cleanup */
-        g_object_unref(dialog);
-        dialog = NULL;
-
-        window = NULL;
-
-        return;
-    }
-
-    bool success = key_import_from_file(g_file_get_path(file));
-    if (!success) {
-        toast = adw_toast_new(_("Key import failed"));
-        adw_toast_set_timeout(toast, 2);
-
-        adw_toast_overlay_add_toast(window->toast_overlay, toast);
-
-        /* Cleanup */
-        g_object_unref(dialog);
-        dialog = NULL;
-
-        window = NULL;
-
-        return;
-    }
-
-    toast = adw_toast_new(_("Imported key"));
-    adw_toast_set_timeout(toast, 2);
-
-    adw_toast_overlay_add_toast(window->toast_overlay, toast);
-
-    /* Cleanup */
-    g_object_unref(dialog);
-    dialog = NULL;
-
-    window = NULL;
-}
-
-/**
- * This function opens an open file dialog to import a GPG key for a LockWindow.
+ * This function initializes the UI required for managing keys.
  *
  * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  * @param parameter https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  * @param window https://docs.gtk.org/gio/signal.SimpleAction.activate.html
  */
-static void lock_window_key_file_dialog_present(GSimpleAction *self,
-                                                GVariant *parameter,
-                                                LockWindow *window)
+static void lock_window_key_dialog(GSimpleAction *action, GVariant *parameter,
+                                   LockWindow *window)
 {
-    GtkFileDialog *dialog = gtk_file_dialog_new();
-    GCancellable *cancel = g_cancellable_new();
-
-    gtk_file_dialog_open(dialog, GTK_WINDOW(window),
-                         cancel, lock_window_key_import, window);
 }
 
 /**** Text ****/
@@ -621,7 +560,9 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
-                       g_free(plain); plain = NULL;);
+                       g_free(plain);
+                       plain = NULL;
+        );
     strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
@@ -699,8 +640,10 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
                        /* Cleanup */
-                       g_free(input_path); input_path = NULL;
-                       g_free(output_path); output_path = NULL;);
+                       g_free(input_path);
+                       input_path = NULL; g_free(output_path);
+                       output_path = NULL;
+        );
     strcpy(window->email, "");  // Mark email search as successful
 
     bool success = encrypt_file(input_path, output_path, key);
