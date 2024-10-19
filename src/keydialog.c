@@ -220,8 +220,6 @@ static void lock_key_dialog_import_file_open(GObject *source_object,
 
     dialog->import_file = gtk_file_dialog_open_finish(file, res, NULL);
     if (dialog->import_file == NULL) {
-        lock_key_dialog_import_on_completed(dialog);
-
         /* Cleanup */
         g_object_unref(file);
         file = NULL;
@@ -230,6 +228,10 @@ static void lock_key_dialog_import_file_open(GObject *source_object,
 
         return;
     }
+
+    /* Cleanup */
+    g_object_unref(file);
+    file = NULL;
 
     thread_import_key(dialog);
 }
@@ -282,9 +284,7 @@ gboolean lock_key_dialog_import_on_completed(LockKeyDialog *dialog)
 {
     AdwToast *toast;
 
-    if (dialog->import_file == NULL) {
-        toast = adw_toast_new(_("Could not open file"));
-    } else if (!dialog->import_success) {
+    if (!dialog->import_success) {
         toast = adw_toast_new(_("Import failed"));
     } else {
         toast = adw_toast_new(_("Key(s) imported"));

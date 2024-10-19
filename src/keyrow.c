@@ -111,8 +111,6 @@ static void lock_key_row_export_file_save(GObject *source_object,
 
     row->export_file = gtk_file_dialog_save_finish(file, res, NULL);
     if (row->export_file == NULL) {
-        lock_key_row_export_on_completed(row);
-
         /* Cleanup */
         g_object_unref(file);
         file = NULL;
@@ -121,6 +119,10 @@ static void lock_key_row_export_file_save(GObject *source_object,
 
         return;
     }
+
+    /* Cleanup */
+    g_object_unref(file);
+    file = NULL;
 
     thread_export_key(row);
 }
@@ -174,9 +176,7 @@ gboolean lock_key_row_export_on_completed(LockKeyRow *row)
 {
     AdwToast *toast;
 
-    if (row->export_file == NULL) {
-        toast = adw_toast_new(_("Could not open file"));
-    } else if (!row->export_success) {
+    if (!row->export_success) {
         toast = adw_toast_new(_("Export failed"));
     } else {
         toast = adw_toast_new(_("Key exported"));
