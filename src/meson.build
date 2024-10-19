@@ -13,9 +13,10 @@ src = files(
   'application.c',
   'window.c',
   'entrydialog.c',
-  'threading.c',
   'keydialog.c',
-  'cryptography.c'
+  'keyrow.c',
+  'cryptography.c',
+  'threading.c'
 )
 
 internal_inc = include_directories('.')

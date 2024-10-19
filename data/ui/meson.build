@@ -5,7 +5,8 @@
 blp = files(
   'window.blp',
   'entrydialog.blp',
-  'keydialog.blp'
+  'keydialog.blp',
+  'keyrow.blp'
 )
 
 ui = custom_target(

@@ -3,33 +3,28 @@ using Adw 1;
 
 template $LockKeyDialog : Adw.Dialog {
     follows-content-size: false;
-    content-width: 500;
-    content-height: 400;
+    content-width: 400;
+    content-height: 500;
     can-close: true;
 
     child: Gtk.ScrolledWindow {
         child: Adw.Clamp {
-            maximum-size: 800;
-            tightening-threshold: 400;
+            tightening-threshold: 150;
             unit: sp;
 
-            child: Gtk.Box {
+            child: Gtk.Box content_box {
                 orientation: vertical;
-                valign: start;
+                valign: center;
                 halign: fill;
 
-                Gtk.Revealer status_revealer {
-                    transition-duration: 500;
-                    transition-type: crossfade;
-
-                    child: Adw.StatusPage {
-                        icon-name: "system-lock-screen-symbolic";
-                        title: _("No keys available");
-                        description: _("Your system does not store any GnuPG keys.");
-                    };
+                Adw.StatusPage status_page {
+                    icon-name: "system-lock-screen-symbolic";
+                    title: _("No keys available");
+                    description: _("Your system does not store any GnuPG keys.");
                 }
 
                 Gtk.ListBox key_box {
+                    styles ["boxed-list"]
                 }
 
                 Gtk.Box button_box {

@@ -1,0 +1,20 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $LockKeyRow : Adw.ActionRow {
+    title: _("User ID");
+    subtitle: _("Fingerprint");
+    use-markup: false;
+
+    Gtk.Box {
+        orientation: horizontal;
+        valign: center;
+
+        Gtk.Button export_button {
+            styles ["flat"]
+
+            icon-name: "send-to-symbolic";
+            tooltip-text: _("Export public key to file");
+        }
+    }
+}

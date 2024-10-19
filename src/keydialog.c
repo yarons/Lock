@@ -3,7 +3,10 @@
 #include <adwaita.h>
 #include <glib/gi18n.h>
 #include <locale.h>
+#include "keyrow.h"
 #include "config.h"
+
+#include <gpgme.h>
 
 /**
  * This structure handles data of a key dialog.
@@ -11,7 +14,9 @@
 struct _LockKeyDialog {
     AdwDialog parent;
 
-    GtkRevealer *status_revealer;
+    GtkBox *content_box;
+
+    AdwStatusPage *status_page;
     GtkListBox *key_box;
 
     GtkButton *import_button;
@@ -45,7 +50,10 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
                                                 UI_RESOURCE("keydialog.ui"));
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         status_revealer);
+                                         content_box);
+
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         status_page);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          key_box);
 
@@ -72,9 +80,38 @@ LockKeyDialog *lock_key_dialog_new()
  */
 static void lock_key_dialog_refresh(LockKeyDialog *dialog)
 {
+    gpgme_ctx_t context;
+    gpgme_key_t key;
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    if (error)
+        return;
+
+    error = gpgme_op_keylist_start(context, NULL, 0);
+    while (!error) {
+        error = gpgme_op_keylist_next(context, &key);
+
+        if (error)
+            break;
+
+        gtk_list_box_append(dialog->key_box,
+                            GTK_WIDGET(lock_key_row_new
+                                       (key->uids->email, key->subkeys->fpr)));
+    }
+
+    gpgme_release(context);
+    gpgme_key_release(key);
+
     if (gtk_list_box_get_row_at_index(dialog->key_box, 0) == NULL) {
-        gtk_revealer_set_reveal_child(dialog->status_revealer, true);
+        gtk_widget_set_visible(GTK_WIDGET(dialog->key_box), false);
+        gtk_box_set_spacing(dialog->content_box, 0);
+
+        gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), true);
     } else {
-        gtk_revealer_set_reveal_child(dialog->status_revealer, false);
+        gtk_widget_set_visible(GTK_WIDGET(dialog->key_box), true);
+        gtk_box_set_spacing(dialog->content_box, 20);
+
+        gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), false);
     }
 }
