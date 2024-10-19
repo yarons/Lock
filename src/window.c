@@ -15,7 +15,7 @@
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
 
-#define HANDLE_ERROR_EMAIL(status, key, ui_function, ui_data, memory) if (key == NULL) { \
+#define HANDLE_ERROR_UID(status, key, ui_function, ui_data, memory) if (key == NULL) { \
         \
         gpgme_key_release(key); \
         \
@@ -36,7 +36,7 @@ struct _LockWindow {
     AdwViewStack *stack;
     unsigned int action_mode;
 
-    gchar *email; /**< Stores the entered email during an encryption process. */
+    gchar *uid; /**< Stores the entered UID during an encryption process. */
 
     /* Text */
     AdwViewStackPage *text_page;
@@ -119,8 +119,8 @@ static void lock_window_init(LockWindow *window)
 {
     gtk_widget_init_template(GTK_WIDGET(window));
 
-    window->email = malloc(1024 * sizeof(char));
-    strcpy(window->email, "");
+    window->uid = malloc((0 + 1) * sizeof(char));
+    strcpy(window->uid, "");
 
     /* Page changed */
     g_signal_connect(window->stack, "notify::visible-child",
@@ -502,14 +502,15 @@ lock_window_file_save_dialog_present(GtkButton *self, LockWindow *window)
 /**** Encryption ****/
 
 /**
- * This function overwrites the email of a LockWindow.
+ * This function overwrites the key UID of a LockWindow.
  *
- * @param window Window to overwrite the email of
- * @param email Email to overwrite with
+ * @param window Window to overwrite the key UID of
+ * @param uid UID to overwrite with
  */
-void lock_window_set_email(LockWindow *window, const char *email)
+void lock_window_set_uid(LockWindow *window, const char *uid)
 {
-    strcpy(window->email, email);
+    window->uid = realloc(window->uid, (strlen(uid) + 1) * sizeof(char));
+    strcpy(window->uid, uid);
 }
 
 /**
@@ -523,8 +524,8 @@ void lock_window_encrypt_text_dialog(GSimpleAction *self, GVariant *parameter,
                                      LockWindow *window)
 {
     LockEntryDialog *dialog =
-        lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
-                              GTK_INPUT_PURPOSE_EMAIL);
+        lock_entry_dialog_new(_("Encrypt for"), _("Enter name or email …"),
+                              GTK_INPUT_PURPOSE_FREE_FORM);
 
     g_signal_connect(dialog, "entered", G_CALLBACK(thread_encrypt_text),
                      window);
@@ -541,7 +542,7 @@ void lock_window_encrypt_text_dialog(GSimpleAction *self, GVariant *parameter,
 void lock_window_encrypt_file_dialog(GtkButton *self, LockWindow *window)
 {
     LockEntryDialog *dialog =
-        lock_entry_dialog_new(_("Encrypt for"), _("Enter email …"),
+        lock_entry_dialog_new(_("Encrypt for"), _("Enter name or email …"),
                               GTK_INPUT_PURPOSE_EMAIL);
 
     g_signal_connect(dialog, "entered", G_CALLBACK(thread_encrypt_file),
@@ -559,12 +560,12 @@ void lock_window_encrypt_text(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
 
-    gpgme_key_t key = key_from_email(window->email);
-    HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
-                       g_free(plain);
-                       plain = NULL;
+    gpgme_key_t key = key_search(window->uid);
+    HANDLE_ERROR_UID(, key, lock_window_encrypt_text_on_completed, window,
+                     g_free(plain);
+                     plain = NULL;
         );
-    strcpy(window->email, "");  // Mark email search as successful
+    lock_window_set_uid(window, "");    // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -602,13 +603,13 @@ gboolean lock_window_encrypt_text_on_completed(LockWindow *window)
     gchar *armor = lock_window_text_queue_get_text(window);
     lock_window_text_queue_set_text(window, "");
 
-    if (strlen(window->email) > 0) {
+    if (strlen(window->uid) > 0) {
         toast =
             adw_toast_new(g_strdup_printf
-                          (_("Failed to find key for email “%s”"),
-                           window->email));
+                          (_("Failed to find key for User ID “%s”"),
+                           window->uid));
 
-        strcpy(window->email, "");
+        lock_window_set_uid(window, "");
     } else if (strcmp(armor, "") == 0) {
         toast = adw_toast_new(_("Encryption failed"));
     } else {
@@ -617,6 +618,7 @@ gboolean lock_window_encrypt_text_on_completed(LockWindow *window)
         lock_window_text_view_set_text(window, armor);
     }
 
+    adw_toast_set_use_markup(toast, false);
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
@@ -638,14 +640,14 @@ void lock_window_encrypt_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    gpgme_key_t key = key_from_email(window->email);
-    HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
-                       /* Cleanup */
-                       g_free(input_path);
-                       input_path = NULL; g_free(output_path);
-                       output_path = NULL;
+    gpgme_key_t key = key_search(window->uid);
+    HANDLE_ERROR_UID(, key, lock_window_encrypt_file_on_completed, window,
+                     /* Cleanup */
+                     g_free(input_path);
+                     input_path = NULL; g_free(output_path);
+                     output_path = NULL;
         );
-    strcpy(window->email, "");  // Mark email search as successful
+    lock_window_set_uid(window, "");    // Mark email search as successful
 
     window->file_success = encrypt_file(input_path, output_path, key);
 
@@ -675,19 +677,20 @@ gboolean lock_window_encrypt_file_on_completed(LockWindow *window)
 {
     AdwToast *toast;
 
-    if (strlen(window->email) > 0) {
+    if (strlen(window->uid) > 0) {
         toast =
             adw_toast_new(g_strdup_printf
-                          (_("Failed to find key for email “%s”"),
-                           window->email));
+                          (_("Failed to find key for User ID “%s”"),
+                           window->uid));
 
-        strcpy(window->email, "");
+        lock_window_set_uid(window, "");
     } else if (!window->file_success) {
         toast = adw_toast_new(_("Encryption failed"));
     } else {
         toast = adw_toast_new(_("File encrypted"));
     }
 
+    adw_toast_set_use_markup(toast, false);
     adw_toast_set_timeout(toast, 3);
     adw_toast_overlay_add_toast(window->toast_overlay, toast);
 
@@ -820,8 +823,6 @@ gboolean lock_window_decrypt_file_on_completed(LockWindow *window)
 void lock_window_sign_text(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
-
-    strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = sign_text(plain);
     if (armor == NULL) {

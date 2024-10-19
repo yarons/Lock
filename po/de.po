@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 17:36+0200\n"
-"PO-Revision-Date: 2024-10-19 17:13+0200\n"
+"POT-Creation-Date: 2024-10-19 18:13+0200\n"
+"PO-Revision-Date: 2024-10-19 18:14+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -41,64 +41,64 @@ msgstr "Text eingeben …"
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:526 src/window.c:544
+#: src/window.c:527 src/window.c:545
 msgid "Encrypt for"
 msgstr "Verschlüsseln für"
 
-#: src/window.c:526 src/window.c:544
-msgid "Enter email …"
-msgstr "E-Mail eingeben …"
+#: src/window.c:527 src/window.c:545
+msgid "Enter name or email …"
+msgstr "Namen oder E-Mail eingeben …"
 
-#: src/window.c:608 src/window.c:681
+#: src/window.c:609 src/window.c:683
 #, c-format
-msgid "Failed to find key for email “%s”"
-msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
+msgid "Failed to find key for User ID “%s”"
+msgstr "Für die Nutzer ID “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:613 src/window.c:686
+#: src/window.c:614 src/window.c:688
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:615
+#: src/window.c:616
 msgid "Text encrypted"
 msgstr "Text verschlüsselt"
 
-#: src/window.c:688
+#: src/window.c:690
 msgid "File encrypted"
 msgstr "Datei verschlüsselt"
 
-#: src/window.c:744 src/window.c:801
+#: src/window.c:747 src/window.c:804
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:746
+#: src/window.c:749
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:803
+#: src/window.c:806
 msgid "File decrypted"
 msgstr "Datei entschlüsselt"
 
-#: src/window.c:861 src/window.c:916
+#: src/window.c:862 src/window.c:917
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
-#: src/window.c:863
+#: src/window.c:864
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:918
+#: src/window.c:919
 msgid "File signed"
 msgstr "Datei signiert"
 
-#: src/window.c:974 src/window.c:1031
+#: src/window.c:975 src/window.c:1032
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
-#: src/window.c:976
+#: src/window.c:977
 msgid "Text verified"
 msgstr "Text verifiziert"
 
-#: src/window.c:1033
+#: src/window.c:1034
 msgid "File verified"
 msgstr "Datei verifiziert"
 
@@ -156,8 +156,8 @@ msgstr "Festlegen des Protokolls des GPGME Kontexts auf OpenPGP"
 
 #: src/cryptography.c:65
 msgctxt "GPGME Error"
-msgid "find key matching email"
-msgstr "Finden eines Schlüssels mit passender E-Mail"
+msgid "find key matching User ID"
+msgstr "Finden eines Schlüssels mit passender Nutzer ID"
 
 #: src/cryptography.c:99
 msgctxt "GPGME Error"
@@ -518,8 +518,8 @@ msgid "Plain text"
 msgstr "Klartext"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
-msgid "Email dialog"
-msgstr "E-Mail Dialog"
+msgid "User ID dialog"
+msgstr "Nutzer ID Dialog"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
 msgid "Encryption"
@@ -528,6 +528,9 @@ msgstr "Verschlüsselung"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
 msgid "Decryption"
 msgstr "Entschlüsselung"
+
+#~ msgid "Enter Email or User ID …"
+#~ msgstr "E-Mail oder Nutzer ID eingeben …"
 
 #~ msgctxt "Expires on at"
 #~ msgid "at"
@@ -569,6 +572,3 @@ msgstr "Entschlüsselung"
 
 #~ msgid "Text encrypted as OpenPGP ASCII armor"
 #~ msgstr "Text verschlüsselt als OpenPGP ASCII Rüstung"
-
-#~ msgid "Enter email to encrypt for …"
-#~ msgstr "E-Mail zur Verschlüsselung eingeben …"

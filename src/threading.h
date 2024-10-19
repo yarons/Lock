@@ -8,9 +8,9 @@
 #include "keyrow.h"
 
 /* Encrypt */
-void thread_encrypt_text(LockEntryDialog * self, const char *email,
+void thread_encrypt_text(LockEntryDialog * self, const char *uid,
                          LockWindow * window);
-void thread_encrypt_file(LockEntryDialog * self, const char *email,
+void thread_encrypt_file(LockEntryDialog * self, const char *uid,
                          LockWindow * window);
 
 /* Decrypt */

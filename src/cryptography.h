@@ -8,7 +8,7 @@
 void cryptography_init();
 
 // Keys
-gpgme_key_t key_from_email(const char *email);
+gpgme_key_t key_search(const char *uid);
 bool key_import(const char *path);
 bool key_export(const char *uid, const char *path);
 

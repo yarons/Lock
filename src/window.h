@@ -15,7 +15,7 @@ void lock_window_open(LockWindow * window, GFile * file);
 /* Cryptography */
 
 // Encryption
-void lock_window_set_email(LockWindow * window, const char *email);
+void lock_window_set_uid(LockWindow * window, const char *uid);
 void lock_window_encrypt_text(LockWindow * window);
 void lock_window_encrypt_file(LockWindow * window);
 

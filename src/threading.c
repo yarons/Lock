@@ -30,16 +30,16 @@
  * @param email LockEntryDialog::entered
  * @param window LockEntryDialog::entered
  */
-void thread_encrypt_text(LockEntryDialog *self, const char *email,
+void thread_encrypt_text(LockEntryDialog *self, const char *uid,
                          LockWindow *window)
 {
-    lock_window_set_email(window, email);
+    lock_window_set_uid(window, uid);
 
     CRYPTOGRAPHY_THREAD_WRAPPER("encrypt_text",
                                 C_("Thread Error", "text encryption"),
                                 lock_window_encrypt_text, window);
 
-    lock_window_set_email(window, "");
+    lock_window_set_uid(window, "");
 }
 
 /**
@@ -49,16 +49,16 @@ void thread_encrypt_text(LockEntryDialog *self, const char *email,
  * @param email LockEntryDialog::entered
  * @param window LockEntryDialog::entered
  */
-void thread_encrypt_file(LockEntryDialog *self, const char *email,
+void thread_encrypt_file(LockEntryDialog *self, const char *uid,
                          LockWindow *window)
 {
-    lock_window_set_email(window, email);
+    lock_window_set_uid(window, uid);
 
     CRYPTOGRAPHY_THREAD_WRAPPER("encrypt_file",
                                 C_("Thread Error", "file encryption"),
                                 lock_window_encrypt_file, window);
 
-    lock_window_set_email(window, "");
+    lock_window_set_uid(window, "");
 }
 
 /**

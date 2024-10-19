@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 17:36+0200\n"
+"POT-Creation-Date: 2024-10-19 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,64 +39,64 @@ msgstr ""
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:526 src/window.c:544
+#: src/window.c:527 src/window.c:545
 msgid "Encrypt for"
 msgstr ""
 
-#: src/window.c:526 src/window.c:544
-msgid "Enter email …"
+#: src/window.c:527 src/window.c:545
+msgid "Enter name or email …"
 msgstr ""
 
-#: src/window.c:608 src/window.c:681
+#: src/window.c:609 src/window.c:683
 #, c-format
-msgid "Failed to find key for email “%s”"
+msgid "Failed to find key for User ID “%s”"
 msgstr ""
 
-#: src/window.c:613 src/window.c:686
+#: src/window.c:614 src/window.c:688
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:615
+#: src/window.c:616
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:688
+#: src/window.c:690
 msgid "File encrypted"
 msgstr ""
 
-#: src/window.c:744 src/window.c:801
+#: src/window.c:747 src/window.c:804
 msgid "Decryption failed"
 msgstr ""
 
-#: src/window.c:746
+#: src/window.c:749
 msgid "Text decrypted"
 msgstr ""
 
-#: src/window.c:803
+#: src/window.c:806
 msgid "File decrypted"
 msgstr ""
 
-#: src/window.c:861 src/window.c:916
+#: src/window.c:862 src/window.c:917
 msgid "Signing failed"
 msgstr ""
 
-#: src/window.c:863
+#: src/window.c:864
 msgid "Text signed"
 msgstr ""
 
-#: src/window.c:918
+#: src/window.c:919
 msgid "File signed"
 msgstr ""
 
-#: src/window.c:974 src/window.c:1031
+#: src/window.c:975 src/window.c:1032
 msgid "Verification failed"
 msgstr ""
 
-#: src/window.c:976
+#: src/window.c:977
 msgid "Text verified"
 msgstr ""
 
-#: src/window.c:1033
+#: src/window.c:1034
 msgid "File verified"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgstr ""
 
 #: src/cryptography.c:65
 msgctxt "GPGME Error"
-msgid "find key matching email"
+msgid "find key matching User ID"
 msgstr ""
 
 #: src/cryptography.c:99
@@ -510,7 +510,7 @@ msgid "Plain text"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
-msgid "Email dialog"
+msgid "User ID dialog"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61

@@ -31,13 +31,13 @@ void cryptography_init()
 }
 
 /**
- * This function returns the secret key of an email.
+ * This function returns a key with matching UID.
  *
- * @param email Email of the owner of the key
+ * @param uid UID of the key
  *
  * @return Key. Calling `gpgme_key_release()` is required
  */
-gpgme_key_t key_from_email(const char *email)
+gpgme_key_t key_search(const char *uid)
 {
     gpgme_ctx_t context;
     gpgme_key_t key;
@@ -52,17 +52,17 @@ gpgme_key_t key_from_email(const char *email)
                  C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
                  context,);
 
-    error = gpgme_op_keylist_start(context, email, 0);
+    error = gpgme_op_keylist_start(context, uid, 0);
     while (!error) {
         error = gpgme_op_keylist_next(context, &key);
 
         if (error)
             break;
 
-        if (strcmp(key->uids->email, email) == 0)
+        if (strstr(key->uids->uid, uid) != NULL)
             break;
     }
-    HANDLE_ERROR(NULL, error, C_("GPGME Error", "find key matching email"),
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "find key matching User ID"),
                  context, gpgme_key_release(key);
         );
 

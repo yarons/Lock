@@ -28,7 +28,7 @@ Supported are
 
 ![Plain text](data/com.konstantintutsch.Lock.Screenshot.Showcase.1Text.png)
 
-![Email dialog](data/com.konstantintutsch.Lock.Screenshot.Showcase.2Email.png)
+![User ID dialog](data/com.konstantintutsch.Lock.Screenshot.Showcase.2UID.png)
 
 ![Encryption](data/com.konstantintutsch.Lock.Screenshot.Showcase.3Encrypted.png)
 
