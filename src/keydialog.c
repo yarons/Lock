@@ -124,7 +124,7 @@ static void lock_key_dialog_refresh(LockKeyDialog *dialog)
 
         gtk_list_box_append(dialog->key_box,
                             GTK_WIDGET(lock_key_row_new
-                                       (key->uids->email, key->subkeys->fpr)));
+                                       (key->uids->uid, key->subkeys->fpr)));
     }
 
     gpgme_release(context);
