@@ -111,6 +111,80 @@ bool key_import(const char *path)
 }
 
 /**
+ * This function exports a key to a file.
+ *
+ * @param email Email of the key to export
+ * @param path Path of the file to export the key to
+ *
+ * @return Success
+ */
+bool key_export(const char *email, const char *path)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t keydata;
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    gpgme_set_armor(context, 1);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    error = gpgme_data_new(&keydata);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "create GPGME key data in memory"), context,
+                 gpgme_data_release(keydata););
+
+    error = gpgme_op_export(context, email, 0, keydata);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "import GPG key from file"),
+                 context, gpgme_data_release(keydata););
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(keydata, &length);
+
+    char *armor = malloc(length + 1);
+    memcpy(armor, buffer, length);
+    armor[length] = '\0';
+
+    FILE *file;
+
+    file = fopen(path, "w");
+    if (file == NULL) {
+        g_message(_("Failed to open export file: %s"), strerror(errno));
+
+        /* Cleanup */
+        gpgme_release(context);
+
+        gpgme_free(buffer);
+        buffer = NULL;
+
+        free(armor);
+        armor = NULL;
+
+        return false;
+    }
+
+    fprintf(file, armor);
+    fclose(file);
+
+    /* Cleanup */
+    gpgme_release(context);
+
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    free(armor);
+    armor = NULL;
+
+    return true;
+}
+
+/**
  * This function encrypts a text using a GPG key.
  *
  * @param text Text to encrypt

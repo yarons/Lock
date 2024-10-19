@@ -152,7 +152,8 @@ static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 
         gtk_list_box_append(dialog->key_box,
                             GTK_WIDGET(lock_key_row_new
-                                       (key->uids->uid, key->subkeys->fpr,
+                                       (dialog, key->uids->email,
+                                        key->uids->uid, key->subkeys->fpr,
                                         expiry_date, expiry_time)));
     }
 
@@ -177,6 +178,29 @@ static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 
         gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), false);
     }
+}
+
+/**
+ * This functions returns the window of a LockKeyDialog.
+ *
+ * @param dialog Dialog to get the window of
+ *
+ * @return LockWindow
+ */
+LockWindow *lock_key_dialog_get_window(LockKeyDialog *dialog)
+{
+    return dialog->window;
+}
+
+/**
+ * This function adds a toast the toast_overlay of a LockKeyDialog.
+ *
+ * @param dialog Dialog to add the toast to
+ * @param toast Toast to add to the dialog
+ */
+void lock_key_dialog_add_toast(LockKeyDialog *dialog, AdwToast *toast)
+{
+    adw_toast_overlay_add_toast(dialog->toast_overlay, toast);
 }
 
 /**** Import ****/

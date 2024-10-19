@@ -6,6 +6,7 @@
 #include "window.h"
 #include "entrydialog.h"
 #include "keydialog.h"
+#include "keyrow.h"
 
 #include <string.h>
 
@@ -152,4 +153,16 @@ void thread_import_key(LockKeyDialog *dialog)
     CRYPTOGRAPHY_THREAD_WRAPPER("import_key",
                                 C_("Thread Error", "key import"),
                                 lock_key_dialog_import, dialog);
+}
+
+/**
+ * This function creates a new thread for the export of a key as a file in a LockKeyRow.
+ *
+ * @param row Row to export the key of
+ */
+void thread_export_key(LockKeyRow *row)
+{
+    CRYPTOGRAPHY_THREAD_WRAPPER("export_key",
+                                C_("Thread Error", "key export"),
+                                lock_key_row_export, row);
 }

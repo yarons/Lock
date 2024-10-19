@@ -5,6 +5,7 @@
 #include "window.h"
 #include "entrydialog.h"
 #include "keydialog.h"
+#include "keyrow.h"
 
 /* Encrypt */
 void thread_encrypt_text(LockEntryDialog * self, const char *email,
@@ -29,5 +30,6 @@ void thread_verify_file(GtkButton * self, LockWindow * window);
 
 /* Key */
 void thread_import_key(LockKeyDialog * dialog);
+void thread_export_key(LockKeyRow * row);
 
 #endif                          // THREADING_H
