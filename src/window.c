@@ -40,7 +40,6 @@ struct _LockWindow {
 
     /* Text */
     AdwViewStackPage *text_page;
-    GtkRevealer *text_button_revealer;
     AdwSplitButton *text_button;
     GtkTextBuffer *text_queue; /**< Text from the last cryptography operation on text */
     GtkTextView *text_view;
@@ -210,8 +209,6 @@ static void lock_window_class_init(LockWindowClass *class)
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          text_page);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
-                                         text_button_revealer);
-    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          text_button);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockWindow,
                                          text_view);
@@ -283,11 +280,11 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
     if (visible_page == window->text_page) {
         window->action_mode = ACTION_MODE_TEXT;
 
-        gtk_revealer_set_reveal_child(window->text_button_revealer, true);
+        gtk_widget_set_visible(GTK_WIDGET(window->text_button), true);
     } else if (visible_page == window->file_page) {
         window->action_mode = ACTION_MODE_FILE;
 
-        gtk_revealer_set_reveal_child(window->text_button_revealer, false);
+        gtk_widget_set_visible(GTK_WIDGET(window->text_button), false);
     }
 
     /* Cleanup */
@@ -564,7 +561,9 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
-                       g_free(plain); plain = NULL;);
+                       g_free(plain);
+                       plain = NULL;
+        );
     strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
@@ -642,8 +641,10 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
                        /* Cleanup */
-                       g_free(input_path); input_path = NULL;
-                       g_free(output_path); output_path = NULL;);
+                       g_free(input_path);
+                       input_path = NULL; g_free(output_path);
+                       output_path = NULL;
+        );
     strcpy(window->email, "");  // Mark email search as successful
 
     bool success = encrypt_file(input_path, output_path, key);

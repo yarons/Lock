@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 11:21+0200\n"
+"POT-Creation-Date: 2024-10-19 11:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,18 +23,18 @@ msgctxt "Error message constructor for failed GPGME operations"
 msgid "Failed to %s: %s"
 msgstr ""
 
-#: src/cryptography.c:47 src/cryptography.c:88 src/cryptography.c:131
-#: src/cryptography.c:191 src/cryptography.c:253 src/cryptography.c:316
-#: src/cryptography.c:377 src/cryptography.c:433 src/cryptography.c:493
-#: src/cryptography.c:550
+#: src/cryptography.c:47 src/cryptography.c:89 src/cryptography.c:130
+#: src/cryptography.c:195 src/cryptography.c:262 src/cryptography.c:330
+#: src/cryptography.c:396 src/cryptography.c:458 src/cryptography.c:524
+#: src/cryptography.c:588
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr ""
 
-#: src/cryptography.c:52 src/cryptography.c:93 src/cryptography.c:136
-#: src/cryptography.c:196 src/cryptography.c:258 src/cryptography.c:321
-#: src/cryptography.c:382 src/cryptography.c:438 src/cryptography.c:498
-#: src/cryptography.c:555
+#: src/cryptography.c:52 src/cryptography.c:94 src/cryptography.c:135
+#: src/cryptography.c:200 src/cryptography.c:267 src/cryptography.c:335
+#: src/cryptography.c:401 src/cryptography.c:463 src/cryptography.c:529
+#: src/cryptography.c:593
 msgctxt "GPGME Error"
 msgid "set protocol of GPGME context to OpenPGP"
 msgstr ""
@@ -44,7 +44,7 @@ msgctxt "GPGME Error"
 msgid "find key matching email"
 msgstr ""
 
-#: src/cryptography.c:98
+#: src/cryptography.c:99
 msgctxt "GPGME Error"
 msgid "load GPGME key data from file"
 msgstr ""
@@ -54,128 +54,128 @@ msgctxt "GPGME Error"
 msgid "import GPG key from file"
 msgstr ""
 
-#: src/cryptography.c:144
+#: src/cryptography.c:143
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:149 src/cryptography.c:393
+#: src/cryptography.c:149 src/cryptography.c:413
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data"
 msgstr ""
 
-#: src/cryptography.c:155
+#: src/cryptography.c:157
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:202 src/cryptography.c:264 src/cryptography.c:444
-#: src/cryptography.c:504
+#: src/cryptography.c:206 src/cryptography.c:273 src/cryptography.c:469
+#: src/cryptography.c:535
 msgctxt "GPGME Error"
 msgid "set pinentry mode of GPGME context to ask"
 msgstr ""
 
-#: src/cryptography.c:207
+#: src/cryptography.c:211
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:212 src/cryptography.c:454
+#: src/cryptography.c:217 src/cryptography.c:480
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr ""
 
-#: src/cryptography.c:217
+#: src/cryptography.c:224
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:271
+#: src/cryptography.c:280
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:276 src/cryptography.c:513 src/cryptography.c:560
+#: src/cryptography.c:286 src/cryptography.c:545 src/cryptography.c:598
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr ""
 
-#: src/cryptography.c:280
+#: src/cryptography.c:292
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:328
+#: src/cryptography.c:342
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data from string"
 msgstr ""
 
-#: src/cryptography.c:333
+#: src/cryptography.c:348
 msgctxt "GPGME Error"
 msgid "create new verified GPGME data"
 msgstr ""
 
-#: src/cryptography.c:338
+#: src/cryptography.c:355
 msgctxt "GPGME Error"
 msgid "verify GPGME data from memory"
 msgstr ""
 
-#: src/cryptography.c:388
+#: src/cryptography.c:407
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:398
+#: src/cryptography.c:420
 msgctxt "GPGME Error"
 msgid "set file path of encrypted GPGME data"
 msgstr ""
 
-#: src/cryptography.c:405
+#: src/cryptography.c:428
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:449
+#: src/cryptography.c:474
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:459
+#: src/cryptography.c:487
 msgctxt "GPGME Error"
 msgid "set file path of decrypted GPGME data"
 msgstr ""
 
-#: src/cryptography.c:465
+#: src/cryptography.c:494
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:508
+#: src/cryptography.c:539
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:518 src/cryptography.c:565
+#: src/cryptography.c:552 src/cryptography.c:604
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr ""
 
-#: src/cryptography.c:522
+#: src/cryptography.c:558
 msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr ""
 
-#: src/cryptography.c:570
+#: src/cryptography.c:610
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr ""
 
-#: src/cryptography.c:575
+#: src/cryptography.c:617
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr ""
 
-#: src/cryptography.c:580
+#: src/cryptography.c:624
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr ""
@@ -194,72 +194,72 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-#: src/window.c:143 data/ui/entrydialog.blp:33
+#: src/window.c:142 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr ""
 
-#: src/window.c:360
+#: src/window.c:357
 msgid "Text copied"
 msgstr ""
 
-#: src/window.c:529 src/window.c:547
+#: src/window.c:526 src/window.c:544
 msgid "Encrypt for"
 msgstr ""
 
-#: src/window.c:529 src/window.c:547
+#: src/window.c:526 src/window.c:544
 msgid "Enter email …"
 msgstr ""
 
-#: src/window.c:609 src/window.c:685
+#: src/window.c:608 src/window.c:686
 #, c-format
 msgid "Failed to find key for email “%s”"
 msgstr ""
 
-#: src/window.c:614 src/window.c:690
+#: src/window.c:613 src/window.c:691
 msgid "Encryption failed"
 msgstr ""
 
-#: src/window.c:616
+#: src/window.c:615
 msgid "Text encrypted"
 msgstr ""
 
-#: src/window.c:692
+#: src/window.c:693
 msgid "File encrypted"
 msgstr ""
 
-#: src/window.c:748 src/window.c:810
+#: src/window.c:749 src/window.c:811
 msgid "Decryption failed"
 msgstr ""
 
-#: src/window.c:750
+#: src/window.c:751
 msgid "Text decrypted"
 msgstr ""
 
-#: src/window.c:812
+#: src/window.c:813
 msgid "File decrypted"
 msgstr ""
 
-#: src/window.c:870 src/window.c:930
+#: src/window.c:871 src/window.c:931
 msgid "Signing failed"
 msgstr ""
 
-#: src/window.c:872
+#: src/window.c:873
 msgid "Text signed"
 msgstr ""
 
-#: src/window.c:932
+#: src/window.c:933
 msgid "File signed"
 msgstr ""
 
-#: src/window.c:988 src/window.c:1050
+#: src/window.c:989 src/window.c:1051
 msgid "Verification failed"
 msgstr ""
 
-#: src/window.c:990
+#: src/window.c:991
 msgid "Text verified"
 msgstr ""
 
-#: src/window.c:1052
+#: src/window.c:1053
 msgid "File verified"
 msgstr ""
 
@@ -310,65 +310,65 @@ msgctxt "Thread Error"
 msgid "file verification"
 msgstr ""
 
-#: data/ui/window.blp:9 data/ui/window.blp:174
+#: data/ui/window.blp:9 data/ui/window.blp:169
 #: data/com.konstantintutsch.Lock.desktop.in.in:4
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
 msgid "Lock"
 msgstr ""
 
-#: data/ui/window.blp:33
+#: data/ui/window.blp:29
 msgid "Copy"
 msgstr ""
 
-#: data/ui/window.blp:34
+#: data/ui/window.blp:30
 msgid "Copy the text"
 msgstr ""
 
-#: data/ui/window.blp:37
+#: data/ui/window.blp:33
 msgid "Cryptography operations"
 msgstr ""
 
-#: data/ui/window.blp:50
+#: data/ui/window.blp:45
 msgid "Main Menu"
 msgstr ""
 
-#: data/ui/window.blp:60
+#: data/ui/window.blp:55
 msgid "Text"
 msgstr ""
 
-#: data/ui/window.blp:78
+#: data/ui/window.blp:73
 msgid "File"
 msgstr ""
 
-#: data/ui/window.blp:97
+#: data/ui/window.blp:92
 msgid "Input File"
 msgstr ""
 
-#: data/ui/window.blp:112
+#: data/ui/window.blp:107
 msgid "Output File"
 msgstr ""
 
-#: data/ui/window.blp:136 data/ui/window.blp:195
+#: data/ui/window.blp:131 data/ui/window.blp:190
 msgid "Encrypt"
 msgstr ""
 
-#: data/ui/window.blp:143 data/ui/window.blp:199
+#: data/ui/window.blp:138 data/ui/window.blp:194
 msgid "Decrypt"
 msgstr ""
 
-#: data/ui/window.blp:150 data/ui/window.blp:205
+#: data/ui/window.blp:145 data/ui/window.blp:200
 msgid "Sign"
 msgstr ""
 
-#: data/ui/window.blp:157 data/ui/window.blp:209
+#: data/ui/window.blp:152 data/ui/window.blp:204
 msgid "Verify"
 msgstr ""
 
-#: data/ui/window.blp:180
+#: data/ui/window.blp:175
 msgid "Manage keys"
 msgstr ""
 
-#: data/ui/window.blp:186
+#: data/ui/window.blp:181
 msgid "About Lock"
 msgstr ""
 

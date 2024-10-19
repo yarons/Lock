@@ -24,18 +24,13 @@ template $LockWindow : Adw.ApplicationWindow {
         Adw.HeaderBar header_bar {
 
             [start]
-            Gtk.Revealer text_button_revealer {
-                transition-duration: 0;
-                transition-type: none;
+            Adw.SplitButton text_button {
+                styles ["suggested-action"]
+                label: _("Copy");
+                tooltip-text: _("Copy the text");
 
-                child: Adw.SplitButton text_button {
-                    styles ["suggested-action"]
-                    label: _("Copy");
-                    tooltip-text: _("Copy the text");
-
-                    menu-model: text_menu;
-                    dropdown-tooltip: _("Cryptography operations");
-                };
+                menu-model: text_menu;
+                dropdown-tooltip: _("Cryptography operations");
             }
 
             [title]
