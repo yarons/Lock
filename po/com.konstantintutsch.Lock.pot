@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 17:12+0200\n"
+"POT-Creation-Date: 2024-10-19 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "File verified"
 msgstr ""
 
-#: src/keydialog.c:286 src/keyrow.c:180
+#: src/keydialog.c:286 src/keyrow.c:178
 msgid "Could not open file"
 msgstr ""
 
@@ -112,21 +112,21 @@ msgstr ""
 msgid "Key(s) imported"
 msgstr ""
 
-#: src/keyrow.c:81
+#: src/keyrow.c:79
 msgid "Key does not expire"
 msgstr ""
 
-#: src/keyrow.c:85
+#: src/keyrow.c:83
 #, c-format
 msgctxt "First formatter: YYYY-mm-dd; Second formatter: HH:MM"
 msgid "Expires %s at %s"
 msgstr ""
 
-#: src/keyrow.c:182
+#: src/keyrow.c:180
 msgid "Export failed"
 msgstr ""
 
-#: src/keyrow.c:184
+#: src/keyrow.c:182
 msgid "Key exported"
 msgstr ""
 

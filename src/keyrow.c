@@ -19,8 +19,6 @@ struct _LockKeyRow {
 
     LockKeyDialog *dialog;
 
-    const gchar *email;
-
     gboolean export_success;
     GtkButton *export_button;
     GFile *export_file;
@@ -72,7 +70,7 @@ static void lock_key_row_class_init(LockKeyRowClass *class)
  *
  * @return LockKeyRow
  */
-LockKeyRow *lock_key_row_new(LockKeyDialog *dialog, const gchar *email,
+LockKeyRow *lock_key_row_new(LockKeyDialog *dialog,
                              const gchar *title, const gchar *subtitle,
                              const gchar *expiry_date, const gchar *expiry_time)
 {
@@ -92,7 +90,6 @@ LockKeyRow *lock_key_row_new(LockKeyDialog *dialog, const gchar *email,
 
     /* TODO: implement g_object_class_install_property() */
     row->dialog = dialog;
-    row->email = email;
 
     return row;
 }
@@ -152,8 +149,9 @@ static void lock_key_row_export_file_present(GtkButton *self, LockKeyRow *row)
 void lock_key_row_export(LockKeyRow *row)
 {
     char *path = g_file_get_path(row->export_file);
+    const char *uid = adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row));
 
-    row->export_success = key_export(row->email, path);
+    row->export_success = key_export(uid, path);
 
     /* Cleanup */
     g_free(path);

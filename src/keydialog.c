@@ -152,9 +152,9 @@ static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 
         gtk_list_box_append(dialog->key_box,
                             GTK_WIDGET(lock_key_row_new
-                                       (dialog, key->uids->email,
-                                        key->uids->uid, key->subkeys->fpr,
-                                        expiry_date, expiry_time)));
+                                       (dialog, key->uids->uid,
+                                        key->subkeys->fpr, expiry_date,
+                                        expiry_time)));
     }
 
     /* Cleanup */

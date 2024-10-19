@@ -113,12 +113,12 @@ bool key_import(const char *path)
 /**
  * This function exports a key to a file.
  *
- * @param email Email of the key to export
+ * @param uid User ID of the key to export
  * @param path Path of the file to export the key to
  *
  * @return Success
  */
-bool key_export(const char *email, const char *path)
+bool key_export(const char *uid, const char *path)
 {
     gpgme_ctx_t context;
     gpgme_data_t keydata;
@@ -140,7 +140,7 @@ bool key_export(const char *email, const char *path)
                  C_("GPGME Error", "create GPGME key data in memory"), context,
                  gpgme_data_release(keydata););
 
-    error = gpgme_op_export(context, email, 0, keydata);
+    error = gpgme_op_export(context, uid, 0, keydata);
     HANDLE_ERROR(false, error, C_("GPGME Error", "import GPG key from file"),
                  context, gpgme_data_release(keydata););
 
