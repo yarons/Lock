@@ -41,6 +41,10 @@
             <caption>Dark Appearance</caption>
         </screenshot>
         <screenshot>
+            <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.Key.png</image>
+            <caption>Key Management</caption>
+        </screenshot>
+        <screenshot>
             <image>https://github.com/konstantintutsch/Lock/raw/refs/heads/main/data/com.konstantintutsch.Lock.Screenshot.File.png</image>
             <caption>File processing</caption>
         </screenshot>
@@ -71,6 +75,18 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.3.0" date="2024-10-19">
+            <description translate="no">
+                <p>Key management is now available!</p>
+                <ul>
+                    <li>Import and export key from and to files</li>
+                    <li>Reduced window to increase compatibility with mobile screens</li>
+                    <li>Improved performance of key search before encryption</li>
+                    <li>Improved performance of page switchting for text page</li>
+                    <li>Improved performance of file operations</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.0" date="2024-10-18">
             <description translate="no">
                 <p>Cryptography operations are now multithreaded!</p>

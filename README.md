@@ -20,6 +20,8 @@ Supported are
 
 ![Dark Appearance](data/com.konstantintutsch.Lock.Screenshot.Dark.png)
 
+![Key management](data/com.konstantintutsch.Lock.Screenshot.Key.png)
+
 ![File processing](data/com.konstantintutsch.Lock.Screenshot.File.png)
 
 ### Usage
