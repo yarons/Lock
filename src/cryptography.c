@@ -155,7 +155,7 @@ bool key_export(const char *uid, const char *path)
 
     file = fopen(path, "w");
     if (file == NULL) {
-        g_message(_("Failed to open export file: %s"), strerror(errno));
+        g_warning(_("Failed to open export file: %s"), strerror(errno));
 
         /* Cleanup */
         gpgme_release(context);
