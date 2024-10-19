@@ -44,8 +44,19 @@ static void lock_key_row_class_init(LockKeyRowClass *class)
  *
  * @return LockKeyRow
  */
-LockKeyRow *lock_key_row_new(const gchar *title, const gchar *subtitle)
+LockKeyRow *lock_key_row_new(const gchar *title, const gchar *subtitle,
+                             const gchar *expiry_date, const gchar *expiry_time)
 {
+    gchar *tooltip_text;
+    if (expiry_date == NULL || expiry_time == NULL) {
+        tooltip_text = _("Key does not expire");
+    } else {
+        tooltip_text = g_strdup_printf(C_
+                                       ("First formatter: YYYY-mm-dd; Second formatter: HH:MM",
+                                        "Expires %s at %s"), expiry_date,
+                                       expiry_time);
+    }
+
     return g_object_new(LOCK_TYPE_KEY_ROW, "title", title, "subtitle", subtitle,
-                        NULL);
+                        "tooltip-text", tooltip_text, NULL);
 }

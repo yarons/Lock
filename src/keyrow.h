@@ -9,6 +9,8 @@
 
 G_DECLARE_FINAL_TYPE(LockKeyRow, lock_key_row, LOCK, KEY_ROW, AdwActionRow);
 
-LockKeyRow *lock_key_row_new(const gchar * title, const gchar * subtitle);
+LockKeyRow *lock_key_row_new(const gchar * title, const gchar * subtitle,
+                             const gchar * expiry_date,
+                             const gchar * expiry_time);
 
 #endif                          // KEY_ROW_H
