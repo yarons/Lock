@@ -304,7 +304,7 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
 static void lock_window_key_dialog(GSimpleAction *action, GVariant *parameter,
                                    LockWindow *window)
 {
-    LockKeyDialog *dialog = lock_key_dialog_new();
+    LockKeyDialog *dialog = lock_key_dialog_new(window);
 
     adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(window));
 }
@@ -647,12 +647,7 @@ void lock_window_encrypt_file(LockWindow *window)
         );
     strcpy(window->email, "");  // Mark email search as successful
 
-    bool success = encrypt_file(input_path, output_path, key);
-    if (!success) {
-        window->file_success = false;
-    } else {
-        window->file_success = true;
-    }
+    window->file_success = encrypt_file(input_path, output_path, key);
 
     /* Cleanup */
     g_free(input_path);
@@ -776,12 +771,7 @@ void lock_window_decrypt_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    bool success = decrypt_file(input_path, output_path);
-    if (!success) {
-        window->file_success = false;
-    } else {
-        window->file_success = true;
-    }
+    window->file_success = decrypt_file(input_path, output_path);
 
     /* Cleanup */
     g_free(input_path);
@@ -896,12 +886,7 @@ void lock_window_sign_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    bool success = sign_file(input_path, output_path);
-    if (!success) {
-        window->file_success = false;
-    } else {
-        window->file_success = true;
-    }
+    window->file_success = sign_file(input_path, output_path);
 
     /* Cleanup */
     g_free(input_path);
@@ -1016,12 +1001,7 @@ void lock_window_verify_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    bool success = verify_file(input_path, output_path);
-    if (!success) {
-        window->file_success = false;
-    } else {
-        window->file_success = true;
-    }
+    window->file_success = verify_file(input_path, output_path);
 
     /* Cleanup */
     g_free(input_path);
