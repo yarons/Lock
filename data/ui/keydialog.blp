@@ -8,42 +8,73 @@ template $LockKeyDialog : Adw.Dialog {
     can-close: true;
 
     child: Adw.ToastOverlay toast_overlay {
-        child: Gtk.ScrolledWindow {
-            child: Adw.Clamp {
-                tightening-threshold: 150;
-                unit: sp;
+        child: Gtk.Box dialog_box {
+            orientation: vertical;
+            valign: start;
+            halign: fill;
 
-                child: Gtk.Box content_box {
-                    orientation: vertical;
-                    valign: start;
-                    halign: fill;
-                    margin-top: 20;
-                    margin-bottom: 20;
+            Adw.HeaderBar header_bar {
+                styles ["flat"]
 
-                    Adw.StatusPage status_page {
-                        icon-name: "system-lock-screen-symbolic";
-                        title: _("No keys available");
-                        description: _("Your system does not store any GnuPG keys.");
+                [start]
+                Gtk.Box {
+                    orientation: horizontal;
+                    valign: center;
+                    halign: start;
+
+                    Gtk.Button refresh_button {
+                        styles ["flat"]
+
+                        icon-name: "view-refresh-symbolic";
+                        tooltip-text: _("Refresh keys");
                     }
+                }
 
-                    Gtk.ListBox key_box {
-                        styles ["boxed-list"]
-                    }
+                [title]
+                Adw.WindowTitle {
+                    title: _("Manage keys");
+                }
+            }
 
-                    Gtk.Box button_box {
-                        orientation: horizontal;
-                        valign: center;
-                        halign: center;
+            Gtk.ScrolledWindow {
+                propagate-natural-height: true;
 
-                        Gtk.Button import_button {
-                            styles ["pill", "suggested-action"]
+                child: Adw.Clamp {
+                    tightening-threshold: 150;
+                    unit: sp;
 
-                            label: C_("Import key from file", "Import");
-                            tooltip-text: _("Import key from file");
+                    child: Gtk.Box content_box {
+                        orientation: vertical;
+                        valign: start;
+                        halign: fill;
+                        margin-top: 20;
+                        margin-bottom: 20;
+
+                        Adw.StatusPage status_page {
+                            icon-name: "system-lock-screen-symbolic";
+                            title: _("No keys available");
+                            description: _("Your system does not store any GnuPG keys.");
                         }
-                    }
+
+                        Gtk.ListBox key_box {
+                            styles ["boxed-list"]
+                        }
+
+                        Gtk.Box button_box {
+                            orientation: horizontal;
+                            valign: center;
+                            halign: center;
+
+                            Gtk.Button import_button {
+                                styles ["pill", "suggested-action"]
+
+                                label: C_("Import key from file", "Import");
+                                tooltip-text: _("Import key from file");
+                            }
+                        }
+                    };
                 };
-            };
+            }
         };
     };
 }

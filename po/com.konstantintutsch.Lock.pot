@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 13:07+0200\n"
+"POT-Creation-Date: 2024-10-19 13:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,16 +100,16 @@ msgstr ""
 msgid "File verified"
 msgstr ""
 
-#: src/keydialog.c:226
+#: src/keydialog.c:233
 msgid "Could not open file"
 msgstr ""
 
-#: src/keydialog.c:228
+#: src/keydialog.c:235
 msgid "Import failed"
 msgstr ""
 
-#: src/keydialog.c:230
-msgid "Key imported"
+#: src/keydialog.c:237
+msgid "Key(s) imported"
 msgstr ""
 
 #: src/cryptography.c:16
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: data/ui/window.blp:175
+#: data/ui/window.blp:175 data/ui/keydialog.blp:35
 msgid "Manage keys"
 msgstr ""
 
@@ -393,20 +393,24 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: data/ui/keydialog.blp:25
+#: data/ui/keydialog.blp:29
+msgid "Refresh keys"
+msgstr ""
+
+#: data/ui/keydialog.blp:55
 msgid "No keys available"
 msgstr ""
 
-#: data/ui/keydialog.blp:26
+#: data/ui/keydialog.blp:56
 msgid "Your system does not store any GnuPG keys."
 msgstr ""
 
-#: data/ui/keydialog.blp:41
+#: data/ui/keydialog.blp:71
 msgctxt "Import key from file"
 msgid "Import"
 msgstr ""
 
-#: data/ui/keydialog.blp:42
+#: data/ui/keydialog.blp:72
 msgid "Import key from file"
 msgstr ""
 

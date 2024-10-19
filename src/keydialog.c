@@ -19,6 +19,7 @@ struct _LockKeyDialog {
 
     LockWindow *window;
 
+    GtkButton *refresh_button;
     AdwToastOverlay *toast_overlay;
     GtkBox *content_box;
 
@@ -33,7 +34,7 @@ struct _LockKeyDialog {
 G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
 
 /* UI */
-static void lock_key_dialog_refresh(LockKeyDialog * dialog);
+static void lock_key_dialog_refresh(GtkButton * self, LockKeyDialog * dialog);
 
 gboolean lock_key_dialog_import_on_completed(LockKeyDialog * dialog);
 
@@ -49,7 +50,10 @@ static void lock_key_dialog_import_file_present(GtkButton * self,
 static void lock_key_dialog_init(LockKeyDialog *dialog)
 {
     gtk_widget_init_template(GTK_WIDGET(dialog));
-    lock_key_dialog_refresh(dialog);
+
+    g_signal_connect(dialog->refresh_button, "clicked",
+                     G_CALLBACK(lock_key_dialog_refresh), dialog);
+    lock_key_dialog_refresh(NULL, dialog);
 
     g_signal_connect(dialog->import_button, "clicked",
                      G_CALLBACK(lock_key_dialog_import_file_present), dialog);
@@ -65,6 +69,8 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
     gtk_widget_class_set_template_from_resource(GTK_WIDGET_CLASS(class),
                                                 UI_RESOURCE("keydialog.ui"));
 
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         refresh_button);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          toast_overlay);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
@@ -101,9 +107,10 @@ LockKeyDialog *lock_key_dialog_new(LockWindow *window)
 /**
  * This function refreshes the key list of a LockKeyDialog.
  *
- * @param dialog Dialog to refresh the list of
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param dialog https://docs.gtk.org/gtk4/signal.Button.clicked.html
  */
-static void lock_key_dialog_refresh(LockKeyDialog *dialog)
+static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 {
     gtk_list_box_remove_all(dialog->key_box);
 
@@ -227,13 +234,13 @@ gboolean lock_key_dialog_import_on_completed(LockKeyDialog *dialog)
     } else if (!dialog->import_success) {
         toast = adw_toast_new(_("Import failed"));
     } else {
-        toast = adw_toast_new(_("Key imported"));
+        toast = adw_toast_new(_("Key(s) imported"));
     }
 
     adw_toast_set_timeout(toast, 2);
     adw_toast_overlay_add_toast(dialog->toast_overlay, toast);
 
-    lock_key_dialog_refresh(dialog);
+    lock_key_dialog_refresh(NULL, dialog);
 
     /* Only execute once */
     return false;               // https://docs.gtk.org/glib/func.idle_add.html
