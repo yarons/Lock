@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 21:39+0200\n"
+"POT-Creation-Date: 2024-10-19 23:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -470,49 +470,63 @@ msgid ""
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
-msgid "Supported are"
+msgid "Process text and files:"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-msgid "Encryption and Decryption of text and files"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-msgid "Signing and Verification of text and files"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
-msgid "Importing and Exporting of keys via files"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:37
-msgid "Light Appearance"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:41
-msgid "Dark Appearance"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:45
-msgid "Key Management"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:49
-msgid "File processing"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:53
-msgid "Plain text"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
-msgid "User ID dialog"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
 msgid "Encryption"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
 msgid "Decryption"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
+msgid "Signing"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:15
+msgid "Verification"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
+msgid "Manage available keys in a list:"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
+msgid "View expiry dates"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+msgid "Export public keys to files"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:44
+msgid "Light Appearance"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:48
+msgid "Dark Appearance"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:52
+msgid "Key Management"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+msgid "File processing"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+msgid "Plain text"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+msgid "User ID dialog"
 msgstr ""

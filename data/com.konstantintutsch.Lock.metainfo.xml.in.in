@@ -7,11 +7,18 @@
     <summary>Process data with GnuPG</summary>
     <description>
         <p>Lock is a graphical front-end for GnuPG (GPG) making use of a beautiful LibAdwaita GUI.</p>
-        <p>Supported are</p>
+        <p>Process text and files:</p>
         <ul>
-            <li>Encryption and Decryption of text and files</li>
-            <li>Signing and Verification of text and files</li>
-            <li>Importing and Exporting of keys via files</li>
+            <li>Encryption</li>
+            <li>Decryption</li>
+            <li>Signing</li>
+            <li>Verification</li>
+        </ul>
+        <p>Manage available keys in a list:</p>
+        <ul>
+            <li>View expiry dates</li>
+            <li>Export public keys to files</li>
+            <li>Import keys from files</li>
         </ul>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>

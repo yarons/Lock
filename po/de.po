@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 21:39+0200\n"
-"PO-Revision-Date: 2024-10-19 18:14+0200\n"
+"POT-Creation-Date: 2024-10-19 23:21+0200\n"
+"PO-Revision-Date: 2024-10-19 23:22+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -478,52 +478,78 @@ msgstr ""
 "wunderschönes LibAdwaita GUI nutzt."
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
-msgid "Supported are"
-msgstr "Unterstützt sind"
+msgid "Process text and files:"
+msgstr "Verarbeite Text und Dateien:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-msgid "Encryption and Decryption of text and files"
-msgstr "Ver- und Entschlüsselung von Text und Dateien"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-msgid "Signing and Verification of text and files"
-msgstr "Signierung und Verifikation von Text und Dateien"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
-msgid "Importing and Exporting of keys via files"
-msgstr "Importieren und Exportieren von Schlüsseln über Dateien"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:37
-msgid "Light Appearance"
-msgstr "Helles Erscheinungsbild"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:41
-msgid "Dark Appearance"
-msgstr "Dunkles Erscheinungsbild"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:45
-msgid "Key Management"
-msgstr "Schlüsselverwaltung"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:49
-msgid "File processing"
-msgstr "Dateiverarbeitung"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:53
-msgid "Plain text"
-msgstr "Klartext"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
-msgid "User ID dialog"
-msgstr "Nutzer ID Dialog"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
 msgid "Encryption"
 msgstr "Verschlüsselung"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
 msgid "Decryption"
 msgstr "Entschlüsselung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
+msgid "Signing"
+msgstr "Signierung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:15
+msgid "Verification"
+msgstr "Verifikation"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
+msgid "Manage available keys in a list:"
+msgstr "Verwalte verfügbare Schlüssel über eine Liste:"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
+msgid "View expiry dates"
+msgstr "Ablaufzeitpunkte ansehen"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+msgid "Export public keys to files"
+msgstr "Öffentliche Schlüssel in Dateien exportieren"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
+msgstr "Schlüssel aus Dateien importieren"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:44
+msgid "Light Appearance"
+msgstr "Helles Erscheinungsbild"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:48
+msgid "Dark Appearance"
+msgstr "Dunkles Erscheinungsbild"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:52
+msgid "Key Management"
+msgstr "Schlüsselverwaltung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+msgid "File processing"
+msgstr "Dateiverarbeitung"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+msgid "Plain text"
+msgstr "Klartext"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+msgid "User ID dialog"
+msgstr "Nutzer ID Dialog"
+
+#~ msgid "Supported are"
+#~ msgstr "Unterstützt sind"
+
+#~ msgid "Encryption and Decryption of text and files"
+#~ msgstr "Ver- und Entschlüsselung von Text und Dateien"
+
+#~ msgid "Signing and Verification of text and files"
+#~ msgstr "Signierung und Verifikation von Text und Dateien"
+
+#~ msgid "Importing and Exporting of keys via files"
+#~ msgstr "Importieren und Exportieren von Schlüsseln über Dateien"
 
 #~ msgid "Could not open file"
 #~ msgstr "Datei konnte nicht geöffnet werden"
@@ -537,12 +563,6 @@ msgstr "Entschlüsselung"
 
 #~ msgid "Imported key"
 #~ msgstr "Schlüssel importiert"
-
-#~ msgid "Signing"
-#~ msgstr "Signierung"
-
-#~ msgid "of text and files."
-#~ msgstr "von Text und Dateien."
 
 #~ msgctxt "GPGME Error"
 #~ msgid "create new signed GPGME data from file"

@@ -6,11 +6,18 @@ Process data with GnuPG
 
 _Lock_ is a graphical front-end for GnuPG (GPG) making use of a beautiful LibAdwaita GUI.
 
-Supported are
+Process text and files:
 
-- Encryption and Decryption of text and files
-- Signing and Verification of text and files
-- Importing and Exporting of keys via files
+- Encryption
+- Decryption
+- Signing
+- Verification
+
+Manage available keys in a list:
+
+- View expiry dates
+- Export public keys to files
+- Import keys from files
 
 <a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>
 
