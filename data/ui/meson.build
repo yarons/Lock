@@ -4,7 +4,8 @@
 
 blp = files(
   'window.blp',
-  'entrydialog.blp'
+  'entrydialog.blp',
+  'keydialog.blp'
 )
 
 ui = custom_target(

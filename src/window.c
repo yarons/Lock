@@ -5,11 +5,12 @@
 #include <locale.h>
 #include "application.h"
 #include "entrydialog.h"
-#include "threading.h"
+#include "keydialog.h"
 #include "config.h"
 
 #include <gpgme.h>
 #include "cryptography.h"
+#include "threading.h"
 
 #define ACTION_MODE_TEXT 0
 #define ACTION_MODE_FILE 1
@@ -306,6 +307,9 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
 static void lock_window_key_dialog(GSimpleAction *action, GVariant *parameter,
                                    LockWindow *window)
 {
+    LockKeyDialog *dialog = lock_key_dialog_new();
+
+    adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(window));
 }
 
 /**** Text ****/
@@ -560,9 +564,7 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
-                       g_free(plain);
-                       plain = NULL;
-        );
+                       g_free(plain); plain = NULL;);
     strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
@@ -640,10 +642,8 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
                        /* Cleanup */
-                       g_free(input_path);
-                       input_path = NULL; g_free(output_path);
-                       output_path = NULL;
-        );
+                       g_free(input_path); input_path = NULL;
+                       g_free(output_path); output_path = NULL;);
     strcpy(window->email, "");  // Mark email search as successful
 
     bool success = encrypt_file(input_path, output_path, key);

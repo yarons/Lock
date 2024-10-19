@@ -14,6 +14,7 @@ src = files(
   'window.c',
   'entrydialog.c',
   'threading.c',
+  'keydialog.c',
   'cryptography.c'
 )
 

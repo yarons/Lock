@@ -1,0 +1,50 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $LockKeyDialog : Adw.Dialog {
+    follows-content-size: false;
+    content-width: 500;
+    content-height: 400;
+    can-close: true;
+
+    child: Gtk.ScrolledWindow {
+        child: Adw.Clamp {
+            maximum-size: 800;
+            tightening-threshold: 400;
+            unit: sp;
+
+            child: Gtk.Box {
+                orientation: vertical;
+                valign: start;
+                halign: fill;
+
+                Gtk.Revealer status_revealer {
+                    transition-duration: 500;
+                    transition-type: crossfade;
+
+                    child: Adw.StatusPage {
+                        icon-name: "system-lock-screen-symbolic";
+                        title: _("No keys available");
+                        description: _("Your system does not store any GnuPG keys.");
+                    };
+                }
+
+                Gtk.ListBox key_box {
+                }
+
+                Gtk.Box button_box {
+                    orientation: horizontal;
+                    valign: center;
+                    halign: center;
+
+                    Gtk.Button import_button {
+                        styles ["pill", "suggested-action"]
+
+                        label: C_("Import key from file", "Import");
+                        tooltip-text: _("Import key from file");
+                    }
+                }
+            };
+        };
+    };
+}
