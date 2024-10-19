@@ -75,6 +75,14 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.3.1" date="2024-10-19">
+            <description translate="no">
+                <p>Hotfix!</p>
+                <ul>
+                    <li>Improved accuracy identifying keys</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.0" date="2024-10-19">
             <description translate="no">
                 <p>Key management is now available!</p>
