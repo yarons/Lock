@@ -10,7 +10,7 @@ Supported are
 
 - Encryption and Decryption of text and files
 - Signing and Verification of text and files
-- Importing of keys via files
+- Importing and Exporting of keys via files
 
 <a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>
 

@@ -11,7 +11,7 @@
         <ul>
             <li>Encryption and Decryption of text and files</li>
             <li>Signing and Verification of text and files</li>
-            <li>Importing of keys via files</li>
+            <li>Importing and Exporting of keys via files</li>
         </ul>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>
