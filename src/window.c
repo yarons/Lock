@@ -561,9 +561,7 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_text_on_completed, window,
-                       g_free(plain);
-                       plain = NULL;
-        );
+                       g_free(plain); plain = NULL;);
     strcpy(window->email, "");  // Mark email search as successful
 
     gchar *armor = encrypt_text(plain, key);
@@ -641,10 +639,8 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_from_email(window->email);
     HANDLE_ERROR_EMAIL(, key, lock_window_encrypt_file_on_completed, window,
                        /* Cleanup */
-                       g_free(input_path);
-                       input_path = NULL; g_free(output_path);
-                       output_path = NULL;
-        );
+                       g_free(input_path); input_path = NULL;
+                       g_free(output_path); output_path = NULL;);
     strcpy(window->email, "");  // Mark email search as successful
 
     window->file_success = encrypt_file(input_path, output_path, key);

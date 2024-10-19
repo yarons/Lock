@@ -5,6 +5,7 @@
 #include <locale.h>
 #include "window.h"
 #include "entrydialog.h"
+#include "keydialog.h"
 
 #include <string.h>
 
@@ -139,4 +140,16 @@ void thread_verify_file(GtkButton *self, LockWindow *window)
     CRYPTOGRAPHY_THREAD_WRAPPER("verify_file",
                                 C_("Thread Error", "file verification"),
                                 lock_window_verify_file, window);
+}
+
+/**
+ * This function creates a new thread for the import of a file as a key of a LockKeyDialog.
+ *
+ * @param dialog Dialog to import the key in
+ */
+void thread_import_key(LockKeyDialog *dialog)
+{
+    CRYPTOGRAPHY_THREAD_WRAPPER("import_key",
+                                C_("Thread Error", "key import"),
+                                lock_key_dialog_import, dialog);
 }

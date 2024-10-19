@@ -9,7 +9,7 @@ void cryptography_init();
 
 // Keys
 gpgme_key_t key_from_email(const char *email);
-bool key_import_from_file(const char *path);
+bool key_import(const char *path);
 
 // Encrypt
 char *encrypt_text(const char *text, gpgme_key_t key);

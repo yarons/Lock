@@ -3,10 +3,13 @@
 #include <adwaita.h>
 #include <glib/gi18n.h>
 #include <locale.h>
+#include "window.h"
 #include "keyrow.h"
 #include "config.h"
 
 #include <gpgme.h>
+#include "cryptography.h"
+#include "threading.h"
 
 /**
  * This structure handles data of a key dialog.
@@ -14,19 +17,29 @@
 struct _LockKeyDialog {
     AdwDialog parent;
 
+    LockWindow *window;
+
+    AdwToastOverlay *toast_overlay;
     GtkBox *content_box;
 
     AdwStatusPage *status_page;
     GtkListBox *key_box;
 
+    gboolean import_success;
     GtkButton *import_button;
+    GFile *import_file;
 };
 
 G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
 
 /* UI */
-
 static void lock_key_dialog_refresh(LockKeyDialog * dialog);
+
+gboolean lock_key_dialog_import_on_completed(LockKeyDialog * dialog);
+
+/* Import */
+static void lock_key_dialog_import_file_present(GtkButton * self,
+                                                LockKeyDialog * dialog);
 
 /**
  * This function initializes a LockKeyDialog.
@@ -37,6 +50,9 @@ static void lock_key_dialog_init(LockKeyDialog *dialog)
 {
     gtk_widget_init_template(GTK_WIDGET(dialog));
     lock_key_dialog_refresh(dialog);
+
+    g_signal_connect(dialog->import_button, "clicked",
+                     G_CALLBACK(lock_key_dialog_import_file_present), dialog);
 }
 
 /**
@@ -49,6 +65,8 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
     gtk_widget_class_set_template_from_resource(GTK_WIDGET_CLASS(class),
                                                 UI_RESOURCE("keydialog.ui"));
 
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         toast_overlay);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          content_box);
 
@@ -64,11 +82,18 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
 /**
  * This function creates a new LockKeyDialog.
  *
+ * @param window Window in which the dialog is presented
+ *
  * @return LockKeyDialog
  */
-LockKeyDialog *lock_key_dialog_new()
+LockKeyDialog *lock_key_dialog_new(LockWindow *window)
 {
-    return g_object_new(LOCK_TYPE_KEY_DIALOG, NULL);
+    LockKeyDialog *dialog = g_object_new(LOCK_TYPE_KEY_DIALOG, NULL);
+
+    /* TODO: implement g_object_class_install_property() */
+    dialog->window = window;
+
+    return dialog;
 }
 
 /**** UI ****/
@@ -80,6 +105,8 @@ LockKeyDialog *lock_key_dialog_new()
  */
 static void lock_key_dialog_refresh(LockKeyDialog *dialog)
 {
+    gtk_list_box_remove_all(dialog->key_box);
+
     gpgme_ctx_t context;
     gpgme_key_t key;
     gpgme_error_t error;
@@ -114,4 +141,100 @@ static void lock_key_dialog_refresh(LockKeyDialog *dialog)
 
         gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), false);
     }
+}
+
+/**** Import ****/
+
+/**
+ * This function opens the import file of a LockKeyDialog.
+ *
+ * @param object https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ * @param result https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ * @param user_data https://docs.gtk.org/gio/callback.AsyncReadyCallback.html
+ */
+static void lock_key_dialog_import_file_open(GObject *source_object,
+                                             GAsyncResult *res, gpointer data)
+{
+    GtkFileDialog *file = GTK_FILE_DIALOG(source_object);
+    LockKeyDialog *dialog = LOCK_KEY_DIALOG(data);
+
+    dialog->import_file = gtk_file_dialog_open_finish(file, res, NULL);
+    if (dialog->import_file == NULL) {
+        lock_key_dialog_import_on_completed(dialog);
+
+        /* Cleanup */
+        g_object_unref(file);
+        file = NULL;
+
+        dialog = NULL;
+
+        return;
+    }
+
+    thread_import_key(dialog);
+}
+
+/**
+ * This function opens an open file dialog for a LockKeyDialog.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param dialog https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+static void lock_key_dialog_import_file_present(GtkButton *self,
+                                                LockKeyDialog *dialog)
+{
+    GtkFileDialog *file = gtk_file_dialog_new();
+    GCancellable *cancel = g_cancellable_new();
+
+    gtk_file_dialog_open(file, GTK_WINDOW(dialog->window),
+                         cancel, lock_key_dialog_import_file_open, dialog);
+}
+
+/**
+ * This function imports a key in a LockKeyDialog.
+ *
+ * @param dialog https://docs.gtk.org/glib/callback.ThreadFunc.html
+ */
+void lock_key_dialog_import(LockKeyDialog *dialog)
+{
+    char *path = g_file_get_path(dialog->import_file);
+
+    dialog->import_success = key_import(path);
+
+    /* Cleanup */
+    g_free(path);
+    path = NULL;
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_key_dialog_import_on_completed, dialog);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for key imports and is supposed to be called via g_idle_add().
+ *
+ * @param dialog https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_key_dialog_import_on_completed(LockKeyDialog *dialog)
+{
+    AdwToast *toast;
+
+    if (dialog->import_file == NULL) {
+        toast = adw_toast_new(_("Could not open file"));
+    } else if (!dialog->import_success) {
+        toast = adw_toast_new(_("Import failed"));
+    } else {
+        toast = adw_toast_new(_("Key imported"));
+    }
+
+    adw_toast_set_timeout(toast, 2);
+    adw_toast_overlay_add_toast(dialog->toast_overlay, toast);
+
+    lock_key_dialog_refresh(dialog);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
 }

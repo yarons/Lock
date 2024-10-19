@@ -7,39 +7,41 @@ template $LockKeyDialog : Adw.Dialog {
     content-height: 500;
     can-close: true;
 
-    child: Gtk.ScrolledWindow {
-        child: Adw.Clamp {
-            tightening-threshold: 150;
-            unit: sp;
+    child: Adw.ToastOverlay toast_overlay {
+        child: Gtk.ScrolledWindow {
+            child: Adw.Clamp {
+                tightening-threshold: 150;
+                unit: sp;
 
-            child: Gtk.Box content_box {
-                orientation: vertical;
-                valign: start;
-                halign: fill;
-                margin-top: 20;
+                child: Gtk.Box content_box {
+                    orientation: vertical;
+                    valign: start;
+                    halign: fill;
+                    margin-top: 20;
 
-                Adw.StatusPage status_page {
-                    icon-name: "system-lock-screen-symbolic";
-                    title: _("No keys available");
-                    description: _("Your system does not store any GnuPG keys.");
-                }
-
-                Gtk.ListBox key_box {
-                    styles ["boxed-list"]
-                }
-
-                Gtk.Box button_box {
-                    orientation: horizontal;
-                    valign: center;
-                    halign: center;
-
-                    Gtk.Button import_button {
-                        styles ["pill", "suggested-action"]
-
-                        label: C_("Import key from file", "Import");
-                        tooltip-text: _("Import key from file");
+                    Adw.StatusPage status_page {
+                        icon-name: "system-lock-screen-symbolic";
+                        title: _("No keys available");
+                        description: _("Your system does not store any GnuPG keys.");
                     }
-                }
+
+                    Gtk.ListBox key_box {
+                        styles ["boxed-list"]
+                    }
+
+                    Gtk.Box button_box {
+                        orientation: horizontal;
+                        valign: center;
+                        halign: center;
+
+                        Gtk.Button import_button {
+                            styles ["pill", "suggested-action"]
+
+                            label: C_("Import key from file", "Import");
+                            tooltip-text: _("Import key from file");
+                        }
+                    }
+                };
             };
         };
     };

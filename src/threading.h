@@ -4,6 +4,7 @@
 #include <adwaita.h>
 #include "window.h"
 #include "entrydialog.h"
+#include "keydialog.h"
 
 /* Encrypt */
 void thread_encrypt_text(LockEntryDialog * self, const char *email,
@@ -25,5 +26,8 @@ void thread_sign_file(GtkButton * self, LockWindow * window);
 void thread_verify_text(GSimpleAction * self, GVariant * parameter,
                         LockWindow * window);
 void thread_verify_file(GtkButton * self, LockWindow * window);
+
+/* Key */
+void thread_import_key(LockKeyDialog * dialog);
 
 #endif                          // THREADING_H
