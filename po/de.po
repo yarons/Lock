@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 11:24+0200\n"
-"PO-Revision-Date: 2024-10-19 09:27+0200\n"
+"POT-Creation-Date: 2024-10-19 11:33+0200\n"
+"PO-Revision-Date: 2024-10-19 11:34+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -18,6 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 47.0\n"
+
+#. Details
+#: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
+msgid "Process data with GnuPG"
+msgstr "Verarbeiten Sie Daten mit GnuPG"
+
+#: src/application.c:136
+msgid "translator-credits"
+msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
+
+#: src/application.c:141
+msgid "Dependencies"
+msgstr "Abhängigkeiten"
+
+#: src/window.c:142 data/ui/entrydialog.blp:33
+msgid "Enter text …"
+msgstr "Text eingeben …"
+
+#: src/window.c:357
+msgid "Text copied"
+msgstr "Text kopiert"
+
+#: src/window.c:526 src/window.c:544
+msgid "Encrypt for"
+msgstr "Verschlüsseln für"
+
+#: src/window.c:526 src/window.c:544
+msgid "Enter email …"
+msgstr "E-Mail eingeben …"
+
+#: src/window.c:608 src/window.c:686
+#, c-format
+msgid "Failed to find key for email “%s”"
+msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
+
+#: src/window.c:613 src/window.c:691
+msgid "Encryption failed"
+msgstr "Verschlüsselung fehlgeschlagen"
+
+#: src/window.c:615
+msgid "Text encrypted"
+msgstr "Text verschlüsselt"
+
+#: src/window.c:693
+msgid "File encrypted"
+msgstr "Datei verschlüsselt"
+
+#: src/window.c:749 src/window.c:811
+msgid "Decryption failed"
+msgstr "Entschlüsselung fehlgeschlagen"
+
+#: src/window.c:751
+msgid "Text decrypted"
+msgstr "Text entschlüsselt"
+
+#: src/window.c:813
+msgid "File decrypted"
+msgstr "Datei entschlüsselt"
+
+#: src/window.c:871 src/window.c:931
+msgid "Signing failed"
+msgstr "Signierung fehlgeschlagen"
+
+#: src/window.c:873
+msgid "Text signed"
+msgstr "Text signiert"
+
+#: src/window.c:933
+msgid "File signed"
+msgstr "Datei signiert"
+
+#: src/window.c:989 src/window.c:1051
+msgid "Verification failed"
+msgstr "Verifikation fehlgeschlagen"
+
+#: src/window.c:991
+msgid "Text verified"
+msgstr "Text verifiziert"
+
+#: src/window.c:1053
+msgid "File verified"
+msgstr "Datei verifiziert"
 
 #: src/cryptography.c:16
 #, c-format
@@ -184,89 +267,6 @@ msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr "Verifiezieren von GPGME Daten aus einer Datei"
 
-#. Details
-#: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
-msgid "Process data with GnuPG"
-msgstr "Verarbeiten Sie Daten mit GnuPG"
-
-#: src/application.c:136
-msgid "translator-credits"
-msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
-
-#: src/application.c:141
-msgid "Dependencies"
-msgstr "Abhängigkeiten"
-
-#: src/window.c:142 data/ui/entrydialog.blp:33
-msgid "Enter text …"
-msgstr "Text eingeben …"
-
-#: src/window.c:357
-msgid "Text copied"
-msgstr "Text kopiert"
-
-#: src/window.c:526 src/window.c:544
-msgid "Encrypt for"
-msgstr "Verschlüsseln für"
-
-#: src/window.c:526 src/window.c:544
-msgid "Enter email …"
-msgstr "E-Mail eingeben …"
-
-#: src/window.c:608 src/window.c:686
-#, c-format
-msgid "Failed to find key for email “%s”"
-msgstr "Für die E-Mail “%s” konnte kein Schlüssel gefunden werden"
-
-#: src/window.c:613 src/window.c:691
-msgid "Encryption failed"
-msgstr "Verschlüsselung fehlgeschlagen"
-
-#: src/window.c:615
-msgid "Text encrypted"
-msgstr "Text verschlüsselt"
-
-#: src/window.c:693
-msgid "File encrypted"
-msgstr "Datei verschlüsselt"
-
-#: src/window.c:749 src/window.c:811
-msgid "Decryption failed"
-msgstr "Entschlüsselung fehlgeschlagen"
-
-#: src/window.c:751
-msgid "Text decrypted"
-msgstr "Text entschlüsselt"
-
-#: src/window.c:813
-msgid "File decrypted"
-msgstr "Datei entschlüsselt"
-
-#: src/window.c:871 src/window.c:931
-msgid "Signing failed"
-msgstr "Signierung fehlgeschlagen"
-
-#: src/window.c:873
-msgid "Text signed"
-msgstr "Text signiert"
-
-#: src/window.c:933
-msgid "File signed"
-msgstr "Datei signiert"
-
-#: src/window.c:989 src/window.c:1051
-msgid "Verification failed"
-msgstr "Verifikation fehlgeschlagen"
-
-#: src/window.c:991
-msgid "Text verified"
-msgstr "Text verifiziert"
-
-#: src/window.c:1053
-msgid "File verified"
-msgstr "Datei verifiziert"
-
 #: src/threading.c:18
 #, c-format
 msgctxt ""
@@ -380,22 +380,34 @@ msgstr "Über Schloss"
 msgid "Title"
 msgstr "Titel"
 
-#: data/ui/keydialog.blp:22
+#: data/ui/keydialog.blp:23
 msgid "No keys available"
 msgstr "Keine Schlüssel verfügbar"
 
-#: data/ui/keydialog.blp:23
+#: data/ui/keydialog.blp:24
 msgid "Your system does not store any GnuPG keys."
 msgstr "Ihr System speichert keine GnuPG Schlüssel."
 
-#: data/ui/keydialog.blp:38
+#: data/ui/keydialog.blp:39
 msgctxt "Import key from file"
 msgid "Import"
 msgstr "Importieren"
 
-#: data/ui/keydialog.blp:39
+#: data/ui/keydialog.blp:40
 msgid "Import key from file"
 msgstr "Schlüssel aus Datei importieren"
+
+#: data/ui/keyrow.blp:5
+msgid "User ID"
+msgstr "Nutzer-ID"
+
+#: data/ui/keyrow.blp:6
+msgid "Fingerprint"
+msgstr "Fingerabdruck"
+
+#: data/ui/keyrow.blp:17
+msgid "Export public key to file"
+msgstr "Öffentlichen Schlüssel in Datei exportieren"
 
 #: data/com.konstantintutsch.Lock.desktop.in.in:11
 msgid "gpg;gnupg;cryptography;openpgp;encrypt;decrypt;sign;verify;"
