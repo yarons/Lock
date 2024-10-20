@@ -10,13 +10,15 @@ The project acknowledges that diverse opinions and beliefs exist. Disagreements 
 
 ### Fundamental Rules
 
-- **Be Respectful**: Treat others with respect and thoughtfulness.
-- **Do Not Insult**: Offensive interactions will not be tolerated.
-- **Do Not Spread False Information**: Lies, conspiracy theories and else are strictly prohibited.
+The following requirements are not optional:
 
-### Legal Compliance
+- Be Respectful: Treat others with respect and thoughtfulness.
+- Do Not Insult: Offensive interactions will not be tolerated.
+- Do Not Spread False Information: Lies, conspiracy theories and else are strictly prohibited.
 
-All members must comply with the laws applicable in their respective countries as well as to the laws applicable in Germany.
+### Legal
+
+Compliance with the laws applicable in members respective countries as well as to the laws applicable in Germany is obligatory.
 
 ## Enforcement
 
@@ -26,4 +28,4 @@ Violations of this Code of Conduct will lead to temporary or permanent exclusion
 
 If you witness or experience any violations, please report them directly to the project maintainer[^1].
 
-[^1]: [Contact Options](https://konstantintutsch.com/#contact) of the maintainer
+[^1]: [Contact options](https://konstantintutsch.com/#contact) of the maintainer
