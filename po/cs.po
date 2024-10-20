@@ -1,0 +1,546 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.konstantintutsch.Lock package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.konstantintutsch.Lock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-20 08:55+0200\n"
+"PO-Revision-Date: 2024-10-20 11:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#. Details
+#: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
+msgid "Process data with GnuPG"
+msgstr "Spravujte data s GnuPG"
+
+#: src/application.c:136
+msgid "translator-credits"
+msgstr ""
+
+#: src/application.c:141
+msgid "Dependencies"
+msgstr "Závislosti"
+
+#: src/window.c:142 data/ui/entrydialog.blp:33
+msgid "Enter text …"
+msgstr "Zadejte text …"
+
+#: src/window.c:357
+msgid "Text copied"
+msgstr "Text zkopírován"
+
+#: src/window.c:527 src/window.c:545
+msgid "Encrypt for"
+msgstr "Zašifrovat pro"
+
+#: src/window.c:527 src/window.c:545
+msgid "Enter name or email …"
+msgstr "Zadejte jméno nebo email …"
+
+#: src/window.c:607 src/window.c:679
+#, c-format
+msgid "Failed to find key for User ID “%s”"
+msgstr "Klíč pro ID Uživatele “%s” nebyl nalezen"
+
+#: src/window.c:612 src/window.c:684
+msgid "Encryption failed"
+msgstr "Zašifrování selhalo"
+
+#: src/window.c:614
+msgid "Text encrypted"
+msgstr "Text zašifrován"
+
+#: src/window.c:686
+msgid "File encrypted"
+msgstr "Soubor zašifrován"
+
+#: src/window.c:743 src/window.c:798
+msgid "Decryption failed"
+msgstr "Rozšifrování selhalo"
+
+#: src/window.c:745
+msgid "Text decrypted"
+msgstr "Text rozšifrován"
+
+#: src/window.c:800
+msgid "File decrypted"
+msgstr "Soubor rozšifrován"
+
+#: src/window.c:856 src/window.c:911
+msgid "Signing failed"
+msgstr "Podepisování selhalo"
+
+#: src/window.c:858
+msgid "Text signed"
+msgstr "Text podepsán"
+
+#: src/window.c:913
+msgid "File signed"
+msgstr "Soubor podepsán"
+
+#: src/window.c:969 src/window.c:1024
+msgid "Verification failed"
+msgstr "Ověření selhalo"
+
+#: src/window.c:971
+msgid "Text verified"
+msgstr "Text ověřen"
+
+#: src/window.c:1026
+msgid "File verified"
+msgstr "Soubor ověřen"
+
+#: src/keydialog.c:288
+msgid "Import failed"
+msgstr "Import selhal"
+
+#: src/keydialog.c:290
+msgid "Key(s) imported"
+msgstr "Klíč(e) importován(y)"
+
+#: src/keyrow.c:79
+msgid "Key does not expire"
+msgstr "Platnost klíče nevyprší"
+
+#: src/keyrow.c:83
+#, c-format
+msgctxt "First formatter: YYYY-mm-dd; Second formatter: HH:MM"
+msgid "Expires %s at %s"
+msgstr "Vyprší %s v %s"
+
+#: src/keyrow.c:180
+msgid "Export failed"
+msgstr "Export selhal"
+
+#: src/keyrow.c:182
+msgid "Key exported"
+msgstr "Klíč exportován"
+
+#: src/cryptography.c:16
+#, c-format
+msgctxt "Error message constructor for failed GPGME operations"
+msgid "Failed to %s: %s"
+msgstr "Selhalo %s: %s"
+
+#: src/cryptography.c:47 src/cryptography.c:88 src/cryptography.c:129
+#: src/cryptography.c:207 src/cryptography.c:267 src/cryptography.c:329
+#: src/cryptography.c:392 src/cryptography.c:461 src/cryptography.c:518
+#: src/cryptography.c:619 src/cryptography.c:676
+msgctxt "GPGME Error"
+msgid "create new GPGME context"
+msgstr "vytvoření nového GPGME kontextu"
+
+#: src/cryptography.c:52 src/cryptography.c:93 src/cryptography.c:136
+#: src/cryptography.c:212 src/cryptography.c:272 src/cryptography.c:334
+#: src/cryptography.c:397 src/cryptography.c:466 src/cryptography.c:523
+#: src/cryptography.c:624 src/cryptography.c:681
+msgctxt "GPGME Error"
+msgid "set protocol of GPGME context to OpenPGP"
+msgstr "nastavení protokolu GPGME kontextu na OpenPGP"
+
+#: src/cryptography.c:65
+msgctxt "GPGME Error"
+msgid "find key matching User ID"
+msgstr "nalezení klíče odpovídající ID Uživatele"
+
+#: src/cryptography.c:98
+msgctxt "GPGME Error"
+msgid "load GPGME key data from file"
+msgstr "načtení GPGME dat klíče ze souboru"
+
+#: src/cryptography.c:103 src/cryptography.c:146
+msgctxt "GPGME Error"
+msgid "import GPG key from file"
+msgstr "importování GPG klíče ze souboru"
+
+#: src/cryptography.c:141
+msgctxt "GPGME Error"
+msgid "create GPGME key data in memory"
+msgstr "vytvoření GPGME dat klíče v paměti"
+
+#: src/cryptography.c:161
+#, c-format
+msgid "Failed to open export file: %s"
+msgstr "Selhalo otevření exportního souboru: %s"
+
+#: src/cryptography.c:220
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from string"
+msgstr "vytvoření nových rozšifrovaných GPGME dat z řetězce"
+
+#: src/cryptography.c:225 src/cryptography.c:477
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data"
+msgstr "vytvoření nových zašifrovaných GPGME dat"
+
+#: src/cryptography.c:231
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from memory"
+msgstr "zašifrování GPGME dat z paměti"
+
+#: src/cryptography.c:278 src/cryptography.c:340 src/cryptography.c:529
+#: src/cryptography.c:630
+msgctxt "GPGME Error"
+msgid "set pinentry mode of GPGME context to ask"
+msgstr "nastavení pinentry módu GPGME kontextu na zeptání se"
+
+#: src/cryptography.c:283
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data from string"
+msgstr "vytvoření nových zašifrovaných GPGME dat z řetězce"
+
+#: src/cryptography.c:288 src/cryptography.c:539
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data"
+msgstr "vytvoření nových rozšifrovaných GPGME dat"
+
+#: src/cryptography.c:293
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from memory"
+msgstr "rozšifrovat GPGME dat z paměti"
+
+#: src/cryptography.c:347
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data from string"
+msgstr "vytvoření nových nepodepsaných GPGME dat z řetězce"
+
+#: src/cryptography.c:352 src/cryptography.c:639 src/cryptography.c:686
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data"
+msgstr "vytvoření nových podepsaných GPGME dat"
+
+#: src/cryptography.c:356
+msgctxt "GPGME Error"
+msgid "sign GPGME data from memory"
+msgstr "podepsání GPGME dat z paměti"
+
+#: src/cryptography.c:404
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data from string"
+msgstr "vytvoření nových podepsaných GPGME dat z řetězce"
+
+#: src/cryptography.c:409
+msgctxt "GPGME Error"
+msgid "create new verified GPGME data"
+msgstr "vytvoření nových ověřených GPGME dat"
+
+#: src/cryptography.c:414
+msgctxt "GPGME Error"
+msgid "verify GPGME data from memory"
+msgstr "ověření GPGME dat z paměti"
+
+#: src/cryptography.c:451 src/cryptography.c:609
+#, c-format
+msgid "Removed %s to prepare overwriting"
+msgstr "Odstraněno %s pro přípravu přepsání"
+
+#: src/cryptography.c:472
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from file"
+msgstr "vytvoření nových rozšifrovaných GPGME dat ze souboru"
+
+#: src/cryptography.c:482
+msgctxt "GPGME Error"
+msgid "set file path of encrypted GPGME data"
+msgstr "nastavení cesty souboru šifrovaných GPGME dat"
+
+#: src/cryptography.c:490
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from file"
+msgstr "šifrování GPGME dat ze souboru"
+
+#: src/cryptography.c:534
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data from file"
+msgstr "vytvoření nových šifrovaných GPGME dat ze souboru"
+
+#: src/cryptography.c:544
+msgctxt "GPGME Error"
+msgid "set file path of decrypted GPGME data"
+msgstr "nastavení cesty souboru rozšifrovaných GPGME dat"
+
+#: src/cryptography.c:550
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from file"
+msgstr "rozšifrování GPGME dat ze souboru"
+
+#: src/cryptography.c:563 src/cryptography.c:719
+#, c-format
+msgid "Failed to open output file: %s"
+msgstr "Selhalo otevření výstupního souboru: %s"
+
+#: src/cryptography.c:634
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data from file"
+msgstr "vytvoření nových nepodepsaných GPGME dat ze souboru"
+
+#: src/cryptography.c:644 src/cryptography.c:691
+msgctxt "GPGME Error"
+msgid "set file path of signed GPGME data"
+msgstr "nastavení cesty souboru podepsaných GPGME dat"
+
+#: src/cryptography.c:648
+msgctxt "GPGME Error"
+msgid "sign GPGME data from file"
+msgstr "podepsání GPGME dat ze souboru"
+
+#: src/cryptography.c:696
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data"
+msgstr "vytvoření nových nepodepsaných GPGME dat"
+
+#: src/cryptography.c:701
+msgctxt "GPGME Error"
+msgid "set file path of unsigned GPGME data"
+msgstr "nastavení cesty souboru nepodepsaných GPGME dat"
+
+#: src/cryptography.c:706
+msgctxt "GPGME Error"
+msgid "verify GPGME data from file"
+msgstr "ověření GPGME dat ze souboru"
+
+#: src/threading.c:20
+#, c-format
+msgctxt ""
+"First format specifier is a translation string marked as “Thread Error”"
+msgid "Failed to create %s thread: %s"
+msgstr "Selhalo vytvoření vlákna %s: %s"
+
+#: src/threading.c:39
+msgctxt "Thread Error"
+msgid "text encryption"
+msgstr "šifrování textu"
+
+#: src/threading.c:58
+msgctxt "Thread Error"
+msgid "file encryption"
+msgstr "šifrování souboru"
+
+#: src/threading.c:75
+msgctxt "Thread Error"
+msgid "text decryption"
+msgstr "rozšifrování textu"
+
+#: src/threading.c:88
+msgctxt "Thread Error"
+msgid "file decryption"
+msgstr "rozšifrování souboru"
+
+#: src/threading.c:102
+msgctxt "Thread Error"
+msgid "text signing"
+msgstr "podepisování textu"
+
+#: src/threading.c:114
+msgctxt "Thread Error"
+msgid "file signing"
+msgstr "podepisování souboru"
+
+#: src/threading.c:129
+msgctxt "Thread Error"
+msgid "text verification"
+msgstr "ověření textu"
+
+#: src/threading.c:142
+msgctxt "Thread Error"
+msgid "file verification"
+msgstr "ověření souboru"
+
+#: src/threading.c:154
+msgctxt "Thread Error"
+msgid "key import"
+msgstr "importování klíče"
+
+#: src/threading.c:166
+msgctxt "Thread Error"
+msgid "key export"
+msgstr "exportování klíče"
+
+#: data/ui/window.blp:9 data/ui/window.blp:169
+#: data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
+msgid "Lock"
+msgstr "Zámek"
+
+#: data/ui/window.blp:29
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: data/ui/window.blp:30
+msgid "Copy the text"
+msgstr "Kopírovat text"
+
+#: data/ui/window.blp:33
+msgid "Cryptography operations"
+msgstr "Kryptografické operace"
+
+#: data/ui/window.blp:45
+msgid "Main Menu"
+msgstr "Hlavní Menu"
+
+#: data/ui/window.blp:55
+msgid "Text"
+msgstr "Text"
+
+#: data/ui/window.blp:73
+msgid "File"
+msgstr "Soubor"
+
+#: data/ui/window.blp:92
+msgid "Input File"
+msgstr "Vstupní Soubor"
+
+#: data/ui/window.blp:107
+msgid "Output File"
+msgstr "Výstupní Soubor"
+
+#: data/ui/window.blp:131 data/ui/window.blp:190
+msgid "Encrypt"
+msgstr "Zašifrovat"
+
+#: data/ui/window.blp:138 data/ui/window.blp:194
+msgid "Decrypt"
+msgstr "Rozšifrovat"
+
+#: data/ui/window.blp:145 data/ui/window.blp:200
+msgid "Sign"
+msgstr "Podepsat"
+
+#: data/ui/window.blp:152 data/ui/window.blp:204
+msgid "Verify"
+msgstr "Ověřit"
+
+#: data/ui/window.blp:175 data/ui/keydialog.blp:35
+msgid "Manage keys"
+msgstr "Spravovat klíče"
+
+#: data/ui/window.blp:181
+msgid "About Lock"
+msgstr "O Zámku"
+
+#: data/ui/entrydialog.blp:22
+msgid "Title"
+msgstr "Nadpis"
+
+#: data/ui/keydialog.blp:29
+msgid "Refresh keys"
+msgstr "Obnovit klíče"
+
+#: data/ui/keydialog.blp:55
+msgid "No keys available"
+msgstr "Žádné klíče k dispozici"
+
+#: data/ui/keydialog.blp:56
+msgid "Your system does not store any GnuPG keys."
+msgstr "Ve vašem systému nejsou uloženy žádné GnuPG klíče."
+
+#: data/ui/keydialog.blp:71
+msgctxt "Import key from file"
+msgid "Import"
+msgstr "Importovat"
+
+#: data/ui/keydialog.blp:72
+msgid "Import key from file"
+msgstr "Importovat klíč ze souboru"
+
+#: data/ui/keyrow.blp:5
+msgid "User ID"
+msgstr "ID Uživatele"
+
+#: data/ui/keyrow.blp:6
+msgid "Fingerprint"
+msgstr "Otisk"
+
+#: data/ui/keyrow.blp:7
+msgid "Expiry"
+msgstr "Platnost"
+
+#: data/ui/keyrow.blp:18
+msgid "Export public key to file"
+msgstr "Exportovat veřejný klíč do souboru"
+
+#: data/com.konstantintutsch.Lock.desktop.in.in:11
+msgid "gpg;gnupg;cryptography;openpgp;encrypt;decrypt;sign;verify;"
+msgstr ""
+"gpg;gnupg;kryptografie;opengpg;šifrovat;rozšifrovat;podepsat;ověřit;"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
+msgid ""
+"Lock is a graphical front-end for GnuPG (GPG) making use of a beautiful "
+"LibAdwaita GUI."
+msgstr ""
+"Zámek je grafické rozhraní pro GnuPG (GPG) s využitím krásného "
+"LibAdwaita GUI."
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
+msgid "Process text and files:"
+msgstr "Možnost text a soubory:"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
+msgid "Encryption"
+msgstr "Šifrovat"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
+msgid "Decryption"
+msgstr "Rozšifrovat"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
+msgid "Signing"
+msgstr "Podepisovat"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:15
+msgid "Verification"
+msgstr "Ověřovat"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
+msgid "Manage available keys in a list:"
+msgstr "Správa klíčů umožňuje:"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
+msgid "View expiry dates"
+msgstr "Zobrazit datum platnosti"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+msgid "Export public keys to files"
+msgstr "Exportovat veřejné klíče do souborů"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
+msgstr "Importovat klíče ze souborů"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:44
+msgid "Light Appearance"
+msgstr "Světlý Vzhled"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:48
+msgid "Dark Appearance"
+msgstr "Tmavý Vzhled"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:52
+msgid "Key Management"
+msgstr "Správa Klíčů"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+msgid "File processing"
+msgstr "Práce se soubory"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+msgid "Plain text"
+msgstr "Holý text"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+msgid "User ID dialog"
+msgstr "Okno s ID uživatele"
