@@ -82,6 +82,13 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.3.4" date="2024-10-20">
+            <description translate="no">
+                <ul>
+                    <li>Landing page for Lock is now available!</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.3" date="2024-10-20">
             <description translate="no">
                 <ul>
