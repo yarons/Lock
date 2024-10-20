@@ -37,6 +37,7 @@ struct _LockWindow {
     unsigned int action_mode;
 
     gchar *uid; /**< Stores the entered UID during an encryption process. */
+    gchar *uid_used; /**< Stores the UID actually used during an encryption process. */
 
     /* Text */
     AdwViewStackPage *text_page;
@@ -514,6 +515,19 @@ void lock_window_set_uid(LockWindow *window, const char *uid)
 }
 
 /**
+ * This function overwrites the used key UID of a LockWindow.
+ *
+ * @param window Window to overwrite the used key UID of
+ * @param uid UID to overwrite with
+ */
+void lock_window_set_uid_used(LockWindow *window, const char *uid)
+{
+    window->uid_used =
+        realloc(window->uid_used, (strlen(uid) + 1) * sizeof(char));
+    strcpy(window->uid_used, uid);
+}
+
+/**
  * This function handles user input to select the target key for a text encryption process of a LockWindow.
  *
  * @param self https://docs.gtk.org/gio/signal.SimpleAction.activate.html
@@ -562,10 +576,15 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_text_on_completed, window,
-                     g_free(plain);
-                     plain = NULL;
-        );
+                     g_free(plain); plain = NULL;);
     lock_window_set_uid(window, "");    // Mark email search as successful
+    if (key->uids->name) {
+        lock_window_set_uid_used(window, key->uids->name);
+    } else if (key->uids->email) {
+        lock_window_set_uid_used(window, key->uids->email);
+    } else {
+        lock_window_set_uid_used(window, key->subkeys->fpr);
+    }
 
     gchar *armor = encrypt_text(plain, key);
     if (armor == NULL) {
@@ -613,7 +632,9 @@ gboolean lock_window_encrypt_text_on_completed(LockWindow *window)
     } else if (strcmp(armor, "") == 0) {
         toast = adw_toast_new(_("Encryption failed"));
     } else {
-        toast = adw_toast_new(_("Text encrypted"));
+        toast =
+            adw_toast_new(g_strdup_printf
+                          (_("Text encrypted for “%s”"), window->uid_used));
 
         lock_window_text_view_set_text(window, armor);
     }
@@ -643,11 +664,16 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_file_on_completed, window,
                      /* Cleanup */
-                     g_free(input_path);
-                     input_path = NULL; g_free(output_path);
-                     output_path = NULL;
-        );
+                     g_free(input_path); input_path = NULL;
+                     g_free(output_path); output_path = NULL;);
     lock_window_set_uid(window, "");    // Mark email search as successful
+    if (key->uids->name) {
+        lock_window_set_uid_used(window, key->uids->name);
+    } else if (key->uids->email) {
+        lock_window_set_uid_used(window, key->uids->email);
+    } else {
+        lock_window_set_uid_used(window, key->subkeys->fpr);
+    }
 
     window->file_success = encrypt_file(input_path, output_path, key);
 
@@ -687,7 +713,9 @@ gboolean lock_window_encrypt_file_on_completed(LockWindow *window)
     } else if (!window->file_success) {
         toast = adw_toast_new(_("Encryption failed"));
     } else {
-        toast = adw_toast_new(_("File encrypted"));
+        toast =
+            adw_toast_new(g_strdup_printf
+                          (_("File encrypted for %s"), window->uid_used));
     }
 
     adw_toast_set_use_markup(toast, false);

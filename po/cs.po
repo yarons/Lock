@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-20 08:55+0200\n"
+"POT-Creation-Date: 2024-10-20 20:04+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -32,72 +32,74 @@ msgstr "Michael Kováč"
 msgid "Dependencies"
 msgstr "Závislosti"
 
-#: src/window.c:142 data/ui/entrydialog.blp:33
+#: src/window.c:143 data/ui/entrydialog.blp:33
 msgid "Enter text …"
 msgstr "Zadejte text …"
 
-#: src/window.c:357
+#: src/window.c:358
 msgid "Text copied"
 msgstr "Text zkopírován"
 
-#: src/window.c:527 src/window.c:545
+#: src/window.c:541 src/window.c:559
 msgid "Encrypt for"
 msgstr "Zašifrovat pro"
 
-#: src/window.c:527 src/window.c:545
+#: src/window.c:541 src/window.c:559
 msgid "Enter name or email …"
 msgstr "Zadejte jméno nebo email …"
 
-#: src/window.c:607 src/window.c:679
+#: src/window.c:628 src/window.c:709
 #, c-format
 msgid "Failed to find key for User ID “%s”"
 msgstr "Klíč pro ID Uživatele “%s” nebyl nalezen"
 
-#: src/window.c:612 src/window.c:684
+#: src/window.c:633 src/window.c:714
 msgid "Encryption failed"
 msgstr "Zašifrování selhalo"
 
-#: src/window.c:614
-msgid "Text encrypted"
+#: src/window.c:637
+#, fuzzy, c-format
+msgid "Text encrypted for “%s”"
 msgstr "Text zašifrován"
 
-#: src/window.c:686
-msgid "File encrypted"
+#: src/window.c:718
+#, fuzzy, c-format
+msgid "File encrypted for %s"
 msgstr "Soubor zašifrován"
 
-#: src/window.c:743 src/window.c:798
+#: src/window.c:775 src/window.c:830
 msgid "Decryption failed"
 msgstr "Rozšifrování selhalo"
 
-#: src/window.c:745
+#: src/window.c:777
 msgid "Text decrypted"
 msgstr "Text rozšifrován"
 
-#: src/window.c:800
+#: src/window.c:832
 msgid "File decrypted"
 msgstr "Soubor rozšifrován"
 
-#: src/window.c:856 src/window.c:911
+#: src/window.c:888 src/window.c:943
 msgid "Signing failed"
 msgstr "Podepisování selhalo"
 
-#: src/window.c:858
+#: src/window.c:890
 msgid "Text signed"
 msgstr "Text podepsán"
 
-#: src/window.c:913
+#: src/window.c:945
 msgid "File signed"
 msgstr "Soubor podepsán"
 
-#: src/window.c:969 src/window.c:1024
+#: src/window.c:1001 src/window.c:1056
 msgid "Verification failed"
 msgstr "Ověření selhalo"
 
-#: src/window.c:971
+#: src/window.c:1003
 msgid "Text verified"
 msgstr "Text ověřen"
 
-#: src/window.c:1026
+#: src/window.c:1058
 msgid "File verified"
 msgstr "Soubor ověřen"
 
@@ -472,16 +474,15 @@ msgstr "Exportovat veřejný klíč do souboru"
 
 #: data/com.konstantintutsch.Lock.desktop.in.in:11
 msgid "gpg;gnupg;cryptography;openpgp;encrypt;decrypt;sign;verify;"
-msgstr ""
-"gpg;gnupg;kryptografie;opengpg;šifrovat;rozšifrovat;podepsat;ověřit;"
+msgstr "gpg;gnupg;kryptografie;opengpg;šifrovat;rozšifrovat;podepsat;ověřit;"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
 msgid ""
 "Lock is a graphical front-end for GnuPG (GPG) making use of a beautiful "
 "LibAdwaita GUI."
 msgstr ""
-"Zámek je grafické rozhraní pro GnuPG (GPG) s využitím krásného "
-"LibAdwaita GUI."
+"Zámek je grafické rozhraní pro GnuPG (GPG) s využitím krásného LibAdwaita "
+"GUI."
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
 msgid "Process text and files:"
