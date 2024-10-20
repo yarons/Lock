@@ -16,9 +16,9 @@ The following requirements are not optional:
 - Do Not Insult: Offensive interactions will not be tolerated.
 - Do Not Spread False Information: Lies, conspiracy theories and else are strictly prohibited.
 
-### Legal
+### Legal Compliance
 
-Compliance with the laws applicable in members respective countries as well as to the laws applicable in Germany is obligatory.
+Compliance with the laws applicable in the members' respective countries as well as to the laws applicable in Germany is obligatory.
 
 ## Enforcement
 
@@ -26,6 +26,6 @@ Violations of this Code of Conduct will lead to temporary or permanent exclusion
 
 ## Reporting Violations
 
-If you witness or experience any violations, please report them directly to the project maintainer[^1].
+If you witness or experience any violations, please report them directly to the project's maintainer[^1].
 
 [^1]: [Contact options](https://konstantintutsch.com/#contact) of the maintainer
