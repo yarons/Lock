@@ -765,8 +765,6 @@ gboolean lock_window_decrypt_text_on_completed(LockWindow *window)
  */
 void lock_window_decrypt_file(LockWindow *window)
 {
-    // FIXME: cannot write to file until GPGME version 1.24
-
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
@@ -993,8 +991,6 @@ gboolean lock_window_verify_text_on_completed(LockWindow *window)
  */
 void lock_window_verify_file(LockWindow *window)
 {
-    // FIXME: cannot write to file until GPGME version 1.24
-
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 

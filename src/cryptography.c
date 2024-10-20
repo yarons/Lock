@@ -541,10 +541,43 @@ bool decrypt_file(const char *input_path, const char *output_path)
                  C_("GPGME Error", "decrypt GPGME data from file"), context,
                  gpgme_data_release(encrypted); gpgme_data_release(decrypted););
 
+    size_t length;
+    void *buffer = gpgme_data_release_and_get_mem(decrypted, &length);
+
+    void *data = malloc(length + 1);
+    memcpy(data, buffer, length);
+
+    FILE *file;
+
+    file = fopen(output_path, "w");
+    if (file == NULL) {
+        g_warning(_("Failed to open output file: %s"), strerror(errno));
+
+        /* Cleanup */
+        gpgme_release(context);
+        gpgme_data_release(encrypted);
+
+        gpgme_free(buffer);
+        buffer = NULL;
+
+        free(data);
+        data = NULL;
+
+        return false;
+    }
+
+    fwrite(data, length, 1, file);
+    fclose(file);
+
     /* Cleanup */
     gpgme_release(context);
-    gpgme_data_release(decrypted);
     gpgme_data_release(encrypted);
+
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    free(data);
+    data = NULL;
 
     return true;
 }
@@ -656,10 +689,43 @@ bool verify_file(const char *input_path, const char *output_path)
                  C_("GPGME Error", "verify GPGME data from file"), context,
                  gpgme_data_release(sign); gpgme_data_release(plain););
 
+    size_t length;
+    void *buffer = gpgme_data_release_and_get_mem(plain, &length);
+
+    void *data = malloc(length + 1);
+    memcpy(data, buffer, length);
+
+    FILE *file;
+
+    file = fopen(output_path, "w");
+    if (file == NULL) {
+        g_warning(_("Failed to open output file: %s"), strerror(errno));
+
+        /* Cleanup */
+        gpgme_release(context);
+        gpgme_data_release(sign);
+
+        gpgme_free(buffer);
+        buffer = NULL;
+
+        free(data);
+        data = NULL;
+
+        return false;
+    }
+
+    fwrite(data, length, 1, file);
+    fclose(file);
+
     /* Cleanup */
     gpgme_release(context);
     gpgme_data_release(sign);
-    gpgme_data_release(plain);
+
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    free(data);
+    data = NULL;
 
     return true;
 }
