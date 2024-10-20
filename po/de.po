@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-20 08:43+0200\n"
-"PO-Revision-Date: 2024-10-20 08:43+0200\n"
+"PO-Revision-Date: 2024-10-20 08:54+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -489,7 +489,7 @@ msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
 msgid "Process text and files:"
-msgstr "Verarbeite Text und Dateien:"
+msgstr "Verarbeiten Sie Text und Dateien:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
@@ -511,7 +511,7 @@ msgstr "Verifikation"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
 msgid "Manage available keys in a list:"
-msgstr "Verwalte verfügbare Schlüssel über eine Liste:"
+msgstr "Verwalten Sie verfügbare Schlüssel über eine Liste:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
 msgid "View expiry dates"
