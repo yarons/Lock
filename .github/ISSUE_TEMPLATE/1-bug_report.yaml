@@ -1,0 +1,33 @@
+name: Bug Report
+description: Create a bug report for Lock. 🐛
+body:
+  - type: textarea
+    attributes:
+      label: Describe the bug …
+      description: A detailed description of the bug and it's consequences.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Which version of Lock are you using?
+      description: A software version, accessible via the about dialog
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Source
+      description: How was Lock installed?
+      options:
+        - Flathub
+        - Other Flatpak Repository
+        - Other Package Manager
+        - Build locally
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Relevant log output
+      description: The output of Lock running in the command line.
+      render: shell
+    validations:
+      required: true
