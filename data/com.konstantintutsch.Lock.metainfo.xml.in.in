@@ -82,6 +82,14 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.3.3" date="2024-10-20">
+            <description translate="no">
+                <ul>
+                    <li>All file cryptography operations now support overwriting</li>
+                    <li>File decryption and verification now produces output files</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.2" date="2024-10-20">
             <description translate="no">
                 <ul>
