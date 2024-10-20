@@ -36,7 +36,7 @@ struct _LockWindow {
     AdwViewStack *stack;
     unsigned int action_mode;
 
-    gchar *uid; /**< Stores the entered UID during an encryption process. */
+    gchar *uid; /**< Stores the entered UID part for an encryption process. */
     gchar *uid_used; /**< Stores the UID actually used during an encryption process. */
 
     /* Text */
@@ -576,7 +576,9 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_text_on_completed, window,
-                     g_free(plain); plain = NULL;);
+                     g_free(plain);
+                     plain = NULL;
+        );
     lock_window_set_uid(window, "");    // Mark email search as successful
     if (key->uids->name) {
         lock_window_set_uid_used(window, key->uids->name);
@@ -634,7 +636,9 @@ gboolean lock_window_encrypt_text_on_completed(LockWindow *window)
     } else {
         toast =
             adw_toast_new(g_strdup_printf
-                          (_("Text encrypted for “%s”"), window->uid_used));
+                          (C_
+                           ("Formatter is either name, email or fingerprint of the public key used in the encryption process.",
+                            "Text encrypted for %s"), window->uid_used));
 
         lock_window_text_view_set_text(window, armor);
     }
@@ -664,8 +668,10 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_file_on_completed, window,
                      /* Cleanup */
-                     g_free(input_path); input_path = NULL;
-                     g_free(output_path); output_path = NULL;);
+                     g_free(input_path);
+                     input_path = NULL; g_free(output_path);
+                     output_path = NULL;
+        );
     lock_window_set_uid(window, "");    // Mark email search as successful
     if (key->uids->name) {
         lock_window_set_uid_used(window, key->uids->name);
@@ -715,7 +721,9 @@ gboolean lock_window_encrypt_file_on_completed(LockWindow *window)
     } else {
         toast =
             adw_toast_new(g_strdup_printf
-                          (_("File encrypted for %s"), window->uid_used));
+                          (C_
+                           ("Formatter is either name, email or fingerprint of the public key used in the encryption process.",
+                            "File encrypted for %s"), window->uid_used));
     }
 
     adw_toast_set_use_markup(toast, false);
