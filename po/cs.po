@@ -26,7 +26,7 @@ msgstr "Spravujte data s GnuPG"
 
 #: src/application.c:136
 msgid "translator-credits"
-msgstr ""
+msgstr "Michael Kováč"
 
 #: src/application.c:141
 msgid "Dependencies"
