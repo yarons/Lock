@@ -185,6 +185,40 @@ bool key_export(const char *uid, const char *path)
 }
 
 /**
+ * This function generates a new GPG keypair.
+ *
+ * @param userid User ID of the new keypair
+ * @param algorithm Algorithm of the new keypair
+ * @param expiry Expiry in seconds of the new keypair
+ */
+bool key_generate(const char *userid, const char *algorithm,
+                  unsigned long expiry)
+{
+    gpgme_ctx_t context;
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    unsigned int flags = GPGME_CREATE_SIGN | GPGME_CREATE_ENCR;
+    if (expiry == 0)
+        flags = flags | GPGME_CREATE_NOEXPIRE;
+
+    error =
+        gpgme_op_createkey(context, userid, algorithm, 0, expiry, NULL, flags);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "generate new GPG keypair"),
+                 context,);
+
+    return true;
+}
+
+/**
  * This function encrypts a text using a GPG key.
  *
  * @param text Text to encrypt

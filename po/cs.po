@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 09:00+0200\n"
+"POT-Creation-Date: 2024-10-21 09:51+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -109,13 +109,22 @@ msgstr "Text ověřen"
 msgid "File verified"
 msgstr "Soubor ověřen"
 
-#: src/keydialog.c:310
+#: src/keydialog.c:315
 msgid "Import failed"
 msgstr "Import selhal"
 
-#: src/keydialog.c:312
+#: src/keydialog.c:317
 msgid "Key(s) imported"
 msgstr "Klíč(e) importován(y)"
+
+#: src/keydialog.c:383
+#, fuzzy
+msgid "Generation failed"
+msgstr "Ověření selhalo"
+
+#: src/keydialog.c:385
+msgid "Keypair generated"
+msgstr ""
 
 #: src/keyrow.c:79
 msgid "Key does not expire"
@@ -142,17 +151,17 @@ msgid "Failed to %s: %s"
 msgstr "Selhalo %s: %s"
 
 #: src/cryptography.c:47 src/cryptography.c:89 src/cryptography.c:128
-#: src/cryptography.c:204 src/cryptography.c:269 src/cryptography.c:336
-#: src/cryptography.c:404 src/cryptography.c:478 src/cryptography.c:541
-#: src/cryptography.c:648 src/cryptography.c:712
+#: src/cryptography.c:201 src/cryptography.c:238 src/cryptography.c:303
+#: src/cryptography.c:370 src/cryptography.c:438 src/cryptography.c:512
+#: src/cryptography.c:575 src/cryptography.c:682 src/cryptography.c:746
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "vytvoření nového GPGME kontextu"
 
 #: src/cryptography.c:52 src/cryptography.c:94 src/cryptography.c:135
-#: src/cryptography.c:209 src/cryptography.c:274 src/cryptography.c:341
-#: src/cryptography.c:409 src/cryptography.c:483 src/cryptography.c:546
-#: src/cryptography.c:653 src/cryptography.c:717
+#: src/cryptography.c:206 src/cryptography.c:243 src/cryptography.c:308
+#: src/cryptography.c:375 src/cryptography.c:443 src/cryptography.c:517
+#: src/cryptography.c:580 src/cryptography.c:687 src/cryptography.c:751
 msgctxt "GPGME Error"
 msgid "set protocol of GPGME context to OpenPGP"
 msgstr "nastavení protokolu GPGME kontextu na OpenPGP"
@@ -182,138 +191,144 @@ msgstr "vytvoření GPGME dat klíče v paměti"
 msgid "Failed to open export file: %s"
 msgstr "Selhalo otevření exportního souboru: %s"
 
-#: src/cryptography.c:217
+#: src/cryptography.c:215
+#, fuzzy
+msgctxt "GPGME Error"
+msgid "generate new GPG keypair"
+msgstr "Spravovat klíče"
+
+#: src/cryptography.c:251
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from string"
 msgstr "vytvoření nových rozšifrovaných GPGME dat z řetězce"
 
-#: src/cryptography.c:223 src/cryptography.c:495
+#: src/cryptography.c:257 src/cryptography.c:529
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data"
 msgstr "vytvoření nových zašifrovaných GPGME dat"
 
-#: src/cryptography.c:231
+#: src/cryptography.c:265
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr "zašifrování GPGME dat z paměti"
 
-#: src/cryptography.c:280 src/cryptography.c:347 src/cryptography.c:552
-#: src/cryptography.c:659
+#: src/cryptography.c:314 src/cryptography.c:381 src/cryptography.c:586
+#: src/cryptography.c:693
 msgctxt "GPGME Error"
 msgid "set pinentry mode of GPGME context to ask"
 msgstr "nastavení pinentry módu GPGME kontextu na zeptání se"
 
-#: src/cryptography.c:285
+#: src/cryptography.c:319
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from string"
 msgstr "vytvoření nových zašifrovaných GPGME dat z řetězce"
 
-#: src/cryptography.c:291 src/cryptography.c:563
+#: src/cryptography.c:325 src/cryptography.c:597
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr "vytvoření nových rozšifrovaných GPGME dat"
 
-#: src/cryptography.c:298
+#: src/cryptography.c:332
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr "rozšifrovat GPGME dat z paměti"
 
-#: src/cryptography.c:354
+#: src/cryptography.c:388
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr "vytvoření nových nepodepsaných GPGME dat z řetězce"
 
-#: src/cryptography.c:360 src/cryptography.c:669 src/cryptography.c:722
+#: src/cryptography.c:394 src/cryptography.c:703 src/cryptography.c:756
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr "vytvoření nových podepsaných GPGME dat"
 
-#: src/cryptography.c:366
+#: src/cryptography.c:400
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr "podepsání GPGME dat z paměti"
 
-#: src/cryptography.c:416
+#: src/cryptography.c:450
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data from string"
 msgstr "vytvoření nových podepsaných GPGME dat z řetězce"
 
-#: src/cryptography.c:422
+#: src/cryptography.c:456
 msgctxt "GPGME Error"
 msgid "create new verified GPGME data"
 msgstr "vytvoření nových ověřených GPGME dat"
 
-#: src/cryptography.c:429
+#: src/cryptography.c:463
 msgctxt "GPGME Error"
 msgid "verify GPGME data from memory"
 msgstr "ověření GPGME dat z paměti"
 
-#: src/cryptography.c:468 src/cryptography.c:638
+#: src/cryptography.c:502 src/cryptography.c:672
 #, c-format
 msgid "Removed %s to prepare overwriting"
 msgstr "Odstraněno %s pro přípravu přepsání"
 
-#: src/cryptography.c:489
+#: src/cryptography.c:523
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from file"
 msgstr "vytvoření nových rozšifrovaných GPGME dat ze souboru"
 
-#: src/cryptography.c:502
+#: src/cryptography.c:536
 msgctxt "GPGME Error"
 msgid "set file path of encrypted GPGME data"
 msgstr "nastavení cesty souboru šifrovaných GPGME dat"
 
-#: src/cryptography.c:511
+#: src/cryptography.c:545
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from file"
 msgstr "šifrování GPGME dat ze souboru"
 
-#: src/cryptography.c:557
+#: src/cryptography.c:591
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from file"
 msgstr "vytvoření nových šifrovaných GPGME dat ze souboru"
 
-#: src/cryptography.c:570
+#: src/cryptography.c:604
 msgctxt "GPGME Error"
 msgid "set file path of decrypted GPGME data"
 msgstr "nastavení cesty souboru rozšifrovaných GPGME dat"
 
-#: src/cryptography.c:577
+#: src/cryptography.c:611
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from file"
 msgstr "rozšifrování GPGME dat ze souboru"
 
-#: src/cryptography.c:592 src/cryptography.c:763
+#: src/cryptography.c:626 src/cryptography.c:797
 #, c-format
 msgid "Failed to open output file: %s"
 msgstr "Selhalo otevření výstupního souboru: %s"
 
-#: src/cryptography.c:663
+#: src/cryptography.c:697
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr "vytvoření nových nepodepsaných GPGME dat ze souboru"
 
-#: src/cryptography.c:676 src/cryptography.c:728
+#: src/cryptography.c:710 src/cryptography.c:762
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr "nastavení cesty souboru podepsaných GPGME dat"
 
-#: src/cryptography.c:682
+#: src/cryptography.c:716
 msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr "podepsání GPGME dat ze souboru"
 
-#: src/cryptography.c:734
+#: src/cryptography.c:768
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr "vytvoření nových nepodepsaných GPGME dat"
 
-#: src/cryptography.c:741
+#: src/cryptography.c:775
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr "nastavení cesty souboru nepodepsaných GPGME dat"
 
-#: src/cryptography.c:748
+#: src/cryptography.c:782
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr "ověření GPGME dat ze souboru"
@@ -374,6 +389,12 @@ msgstr "importování klíče"
 msgctxt "Thread Error"
 msgid "key export"
 msgstr "exportování klíče"
+
+#: src/threading.c:179
+#, fuzzy
+msgctxt "Thread Error"
+msgid "key generation"
+msgstr "šifrování textu"
 
 #: data/ui/window.blp:9 data/ui/window.blp:169
 #: data/com.konstantintutsch.Lock.desktop.in.in:4

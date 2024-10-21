@@ -11,6 +11,8 @@ void cryptography_init();
 gpgme_key_t key_search(const char *uid);
 bool key_import(const char *path);
 bool key_export(const char *uid, const char *path);
+bool key_generate(const char *userid, const char *algorithm,
+                  unsigned long expiry);
 
 // Encrypt
 char *encrypt_text(const char *text, gpgme_key_t key);

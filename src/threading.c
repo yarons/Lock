@@ -166,3 +166,16 @@ void thread_export_key(LockKeyRow *row)
                                 C_("Thread Error", "key export"),
                                 lock_key_row_export, row);
 }
+
+/**
+ * This function creates a new thread for the generation of a new keypair in a LockKeyDialog.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param dialog https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+void thread_generate_key(GtkButton *self, LockKeyDialog *dialog)
+{
+    CRYPTOGRAPHY_THREAD_WRAPPER("generate_key",
+                                C_("Thread Error", "key generation"),
+                                lock_key_dialog_generate, dialog);
+}

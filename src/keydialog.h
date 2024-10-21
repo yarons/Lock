@@ -18,4 +18,7 @@ void lock_key_dialog_add_toast(LockKeyDialog * dialog, AdwToast * toast);
 // Import
 void lock_key_dialog_import(LockKeyDialog * dialog);
 
+// Generation
+void lock_key_dialog_generate(LockKeyDialog * dialog);
+
 #endif                          // KEY_DIALOG_H

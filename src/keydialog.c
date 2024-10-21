@@ -32,12 +32,13 @@ struct _LockKeyDialog {
     GtkButton *import_button;
     GFile *import_file;
 
+    gboolean generate_success;
+    GtkButton *generate_button;
     AdwEntryRow *name_entry;
     AdwEntryRow *email_entry;
     AdwComboRow *algorithm_entry;
     AdwSpinRow *length_entry;
     AdwSpinRow *expiry_entry;
-    GtkButton *generate_button;
 };
 
 G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
@@ -46,6 +47,7 @@ G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
 static void lock_key_dialog_refresh(GtkButton * self, LockKeyDialog * dialog);
 
 gboolean lock_key_dialog_import_on_completed(LockKeyDialog * dialog);
+gboolean lock_key_dialog_generate_on_completed(LockKeyDialog * dialog);
 
 /* Import */
 static void lock_key_dialog_import_file_present(GtkButton * self,
@@ -66,6 +68,9 @@ static void lock_key_dialog_init(LockKeyDialog *dialog)
 
     g_signal_connect(dialog->import_button, "clicked",
                      G_CALLBACK(lock_key_dialog_import_file_present), dialog);
+
+    g_signal_connect(dialog->generate_button, "clicked",
+                     G_CALLBACK(thread_generate_key), dialog);
 }
 
 /**
@@ -95,6 +100,8 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
                                          import_button);
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         generate_button);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          name_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          email_entry);
@@ -104,8 +111,6 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
                                          length_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          expiry_entry);
-    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         generate_button);
 }
 
 /**
@@ -310,6 +315,74 @@ gboolean lock_key_dialog_import_on_completed(LockKeyDialog *dialog)
         toast = adw_toast_new(_("Import failed"));
     } else {
         toast = adw_toast_new(_("Key(s) imported"));
+    }
+
+    adw_toast_set_timeout(toast, 2);
+    adw_toast_overlay_add_toast(dialog->toast_overlay, toast);
+
+    lock_key_dialog_refresh(NULL, dialog);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
+}
+
+/**** Keypair Generation ****/
+
+/**
+ * This function generates a new keypair in a LockKeyDialog.
+ *
+ * @param dialog Dialog to generate the keypair in and from
+ */
+void lock_key_dialog_generate(LockKeyDialog *dialog)
+{
+    const gchar *name = gtk_editable_get_text(GTK_EDITABLE(dialog->name_entry));
+    const gchar *email =
+        gtk_editable_get_text(GTK_EDITABLE(dialog->email_entry));
+    gchar *userid = g_strdup_printf("%s <%s>", name, email);
+
+    gchar *algorithm = NULL;
+    gint algorithm_length = (gint) adw_spin_row_get_value(dialog->length_entry);
+    gint algorithm_id = adw_combo_row_get_selected(dialog->algorithm_entry);
+    if (algorithm_id == 0) {
+        algorithm = g_strdup_printf("rsa%d", algorithm_length);
+    } else if (algorithm_id == 1) {
+        algorithm = g_strdup_printf("dsa%d", algorithm_length);
+    }
+
+    gint expiry_months = (gint) adw_spin_row_get_value(dialog->expiry_entry);
+    unsigned long expiry_seconds =
+        ((expiry_months / 2) * 31 + (expiry_months / 2) * 30) * 24 * 60 * 60;
+
+    dialog->generate_success = key_generate(userid, algorithm, expiry_seconds);
+
+    /* Cleanup */
+    g_free(userid);
+    userid = NULL;
+
+    g_free(algorithm);
+    algorithm = NULL;
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_key_dialog_generate_on_completed, dialog);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for keypair generation and is supposed to be called via g_idle_add().
+ *
+ * @param dialog https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_key_dialog_generate_on_completed(LockKeyDialog *dialog)
+{
+    AdwToast *toast;
+
+    if (!dialog->generate_success) {
+        toast = adw_toast_new(_("Generation failed"));
+    } else {
+        toast = adw_toast_new(_("Keypair generated"));
     }
 
     adw_toast_set_timeout(toast, 2);
