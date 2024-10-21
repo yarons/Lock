@@ -18,6 +18,7 @@ Manage available keys in a list:
 - View expiry dates
 - Export public keys to files
 - Import keys from files
+- Generate new keypairs
 
 <a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>
 

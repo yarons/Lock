@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 10:04+0200\n"
+"POT-Creation-Date: 2024-10-21 10:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,12 +567,12 @@ msgid "Process text and files:"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:73
 msgid "Encryption"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:76
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:77
 msgid "Decryption"
 msgstr ""
 
@@ -600,30 +600,34 @@ msgstr ""
 msgid "Import keys from files"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:44
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
+msgid "Generate new keypairs"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:45
 msgid "Light Appearance"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:48
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:49
 msgid "Dark Appearance"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:52
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:53
 msgid "Key Management"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
 msgid "Keypair Generation"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
 msgid "File processing"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
 msgid "Plain text"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:69
 msgid "User ID dialog"
 msgstr ""

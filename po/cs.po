@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 10:04+0200\n"
+"POT-Creation-Date: 2024-10-21 10:08+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -577,12 +577,12 @@ msgid "Process text and files:"
 msgstr "Možnost text a soubory:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:73
 msgid "Encryption"
 msgstr "Šifrovat"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:76
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:77
 msgid "Decryption"
 msgstr "Rozšifrovat"
 
@@ -610,31 +610,36 @@ msgstr "Exportovat veřejné klíče do souborů"
 msgid "Import keys from files"
 msgstr "Importovat klíče ze souborů"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:44
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
+#, fuzzy
+msgid "Generate new keypairs"
+msgstr "Spravovat klíče"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:45
 msgid "Light Appearance"
 msgstr "Světlý Vzhled"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:48
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:49
 msgid "Dark Appearance"
 msgstr "Tmavý Vzhled"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:52
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:53
 msgid "Key Management"
 msgstr "Správa Klíčů"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
 msgid "Keypair Generation"
 msgstr ""
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
 msgid "File processing"
 msgstr "Práce se soubory"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
 msgid "Plain text"
 msgstr "Holý text"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:69
 msgid "User ID dialog"
 msgstr "Okno s ID uživatele"
 

@@ -19,6 +19,7 @@
             <li>View expiry dates</li>
             <li>Export public keys to files</li>
             <li>Import keys from files</li>
+            <li>Generate new keypairs</li>
         </ul>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>
