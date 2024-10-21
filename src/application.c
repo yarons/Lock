@@ -65,6 +65,10 @@ static void lock_application_activate(GApplication *app)
 static void lock_application_open(GApplication *self, GFile **files,
                                   int n_files, const char *hint)
 {
+    (void)files;
+    (void)n_files;
+    (void)hint;
+
     GList *windows;
     LockWindow *window;
 
@@ -110,6 +114,9 @@ static void lock_application_show_about(GSimpleAction *self,
                                         GVariant *parameter,
                                         LockApplication *app)
 {
+    (void)self;
+    (void)parameter;
+
     LockWindow *active_window =
         LOCK_WINDOW(gtk_application_get_active_window(GTK_APPLICATION(app)));
 

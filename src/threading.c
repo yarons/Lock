@@ -33,6 +33,8 @@
 void thread_encrypt_text(LockEntryDialog *self, const char *uid,
                          LockWindow *window)
 {
+    (void)self;
+
     lock_window_set_uid(window, uid);
 
     CRYPTOGRAPHY_THREAD_WRAPPER("encrypt_text",
@@ -52,6 +54,8 @@ void thread_encrypt_text(LockEntryDialog *self, const char *uid,
 void thread_encrypt_file(LockEntryDialog *self, const char *uid,
                          LockWindow *window)
 {
+    (void)self;
+
     lock_window_set_uid(window, uid);
 
     CRYPTOGRAPHY_THREAD_WRAPPER("encrypt_file",
@@ -71,6 +75,9 @@ void thread_encrypt_file(LockEntryDialog *self, const char *uid,
 void thread_decrypt_text(GSimpleAction *self, GVariant *parameter,
                          LockWindow *window)
 {
+    (void)self;
+    (void)parameter;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("decrypt_text",
                                 C_("Thread Error", "text decryption"),
                                 lock_window_decrypt_text, window);
@@ -84,6 +91,8 @@ void thread_decrypt_text(GSimpleAction *self, GVariant *parameter,
  */
 void thread_decrypt_file(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("decrypt_file",
                                 C_("Thread Error", "file decryption"),
                                 lock_window_decrypt_file, window);
@@ -99,6 +108,9 @@ void thread_decrypt_file(GtkButton *self, LockWindow *window)
 void thread_sign_text(GSimpleAction *self, GVariant *parameter,
                       LockWindow *window)
 {
+    (void)self;
+    (void)parameter;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("sign_text", C_("Thread Error", "text signing"),
                                 lock_window_sign_text, window);
 }
@@ -111,6 +123,8 @@ void thread_sign_text(GSimpleAction *self, GVariant *parameter,
  */
 void thread_sign_file(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("sign_file", C_("Thread Error", "file signing"),
                                 lock_window_sign_file, window);
 }
@@ -125,6 +139,9 @@ void thread_sign_file(GtkButton *self, LockWindow *window)
 void thread_verify_text(GSimpleAction *self, GVariant *parameter,
                         LockWindow *window)
 {
+    (void)self;
+    (void)parameter;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("verify_text",
                                 C_("Thread Error", "text verification"),
                                 lock_window_verify_text, window);
@@ -138,6 +155,8 @@ void thread_verify_text(GSimpleAction *self, GVariant *parameter,
  */
 void thread_verify_file(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("verify_file",
                                 C_("Thread Error", "file verification"),
                                 lock_window_verify_file, window);
@@ -175,6 +194,8 @@ void thread_export_key(LockKeyRow *row)
  */
 void thread_generate_key(GtkButton *self, LockKeyDialog *dialog)
 {
+    (void)self;
+
     CRYPTOGRAPHY_THREAD_WRAPPER("generate_key",
                                 C_("Thread Error", "key generation"),
                                 lock_key_dialog_generate, dialog);

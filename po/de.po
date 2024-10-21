@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 10:08+0200\n"
+"POT-Creation-Date: 2024-10-21 12:26+0200\n"
 "PO-Revision-Date: 2024-10-21 10:08+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
@@ -20,16 +20,16 @@ msgstr ""
 "X-Generator: Gtranslator 47.0\n"
 
 #. Details
-#: src/application.c:125 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: src/application.c:132 data/com.konstantintutsch.Lock.desktop.in.in:5
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
 msgid "Process data with GnuPG"
 msgstr "Verarbeiten Sie Daten mit GnuPG"
 
-#: src/application.c:136
+#: src/application.c:143
 msgid "translator-credits"
 msgstr "Konstantin Tutsch <mail@konstantintutsch.com>"
 
-#: src/application.c:141
+#: src/application.c:148
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
@@ -37,28 +37,28 @@ msgstr "Abhängigkeiten"
 msgid "Enter text …"
 msgstr "Text eingeben …"
 
-#: src/window.c:358
+#: src/window.c:367
 msgid "Text copied"
 msgstr "Text kopiert"
 
-#: src/window.c:541 src/window.c:559
+#: src/window.c:557 src/window.c:577
 msgid "Encrypt for"
 msgstr "Verschlüsseln für"
 
-#: src/window.c:541 src/window.c:559
+#: src/window.c:557 src/window.c:577
 msgid "Enter name or email …"
 msgstr "Namen oder E-Mail eingeben …"
 
-#: src/window.c:630 src/window.c:715
+#: src/window.c:648 src/window.c:733
 #, c-format
 msgid "Failed to find key for User ID “%s”"
 msgstr "Für die Nutzer ID “%s” konnte kein Schlüssel gefunden werden"
 
-#: src/window.c:635 src/window.c:720
+#: src/window.c:653 src/window.c:738
 msgid "Encryption failed"
 msgstr "Verschlüsselung fehlgeschlagen"
 
-#: src/window.c:641
+#: src/window.c:659
 #, c-format
 msgctxt ""
 "Formatter is either name, email or fingerprint of the public key used in the "
@@ -66,7 +66,7 @@ msgctxt ""
 msgid "Text encrypted for %s"
 msgstr "Text verschlüsselt für %s"
 
-#: src/window.c:726
+#: src/window.c:744
 #, c-format
 msgctxt ""
 "Formatter is either name, email or fingerprint of the public key used in the "
@@ -74,55 +74,55 @@ msgctxt ""
 msgid "File encrypted for %s"
 msgstr "Datei verschlüsselt für %s"
 
-#: src/window.c:783 src/window.c:838
+#: src/window.c:801 src/window.c:856
 msgid "Decryption failed"
 msgstr "Entschlüsselung fehlgeschlagen"
 
-#: src/window.c:785
+#: src/window.c:803
 msgid "Text decrypted"
 msgstr "Text entschlüsselt"
 
-#: src/window.c:840
+#: src/window.c:858
 msgid "File decrypted"
 msgstr "Datei entschlüsselt"
 
-#: src/window.c:896 src/window.c:951
+#: src/window.c:914 src/window.c:969
 msgid "Signing failed"
 msgstr "Signierung fehlgeschlagen"
 
-#: src/window.c:898
+#: src/window.c:916
 msgid "Text signed"
 msgstr "Text signiert"
 
-#: src/window.c:953
+#: src/window.c:971
 msgid "File signed"
 msgstr "Datei signiert"
 
-#: src/window.c:1009 src/window.c:1064
+#: src/window.c:1027 src/window.c:1082
 msgid "Verification failed"
 msgstr "Verifikation fehlgeschlagen"
 
-#: src/window.c:1011
+#: src/window.c:1029
 msgid "Text verified"
 msgstr "Text verifiziert"
 
-#: src/window.c:1066
+#: src/window.c:1084
 msgid "File verified"
 msgstr "Datei verifiziert"
 
-#: src/keydialog.c:315
+#: src/keydialog.c:319
 msgid "Import failed"
 msgstr "Import fehlgeschlagen"
 
-#: src/keydialog.c:317
+#: src/keydialog.c:321
 msgid "Key(s) imported"
 msgstr "Schlüssel importiert"
 
-#: src/keydialog.c:383
+#: src/keydialog.c:387
 msgid "Generation failed"
 msgstr "Generierung fehlgeschlagen"
 
-#: src/keydialog.c:385
+#: src/keydialog.c:389
 msgid "Keypair generated"
 msgstr "Schlüsselpaar generiert"
 
@@ -136,11 +136,11 @@ msgctxt "First formatter: YYYY-mm-dd; Second formatter: HH:MM"
 msgid "Expires %s at %s"
 msgstr "Läuft %s um %s Uhr ab"
 
-#: src/keyrow.c:180
+#: src/keyrow.c:182
 msgid "Export failed"
 msgstr "Export fehlgeschlagen"
 
-#: src/keyrow.c:182
+#: src/keyrow.c:184
 msgid "Key exported"
 msgstr "Schlüssel exportiert"
 
@@ -341,57 +341,57 @@ msgctxt ""
 msgid "Failed to create %s thread: %s"
 msgstr "Fehler beim Erstellen eines Threads für %s: %s"
 
-#: src/threading.c:39
+#: src/threading.c:41
 msgctxt "Thread Error"
 msgid "text encryption"
 msgstr "Text Verschlüsselung"
 
-#: src/threading.c:58
+#: src/threading.c:62
 msgctxt "Thread Error"
 msgid "file encryption"
 msgstr "Datei Verschlüsselung"
 
-#: src/threading.c:75
+#: src/threading.c:82
 msgctxt "Thread Error"
 msgid "text decryption"
 msgstr "Text Entschlüsselung"
 
-#: src/threading.c:88
+#: src/threading.c:97
 msgctxt "Thread Error"
 msgid "file decryption"
 msgstr "Datei Entschlüsselung"
 
-#: src/threading.c:102
+#: src/threading.c:114
 msgctxt "Thread Error"
 msgid "text signing"
 msgstr "Text Signierung"
 
-#: src/threading.c:114
+#: src/threading.c:128
 msgctxt "Thread Error"
 msgid "file signing"
 msgstr "Datei Signierung"
 
-#: src/threading.c:129
+#: src/threading.c:146
 msgctxt "Thread Error"
 msgid "text verification"
 msgstr "Text Verifikation"
 
-#: src/threading.c:142
+#: src/threading.c:161
 msgctxt "Thread Error"
 msgid "file verification"
 msgstr "Datei Verifikation"
 
-#: src/threading.c:154
+#: src/threading.c:173
 msgctxt "Thread Error"
 msgid "key import"
 msgstr "Schlüsselimport"
 
-#: src/threading.c:166
+#: src/threading.c:185
 msgctxt "Thread Error"
 msgid "key export"
 msgstr "Schlüsselexport"
 
-#: src/threading.c:179
+#: src/threading.c:200
 msgctxt "Thread Error"
 msgid "key generation"
 msgstr "Schlüsselpaar Generierung"

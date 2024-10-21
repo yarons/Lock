@@ -259,6 +259,8 @@ LockWindow *lock_window_new(LockApplication *app)
 
 void lock_window_open(LockWindow *window, GFile *file)
 {
+    (void)window;
+    (void)file;
 }
 
 /**** UI ****/
@@ -274,6 +276,8 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
                                               GParamSpec *pspec,
                                               LockWindow *window)
 {
+    (void)pspec;
+
     GtkWidget *visible_child = adw_view_stack_get_visible_child(self);
     AdwViewStackPage *visible_page =
         adw_view_stack_get_page(self, visible_child);
@@ -305,6 +309,9 @@ static void lock_window_stack_page_on_changed(AdwViewStack *self,
 static void lock_window_key_dialog(GSimpleAction *action, GVariant *parameter,
                                    LockWindow *window)
 {
+    (void)action;
+    (void)parameter;
+
     LockKeyDialog *dialog = lock_key_dialog_new(window);
 
     adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(window));
@@ -352,6 +359,8 @@ static void lock_window_text_view_set_text(LockWindow *window, const char *text)
  */
 static void lock_window_text_view_copy(AdwSplitButton *self, LockWindow *window)
 {
+    (void)self;
+
     GdkClipboard *active_clipboard =
         gdk_display_get_clipboard(gdk_display_get_default());
 
@@ -477,6 +486,8 @@ static void lock_window_file_save(GObject *source_object,
 static void
 lock_window_file_open_dialog_present(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     GtkFileDialog *dialog = gtk_file_dialog_new();
     GCancellable *cancel = g_cancellable_new();
 
@@ -493,6 +504,8 @@ lock_window_file_open_dialog_present(GtkButton *self, LockWindow *window)
 static void
 lock_window_file_save_dialog_present(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     GtkFileDialog *dialog = gtk_file_dialog_new();
     GCancellable *cancel = g_cancellable_new();
 
@@ -537,6 +550,9 @@ void lock_window_set_uid_used(LockWindow *window, const char *uid)
 void lock_window_encrypt_text_dialog(GSimpleAction *self, GVariant *parameter,
                                      LockWindow *window)
 {
+    (void)self;
+    (void)parameter;
+
     LockEntryDialog *dialog =
         lock_entry_dialog_new(_("Encrypt for"), _("Enter name or email …"),
                               GTK_INPUT_PURPOSE_FREE_FORM);
@@ -555,6 +571,8 @@ void lock_window_encrypt_text_dialog(GSimpleAction *self, GVariant *parameter,
  */
 void lock_window_encrypt_file_dialog(GtkButton *self, LockWindow *window)
 {
+    (void)self;
+
     LockEntryDialog *dialog =
         lock_entry_dialog_new(_("Encrypt for"), _("Enter name or email …"),
                               GTK_INPUT_PURPOSE_EMAIL);

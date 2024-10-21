@@ -135,6 +135,8 @@ static void lock_key_row_export_file_save(GObject *source_object,
  */
 static void lock_key_row_export_file_present(GtkButton *self, LockKeyRow *row)
 {
+    (void)self;
+
     GtkFileDialog *file = gtk_file_dialog_new();
     LockWindow *window = lock_key_dialog_get_window(row->dialog);
     GCancellable *cancel = g_cancellable_new();

@@ -140,6 +140,8 @@ LockKeyDialog *lock_key_dialog_new(LockWindow *window)
  */
 static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 {
+    (void)self;
+
     gtk_list_box_remove_all(dialog->key_box);
 
     size_t expiry_date_length = strlen("YYYY-mm-dd") + 1;
@@ -272,6 +274,8 @@ static void lock_key_dialog_import_file_open(GObject *source_object,
 static void lock_key_dialog_import_file_present(GtkButton *self,
                                                 LockKeyDialog *dialog)
 {
+    (void)self;
+
     GtkFileDialog *file = gtk_file_dialog_new();
     GCancellable *cancel = g_cancellable_new();
 

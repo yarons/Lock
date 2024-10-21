@@ -150,6 +150,8 @@ const gchar *lock_entry_dialog_get_text(LockEntryDialog *dialog)
 static void lock_entry_dialog_entry_confirm(GtkButton *self,
                                             LockEntryDialog *dialog)
 {
+    (void)self;
+
     const gchar *text = lock_entry_dialog_get_text(dialog);
 
     if (!(strlen(text) > 0) || text == NULL)

@@ -32,6 +32,8 @@ modules:
     run-tests: false
     config-opts:
       - -Dprofile=development
+      - -Dbuildtype=debug
+      - -Dwarning_level=2
     sources:
       - type: dir
         path: ../
