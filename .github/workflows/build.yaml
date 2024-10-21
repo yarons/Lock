@@ -18,7 +18,7 @@ jobs:
       run: sudo apt-get update
   
     - name: Install build tools
-      run: sudo apt-get install just meson flatpak flatpak-builder
+      run: sudo apt-get install meson git gettext flatpak flatpak-builder
 
     - name: Install build dependencies
       run: |
@@ -27,7 +27,4 @@ jobs:
         sudo flatpak install --assumeyes org.gnome.Sdk//47 org.gnome.Platform//47
 
     - name: Build development profile
-      run: just devel
-
-    - name: Build release profile
-      run: just release
+      run: sudo flatpak-builder --install --install-deps-from=flathub .meson-builder com.konstantintutsch.Lock.Devel.yaml

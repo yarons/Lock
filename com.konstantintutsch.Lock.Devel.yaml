@@ -1,8 +1,8 @@
-id: com.konstantintutsch.Lock
+id: com.konstantintutsch.Lock.Devel
 runtime: org.gnome.Platform
 runtime-version: '47'
 sdk: org.gnome.Sdk
-command: com.konstantintutsch.Lock
+command: com.konstantintutsch.Lock.Devel
 finish-args:
   - --device=dri
   - --share=ipc
@@ -24,16 +24,17 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
-        commit: d7097cad019c032e803d271d3671d0ee933a522b
+        tag: v0.14.0
+        commit: 8e10fcf8692108b9d4ab78f41086c5d7773ef864
     cleanup:
       - '*'
   - name: Lock
     buildsystem: meson
-    run-tests: false
+    run-tests: true
     config-opts:
-      - -Dprofile=default
-      - -Dbuildtype=release
+      - -Dprofile=development
+      - -Dbuildtype=debug
       - -Dwarning_level=2
     sources:
       - type: dir
-        path: ../
+        path: ./

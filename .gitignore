@@ -1,5 +1,8 @@
 *~
-/build
+.xdp-*
 /subprojects/blueprint-compiler
 /.flatpak-builder
-.xdp-*
+/.meson-builder
+/builddir
+/repo
+/bundle.flatpak
