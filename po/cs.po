@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-20 21:05+0200\n"
+"POT-Creation-Date: 2024-10-21 09:00+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -109,11 +109,11 @@ msgstr "Text ověřen"
 msgid "File verified"
 msgstr "Soubor ověřen"
 
-#: src/keydialog.c:288
+#: src/keydialog.c:310
 msgid "Import failed"
 msgstr "Import selhal"
 
-#: src/keydialog.c:290
+#: src/keydialog.c:312
 msgid "Key(s) imported"
 msgstr "Klíč(e) importován(y)"
 
@@ -429,7 +429,7 @@ msgstr "Podepsat"
 msgid "Verify"
 msgstr "Ověřit"
 
-#: data/ui/window.blp:175 data/ui/keydialog.blp:35
+#: data/ui/window.blp:175 data/ui/keydialog.blp:13
 msgid "Manage keys"
 msgstr "Spravovat klíče"
 
@@ -441,26 +441,87 @@ msgstr "O Zámku"
 msgid "Title"
 msgstr "Nadpis"
 
-#: data/ui/keydialog.blp:29
+#: data/ui/keydialog.blp:32
 msgid "Refresh keys"
 msgstr "Obnovit klíče"
 
-#: data/ui/keydialog.blp:55
+#: data/ui/keydialog.blp:53
 msgid "No keys available"
 msgstr "Žádné klíče k dispozici"
 
-#: data/ui/keydialog.blp:56
+#: data/ui/keydialog.blp:54
 msgid "Your system does not store any GnuPG keys."
 msgstr "Ve vašem systému nejsou uloženy žádné GnuPG klíče."
 
-#: data/ui/keydialog.blp:71
-msgctxt "Import key from file"
+#: data/ui/keydialog.blp:70
+#, fuzzy
+msgctxt "Import key(s) from file"
 msgid "Import"
 msgstr "Importovat"
 
-#: data/ui/keydialog.blp:72
-msgid "Import key from file"
-msgstr "Importovat klíč ze souboru"
+#: data/ui/keydialog.blp:71
+#, fuzzy
+msgid "Import key(s) from file"
+msgstr "Importovat klíče ze souborů"
+
+#: data/ui/keydialog.blp:78
+msgid "Create a new keypair"
+msgstr ""
+
+#: data/ui/keydialog.blp:91
+#, fuzzy
+msgid "Generate keypair"
+msgstr "Spravovat klíče"
+
+#: data/ui/keydialog.blp:118
+msgctxt "Name of the UID of the new keypair"
+msgid "Name"
+msgstr ""
+
+#: data/ui/keydialog.blp:123
+msgctxt "Email of the UID of the new keypair"
+msgid "Email"
+msgstr ""
+
+#: data/ui/keydialog.blp:128
+msgctxt "Algorithm of the new keypair"
+msgid "Algorithm"
+msgstr ""
+
+#: data/ui/keydialog.blp:129
+msgctxt "Algorithm of the new keypair"
+msgid "Keypair"
+msgstr ""
+
+#: data/ui/keydialog.blp:137
+msgctxt "Length of the new keypair"
+msgid "Length"
+msgstr ""
+
+#: data/ui/keydialog.blp:138
+msgctxt "Length unit of the new keypair"
+msgid "Bits"
+msgstr ""
+
+#: data/ui/keydialog.blp:151
+#, fuzzy
+msgctxt "Expiry time of the new keypair"
+msgid "Expiry"
+msgstr "Platnost"
+
+#: data/ui/keydialog.blp:152
+msgctxt "Expiry unit of the new keypair"
+msgid "Months, disable with zero"
+msgstr ""
+
+#: data/ui/keydialog.blp:174
+msgctxt "Generate a new keypair"
+msgid "Generate"
+msgstr ""
+
+#: data/ui/keydialog.blp:175
+msgid "Generate a new keypair"
+msgstr ""
 
 #: data/ui/keyrow.blp:5
 msgid "User ID"
@@ -495,12 +556,12 @@ msgid "Process text and files:"
 msgstr "Možnost text a soubory:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
 msgid "Encryption"
 msgstr "Šifrovat"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:76
 msgid "Decryption"
 msgstr "Rozšifrovat"
 
@@ -541,13 +602,20 @@ msgid "Key Management"
 msgstr "Správa Klíčů"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
+msgid "Keypair Generation"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
 msgid "File processing"
 msgstr "Práce se soubory"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
 msgid "Plain text"
 msgstr "Holý text"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
 msgid "User ID dialog"
 msgstr "Okno s ID uživatele"
+
+#~ msgid "Import key from file"
+#~ msgstr "Importovat klíč ze souboru"

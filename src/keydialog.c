@@ -20,9 +20,10 @@ struct _LockKeyDialog {
 
     LockWindow *window;
 
-    GtkButton *refresh_button;
     AdwToastOverlay *toast_overlay;
-    GtkBox *content_box;
+
+    GtkButton *refresh_button;
+    GtkBox *manage_box;
 
     AdwStatusPage *status_page;
     GtkListBox *key_box;
@@ -30,6 +31,13 @@ struct _LockKeyDialog {
     gboolean import_success;
     GtkButton *import_button;
     GFile *import_file;
+
+    AdwEntryRow *name_entry;
+    AdwEntryRow *email_entry;
+    AdwComboRow *algorithm_entry;
+    AdwSpinRow *length_entry;
+    AdwSpinRow *expiry_entry;
+    GtkButton *generate_button;
 };
 
 G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
@@ -71,11 +79,12 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
                                                 UI_RESOURCE("keydialog.ui"));
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         toast_overlay);
+
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          refresh_button);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         toast_overlay);
-    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         content_box);
+                                         manage_box);
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          status_page);
@@ -84,6 +93,19 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          import_button);
+
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         name_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         email_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         algorithm_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         length_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         expiry_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         generate_button);
 }
 
 /**
@@ -169,12 +191,12 @@ static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 
     if (gtk_list_box_get_row_at_index(dialog->key_box, 0) == NULL) {
         gtk_widget_set_visible(GTK_WIDGET(dialog->key_box), false);
-        gtk_box_set_spacing(dialog->content_box, 0);
+        gtk_box_set_spacing(dialog->manage_box, 0);
 
         gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), true);
     } else {
         gtk_widget_set_visible(GTK_WIDGET(dialog->key_box), true);
-        gtk_box_set_spacing(dialog->content_box, 20);
+        gtk_box_set_spacing(dialog->manage_box, 20);
 
         gtk_widget_set_visible(GTK_WIDGET(dialog->status_page), false);
     }

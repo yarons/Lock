@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-20 21:05+0200\n"
+"POT-Creation-Date: 2024-10-21 09:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,11 +108,11 @@ msgstr ""
 msgid "File verified"
 msgstr ""
 
-#: src/keydialog.c:288
+#: src/keydialog.c:310
 msgid "Import failed"
 msgstr ""
 
-#: src/keydialog.c:290
+#: src/keydialog.c:312
 msgid "Key(s) imported"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: data/ui/window.blp:175 data/ui/keydialog.blp:35
+#: data/ui/window.blp:175 data/ui/keydialog.blp:13
 msgid "Manage keys"
 msgstr ""
 
@@ -440,25 +440,82 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: data/ui/keydialog.blp:29
+#: data/ui/keydialog.blp:32
 msgid "Refresh keys"
 msgstr ""
 
-#: data/ui/keydialog.blp:55
+#: data/ui/keydialog.blp:53
 msgid "No keys available"
 msgstr ""
 
-#: data/ui/keydialog.blp:56
+#: data/ui/keydialog.blp:54
 msgid "Your system does not store any GnuPG keys."
 msgstr ""
 
-#: data/ui/keydialog.blp:71
-msgctxt "Import key from file"
+#: data/ui/keydialog.blp:70
+msgctxt "Import key(s) from file"
 msgid "Import"
 msgstr ""
 
-#: data/ui/keydialog.blp:72
-msgid "Import key from file"
+#: data/ui/keydialog.blp:71
+msgid "Import key(s) from file"
+msgstr ""
+
+#: data/ui/keydialog.blp:78
+msgid "Create a new keypair"
+msgstr ""
+
+#: data/ui/keydialog.blp:91
+msgid "Generate keypair"
+msgstr ""
+
+#: data/ui/keydialog.blp:118
+msgctxt "Name of the UID of the new keypair"
+msgid "Name"
+msgstr ""
+
+#: data/ui/keydialog.blp:123
+msgctxt "Email of the UID of the new keypair"
+msgid "Email"
+msgstr ""
+
+#: data/ui/keydialog.blp:128
+msgctxt "Algorithm of the new keypair"
+msgid "Algorithm"
+msgstr ""
+
+#: data/ui/keydialog.blp:129
+msgctxt "Algorithm of the new keypair"
+msgid "Keypair"
+msgstr ""
+
+#: data/ui/keydialog.blp:137
+msgctxt "Length of the new keypair"
+msgid "Length"
+msgstr ""
+
+#: data/ui/keydialog.blp:138
+msgctxt "Length unit of the new keypair"
+msgid "Bits"
+msgstr ""
+
+#: data/ui/keydialog.blp:151
+msgctxt "Expiry time of the new keypair"
+msgid "Expiry"
+msgstr ""
+
+#: data/ui/keydialog.blp:152
+msgctxt "Expiry unit of the new keypair"
+msgid "Months, disable with zero"
+msgstr ""
+
+#: data/ui/keydialog.blp:174
+msgctxt "Generate a new keypair"
+msgid "Generate"
+msgstr ""
+
+#: data/ui/keydialog.blp:175
+msgid "Generate a new keypair"
 msgstr ""
 
 #: data/ui/keyrow.blp:5
@@ -492,12 +549,12 @@ msgid "Process text and files:"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
 msgid "Encryption"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:72
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:76
 msgid "Decryption"
 msgstr ""
 
@@ -538,13 +595,17 @@ msgid "Key Management"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:56
-msgid "File processing"
+msgid "Keypair Generation"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:60
-msgid "Plain text"
+msgid "File processing"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:64
+msgid "Plain text"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:68
 msgid "User ID dialog"
 msgstr ""

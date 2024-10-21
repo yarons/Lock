@@ -29,6 +29,8 @@ Manage available keys in a list:
 
 ![Key management](data/com.konstantintutsch.Lock.Screenshot.Key.png)
 
+![Keypair generation](data/com.konstantintutsch.Lock.Screenshot.Generate.png)
+
 ![File processing](data/com.konstantintutsch.Lock.Screenshot.File.png)
 
 ### Usage
