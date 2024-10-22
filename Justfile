@@ -21,6 +21,7 @@ local:
     flatpak install --user --reinstall --assumeyes --bundle \
         --include-sdk --include-debug \
         _bundle.flatpak
+    systemctl --user restart gpg-agent
     GTK_DEBUG=interactive flatpak run \
         com.konstantintutsch.Lock.Devel
 
