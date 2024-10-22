@@ -1,0 +1,642 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.konstantintutsch.Lock package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.konstantintutsch.Lock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-22 20:55+0200\n"
+"PO-Revision-Date: 2024-10-23 00:02+0200\n"
+"Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 46.1\n"
+
+#. Details
+#: src/application.c:132 data/com.konstantintutsch.Lock.desktop.in.in:5
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:7
+msgid "Process data with GnuPG"
+msgstr "Обработване на данни с GnuPG"
+
+#: src/application.c:143
+msgid "translator-credits"
+msgstr "twlvnn kraftwerk <kraft_werk@tutanota.com>"
+
+#: src/application.c:148
+msgid "Dependencies"
+msgstr "Зависимости"
+
+#: src/window.c:143 data/ui/entrydialog.blp:33
+msgid "Enter text …"
+msgstr "Въведете текст …"
+
+#: src/window.c:367
+msgid "Text copied"
+msgstr "Текстът е копиран"
+
+#: src/window.c:557 src/window.c:577
+msgid "Encrypt for"
+msgstr "Шифриране за"
+
+#: src/window.c:557 src/window.c:577
+msgid "Enter name or email …"
+msgstr "Въведете име или е-поща …"
+
+#: src/window.c:646 src/window.c:729
+#, c-format
+msgid "Failed to find key for User ID “%s”"
+msgstr "Ключ за идентификатор на потребител „%s“ не може да бъде намерен"
+
+#: src/window.c:651 src/window.c:734
+msgid "Encryption failed"
+msgstr "Шифрирането е неуспешно"
+
+#: src/window.c:657
+#, c-format
+msgctxt ""
+"Formatter is either name, email or fingerprint of the public key used in the "
+"encryption process."
+msgid "Text encrypted for %s"
+msgstr "Текстът е шифриран за %s"
+
+#: src/window.c:740
+#, c-format
+msgctxt ""
+"Formatter is either name, email or fingerprint of the public key used in the "
+"encryption process."
+msgid "File encrypted for %s"
+msgstr "Файлът е шифриран за %s"
+
+#: src/window.c:797 src/window.c:852
+msgid "Decryption failed"
+msgstr "Дешифрирането е неуспешно"
+
+#: src/window.c:799
+msgid "Text decrypted"
+msgstr "Текстът е дешифриран"
+
+#: src/window.c:854
+msgid "File decrypted"
+msgstr "Файлът е дешифриран"
+
+#: src/window.c:910 src/window.c:965
+msgid "Signing failed"
+msgstr "Подписването е неуспешно"
+
+#: src/window.c:912
+msgid "Text signed"
+msgstr "Текстът е подписан"
+
+#: src/window.c:967
+msgid "File signed"
+msgstr "Файлът е подписан"
+
+#: src/window.c:1023 src/window.c:1078
+msgid "Verification failed"
+msgstr "Потвърждаването е неуспешно"
+
+#: src/window.c:1025
+msgid "Text verified"
+msgstr "Текстът е потвърден"
+
+#: src/window.c:1080
+msgid "File verified"
+msgstr "Файлът е потвърден"
+
+#: src/keydialog.c:319
+msgid "Import failed"
+msgstr "Внасянето е неуспешно"
+
+#: src/keydialog.c:321
+msgid "Key(s) imported"
+msgstr "Внесено"
+
+#: src/keydialog.c:388
+msgid "Generation failed"
+msgstr "Генерирането е неуспешно"
+
+#: src/keydialog.c:390
+msgid "Keypair generated"
+msgstr "Двойката ключове е генерирана"
+
+#: src/keyrow.c:79
+msgid "Key does not expire"
+msgstr "Ключът няма дата на изтичане"
+
+#: src/keyrow.c:83
+#, c-format
+msgctxt "First formatter: YYYY-mm-dd; Second formatter: HH:MM"
+msgid "Expires %s at %s"
+msgstr "Изтича %s на %s"
+
+#: src/keyrow.c:182
+msgid "Export failed"
+msgstr "Изнасянето е неуспешно"
+
+#: src/keyrow.c:184
+msgid "Key exported"
+msgstr "Ключът е изнесен"
+
+#: src/cryptography.c:16
+#, c-format
+msgctxt "Error message constructor for failed GPGME operations"
+msgid "Failed to %s: %s"
+msgstr "Неуспех на %s: %s"
+
+#: src/cryptography.c:47 src/cryptography.c:88 src/cryptography.c:129
+#: src/cryptography.c:205 src/cryptography.c:262 src/cryptography.c:322
+#: src/cryptography.c:384 src/cryptography.c:447 src/cryptography.c:516
+#: src/cryptography.c:573 src/cryptography.c:674 src/cryptography.c:731
+msgctxt "GPGME Error"
+msgid "create new GPGME context"
+msgstr "създадане на нов GPGME контекст"
+
+#: src/cryptography.c:52 src/cryptography.c:93 src/cryptography.c:136
+#: src/cryptography.c:210 src/cryptography.c:267 src/cryptography.c:327
+#: src/cryptography.c:389 src/cryptography.c:452 src/cryptography.c:521
+#: src/cryptography.c:578 src/cryptography.c:679 src/cryptography.c:736
+msgctxt "GPGME Error"
+msgid "set protocol of GPGME context to OpenPGP"
+msgstr "задаване на протокол на GPGME контекста на OpenPGP"
+
+#: src/cryptography.c:65
+msgctxt "GPGME Error"
+msgid "find key matching User ID"
+msgstr "намиране на ключ, съответстващ на идентификатора на потребителя"
+
+#: src/cryptography.c:98
+msgctxt "GPGME Error"
+msgid "load GPGME key data from file"
+msgstr "зареждане на данни за GPGME ключа от файл"
+
+#: src/cryptography.c:103 src/cryptography.c:146
+msgctxt "GPGME Error"
+msgid "import GPG key from file"
+msgstr "внасяне на GPG ключ от файл"
+
+#: src/cryptography.c:141
+msgctxt "GPGME Error"
+msgid "create GPGME key data in memory"
+msgstr "създаване на данни за GPGME ключ в паметта"
+
+#: src/cryptography.c:161
+#, c-format
+msgid "Failed to open export file: %s"
+msgstr "Изнесеният файл не може да бъде отворен: %s"
+
+#: src/cryptography.c:221 src/cryptography.c:230
+msgctxt "GPGME Error"
+msgid "generate new GPG key for signing"
+msgstr "генериране на нов GPG ключ за подписване"
+
+#: src/cryptography.c:237
+msgctxt "GPGME Error"
+msgid "delete unfinished, generated ECC key"
+msgstr "изтриване на незавършен, генериран ECC ключ"
+
+#: src/cryptography.c:275
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from string"
+msgstr "създаване на нови дешифрирани GPGME данни от низ"
+
+#: src/cryptography.c:280 src/cryptography.c:532
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data"
+msgstr "създаване на нови шифрирани GPGME данни"
+
+#: src/cryptography.c:286
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from memory"
+msgstr "шифриране на GPGME данни от паметта"
+
+#: src/cryptography.c:333 src/cryptography.c:395 src/cryptography.c:584
+#: src/cryptography.c:685
+msgctxt "GPGME Error"
+msgid "set pinentry mode of GPGME context to ask"
+msgstr "задаване на режим „pinentry“ на GPGME контекста за запитване"
+
+#: src/cryptography.c:338
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data from string"
+msgstr "създаване на нови шифрирани GPGME данни от низ"
+
+#: src/cryptography.c:343 src/cryptography.c:594
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data"
+msgstr "създаване на нови дешифрирани GPGME данни"
+
+#: src/cryptography.c:348
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from memory"
+msgstr "дешифриране на GPGME данни от паметта"
+
+#: src/cryptography.c:402
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data from string"
+msgstr "създаване на нови неподписани GPGME данни от низ"
+
+#: src/cryptography.c:407 src/cryptography.c:694 src/cryptography.c:741
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data"
+msgstr "създаване на нови подписани GPGME данни"
+
+#: src/cryptography.c:411
+msgctxt "GPGME Error"
+msgid "sign GPGME data from memory"
+msgstr "подписване на GPGME данни от паметта"
+
+#: src/cryptography.c:459
+msgctxt "GPGME Error"
+msgid "create new signed GPGME data from string"
+msgstr "създаване на нови подписани GPGME данни от низ"
+
+#: src/cryptography.c:464
+msgctxt "GPGME Error"
+msgid "create new verified GPGME data"
+msgstr "създаване на нови потвърдени GPGME данни"
+
+#: src/cryptography.c:469
+msgctxt "GPGME Error"
+msgid "verify GPGME data from memory"
+msgstr "потвърждаване на GPGME данни от паметта"
+
+#: src/cryptography.c:506 src/cryptography.c:664
+#, c-format
+msgid "Removed %s to prepare overwriting"
+msgstr "%s е премахнато, за да се подготви презаписването"
+
+#: src/cryptography.c:527
+msgctxt "GPGME Error"
+msgid "create new decrypted GPGME data from file"
+msgstr "създаване на нови дешифрирани GPGME данни от файл"
+
+#: src/cryptography.c:537
+msgctxt "GPGME Error"
+msgid "set file path of encrypted GPGME data"
+msgstr "задаване на местоположението до файла с шифрираните GPGME данни"
+
+#: src/cryptography.c:545
+msgctxt "GPGME Error"
+msgid "encrypt GPGME data from file"
+msgstr "шифриране на GPGME данни от файл"
+
+#: src/cryptography.c:589
+msgctxt "GPGME Error"
+msgid "create new encrypted GPGME data from file"
+msgstr "създаване на нови шифрирани GPGME данни от файл"
+
+#: src/cryptography.c:599
+msgctxt "GPGME Error"
+msgid "set file path of decrypted GPGME data"
+msgstr "задаване на местоположението до файла с дешифрираните GPGME данни"
+
+#: src/cryptography.c:605
+msgctxt "GPGME Error"
+msgid "decrypt GPGME data from file"
+msgstr "дешифриране на GPGME данни от файл"
+
+#: src/cryptography.c:618 src/cryptography.c:774
+#, c-format
+msgid "Failed to open output file: %s"
+msgstr "Изходният файл не може да бъде отворен: %s"
+
+#: src/cryptography.c:689
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data from file"
+msgstr "създаване на нови неподписани GPGME данни от файл"
+
+#: src/cryptography.c:699 src/cryptography.c:746
+msgctxt "GPGME Error"
+msgid "set file path of signed GPGME data"
+msgstr "задаване на местоположението до файла с подписаните GPGME данни"
+
+#: src/cryptography.c:703
+msgctxt "GPGME Error"
+msgid "sign GPGME data from file"
+msgstr "подписване на GPGME данни от файл"
+
+#: src/cryptography.c:751
+msgctxt "GPGME Error"
+msgid "create new unsigned GPGME data"
+msgstr "създаване на нови неподписани GPGME данни"
+
+#: src/cryptography.c:756
+msgctxt "GPGME Error"
+msgid "set file path of unsigned GPGME data"
+msgstr "задаване на местоположението до файла с неподписаните GPGME данни"
+
+#: src/cryptography.c:761
+msgctxt "GPGME Error"
+msgid "verify GPGME data from file"
+msgstr "потвърждаване на GPGME данни от файл"
+
+#: src/threading.c:20
+#, c-format
+msgctxt ""
+"First format specifier is a translation string marked as “Thread Error”"
+msgid "Failed to create %s thread: %s"
+msgstr "Създаване на нишка %s е неуспешно: %s"
+
+#: src/threading.c:41
+msgctxt "Thread Error"
+msgid "text encryption"
+msgstr "шифриране на текст"
+
+#: src/threading.c:62
+msgctxt "Thread Error"
+msgid "file encryption"
+msgstr "шифриране на файл"
+
+#: src/threading.c:82
+msgctxt "Thread Error"
+msgid "text decryption"
+msgstr "дешифриране на текст"
+
+#: src/threading.c:97
+msgctxt "Thread Error"
+msgid "file decryption"
+msgstr "дешифриране на файл"
+
+#: src/threading.c:114
+msgctxt "Thread Error"
+msgid "text signing"
+msgstr "подписване на текст"
+
+#: src/threading.c:128
+msgctxt "Thread Error"
+msgid "file signing"
+msgstr "подписване на файл"
+
+#: src/threading.c:146
+msgctxt "Thread Error"
+msgid "text verification"
+msgstr "потвърждаване на текст"
+
+#: src/threading.c:161
+msgctxt "Thread Error"
+msgid "file verification"
+msgstr "потвърждаване на файл"
+
+#: src/threading.c:173
+msgctxt "Thread Error"
+msgid "key import"
+msgstr "внасяне на ключ"
+
+#: src/threading.c:185
+msgctxt "Thread Error"
+msgid "key export"
+msgstr "изнасяне на ключ"
+
+#: src/threading.c:200
+msgctxt "Thread Error"
+msgid "key generation"
+msgstr "генериране на ключ"
+
+#: data/ui/window.blp:9 data/ui/window.blp:169
+#: data/com.konstantintutsch.Lock.desktop.in.in:4
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:6
+msgid "Lock"
+msgstr "Ключалка"
+
+#: data/ui/window.blp:29
+msgid "Copy"
+msgstr "Копиране"
+
+#: data/ui/window.blp:30
+msgid "Copy the text"
+msgstr "Копиране на текста"
+
+#: data/ui/window.blp:33
+msgid "Cryptography operations"
+msgstr "Криптографски операции"
+
+#: data/ui/window.blp:45
+msgid "Main Menu"
+msgstr "Основно меню"
+
+#: data/ui/window.blp:55
+msgid "Text"
+msgstr "Текст"
+
+#: data/ui/window.blp:73
+msgid "File"
+msgstr "Файл"
+
+#: data/ui/window.blp:92
+msgid "Input File"
+msgstr "Входен файл"
+
+#: data/ui/window.blp:107
+msgid "Output File"
+msgstr "Изходен файл"
+
+#: data/ui/window.blp:131 data/ui/window.blp:190
+msgid "Encrypt"
+msgstr "Шифриране"
+
+#: data/ui/window.blp:138 data/ui/window.blp:194
+msgid "Decrypt"
+msgstr "Дешифриране"
+
+#: data/ui/window.blp:145 data/ui/window.blp:200
+msgid "Sign"
+msgstr "Подписване"
+
+#: data/ui/window.blp:152 data/ui/window.blp:204
+msgid "Verify"
+msgstr "Потвърждаване"
+
+#: data/ui/window.blp:175 data/ui/keydialog.blp:13
+msgid "Manage keys"
+msgstr "Управление на ключовете"
+
+#: data/ui/window.blp:181
+msgid "About Lock"
+msgstr "Относно „Ключалка“"
+
+#: data/ui/entrydialog.blp:22
+msgid "Title"
+msgstr "Заглавие"
+
+#: data/ui/keydialog.blp:32
+msgid "Refresh keys"
+msgstr "Опресняване на ключовете"
+
+#: data/ui/keydialog.blp:51
+msgid "No keys available"
+msgstr "Няма налични ключове"
+
+#: data/ui/keydialog.blp:52
+msgid "Your system does not store any GnuPG keys."
+msgstr "Вашата система не съхранява GnuPG ключове."
+
+#: data/ui/keydialog.blp:71
+msgctxt "Import key(s) from file"
+msgid "Import"
+msgstr "Внасяне"
+
+#: data/ui/keydialog.blp:72
+msgid "Import key(s) from file"
+msgstr "Внасяне на ключ(ове) от файл"
+
+#: data/ui/keydialog.blp:79
+msgid "Create a new keypair"
+msgstr "Създаване на нова двойка ключове"
+
+#: data/ui/keydialog.blp:92
+msgid "Generate keypair"
+msgstr "Генериране на двойка ключове"
+
+#: data/ui/keydialog.blp:119
+msgctxt "Name of the UID of the new keypair"
+msgid "Name"
+msgstr "Име"
+
+#: data/ui/keydialog.blp:124
+msgctxt "Email of the UID of the new keypair"
+msgid "Email"
+msgstr "Е-поща"
+
+#: data/ui/keydialog.blp:129
+msgctxt "Signing algorithm of the new keypair"
+msgid "Signing Algorithm"
+msgstr "Алгоритъм за подписване"
+
+#: data/ui/keydialog.blp:130
+msgctxt "Signing algorithm of the new keypair"
+msgid "Key"
+msgstr "Ключ"
+
+#: data/ui/keydialog.blp:138
+msgctxt "Encryption algorithm of the new keypair"
+msgid "Encryption Algorithm"
+msgstr "Алгоритъм за шифриране"
+
+#: data/ui/keydialog.blp:139
+msgctxt "Encryption algorithm of the new keypair"
+msgid "Subkey"
+msgstr "Подключ"
+
+#: data/ui/keydialog.blp:147
+msgctxt "Expiry time of the new keypair"
+msgid "Expiry"
+msgstr "Дата на изтичане"
+
+#: data/ui/keydialog.blp:148
+msgctxt "Expiry unit of the new keypair"
+msgid "Months, disable with zero"
+msgstr "Месеци, изключва се с нула"
+
+#: data/ui/keydialog.blp:170
+msgctxt "Generate a new keypair"
+msgid "Generate"
+msgstr "Генериране"
+
+#: data/ui/keydialog.blp:171
+msgid "Generate a new keypair"
+msgstr "Генериране на нова двойка ключове"
+
+#: data/ui/keyrow.blp:5
+msgid "User ID"
+msgstr "Идентификатор на потребителя"
+
+#: data/ui/keyrow.blp:6
+msgid "Fingerprint"
+msgstr "Отпечатък"
+
+#: data/ui/keyrow.blp:7
+msgid "Expiry"
+msgstr "Дата на изтичане"
+
+#: data/ui/keyrow.blp:18
+msgid "Export public key to file"
+msgstr "Изнасяне на публичния ключ във файл"
+
+#: data/com.konstantintutsch.Lock.desktop.in.in:11
+msgid "gpg;gnupg;cryptography;openpgp;encrypt;decrypt;sign;verify;"
+msgstr "криптография;шифриране;дешифриране;подписване;потвърждаване;"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:9
+msgid ""
+"Lock is a graphical front-end for GnuPG (GPG) making use of a beautiful "
+"LibAdwaita GUI."
+msgstr ""
+"„Ключалка“ е програма за GnuPG (GPG), която използва красивия LibAdwaita "
+"графичен интерфейс."
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:10
+msgid "Process text and files:"
+msgstr "Обработвайте текст и файлове:"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:12
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:73
+msgid "Encryption"
+msgstr "Шифриране"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:13
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:77
+msgid "Decryption"
+msgstr "Дешифриране"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:14
+msgid "Signing"
+msgstr "Подписване"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:15
+msgid "Verification"
+msgstr "Потвърждаване"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
+msgid "Manage available keys in a list:"
+msgstr "Управлявайте наличните ключове в списък:"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
+msgid "View expiry dates"
+msgstr "Преглеждайте датите на изтичане"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+msgid "Export public keys to files"
+msgstr "Изнасяйте публични ключове от файлове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
+msgstr "Внасяйте ключове от файлове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
+msgid "Generate new keypairs"
+msgstr "Генерирайте нови ключове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:45
+msgid "Light Appearance"
+msgstr "Светъл външен вид"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:49
+msgid "Dark Appearance"
+msgstr "Тъмен външен вид"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:53
+msgid "Key Management"
+msgstr "Управляване на ключове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:57
+msgid "Keypair Generation"
+msgstr "Генериране на двойка ключове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:61
+msgid "File processing"
+msgstr "Обработване на файлове"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:65
+msgid "Plain text"
+msgstr "Обикновен текст"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:69
+msgid "User ID dialog"
+msgstr "Прозорец за идентификатор на потребителя"
