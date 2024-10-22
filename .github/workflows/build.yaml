@@ -23,8 +23,8 @@ jobs:
     - name: Install build dependencies
       run: |
         sudo apt-get install libadwaita-1-dev libgpgme-dev
-        sudo flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-        sudo flatpak install --assumeyes org.gnome.Sdk//47 org.gnome.Platform//47
+        flatpak remote-add --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        flatpak install --user --assumeyes org.gnome.Sdk//47 org.gnome.Platform//47
 
     - name: Build development profile
-      run: sudo flatpak-builder --install --install-deps-from=flathub .meson-builder com.konstantintutsch.Lock.Devel.yaml
+      run: flatpak-builder --user --install --install-deps-from=flathub --force-clean _meson com.konstantintutsch.Lock.Devel.yaml

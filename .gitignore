@@ -2,7 +2,4 @@
 .xdp-*
 /subprojects/blueprint-compiler
 /.flatpak-builder
-/.meson-builder
-/builddir
-/repo
-/bundle.flatpak
+/_*

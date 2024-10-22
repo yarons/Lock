@@ -6,21 +6,21 @@ format:
     indent src/*.c src/*.h -linux -nut -i4
 
 translate:
-    meson compile -C ./.meson-builder com.konstantintutsch.Lock-pot
-    meson compile -C ./.meson-builder com.konstantintutsch.Lock-update-po
+    meson compile -C _meson com.konstantintutsch.Lock-pot
+    meson compile -C _meson com.konstantintutsch.Lock-update-po
 
 local:
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak run org.flatpak.Builder --user --sandbox \
         --force-clean --ccache --install-deps-from=flathub \
-        --repo=repo builddir \
+        --repo=_repo _flatpak \
         com.konstantintutsch.Lock.Devel.yaml
-    flatpak build-bundle repo \
-        bundle.flatpak \
+    flatpak build-bundle _repo \
+        _bundle.flatpak \
         com.konstantintutsch.Lock.Devel
     flatpak install --user --reinstall --assumeyes --bundle \
         --include-sdk --include-debug \
-        bundle.flatpak
+        _bundle.flatpak
     GTK_DEBUG=interactive flatpak run \
         com.konstantintutsch.Lock.Devel
 
