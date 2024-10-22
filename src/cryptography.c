@@ -15,9 +15,9 @@
     { \
         g_warning(C_("Error message constructor for failed GPGME operations", "Failed to %s: %s"), String, gpgme_strerror(Error)); \
         \
-        gpgme_release(Context); \
-        \
         FreeCode \
+        \
+        gpgme_release(Context); \
         \
         return Return; \
     }
@@ -206,14 +206,44 @@ bool key_generate(const char *userid, const char *algorithm,
                  C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
                  context,);
 
-    unsigned int flags = GPGME_CREATE_SIGN | GPGME_CREATE_ENCR;
+    unsigned int flags = 0;
     if (expiry == 0)
-        flags = flags | GPGME_CREATE_NOEXPIRE;
+        flags = GPGME_CREATE_NOEXPIRE;
 
-    error =
-        gpgme_op_createkey(context, userid, algorithm, 0, expiry, NULL, flags);
-    HANDLE_ERROR(false, error, C_("GPGME Error", "generate new GPG keypair"),
-                 context,);
+    if (strcmp(algorithm, "ecc") == 0) {
+        error =
+            gpgme_op_createkey(context, userid, "ed25519", 0, expiry, NULL,
+                               GPGME_CREATE_SIGN | flags);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "generate new GPG key for signing"),
+                     context,);
+
+        gpgme_key_t key = key_search(userid);
+
+        error =
+            gpgme_op_createsubkey(context, key, "curve25519", 0, expiry,
+                                  GPGME_CREATE_ENCR | flags);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "generate new GPG key for signing"),
+                     context, error =
+                     gpgme_op_delete_ext(context, key,
+                                         GPGME_DELETE_ALLOW_SECRET |
+                                         GPGME_DELETE_FORCE);
+                     HANDLE_ERROR(false, error,
+                                  C_("GPGME Error",
+                                     "delete unfinished, generated ECC key"),
+                                  context,);
+                     gpgme_key_release(key);
+            );
+
+        gpgme_key_release(key);
+    } else {
+        error =
+            gpgme_op_createkey(context, userid, algorithm, 0, expiry, NULL,
+                               GPGME_CREATE_SIGN | GPGME_CREATE_ENCR | flags);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "generate new GPG keypair"), context,);
+    }
 
     return true;
 }

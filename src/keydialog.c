@@ -37,7 +37,6 @@ struct _LockKeyDialog {
     AdwEntryRow *name_entry;
     AdwEntryRow *email_entry;
     AdwComboRow *algorithm_entry;
-    AdwSpinRow *length_entry;
     AdwSpinRow *expiry_entry;
 };
 
@@ -107,8 +106,6 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
                                          email_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          algorithm_entry);
-    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         length_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          expiry_entry);
 }
@@ -345,12 +342,15 @@ void lock_key_dialog_generate(LockKeyDialog *dialog)
     gchar *userid = g_strdup_printf("%s <%s>", name, email);
 
     gchar *algorithm = NULL;
-    gint algorithm_length = (gint) adw_spin_row_get_value(dialog->length_entry);
     gint algorithm_id = adw_combo_row_get_selected(dialog->algorithm_entry);
     if (algorithm_id == 0) {
-        algorithm = g_strdup_printf("rsa%d", algorithm_length);
+        algorithm = g_strdup("ecc");
     } else if (algorithm_id == 1) {
-        algorithm = g_strdup_printf("dsa%d", algorithm_length);
+        algorithm = g_strdup("rsa2048");
+    } else if (algorithm_id == 2) {
+        algorithm = g_strdup("rsa4096");
+    } else {
+        algorithm = g_strdup("ecc");
     }
 
     gint expiry_months = (gint) adw_spin_row_get_value(dialog->expiry_entry);

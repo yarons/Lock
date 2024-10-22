@@ -129,21 +129,7 @@ template $LockKeyDialog : Adw.Dialog {
                                         subtitle: C_("Algorithm of the new keypair", "Keypair");
 
                                         model: Gtk.StringList {
-                                            strings: ["RSA", "DSA"];
-                                        };
-                                    }
-
-                                    Adw.SpinRow length_entry {
-                                        title: C_("Length of the new keypair", "Length");
-                                        subtitle: C_("Length unit of the new keypair", "Bits");
-
-                                        adjustment: Gtk.Adjustment {
-                                            lower: 1024;
-                                            upper: 4096;
-                                            value: 4096;
-
-                                            page-increment: 1024;
-                                            step-increment: 1;
+                                            strings: ["ECC (ed-, curve25519)", "RSA (2048)", "RSA (4096)"];
                                         };
                                     }
 
