@@ -36,4 +36,5 @@ setup:
     sudo dnf install -y gpgme-devel
     flatpak install --user --assumeyes org.gnome.Platform//47
     flatpak install --user --assumeyes org.gnome.Sdk//47
+    flatpak install --user --assumeyes org.gnome.Sdk.Debug//47
     flatpak install --user --assumeyes org.flatpak.Builder
