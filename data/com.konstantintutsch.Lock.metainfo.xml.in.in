@@ -20,6 +20,7 @@
             <li>Export public keys to files</li>
             <li>Import keys from files</li>
             <li>Generate new keypairs</li>
+            <li>Remove keys</li>
         </ul>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>
@@ -87,6 +88,17 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="0.5.0" date="2024-10-23">
+            <description translate="no">
+                <p>Removal of keys from the GnuPG keyring is now available!</p>
+                <ul>
+                    <li>Add key removal</li>
+                    <li>Add independent choice of signing key and encryption subkey algorithms in keypair generation</li>
+                    <li>Add DSA (3072 bit) signing key algorithm</li>
+                    <li>Add symbolic icon derived from app icon</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.4.1" date="2024-10-22">
             <description translate="no">
                 <ul>

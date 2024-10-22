@@ -11,6 +11,13 @@ template $LockKeyRow : Adw.ActionRow {
         orientation: horizontal;
         valign: center;
 
+        Gtk.Button remove_button {
+            styles ["flat"]
+
+            icon-name: "edit-delete-symbolic";
+            tooltip-text: _("Remove key including subkeys");
+        }
+
         Gtk.Button export_button {
             styles ["flat"]
 

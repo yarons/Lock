@@ -18,4 +18,7 @@ LockKeyRow *lock_key_row_new(LockKeyDialog * dialog,
 // Export
 void lock_key_row_export(LockKeyRow * row);
 
+// Remove
+void lock_key_row_remove(LockKeyRow * row);
+
 #endif                          // KEY_ROW_H
