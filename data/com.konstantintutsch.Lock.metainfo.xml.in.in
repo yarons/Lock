@@ -20,6 +20,7 @@
             <li>Export public keys to files</li>
             <li>Import keys from files</li>
             <li>Generate new keypairs</li>
+            <li>Remove keys</li>
         </ul>
     </description>
     <launchable type="desktop-id">@project_id@.desktop</launchable>

@@ -112,6 +112,61 @@ bool key_import(const char *path)
 }
 
 /**
+ * This function generates a new GPG keypair.
+ *
+ * @param userid User ID of the new keypair
+ * @param sign_algorithm Algorithm of the signing key of the new keypair
+ * @param encrypt_algorithm Algorithm of the encryption key of the new keypair
+ * @param expiry Expiry in seconds of the new keypair
+ */
+bool key_generate(const char *userid, const char *sign_algorithm,
+                  const char *encrypt_algorithm, unsigned long expiry)
+{
+    gpgme_ctx_t context;
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    unsigned int flags = 0;
+    if (expiry == 0)
+        flags = GPGME_CREATE_NOEXPIRE;
+
+    error =
+        gpgme_op_createkey(context, userid, sign_algorithm, 0, expiry, NULL,
+                           GPGME_CREATE_SIGN | flags);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "generate new GPG key for signing"),
+                 context,);
+
+    gpgme_key_t key = key_search(userid);
+
+    error =
+        gpgme_op_createsubkey(context, key, encrypt_algorithm, 0, expiry,
+                              GPGME_CREATE_ENCR | flags);
+    HANDLE_ERROR(false, error,
+                 C_("GPGME Error", "generate new GPG key for signing"),
+                 context, error =
+                 gpgme_op_delete_ext(context, key,
+                                     GPGME_DELETE_ALLOW_SECRET |
+                                     GPGME_DELETE_FORCE);
+                 HANDLE_ERROR(false, error,
+                              C_("GPGME Error",
+                                 "delete unfinished, generated ECC key"),
+                              context,); gpgme_key_release(key););
+
+    gpgme_key_release(key);
+
+    return true;
+}
+
+/**
  * This function exports a key to a file.
  *
  * @param uid User ID of the key to export
@@ -188,15 +243,13 @@ bool key_export(const char *uid, const char *path)
 }
 
 /**
- * This function generates a new GPG keypair.
+ * This function removes a key and its subkeys from the system.
  *
- * @param userid User ID of the new keypair
- * @param sign_algorithm Algorithm of the signing key of the new keypair
- * @param encrypt_algorithm Algorithm of the encryption key of the new keypair
- * @param expiry Expiry in seconds of the new keypair
+ * @param key Key to remove
+ *
+ * @return Success
  */
-bool key_generate(const char *userid, const char *sign_algorithm,
-                  const char *encrypt_algorithm, unsigned long expiry)
+bool key_remove(gpgme_key_t key)
 {
     gpgme_ctx_t context;
     gpgme_error_t error;
@@ -210,34 +263,11 @@ bool key_generate(const char *userid, const char *sign_algorithm,
                  C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
                  context,);
 
-    unsigned int flags = 0;
-    if (expiry == 0)
-        flags = GPGME_CREATE_NOEXPIRE;
+    error = gpgme_op_delete(context, key, 1);
+    HANDLE_ERROR(false, error, C_("GPGME Error", "remove GPG key"), context,);
 
-    error =
-        gpgme_op_createkey(context, userid, sign_algorithm, 0, expiry, NULL,
-                           GPGME_CREATE_SIGN | flags);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "generate new GPG key for signing"),
-                 context,);
-
-    gpgme_key_t key = key_search(userid);
-
-    error =
-        gpgme_op_createsubkey(context, key, encrypt_algorithm, 0, expiry,
-                              GPGME_CREATE_ENCR | flags);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "generate new GPG key for signing"),
-                 context, error =
-                 gpgme_op_delete_ext(context, key,
-                                     GPGME_DELETE_ALLOW_SECRET |
-                                     GPGME_DELETE_FORCE);
-                 HANDLE_ERROR(false, error,
-                              C_("GPGME Error",
-                                 "delete unfinished, generated ECC key"),
-                              context,); gpgme_key_release(key););
-
-    gpgme_key_release(key);
+    /* Cleanup */
+    gpgme_release(context);
 
     return true;
 }

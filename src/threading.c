@@ -175,18 +175,6 @@ void thread_import_key(LockKeyDialog *dialog)
 }
 
 /**
- * This function creates a new thread for the export of a key as a file in a LockKeyRow.
- *
- * @param row Row to export the key of
- */
-void thread_export_key(LockKeyRow *row)
-{
-    CRYPTOGRAPHY_THREAD_WRAPPER("export_key",
-                                C_("Thread Error", "key export"),
-                                lock_key_row_export, row);
-}
-
-/**
  * This function creates a new thread for the generation of a new keypair in a LockKeyDialog.
  *
  * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
@@ -199,4 +187,28 @@ void thread_generate_key(GtkButton *self, LockKeyDialog *dialog)
     CRYPTOGRAPHY_THREAD_WRAPPER("generate_key",
                                 C_("Thread Error", "key generation"),
                                 lock_key_dialog_generate, dialog);
+}
+
+/**
+ * This function creates a new thread for the export of a key as a file in a LockKeyRow.
+ *
+ * @param row Row to export the key of
+ */
+void thread_export_key(LockKeyRow *row)
+{
+    CRYPTOGRAPHY_THREAD_WRAPPER("export_key",
+                                C_("Thread Error", "key export"),
+                                lock_key_row_export, row);
+}
+
+/**
+ * This function creates a new thread for the removal of a key in a LockKeyRow.
+ *
+ * @param row Row to remove the key of
+ */
+void thread_remove_key(LockKeyRow *row)
+{
+    CRYPTOGRAPHY_THREAD_WRAPPER("remove_key",
+                                C_("Thread Error", "key removal"),
+                                lock_key_row_remove, row);
 }

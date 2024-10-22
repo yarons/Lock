@@ -44,8 +44,6 @@ struct _LockKeyDialog {
 G_DEFINE_TYPE(LockKeyDialog, lock_key_dialog, ADW_TYPE_DIALOG);
 
 /* UI */
-static void lock_key_dialog_refresh(GtkButton * self, LockKeyDialog * dialog);
-
 gboolean lock_key_dialog_import_on_completed(LockKeyDialog * dialog);
 gboolean lock_key_dialog_generate_on_completed(LockKeyDialog * dialog);
 
@@ -138,7 +136,7 @@ LockKeyDialog *lock_key_dialog_new(LockWindow *window)
  * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
  * @param dialog https://docs.gtk.org/gtk4/signal.Button.clicked.html
  */
-static void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
+void lock_key_dialog_refresh(GtkButton *self, LockKeyDialog *dialog)
 {
     (void)self;
 

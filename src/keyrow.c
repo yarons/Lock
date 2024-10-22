@@ -19,6 +19,9 @@ struct _LockKeyRow {
 
     LockKeyDialog *dialog;
 
+    gboolean remove_success;
+    GtkButton *remove_button;
+
     gboolean export_success;
     GtkButton *export_button;
     GFile *export_file;
@@ -29,7 +32,10 @@ G_DEFINE_TYPE(LockKeyRow, lock_key_row, ADW_TYPE_ACTION_ROW);
 /* Export */
 static void lock_key_row_export_file_present(GtkButton * self,
                                              LockKeyRow * row);
+static void lock_key_row_remove_confirm(GtkButton * self, LockKeyRow * row);
+
 gboolean lock_key_row_export_on_completed(LockKeyRow * row);
+gboolean lock_key_row_remove_on_completed(LockKeyRow * row);
 
 /**
  * This function initializes a LockKeyRow.
@@ -39,6 +45,9 @@ gboolean lock_key_row_export_on_completed(LockKeyRow * row);
 static void lock_key_row_init(LockKeyRow *row)
 {
     gtk_widget_init_template(GTK_WIDGET(row));
+
+    g_signal_connect(row->remove_button, "clicked",
+                     G_CALLBACK(lock_key_row_remove_confirm), row);
 
     g_signal_connect(row->export_button, "clicked",
                      G_CALLBACK(lock_key_row_export_file_present), row);
@@ -53,6 +62,9 @@ static void lock_key_row_class_init(LockKeyRowClass *class)
 {
     gtk_widget_class_set_template_from_resource(GTK_WIDGET_CLASS(class),
                                                 UI_RESOURCE("keyrow.ui"));
+
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyRow,
+                                         remove_button);
 
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyRow,
                                          export_button);
@@ -183,6 +195,108 @@ gboolean lock_key_row_export_on_completed(LockKeyRow *row)
     } else {
         toast = adw_toast_new(_("Key exported"));
     }
+
+    adw_toast_set_timeout(toast, 2);
+    lock_key_dialog_add_toast(row->dialog, toast);
+
+    /* Only execute once */
+    return false;               // https://docs.gtk.org/glib/func.idle_add.html
+}
+
+/**** Remove ****/
+
+/**
+ * This function handles user input of the confirm dialog for key removals.
+ *
+ * @param self https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/signal.AlertDialog.response.html
+ * @param response https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/signal.AlertDialog.response.html
+ * @param row https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/signal.AlertDialog.response.html
+ */
+static void lock_key_row_remove_confirm_on_responded(AdwAlertDialog *self,
+                                                     gchar *response,
+                                                     LockKeyRow *row)
+{
+    (void)self;
+
+    if (strcmp(response, "remove") != 0)
+        return;
+
+    thread_remove_key(row);
+}
+
+/**
+ * This function confirms whether a key should be removed in a LockKeyDialog.
+ *
+ * @param self https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ * @param row https://docs.gtk.org/gtk4/signal.Button.clicked.html
+ */
+static void lock_key_row_remove_confirm(GtkButton *self, LockKeyRow *row)
+{
+    (void)self;
+
+    LockWindow *window = lock_key_dialog_get_window(row->dialog);
+    const char *uid = adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row));
+
+    AdwAlertDialog *confirm =
+        ADW_ALERT_DIALOG(adw_alert_dialog_new
+                         (_("Remove key and subkeys?"), NULL));
+    adw_alert_dialog_format_body(confirm,
+                                 _
+                                 ("The removal of the key of %s cannot be undone!"),
+                                 uid);
+
+    adw_alert_dialog_add_responses(confirm, "cancel", _("_Cancel"), "remove",
+                                   _("_Remove"), NULL);
+    adw_alert_dialog_set_response_appearance(confirm, "remove",
+                                             ADW_RESPONSE_DESTRUCTIVE);
+
+    adw_alert_dialog_set_default_response(confirm, "cancel");
+    adw_alert_dialog_set_close_response(confirm, "cancel");
+    g_signal_connect(confirm, "response",
+                     G_CALLBACK(lock_key_row_remove_confirm_on_responded), row);
+
+    adw_dialog_present(ADW_DIALOG(confirm), GTK_WIDGET(window));
+}
+
+/**
+ * This function removes a key and its subkeys from the system in a LockKeyRow.
+ *
+ * @param row https://docs.gtk.org/glib/callback.ThreadFunc.html
+ */
+void lock_key_row_remove(LockKeyRow *row)
+{
+    const char *uid = adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row));
+
+    gpgme_key_t key = key_search(uid);
+    row->remove_success = key_remove(key);
+
+    /* Cleanup */
+    gpgme_key_release(key);
+
+    /* UI */
+    g_idle_add((GSourceFunc) lock_key_row_remove_on_completed, row);
+
+    g_thread_exit(0);
+}
+
+/**
+ * This function handles UI updates for key removals and is supposed to be called via g_idle_add().
+ *
+ * @param row https://docs.gtk.org/glib/callback.SourceFunc.html
+ *
+ * @return https://docs.gtk.org/glib/func.idle_add.html
+ */
+gboolean lock_key_row_remove_on_completed(LockKeyRow *row)
+{
+    AdwToast *toast;
+
+    if (!row->remove_success) {
+        toast = adw_toast_new(_("Removal failed"));
+    } else {
+        toast = adw_toast_new(_("Key removed"));
+    }
+
+    lock_key_dialog_refresh(NULL, row->dialog);
 
     adw_toast_set_timeout(toast, 2);
     lock_key_dialog_add_toast(row->dialog, toast);
