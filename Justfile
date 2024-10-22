@@ -15,12 +15,12 @@ local:
         --force-clean --ccache --install-deps-from=flathub \
         --repo=_repo _flatpak \
         com.konstantintutsch.Lock.Devel.yaml
-    flatpak build-bundle _repo \
-        _bundle.flatpak \
-        com.konstantintutsch.Lock.Devel
-    flatpak install --user --reinstall --assumeyes --bundle \
+    flatpak remote-add --if-not-exists --user --no-gpg-verify \
+        com-konstantintutsch-Lock-Devel \
+        file://$(pwd)/_repo
+    flatpak install --user --reinstall --assumeyes \
         --include-sdk --include-debug \
-        _bundle.flatpak
+        com.konstantintutsch.Lock.Devel
     systemctl --user restart gpg-agent
     GTK_DEBUG=interactive flatpak run \
         com.konstantintutsch.Lock.Devel
