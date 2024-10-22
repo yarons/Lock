@@ -125,12 +125,21 @@ template $LockKeyDialog : Adw.Dialog {
                                         input-purpose: email;
                                     }
 
-                                    Adw.ComboRow algorithm_entry {
-                                        title: C_("Algorithm of the new keypair", "Algorithm");
-                                        subtitle: C_("Algorithm of the new keypair", "Keypair");
+                                    Adw.ComboRow sign_entry {
+                                        title: C_("Signing algorithm of the new keypair", "Signing Algorithm");
+                                        subtitle: C_("Signing algorithm of the new keypair", "Key");
 
                                         model: Gtk.StringList {
-                                            strings: ["ECC (ed-, curve25519)", "RSA (2048)", "RSA (4096)"];
+                                            strings: ["ed25519", "rsa2048", "rsa4096"];
+                                        };
+                                    }
+
+                                    Adw.ComboRow encrypt_entry {
+                                        title: C_("Encryption algorithm of the new keypair", "Encryption Algorithm");
+                                        subtitle: C_("Encryption algorithm of the new keypair", "Subkey");
+
+                                        model: Gtk.StringList {
+                                            strings: ["curve25519", "rsa2048", "rsa4096"];
                                         };
                                     }
 

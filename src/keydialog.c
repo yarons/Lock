@@ -36,7 +36,8 @@ struct _LockKeyDialog {
     GtkButton *generate_button;
     AdwEntryRow *name_entry;
     AdwEntryRow *email_entry;
-    AdwComboRow *algorithm_entry;
+    AdwComboRow *sign_entry;
+    AdwComboRow *encrypt_entry;
     AdwSpinRow *expiry_entry;
 };
 
@@ -105,7 +106,9 @@ static void lock_key_dialog_class_init(LockKeyDialogClass *class)
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          email_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
-                                         algorithm_entry);
+                                         sign_entry);
+    gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
+                                         encrypt_entry);
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(class), LockKeyDialog,
                                          expiry_entry);
 }
@@ -341,30 +344,28 @@ void lock_key_dialog_generate(LockKeyDialog *dialog)
         gtk_editable_get_text(GTK_EDITABLE(dialog->email_entry));
     gchar *userid = g_strdup_printf("%s <%s>", name, email);
 
-    gchar *algorithm = NULL;
-    gint algorithm_id = adw_combo_row_get_selected(dialog->algorithm_entry);
-    if (algorithm_id == 0) {
-        algorithm = g_strdup("ecc");
-    } else if (algorithm_id == 1) {
-        algorithm = g_strdup("rsa2048");
-    } else if (algorithm_id == 2) {
-        algorithm = g_strdup("rsa4096");
-    } else {
-        algorithm = g_strdup("ecc");
-    }
+    gint sign_selected = adw_combo_row_get_selected(dialog->sign_entry);
+    GtkStringList *sign_list =
+        GTK_STRING_LIST(adw_combo_row_get_model(dialog->sign_entry));
+    const gchar *sign_algorithm =
+        gtk_string_list_get_string(sign_list, sign_selected);
+
+    gint encrypt_selected = adw_combo_row_get_selected(dialog->encrypt_entry);
+    GtkStringList *encrypt_list =
+        GTK_STRING_LIST(adw_combo_row_get_model(dialog->encrypt_entry));
+    const gchar *encrypt_algorithm =
+        gtk_string_list_get_string(encrypt_list, encrypt_selected);
 
     gint expiry_months = (gint) adw_spin_row_get_value(dialog->expiry_entry);
     unsigned long expiry_seconds =
         ((expiry_months / 2) * 31 + (expiry_months / 2) * 30) * 24 * 60 * 60;
 
-    dialog->generate_success = key_generate(userid, algorithm, expiry_seconds);
+    dialog->generate_success =
+        key_generate(userid, sign_algorithm, encrypt_algorithm, expiry_seconds);
 
     /* Cleanup */
     g_free(userid);
     userid = NULL;
-
-    g_free(algorithm);
-    algorithm = NULL;
 
     /* UI */
     g_idle_add((GSourceFunc) lock_key_dialog_generate_on_completed, dialog);
