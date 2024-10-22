@@ -45,8 +45,6 @@ template $LockKeyDialog : Adw.Dialog {
                                 orientation: vertical;
                                 valign: start;
                                 halign: fill;
-                                margin-top: 20;
-                                margin-bottom: 20;
 
                                 Adw.StatusPage status_page {
                                     icon-name: "system-lock-screen-symbolic";
@@ -56,12 +54,15 @@ template $LockKeyDialog : Adw.Dialog {
 
                                 Gtk.ListBox key_box {
                                     styles ["boxed-list"]
+
+                                    margin-top: 20;
                                 }
 
                                 Gtk.Box {
                                     orientation: horizontal;
                                     valign: center;
                                     halign: center;
+                                    margin-bottom: 20;
                                     spacing: 10;
 
                                     Gtk.Button import_button {

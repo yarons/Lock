@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 12:43+0200\n"
+"POT-Creation-Date: 2024-10-22 13:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -472,67 +472,67 @@ msgstr ""
 msgid "Refresh keys"
 msgstr ""
 
-#: data/ui/keydialog.blp:53
+#: data/ui/keydialog.blp:51
 msgid "No keys available"
 msgstr ""
 
-#: data/ui/keydialog.blp:54
+#: data/ui/keydialog.blp:52
 msgid "Your system does not store any GnuPG keys."
 msgstr ""
 
-#: data/ui/keydialog.blp:70
+#: data/ui/keydialog.blp:71
 msgctxt "Import key(s) from file"
 msgid "Import"
 msgstr ""
 
-#: data/ui/keydialog.blp:71
+#: data/ui/keydialog.blp:72
 msgid "Import key(s) from file"
 msgstr ""
 
-#: data/ui/keydialog.blp:78
+#: data/ui/keydialog.blp:79
 msgid "Create a new keypair"
 msgstr ""
 
-#: data/ui/keydialog.blp:91
+#: data/ui/keydialog.blp:92
 msgid "Generate keypair"
 msgstr ""
 
-#: data/ui/keydialog.blp:118
+#: data/ui/keydialog.blp:119
 msgctxt "Name of the UID of the new keypair"
 msgid "Name"
 msgstr ""
 
-#: data/ui/keydialog.blp:123
+#: data/ui/keydialog.blp:124
 msgctxt "Email of the UID of the new keypair"
 msgid "Email"
 msgstr ""
 
-#: data/ui/keydialog.blp:128
+#: data/ui/keydialog.blp:129
 msgctxt "Algorithm of the new keypair"
 msgid "Algorithm"
 msgstr ""
 
-#: data/ui/keydialog.blp:129
+#: data/ui/keydialog.blp:130
 msgctxt "Algorithm of the new keypair"
 msgid "Keypair"
 msgstr ""
 
-#: data/ui/keydialog.blp:137
+#: data/ui/keydialog.blp:138
 msgctxt "Expiry time of the new keypair"
 msgid "Expiry"
 msgstr ""
 
-#: data/ui/keydialog.blp:138
+#: data/ui/keydialog.blp:139
 msgctxt "Expiry unit of the new keypair"
 msgid "Months, disable with zero"
 msgstr ""
 
-#: data/ui/keydialog.blp:160
+#: data/ui/keydialog.blp:161
 msgctxt "Generate a new keypair"
 msgid "Generate"
 msgstr ""
 
-#: data/ui/keydialog.blp:161
+#: data/ui/keydialog.blp:162
 msgid "Generate a new keypair"
 msgstr ""
 

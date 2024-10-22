@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 12:43+0200\n"
+"POT-Creation-Date: 2024-10-22 13:42+0200\n"
 "PO-Revision-Date: 2024-10-22 12:41+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
@@ -476,67 +476,67 @@ msgstr "Titel"
 msgid "Refresh keys"
 msgstr "Schlüssel aktualisieren"
 
-#: data/ui/keydialog.blp:53
+#: data/ui/keydialog.blp:51
 msgid "No keys available"
 msgstr "Keine Schlüssel verfügbar"
 
-#: data/ui/keydialog.blp:54
+#: data/ui/keydialog.blp:52
 msgid "Your system does not store any GnuPG keys."
 msgstr "Ihr System speichert keine GnuPG Schlüssel."
 
-#: data/ui/keydialog.blp:70
+#: data/ui/keydialog.blp:71
 msgctxt "Import key(s) from file"
 msgid "Import"
 msgstr "Importieren"
 
-#: data/ui/keydialog.blp:71
+#: data/ui/keydialog.blp:72
 msgid "Import key(s) from file"
 msgstr "Schlüssel aus Datei importieren"
 
-#: data/ui/keydialog.blp:78
+#: data/ui/keydialog.blp:79
 msgid "Create a new keypair"
 msgstr "Neues Schlüsselpaar erstellen"
 
-#: data/ui/keydialog.blp:91
+#: data/ui/keydialog.blp:92
 msgid "Generate keypair"
 msgstr "Schlüsselpaar generieren"
 
-#: data/ui/keydialog.blp:118
+#: data/ui/keydialog.blp:119
 msgctxt "Name of the UID of the new keypair"
 msgid "Name"
 msgstr "Name"
 
-#: data/ui/keydialog.blp:123
+#: data/ui/keydialog.blp:124
 msgctxt "Email of the UID of the new keypair"
 msgid "Email"
 msgstr "E-Mail"
 
-#: data/ui/keydialog.blp:128
+#: data/ui/keydialog.blp:129
 msgctxt "Algorithm of the new keypair"
 msgid "Algorithm"
 msgstr "Algorithmus"
 
-#: data/ui/keydialog.blp:129
+#: data/ui/keydialog.blp:130
 msgctxt "Algorithm of the new keypair"
 msgid "Keypair"
 msgstr "Schlüsselpaar"
 
-#: data/ui/keydialog.blp:137
+#: data/ui/keydialog.blp:138
 msgctxt "Expiry time of the new keypair"
 msgid "Expiry"
 msgstr "Ablaufdauer"
 
-#: data/ui/keydialog.blp:138
+#: data/ui/keydialog.blp:139
 msgctxt "Expiry unit of the new keypair"
 msgid "Months, disable with zero"
 msgstr "Monate, mit Null ausschalten"
 
-#: data/ui/keydialog.blp:160
+#: data/ui/keydialog.blp:161
 msgctxt "Generate a new keypair"
 msgid "Generate"
 msgstr "Generieren"
 
-#: data/ui/keydialog.blp:161
+#: data/ui/keydialog.blp:162
 msgid "Generate a new keypair"
 msgstr "Neues Schlüsselpaar generieren"
 
