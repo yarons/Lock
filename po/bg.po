@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 00:50+0200\n"
-"PO-Revision-Date: 2024-10-23 00:02+0200\n"
+"POT-Creation-Date: 2024-10-23 00:47+0200\n"
+"PO-Revision-Date: 2024-10-23 00:58+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -146,30 +146,28 @@ msgstr "Ключът е изнесен"
 
 #: src/keyrow.c:242
 msgid "Remove key and subkeys?"
-msgstr ""
+msgstr "Премахване на ключа и подключовете?"
 
 #: src/keyrow.c:245
 #, c-format
 msgid "The removal of the key of %s cannot be undone!"
-msgstr ""
+msgstr "Премахването на ключа %s не може да бъде върнато!"
 
 #: src/keyrow.c:248
 msgid "_Cancel"
-msgstr ""
+msgstr "_Отказване"
 
 #: src/keyrow.c:249
 msgid "_Remove"
-msgstr ""
+msgstr "_Премахване"
 
 #: src/keyrow.c:294
-#, fuzzy
 msgid "Removal failed"
-msgstr "Внасянето е неуспешно"
+msgstr "Премахването е неуспешно"
 
 #: src/keyrow.c:296
-#, fuzzy
 msgid "Key removed"
-msgstr "Ключът е изнесен"
+msgstr "Ключът е премахнат"
 
 #: src/cryptography.c:16
 #, c-format
@@ -233,7 +231,7 @@ msgstr "Изнесеният файл не може да бъде отворен
 #: src/cryptography.c:267
 msgctxt "GPGME Error"
 msgid "remove GPG key"
-msgstr ""
+msgstr "премахване на GPG ключ"
 
 #: src/cryptography.c:305
 msgctxt "GPGME Error"
@@ -436,7 +434,7 @@ msgstr "изнасяне на ключ"
 #: src/threading.c:212
 msgctxt "Thread Error"
 msgid "key removal"
-msgstr ""
+msgstr "премахване на ключ"
 
 #: data/ui/window.blp:9 data/ui/window.blp:169
 #: data/com.konstantintutsch.Lock.desktop.in.in:4
@@ -476,19 +474,19 @@ msgstr "Входен файл"
 msgid "Output File"
 msgstr "Изходен файл"
 
-#: data/ui/window.blp:131 data/ui/window.blp:190
+#: data/ui/window.blp:131 data/ui/window.blp:194
 msgid "Encrypt"
 msgstr "Шифриране"
 
-#: data/ui/window.blp:138 data/ui/window.blp:194
+#: data/ui/window.blp:138 data/ui/window.blp:198
 msgid "Decrypt"
 msgstr "Дешифриране"
 
-#: data/ui/window.blp:145 data/ui/window.blp:200
+#: data/ui/window.blp:145 data/ui/window.blp:204
 msgid "Sign"
 msgstr "Подписване"
 
-#: data/ui/window.blp:152 data/ui/window.blp:204
+#: data/ui/window.blp:152 data/ui/window.blp:208
 msgid "Verify"
 msgstr "Потвърждаване"
 
@@ -496,7 +494,11 @@ msgstr "Потвърждаване"
 msgid "Manage keys"
 msgstr "Управление на ключовете"
 
-#: data/ui/window.blp:181
+#: data/ui/window.blp:179
+msgid "Backup keys"
+msgstr "Създаване на резерва"
+
+#: data/ui/window.blp:185
 msgid "About Lock"
 msgstr "Относно „Ключалка“"
 
@@ -596,7 +598,7 @@ msgstr "Дата на изтичане"
 
 #: data/ui/keyrow.blp:18
 msgid "Remove key including subkeys"
-msgstr ""
+msgstr "Премахване на ключа, както и подключовете"
 
 #: data/ui/keyrow.blp:25
 msgid "Export public key to file"
@@ -657,9 +659,8 @@ msgid "Generate new keypairs"
 msgstr "Генерирайте нови ключове"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:23
-#, fuzzy
 msgid "Remove keys"
-msgstr "Опресняване на ключовете"
+msgstr "Премахвайте ключове"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:46
 msgid "Light Appearance"
