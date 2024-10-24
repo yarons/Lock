@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 20:01+0200\n"
+"POT-Creation-Date: 2024-10-24 21:12+0200\n"
 "PO-Revision-Date: 2024-10-23 00:58+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
@@ -115,7 +115,8 @@ msgid "Import failed"
 msgstr "Внасянето е неуспешно"
 
 #: src/keydialog.c:329
-msgid "Key(s) imported"
+#, fuzzy
+msgid "Keys imported"
 msgstr "Внесено"
 
 #: src/keydialog.c:396
@@ -521,13 +522,15 @@ msgid "Your system does not store any GnuPG keys."
 msgstr "Вашата система не съхранява GnuPG ключове."
 
 #: data/ui/keydialog.blp:71
-msgctxt "Import key(s) from file"
+#, fuzzy
+msgctxt "Import keys from files"
 msgid "Import"
 msgstr "Внасяне"
 
 #: data/ui/keydialog.blp:72
-msgid "Import key(s) from file"
-msgstr "Внасяне на ключ(ове) от файл"
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
+msgstr "Внасяйте ключове от файлове"
 
 #: data/ui/keydialog.blp:79
 msgid "Create a new keypair"
@@ -652,10 +655,6 @@ msgstr "Преглеждайте датите на изтичане"
 msgid "Export public keys to files"
 msgstr "Изнасяйте публични ключове от файлове"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
-msgid "Import keys from files"
-msgstr "Внасяйте ключове от файлове"
-
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
 msgid "Generate new keypairs"
 msgstr "Генерирайте нови ключове"
@@ -691,6 +690,9 @@ msgstr "Обикновен текст"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Прозорец за идентификатор на потребителя"
+
+#~ msgid "Import key(s) from file"
+#~ msgstr "Внасяне на ключ(ове) от файл"
 
 #~ msgid "Backup keys"
 #~ msgstr "Създаване на резерва"

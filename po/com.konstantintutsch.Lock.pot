@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 20:01+0200\n"
+"POT-Creation-Date: 2024-10-24 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgid "Import failed"
 msgstr ""
 
 #: src/keydialog.c:329
-msgid "Key(s) imported"
+msgid "Keys imported"
 msgstr ""
 
 #: src/keydialog.c:396
@@ -518,12 +518,13 @@ msgid "Your system does not store any GnuPG keys."
 msgstr ""
 
 #: data/ui/keydialog.blp:71
-msgctxt "Import key(s) from file"
+msgctxt "Import keys from files"
 msgid "Import"
 msgstr ""
 
 #: data/ui/keydialog.blp:72
-msgid "Import key(s) from file"
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
 msgstr ""
 
 #: data/ui/keydialog.blp:79
@@ -645,10 +646,6 @@ msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
 msgid "Export public keys to files"
-msgstr ""
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
-msgid "Import keys from files"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22

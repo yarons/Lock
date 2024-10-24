@@ -326,7 +326,7 @@ gboolean lock_key_dialog_import_on_completed(LockKeyDialog *dialog)
     if (!dialog->import_success) {
         toast = adw_toast_new(_("Import failed"));
     } else {
-        toast = adw_toast_new(_("Key(s) imported"));
+        toast = adw_toast_new(_("Keys imported"));
     }
 
     adw_toast_set_timeout(toast, 2);

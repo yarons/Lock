@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 20:01+0200\n"
+"POT-Creation-Date: 2024-10-24 21:12+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -114,7 +114,8 @@ msgid "Import failed"
 msgstr "Import selhal"
 
 #: src/keydialog.c:329
-msgid "Key(s) imported"
+#, fuzzy
+msgid "Keys imported"
 msgstr "Klíč(e) importován(y)"
 
 #: src/keydialog.c:396
@@ -528,13 +529,13 @@ msgstr "Ve vašem systému nejsou uloženy žádné GnuPG klíče."
 
 #: data/ui/keydialog.blp:71
 #, fuzzy
-msgctxt "Import key(s) from file"
+msgctxt "Import keys from files"
 msgid "Import"
 msgstr "Importovat"
 
 #: data/ui/keydialog.blp:72
-#, fuzzy
-msgid "Import key(s) from file"
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Import keys from files"
 msgstr "Importovat klíče ze souborů"
 
 #: data/ui/keydialog.blp:79
@@ -664,10 +665,6 @@ msgstr "Zobrazit datum platnosti"
 msgid "Export public keys to files"
 msgstr "Exportovat veřejné klíče do souborů"
 
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
-msgid "Import keys from files"
-msgstr "Importovat klíče ze souborů"
-
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
 #, fuzzy
 msgid "Generate new keypairs"
@@ -705,6 +702,10 @@ msgstr "Holý text"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Okno s ID uživatele"
+
+#, fuzzy
+#~ msgid "Import key(s) from file"
+#~ msgstr "Importovat klíče ze souborů"
 
 #, fuzzy
 #~ msgctxt "GPGME Error"
