@@ -289,7 +289,7 @@ static void lock_key_dialog_import_file_present(GtkButton *self,
  */
 void lock_key_dialog_import(LockKeyDialog *dialog)
 {
-    char *path;
+    char *path = malloc(1 * sizeof(char));
 
     gboolean thread_success;
     for (guint i = 0; i < g_list_model_get_n_items(dialog->import_file); i++) {
