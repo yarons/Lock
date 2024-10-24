@@ -30,6 +30,8 @@ void cryptography_init()
     g_message("GnuPG Made Easy %s", gpgme_check_version(NULL));
 }
 
+/**** Key ****/
+
 /**
  * This function returns a key with matching UID.
  *
@@ -272,6 +274,8 @@ bool key_remove(gpgme_key_t key)
     return true;
 }
 
+/**** Encrypt ****/
+
 /**
  * This function encrypts a text using a GPG key.
  *
@@ -331,189 +335,6 @@ char *encrypt_text(const char *text, gpgme_key_t key)
     buffer = NULL;
 
     return armor;
-}
-
-/**
- * This function decrypts an OpenPGP ASCII armored text.
- *
- * @param armor Text to decrypt
- *
- * @return Decrypted text. Calling `free()` is required
- */
-char *decrypt_text(const char *armor)
-{
-    gpgme_ctx_t context;
-    gpgme_data_t encrypted;
-    gpgme_data_t decrypted;
-
-    gpgme_error_t error;
-
-    error = gpgme_new(&context);
-    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
-
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
-
-    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "set pinentry mode of GPGME context to ask"), context,);
-
-    error = gpgme_data_new_from_mem(&encrypted, armor, strlen(armor), 1);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "create new encrypted GPGME data from string"), context,
-                 gpgme_data_release(encrypted););
-
-    error = gpgme_data_new(&decrypted);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "create new decrypted GPGME data"), context,
-                 gpgme_data_release(encrypted); gpgme_data_release(decrypted););
-
-    error = gpgme_op_decrypt(context, encrypted, decrypted);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "decrypt GPGME data from memory"), context,
-                 gpgme_data_release(encrypted); gpgme_data_release(decrypted););
-
-    size_t length;
-    char *buffer = gpgme_data_release_and_get_mem(decrypted, &length);
-
-    char *text = malloc(length + 1);
-    memcpy(text, buffer, length);
-    text[length] = '\0';
-
-    /* Cleanup */
-    gpgme_free(buffer);
-    buffer = NULL;
-
-    gpgme_release(context);
-    gpgme_data_release(encrypted);
-
-    return text;
-}
-
-/**
- * This function signs a text using a GPG key.
- *
- * @param text Text to sign
- *
- * @return Signed text as an OpenPGP ASCII armor. Calling `free()` is required
- */
-char *sign_text(const char *text)
-{
-    gpgme_ctx_t context;
-    gpgme_data_t plain;
-    gpgme_data_t sign;
-
-    gpgme_error_t error;
-
-    error = gpgme_new(&context);
-    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
-
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
-
-    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "set pinentry mode of GPGME context to ask"), context,);
-
-    gpgme_set_armor(context, 1);
-
-    error = gpgme_data_new_from_mem(&plain, text, strlen(text), 1);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "create new unsigned GPGME data from string"), context,
-                 gpgme_data_release(plain););
-
-    error = gpgme_data_new(&sign);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "create new signed GPGME data"), context,
-                 gpgme_data_release(plain); gpgme_data_release(sign););
-
-    error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
-    HANDLE_ERROR(NULL, error, C_("GPGME Error", "sign GPGME data from memory"),
-                 context, gpgme_data_release(plain); gpgme_data_release(sign););
-
-    size_t length;
-    char *buffer = gpgme_data_release_and_get_mem(sign, &length);
-
-    char *armor = malloc(length + 1);
-    memcpy(armor, buffer, length);
-    armor[length] = '\0';
-
-    /* Cleanup */
-    gpgme_free(buffer);
-    buffer = NULL;
-
-    gpgme_release(context);
-    gpgme_data_release(plain);
-
-    return armor;
-}
-
-/**
- * This function verifies a text using a GPG key.
- *
- * @param armor Text to verify
- *
- * @return Verified text. Calling `free()` is required
- */
-char *verify_text(const char *armor)
-{
-    gpgme_ctx_t context;
-    gpgme_data_t sign;
-    gpgme_data_t plain;
-
-    gpgme_error_t error;
-
-    error = gpgme_new(&context);
-    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
-
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
-
-    gpgme_set_armor(context, 1);
-
-    error = gpgme_data_new_from_mem(&sign, armor, strlen(armor), 1);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "create new signed GPGME data from string"),
-                 context, gpgme_data_release(sign););
-
-    error = gpgme_data_new(&plain);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "create new verified GPGME data"), context,
-                 gpgme_data_release(sign); gpgme_data_release(plain););
-
-    error = gpgme_op_verify(context, sign, NULL, plain);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "verify GPGME data from memory"), context,
-                 gpgme_data_release(sign); gpgme_data_release(plain););
-
-    size_t length;
-    char *buffer = gpgme_data_release_and_get_mem(plain, &length);
-
-    char *text = malloc(length + 1);
-    memcpy(text, buffer, length);
-    text[length] = '\0';
-
-    /* Cleanup */
-    gpgme_free(buffer);
-    buffer = NULL;
-
-    gpgme_release(context);
-    gpgme_data_release(sign);
-
-    return text;
 }
 
 /**
@@ -581,6 +402,70 @@ bool encrypt_file(const char *input_path, const char *output_path,
     gpgme_data_release(encrypted);
 
     return true;
+}
+
+/**** Decrypt ****/
+
+/**
+ * This function decrypts an OpenPGP ASCII armored text.
+ *
+ * @param armor Text to decrypt
+ *
+ * @return Decrypted text. Calling `free()` is required
+ */
+char *decrypt_text(const char *armor)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t encrypted;
+    gpgme_data_t decrypted;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "set pinentry mode of GPGME context to ask"), context,);
+
+    error = gpgme_data_new_from_mem(&encrypted, armor, strlen(armor), 1);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "create new encrypted GPGME data from string"), context,
+                 gpgme_data_release(encrypted););
+
+    error = gpgme_data_new(&decrypted);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new decrypted GPGME data"), context,
+                 gpgme_data_release(encrypted); gpgme_data_release(decrypted););
+
+    error = gpgme_op_decrypt(context, encrypted, decrypted);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "decrypt GPGME data from memory"), context,
+                 gpgme_data_release(encrypted); gpgme_data_release(decrypted););
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(decrypted, &length);
+
+    char *text = malloc(length + 1);
+    memcpy(text, buffer, length);
+    text[length] = '\0';
+
+    /* Cleanup */
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    gpgme_release(context);
+    gpgme_data_release(encrypted);
+
+    return text;
 }
 
 /**
@@ -676,6 +561,71 @@ bool decrypt_file(const char *input_path, const char *output_path)
     return true;
 }
 
+/**** Sign ****/
+
+/**
+ * This function signs a text using a GPG key.
+ *
+ * @param text Text to sign
+ *
+ * @return Signed text as an OpenPGP ASCII armor. Calling `free()` is required
+ */
+char *sign_text(const char *text)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t plain;
+    gpgme_data_t sign;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "set pinentry mode of GPGME context to ask"), context,);
+
+    gpgme_set_armor(context, 1);
+
+    error = gpgme_data_new_from_mem(&plain, text, strlen(text), 1);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error",
+                    "create new unsigned GPGME data from string"), context,
+                 gpgme_data_release(plain););
+
+    error = gpgme_data_new(&sign);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new signed GPGME data"), context,
+                 gpgme_data_release(plain); gpgme_data_release(sign););
+
+    error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "sign GPGME data from memory"),
+                 context, gpgme_data_release(plain); gpgme_data_release(sign););
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(sign, &length);
+
+    char *armor = malloc(length + 1);
+    memcpy(armor, buffer, length);
+    armor[length] = '\0';
+
+    /* Cleanup */
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    gpgme_release(context);
+    gpgme_data_release(plain);
+
+    return armor;
+}
+
 /**
  * This function signs a file using a GPG key.
  *
@@ -739,6 +689,66 @@ bool sign_file(const char *input_path, const char *output_path)
     gpgme_data_release(sign);
 
     return true;
+}
+
+/**** Verify ****/
+
+/**
+ * This function verifies a text using a GPG key.
+ *
+ * @param armor Text to verify
+ *
+ * @return Verified text. Calling `free()` is required
+ */
+char *verify_text(const char *armor)
+{
+    gpgme_ctx_t context;
+    gpgme_data_t sign;
+    gpgme_data_t plain;
+
+    gpgme_error_t error;
+
+    error = gpgme_new(&context);
+    HANDLE_ERROR(NULL, error, C_("GPGME Error", "create new GPGME context"),
+                 context,);
+
+    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
+                 context,);
+
+    gpgme_set_armor(context, 1);
+
+    error = gpgme_data_new_from_mem(&sign, armor, strlen(armor), 1);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new signed GPGME data from string"),
+                 context, gpgme_data_release(sign););
+
+    error = gpgme_data_new(&plain);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "create new verified GPGME data"), context,
+                 gpgme_data_release(sign); gpgme_data_release(plain););
+
+    error = gpgme_op_verify(context, sign, NULL, plain);
+    HANDLE_ERROR(NULL, error,
+                 C_("GPGME Error", "verify GPGME data from memory"), context,
+                 gpgme_data_release(sign); gpgme_data_release(plain););
+
+    size_t length;
+    char *buffer = gpgme_data_release_and_get_mem(plain, &length);
+
+    char *text = malloc(length + 1);
+    memcpy(text, buffer, length);
+    text[length] = '\0';
+
+    /* Cleanup */
+    gpgme_free(buffer);
+    buffer = NULL;
+
+    gpgme_release(context);
+    gpgme_data_release(sign);
+
+    return text;
 }
 
 /**
