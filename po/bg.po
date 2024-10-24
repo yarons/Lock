@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 19:39+0200\n"
+"POT-Creation-Date: 2024-10-24 19:56+0200\n"
 "PO-Revision-Date: 2024-10-23 00:58+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
@@ -49,16 +49,16 @@ msgstr "Шифриране за"
 msgid "Enter name or email …"
 msgstr "Въведете име или е-поща …"
 
-#: src/window.c:648 src/window.c:733
+#: src/window.c:646 src/window.c:729
 #, c-format
 msgid "Failed to find key for User ID “%s”"
 msgstr "Ключ за идентификатор на потребител „%s“ не може да бъде намерен"
 
-#: src/window.c:653 src/window.c:738
+#: src/window.c:651 src/window.c:734
 msgid "Encryption failed"
 msgstr "Шифрирането е неуспешно"
 
-#: src/window.c:659
+#: src/window.c:657
 #, c-format
 msgctxt ""
 "Formatter is either name, email or fingerprint of the public key used in the "
@@ -66,7 +66,7 @@ msgctxt ""
 msgid "Text encrypted for %s"
 msgstr "Текстът е шифриран за %s"
 
-#: src/window.c:744
+#: src/window.c:740
 #, c-format
 msgctxt ""
 "Formatter is either name, email or fingerprint of the public key used in the "
@@ -74,55 +74,55 @@ msgctxt ""
 msgid "File encrypted for %s"
 msgstr "Файлът е шифриран за %s"
 
-#: src/window.c:801 src/window.c:856
+#: src/window.c:797 src/window.c:852
 msgid "Decryption failed"
 msgstr "Дешифрирането е неуспешно"
 
-#: src/window.c:803
+#: src/window.c:799
 msgid "Text decrypted"
 msgstr "Текстът е дешифриран"
 
-#: src/window.c:858
+#: src/window.c:854
 msgid "File decrypted"
 msgstr "Файлът е дешифриран"
 
-#: src/window.c:914 src/window.c:969
+#: src/window.c:910 src/window.c:965
 msgid "Signing failed"
 msgstr "Подписването е неуспешно"
 
-#: src/window.c:916
+#: src/window.c:912
 msgid "Text signed"
 msgstr "Текстът е подписан"
 
-#: src/window.c:971
+#: src/window.c:967
 msgid "File signed"
 msgstr "Файлът е подписан"
 
-#: src/window.c:1027 src/window.c:1082
+#: src/window.c:1023 src/window.c:1078
 msgid "Verification failed"
 msgstr "Потвърждаването е неуспешно"
 
-#: src/window.c:1029
+#: src/window.c:1025
 msgid "Text verified"
 msgstr "Текстът е потвърден"
 
-#: src/window.c:1084
+#: src/window.c:1080
 msgid "File verified"
 msgstr "Файлът е потвърден"
 
-#: src/keydialog.c:317
+#: src/keydialog.c:327
 msgid "Import failed"
 msgstr "Внасянето е неуспешно"
 
-#: src/keydialog.c:319
+#: src/keydialog.c:329
 msgid "Key(s) imported"
 msgstr "Внесено"
 
-#: src/keydialog.c:386
+#: src/keydialog.c:396
 msgid "Generation failed"
 msgstr "Генерирането е неуспешно"
 
-#: src/keydialog.c:388
+#: src/keydialog.c:398
 msgid "Keypair generated"
 msgstr "Двойката ключове е генерирана"
 
@@ -175,20 +175,20 @@ msgctxt "Error message constructor for failed GPGME operations"
 msgid "Failed to %s: %s"
 msgstr "Неуспех на %s: %s"
 
-#: src/cryptography.c:49 src/cryptography.c:91 src/cryptography.c:130
-#: src/cryptography.c:187 src/cryptography.c:259 src/cryptography.c:295
-#: src/cryptography.c:371 src/cryptography.c:435 src/cryptography.c:503
-#: src/cryptography.c:603 src/cryptography.c:680 src/cryptography.c:745
-#: src/cryptography.c:809
+#: src/cryptography.c:49 src/cryptography.c:90 src/cryptography.c:131
+#: src/cryptography.c:186 src/cryptography.c:260 src/cryptography.c:296
+#: src/cryptography.c:367 src/cryptography.c:425 src/cryptography.c:488
+#: src/cryptography.c:582 src/cryptography.c:654 src/cryptography.c:712
+#: src/cryptography.c:771
 msgctxt "GPGME Error"
 msgid "create new GPGME context"
 msgstr "създадане на нов GPGME контекст"
 
-#: src/cryptography.c:54 src/cryptography.c:96 src/cryptography.c:135
-#: src/cryptography.c:194 src/cryptography.c:264 src/cryptography.c:300
-#: src/cryptography.c:376 src/cryptography.c:440 src/cryptography.c:508
-#: src/cryptography.c:608 src/cryptography.c:685 src/cryptography.c:750
-#: src/cryptography.c:814
+#: src/cryptography.c:54 src/cryptography.c:95 src/cryptography.c:136
+#: src/cryptography.c:193 src/cryptography.c:265 src/cryptography.c:301
+#: src/cryptography.c:372 src/cryptography.c:430 src/cryptography.c:493
+#: src/cryptography.c:587 src/cryptography.c:659 src/cryptography.c:717
+#: src/cryptography.c:776
 msgctxt "GPGME Error"
 msgid "set protocol of GPGME context to OpenPGP"
 msgstr "задаване на протокол на GPGME контекста на OpenPGP"
@@ -198,7 +198,7 @@ msgctxt "GPGME Error"
 msgid "find key matching User ID"
 msgstr "намиране на ключ, съответстващ на идентификатора на потребителя"
 
-#: src/cryptography.c:101
+#: src/cryptography.c:100
 msgctxt "GPGME Error"
 msgid "load GPGME key data from file"
 msgstr "зареждане на данни за GPGME ключа от файл"
@@ -208,17 +208,17 @@ msgctxt "GPGME Error"
 msgid "import GPG key from file"
 msgstr "внасяне на GPG ключ от файл"
 
-#: src/cryptography.c:146 src/cryptography.c:155
+#: src/cryptography.c:147 src/cryptography.c:156
 msgctxt "GPGME Error"
 msgid "generate new GPG key for signing"
 msgstr "генериране на нов GPG ключ за подписване"
 
-#: src/cryptography.c:162
+#: src/cryptography.c:163
 msgctxt "GPGME Error"
 msgid "delete unfinished, generated ECC key"
 msgstr "изтриване на незавършен, генериран ECC ключ"
 
-#: src/cryptography.c:199
+#: src/cryptography.c:198
 msgctxt "GPGME Error"
 msgid "create GPGME key data in memory"
 msgstr "създаване на данни за GPGME ключ в паметта"
@@ -229,148 +229,148 @@ msgctxt "GPGME Error"
 msgid "export GPG key(s) to file"
 msgstr "внасяне на GPG ключ от файл"
 
-#: src/cryptography.c:217
+#: src/cryptography.c:218
 #, c-format
 msgid "Failed to open export file: %s"
 msgstr "Изнесеният файл не може да бъде отворен: %s"
 
-#: src/cryptography.c:268
+#: src/cryptography.c:269
 msgctxt "GPGME Error"
 msgid "remove GPG key"
 msgstr "премахване на GPG ключ"
 
-#: src/cryptography.c:308
+#: src/cryptography.c:309
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from string"
 msgstr "създаване на нови дешифрирани GPGME данни от низ"
 
-#: src/cryptography.c:314 src/cryptography.c:388
+#: src/cryptography.c:314 src/cryptography.c:383
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data"
 msgstr "създаване на нови шифрирани GPGME данни"
 
-#: src/cryptography.c:322
+#: src/cryptography.c:320
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from memory"
 msgstr "шифриране на GPGME данни от паметта"
 
-#: src/cryptography.c:361 src/cryptography.c:670
+#: src/cryptography.c:357 src/cryptography.c:644
 #, c-format
 msgid "Removed %s to prepare overwriting"
 msgstr "%s е премахнато, за да се подготви презаписването"
 
-#: src/cryptography.c:382
+#: src/cryptography.c:378
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data from file"
 msgstr "създаване на нови дешифрирани GPGME данни от файл"
 
-#: src/cryptography.c:395
+#: src/cryptography.c:388
 msgctxt "GPGME Error"
 msgid "set file path of encrypted GPGME data"
 msgstr "задаване на местоположението до файла с шифрираните GPGME данни"
 
-#: src/cryptography.c:404
+#: src/cryptography.c:396
 msgctxt "GPGME Error"
 msgid "encrypt GPGME data from file"
 msgstr "шифриране на GPGME данни от файл"
 
-#: src/cryptography.c:446 src/cryptography.c:514 src/cryptography.c:614
-#: src/cryptography.c:691
+#: src/cryptography.c:436 src/cryptography.c:499 src/cryptography.c:593
+#: src/cryptography.c:665
 msgctxt "GPGME Error"
 msgid "set pinentry mode of GPGME context to ask"
 msgstr "задаване на режим „pinentry“ на GPGME контекста за запитване"
 
-#: src/cryptography.c:451
+#: src/cryptography.c:441
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from string"
 msgstr "създаване на нови шифрирани GPGME данни от низ"
 
-#: src/cryptography.c:457 src/cryptography.c:525
+#: src/cryptography.c:446 src/cryptography.c:509
 msgctxt "GPGME Error"
 msgid "create new decrypted GPGME data"
 msgstr "създаване на нови дешифрирани GPGME данни"
 
-#: src/cryptography.c:464
+#: src/cryptography.c:451
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from memory"
 msgstr "дешифриране на GPGME данни от паметта"
 
-#: src/cryptography.c:519
+#: src/cryptography.c:504
 msgctxt "GPGME Error"
 msgid "create new encrypted GPGME data from file"
 msgstr "създаване на нови шифрирани GPGME данни от файл"
 
-#: src/cryptography.c:532
+#: src/cryptography.c:514
 msgctxt "GPGME Error"
 msgid "set file path of decrypted GPGME data"
 msgstr "задаване на местоположението до файла с дешифрираните GPGME данни"
 
-#: src/cryptography.c:539
+#: src/cryptography.c:520
 msgctxt "GPGME Error"
 msgid "decrypt GPGME data from file"
 msgstr "дешифриране на GPGME данни от файл"
 
-#: src/cryptography.c:554 src/cryptography.c:860
+#: src/cryptography.c:533 src/cryptography.c:814
 #, c-format
 msgid "Failed to open output file: %s"
 msgstr "Изходният файл не може да бъде отворен: %s"
 
-#: src/cryptography.c:621
+#: src/cryptography.c:600
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from string"
 msgstr "създаване на нови неподписани GPGME данни от низ"
 
-#: src/cryptography.c:627 src/cryptography.c:701 src/cryptography.c:819
+#: src/cryptography.c:605 src/cryptography.c:674 src/cryptography.c:781
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data"
 msgstr "създаване на нови подписани GPGME данни"
 
-#: src/cryptography.c:633
+#: src/cryptography.c:609
 msgctxt "GPGME Error"
 msgid "sign GPGME data from memory"
 msgstr "подписване на GPGME данни от паметта"
 
-#: src/cryptography.c:695
+#: src/cryptography.c:669
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data from file"
 msgstr "създаване на нови неподписани GPGME данни от файл"
 
-#: src/cryptography.c:708 src/cryptography.c:825
+#: src/cryptography.c:679 src/cryptography.c:786
 msgctxt "GPGME Error"
 msgid "set file path of signed GPGME data"
 msgstr "задаване на местоположението до файла с подписаните GPGME данни"
 
-#: src/cryptography.c:714
+#: src/cryptography.c:683
 msgctxt "GPGME Error"
 msgid "sign GPGME data from file"
 msgstr "подписване на GPGME данни от файл"
 
-#: src/cryptography.c:757
+#: src/cryptography.c:724
 msgctxt "GPGME Error"
 msgid "create new signed GPGME data from string"
 msgstr "създаване на нови подписани GPGME данни от низ"
 
-#: src/cryptography.c:763
+#: src/cryptography.c:729
 msgctxt "GPGME Error"
 msgid "create new verified GPGME data"
 msgstr "създаване на нови потвърдени GPGME данни"
 
-#: src/cryptography.c:770
+#: src/cryptography.c:734
 msgctxt "GPGME Error"
 msgid "verify GPGME data from memory"
 msgstr "потвърждаване на GPGME данни от паметта"
 
-#: src/cryptography.c:831
+#: src/cryptography.c:791
 msgctxt "GPGME Error"
 msgid "create new unsigned GPGME data"
 msgstr "създаване на нови неподписани GPGME данни"
 
-#: src/cryptography.c:838
+#: src/cryptography.c:796
 msgctxt "GPGME Error"
 msgid "set file path of unsigned GPGME data"
 msgstr "задаване на местоположението до файла с неподписаните GPGME данни"
 
-#: src/cryptography.c:845
+#: src/cryptography.c:801
 msgctxt "GPGME Error"
 msgid "verify GPGME data from file"
 msgstr "потвърждаване на GPGME данни от файл"

@@ -30,7 +30,7 @@ struct _LockKeyDialog {
 
     gboolean import_success;
     GtkButton *import_button;
-    GFile *import_file;
+    GListModel *import_file;
 
     gboolean generate_success;
     GtkButton *generate_button;
@@ -245,7 +245,7 @@ static void lock_key_dialog_import_file_open(GObject *source_object,
     GtkFileDialog *file = GTK_FILE_DIALOG(source_object);
     LockKeyDialog *dialog = LOCK_KEY_DIALOG(data);
 
-    dialog->import_file = gtk_file_dialog_open_finish(file, res, NULL);
+    dialog->import_file = gtk_file_dialog_open_multiple_finish(file, res, NULL);
     if (dialog->import_file == NULL) {
         /* Cleanup */
         g_object_unref(file);
@@ -277,8 +277,9 @@ static void lock_key_dialog_import_file_present(GtkButton *self,
     GtkFileDialog *file = gtk_file_dialog_new();
     GCancellable *cancel = g_cancellable_new();
 
-    gtk_file_dialog_open(file, GTK_WINDOW(dialog->window),
-                         cancel, lock_key_dialog_import_file_open, dialog);
+    gtk_file_dialog_open_multiple(file, GTK_WINDOW(dialog->window),
+                                  cancel, lock_key_dialog_import_file_open,
+                                  dialog);
 }
 
 /**
@@ -288,9 +289,18 @@ static void lock_key_dialog_import_file_present(GtkButton *self,
  */
 void lock_key_dialog_import(LockKeyDialog *dialog)
 {
-    char *path = g_file_get_path(dialog->import_file);
+    char *path;
 
-    dialog->import_success = key_import(path);
+    gboolean thread_success;
+    for (int i = 0; i < g_list_model_get_n_items(dialog->import_file); i++) {
+        path = g_file_get_path(g_list_model_get_item(dialog->import_file, i));
+
+        thread_success = key_import(path);
+
+        if (!thread_success)
+            break;
+    }
+    dialog->import_success = thread_success;
 
     /* Cleanup */
     g_free(path);
