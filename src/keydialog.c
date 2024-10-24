@@ -292,7 +292,7 @@ void lock_key_dialog_import(LockKeyDialog *dialog)
     char *path;
 
     gboolean thread_success;
-    for (int i = 0; i < g_list_model_get_n_items(dialog->import_file); i++) {
+    for (guint i = 0; i < g_list_model_get_n_items(dialog->import_file); i++) {
         path = g_file_get_path(g_list_model_get_item(dialog->import_file, i));
 
         thread_success = key_import(path);
