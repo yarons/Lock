@@ -167,7 +167,7 @@ void lock_key_row_export(LockKeyRow *row)
     char *path = g_file_get_path(row->export_file);
     const char *uid = adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row));
 
-    row->export_success = key_export(uid, path);
+    row->export_success = key_manage(path, uid, EXPORT);
 
     /* Cleanup */
     g_free(path);
@@ -267,11 +267,7 @@ void lock_key_row_remove(LockKeyRow *row)
 {
     const char *uid = adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row));
 
-    gpgme_key_t key = key_search(uid);
-    row->remove_success = key_remove(key);
-
-    /* Cleanup */
-    gpgme_key_release(key);
+    row->remove_success = key_manage(NULL, uid, REMOVE);
 
     /* UI */
     g_idle_add((GSourceFunc) lock_key_row_remove_on_completed, row);
