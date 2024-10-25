@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:37+0200\n"
+"POT-Creation-Date: 2024-10-25 10:52+0200\n"
 "PO-Revision-Date: 2024-10-23 00:58+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
@@ -528,7 +528,6 @@ msgid "Import"
 msgstr "Внасяне"
 
 #: data/ui/keydialog.blp:72
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
 msgid "Import keys from files"
 msgstr "Внасяйте ключове от файлове"
 
@@ -645,20 +644,26 @@ msgid "Verification"
 msgstr "Потвърждаване"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
-msgid "Manage available keys in a list:"
-msgstr "Управлявайте наличните ключове в списък:"
+msgid "Manage your GnuPG keyring:"
+msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
-msgid "View expiry dates"
-msgstr "Преглеждайте датите на изтичане"
+msgid "Generate new keypairs"
+msgstr "Генерирайте нови ключове"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
-msgid "Export public keys to files"
+#, fuzzy
+msgid "Import keys"
+msgstr "Внасяне"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+#, fuzzy
+msgid "Export public keys"
 msgstr "Изнасяйте публични ключове от файлове"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
-msgid "Generate new keypairs"
-msgstr "Генерирайте нови ключове"
+msgid "View expiry dates"
+msgstr "Преглеждайте датите на изтичане"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:23
 msgid "Remove keys"
@@ -691,6 +696,9 @@ msgstr "Обикновен текст"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Прозорец за идентификатор на потребителя"
+
+#~ msgid "Manage available keys in a list:"
+#~ msgstr "Управлявайте наличните ключове в списък:"
 
 #~ msgid "Remove key including subkeys"
 #~ msgstr "Премахване на ключа, както и подключовете"

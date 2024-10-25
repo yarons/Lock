@@ -13,12 +13,12 @@ Process text and files:
 - Signing
 - Verification
 
-Manage available keys in a list:
+Manage your GnuPG keyring:
 
-- View expiry dates
-- Export public keys to files
-- Import keys from files
 - Generate new keypairs
+- Import keys
+- Export public keys
+- View expiry dates
 - Remove keys
 
 <a href="https://flathub.org/apps/com.konstantintutsch.Lock"><img width="240" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"></a>

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:37+0200\n"
-"PO-Revision-Date: 2024-10-25 09:37+0200\n"
+"POT-Creation-Date: 2024-10-25 10:52+0200\n"
+"PO-Revision-Date: 2024-10-25 10:52+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -528,7 +528,6 @@ msgid "Import"
 msgstr "Importieren"
 
 #: data/ui/keydialog.blp:72
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
 msgid "Import keys from files"
 msgstr "Schlüssel aus Dateien importieren"
 
@@ -646,20 +645,24 @@ msgid "Verification"
 msgstr "Verifikation"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
-msgid "Manage available keys in a list:"
-msgstr "Verwalten Sie verfügbare Schlüssel über eine Liste:"
+msgid "Manage your GnuPG keyring:"
+msgstr "Verwalten Sie Ihren GnuPG Schlüsselbund:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
-msgid "View expiry dates"
-msgstr "Ablaufzeitpunkte ansehen"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
-msgid "Export public keys to files"
-msgstr "Öffentliche Schlüssel in Dateien exportieren"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
 msgid "Generate new keypairs"
 msgstr "Neue Schlüsselpaare generieren"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+msgid "Import keys"
+msgstr "Schlüssel importieren"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Export public keys"
+msgstr "Öffentliche Schlüssel exportieren"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
+msgid "View expiry dates"
+msgstr "Ablaufzeitpunkte ansehen"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:23
 msgid "Remove keys"
@@ -692,6 +695,9 @@ msgstr "Klartext"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Nutzer ID Dialog"
+
+#~ msgid "Manage available keys in a list:"
+#~ msgstr "Verwalten Sie verfügbare Schlüssel über eine Liste:"
 
 #~ msgid "Remove key including subkeys"
 #~ msgstr "Schlüssel inklusive Unterschlüssel entfernen"
@@ -742,9 +748,6 @@ msgstr "Nutzer ID Dialog"
 #~ msgctxt "Expires on at"
 #~ msgid "at"
 #~ msgstr "um"
-
-#~ msgid "Imported key"
-#~ msgstr "Schlüssel importiert"
 
 #~ msgctxt "GPGME Error"
 #~ msgid "create new signed GPGME data from file"

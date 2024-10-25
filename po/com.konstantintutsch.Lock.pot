@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:37+0200\n"
+"POT-Creation-Date: 2024-10-25 10:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -523,7 +523,6 @@ msgid "Import"
 msgstr ""
 
 #: data/ui/keydialog.blp:72
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
 msgid "Import keys from files"
 msgstr ""
 
@@ -637,19 +636,23 @@ msgid "Verification"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
-msgid "Manage available keys in a list:"
+msgid "Manage your GnuPG keyring:"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
-msgid "View expiry dates"
+msgid "Generate new keypairs"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
-msgid "Export public keys to files"
+msgid "Import keys"
+msgstr ""
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+msgid "Export public keys"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
-msgid "Generate new keypairs"
+msgid "View expiry dates"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:23
