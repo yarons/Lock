@@ -12,15 +12,19 @@ typedef enum {
     VERIFY = 1 << 3
 } cryptography_flags;
 
+typedef enum {
+    IMPORT = 1 << 0,
+    EXPORT = 1 << 1,
+    REMOVE = 1 << 2
+} key_flags;
+
 void cryptography_init();
 
 // Keys
-gpgme_key_t key_search(const char *uid);
-bool key_import(const char *path);
+gpgme_key_t key_search(const char *userid);
 bool key_generate(const char *userid, const char *sign_algorithm,
                   const char *encrypt_algorithm, unsigned long expiry);
-bool key_export(const char *uid, const char *path);
-bool key_remove(gpgme_key_t key);
+bool key_manage(const char *path, const char *userid, key_flags flags);
 
 /* Operations */
 char *process_text(const char *text, cryptography_flags flags, gpgme_key_t key);
