@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 10:45+0200\n"
+"POT-Creation-Date: 2024-10-25 10:52+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -534,7 +534,6 @@ msgid "Import"
 msgstr "Importovat"
 
 #: data/ui/keydialog.blp:72
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
 msgid "Import keys from files"
 msgstr "Importovat klíče ze souborů"
 
@@ -658,17 +657,23 @@ msgid "Manage your GnuPG keyring:"
 msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
-msgid "View expiry dates"
-msgstr "Zobrazit datum platnosti"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
-msgid "Export public keys to files"
-msgstr "Exportovat veřejné klíče do souborů"
-
-#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
 #, fuzzy
 msgid "Generate new keypairs"
 msgstr "Spravovat klíče"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:20
+#, fuzzy
+msgid "Import keys"
+msgstr "Importovat"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:21
+#, fuzzy
+msgid "Export public keys"
+msgstr "Exportovat veřejné klíče do souborů"
+
+#: data/com.konstantintutsch.Lock.metainfo.xml.in.in:22
+msgid "View expiry dates"
+msgstr "Zobrazit datum platnosti"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:23
 #, fuzzy

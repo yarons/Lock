@@ -16,10 +16,10 @@
         </ul>
         <p>Manage your GnuPG keyring:</p>
         <ul>
-            <li>View expiry dates</li>
-            <li>Export public keys to files</li>
-            <li>Import keys from files</li>
             <li>Generate new keypairs</li>
+            <li>Import keys</li>
+            <li>Export public keys</li>
+            <li>View expiry dates</li>
             <li>Remove keys</li>
         </ul>
     </description>
