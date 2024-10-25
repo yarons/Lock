@@ -38,7 +38,8 @@ template $LockKeyDialog : Adw.Dialog {
                         propagate-natural-height: true;
 
                         child: Adw.Clamp {
-                            tightening-threshold: 150;
+                            maximum-size: 550;
+                            tightening-threshold: 70;
                             unit: sp;
 
                             child: Gtk.Box manage_box {
@@ -103,7 +104,8 @@ template $LockKeyDialog : Adw.Dialog {
                         propagate-natural-height: true;
 
                         child: Adw.Clamp {
-                            tightening-threshold: 150;
+                            maximum-size: 550;
+                            tightening-threshold: 70;
                             unit: sp;
 
                             child: Gtk.Box {
