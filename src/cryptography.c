@@ -313,8 +313,7 @@ char *process_text(const char *text, cryptography_flags flags, gpgme_key_t key)
     error = gpgme_data_new(&output);
     HANDLE_ERROR(NULL, error,
                  C_("GPGME Error", "create new GPGME output data in memory"),
-                 context, gpgme_data_release(input);
-                 gpgme_data_release(output);
+                 context, gpgme_data_release(input); gpgme_data_release(output);
         );
 
     if (flags & ENCRYPT) {
@@ -368,31 +367,33 @@ char *process_text(const char *text, cryptography_flags flags, gpgme_key_t key)
     return string;
 }
 
-/**** Encrypt ****/
-
 /**
- * This function encrypts a file using a GPG key.
+ * This function processes a file.
  *
- * @param input_path Path to the file to encrypt
- * @param output_path Path to write the encrypted file to
- * @param key Key to encrypt for
+ * @param input_path Path to the file to process
+ * @param output_path Path to write the processed file to
+ * @param flags Processing options
+ * @param key Key to encrypt for. Can be NULL
  *
  * @return Success
  */
-bool encrypt_file(const char *input_path, const char *output_path,
-                  gpgme_key_t key)
+bool process_file(const char *input_path, const char *output_path,
+                  cryptography_flags flags, gpgme_key_t key)
 {
-    /* Overwritng */
-    FILE *file = fopen(output_path, "r");
-    if (file != NULL) {
-        fclose(file);
-        remove(output_path);
-        g_message(_("Removed %s to prepare overwriting"), output_path);
+    // TODO: Remove flag condition once GPGME 1.24.0 is release: gpgme_op_decrypt and gpgme_op_verify will support writing directly files
+    if (flags & ENCRYPT || flags & SIGN) {
+        /* Overwriting */
+        FILE *file = fopen(output_path, "r");
+        if (file != NULL) {
+            fclose(file);
+            remove(output_path);
+            g_message(_("Removed %s to prepare overwriting"), output_path);
+        }
     }
 
     gpgme_ctx_t context;
-    gpgme_data_t decrypted;
-    gpgme_data_t encrypted;
+    gpgme_data_t input;
+    gpgme_data_t output;
 
     gpgme_error_t error;
 
@@ -405,316 +406,117 @@ bool encrypt_file(const char *input_path, const char *output_path,
                  C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
                  context,);
 
-    error = gpgme_data_new_from_file(&decrypted, input_path, 1);
+    // TODO: Do not copy file data to memory once GPGME supports this behavior
+    error = gpgme_data_new_from_file(&input, input_path, 1);
     HANDLE_ERROR(false, error,
                  C_("GPGME Error",
-                    "create new decrypted GPGME data from file"), context,
-                 gpgme_data_release(decrypted);
+                    "create new GPGME input data from file"), context,
+                 gpgme_data_release(input);
         );
 
-    error = gpgme_data_new(&encrypted);
+    // TODO: Always set input file name once GPGME 1.24.0 is released: gpgme_op_encrypt and gpgme_op_sign will be able to read input data directly from files
+    if (flags & DECRYPT || flags & VERIFY) {
+        error = gpgme_data_set_file_name(input, input_path);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "set file name of GPGME input data"),
+                     context, gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    }
+
+    error = gpgme_data_new(&output);
     HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new encrypted GPGME data"), context,
-                 gpgme_data_release(decrypted);
-                 gpgme_data_release(encrypted);
+                 C_("GPGME Error", "create new GPGME output data in memory"),
+                 context, gpgme_data_release(input); gpgme_data_release(output);
         );
 
-    error = gpgme_data_set_file_name(encrypted, output_path);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "set file path of encrypted GPGME data"),
-                 context, gpgme_data_release(decrypted);
-                 gpgme_data_release(encrypted);
-        );
+    // TODO: Always set output file name once GPGME 1.24.0 is released: gpgme_op_decrypt and gpgme_op_verify will be able to write output data directly to files
+    if (flags & ENCRYPT || flags & SIGN) {
+        error = gpgme_data_set_file_name(output, output_path);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "set file name of GPGME output data"),
+                     context, gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    }
 
-    error = gpgme_op_encrypt(context, (gpgme_key_t[]) {
-                             key, NULL}
-                             , 0, decrypted, encrypted);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "encrypt GPGME data from file"), context,
-                 gpgme_data_release(decrypted);
-                 gpgme_data_release(encrypted);
-        );
+    if (flags & ENCRYPT) {
+        error = gpgme_op_encrypt(context, (gpgme_key_t[]) {
+                                 key, NULL}
+                                 , 0, input, output);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "encrypt GPGME data from file"), context,
+                     gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    } else if (flags & DECRYPT) {
+        error = gpgme_op_decrypt(context, input, output);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "decrypt GPGME data from file"), context,
+                     gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    }
 
-    /* Cleanup */
-    gpgme_release(context);
-    gpgme_data_release(decrypted);
-    gpgme_data_release(encrypted);
+    if (flags & SIGN) {
+        error = gpgme_op_sign(context, input, output, GPGME_SIG_MODE_NORMAL);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "sign GPGME data from file"), context,
+                     gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    } else if (flags & VERIFY) {
+        error = gpgme_op_verify(context, input, NULL, output);
+        HANDLE_ERROR(false, error,
+                     C_("GPGME Error", "verify GPGME data from file"), context,
+                     gpgme_data_release(input);
+                     gpgme_data_release(output);
+            );
+    }
+    // TODO: Do not manually write to files once GPGME 1.24.0 is released: gpgme_op_decrypt and gpgme_op_verify will be able to write output data directly to files
+    if (flags & DECRYPT || flags & VERIFY) {
+        size_t length;
+        void *buffer = gpgme_data_release_and_get_mem(output, &length);
 
-    return true;
-}
+        void *data = malloc(length + 1);
+        memcpy(data, buffer, length);
 
-/**** Decrypt ****/
+        FILE *file;
 
-/**
- * This function decrypts a file.
- *
- * @param input_path Path to the file to decrypt
- * @param output_path Path to write the decrypted file to
- *
- * @return Success
- */
-bool decrypt_file(const char *input_path, const char *output_path)
-{
-    gpgme_ctx_t context;
-    gpgme_data_t encrypted;
-    gpgme_data_t decrypted;
+        file = fopen(output_path, "w");
+        if (file == NULL) {
+            g_warning(_("Failed to open output file: %s"), strerror(errno));
 
-    gpgme_error_t error;
+            /* Cleanup */
+            gpgme_release(context);
+            gpgme_data_release(input);
 
-    error = gpgme_new(&context);
-    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
+            gpgme_free(buffer);
+            buffer = NULL;
 
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
+            free(data);
+            data = NULL;
 
-    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "set pinentry mode of GPGME context to ask"), context,);
+            return false;
+        }
 
-    error = gpgme_data_new_from_file(&encrypted, input_path, 1);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error",
-                    "create new encrypted GPGME data from file"), context,
-                 gpgme_data_release(encrypted);
-        );
-
-    error = gpgme_data_new(&decrypted);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new decrypted GPGME data"), context,
-                 gpgme_data_release(encrypted);
-                 gpgme_data_release(decrypted);
-        );
-
-    error = gpgme_data_set_file_name(decrypted, output_path);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "set file path of decrypted GPGME data"),
-                 context, gpgme_data_release(encrypted);
-                 gpgme_data_release(decrypted);
-        );
-
-    error = gpgme_op_decrypt(context, encrypted, decrypted);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "decrypt GPGME data from file"), context,
-                 gpgme_data_release(encrypted);
-                 gpgme_data_release(decrypted);
-        );
-
-    size_t length;
-    void *buffer = gpgme_data_release_and_get_mem(decrypted, &length);
-
-    void *data = malloc(length + 1);
-    memcpy(data, buffer, length);
-
-    FILE *file;
-
-    file = fopen(output_path, "w");
-    if (file == NULL) {
-        g_warning(_("Failed to open output file: %s"), strerror(errno));
+        fwrite(data, length, 1, file);
+        fclose(file);
 
         /* Cleanup */
-        gpgme_release(context);
-        gpgme_data_release(encrypted);
-
         gpgme_free(buffer);
         buffer = NULL;
 
         free(data);
         data = NULL;
-
-        return false;
     }
-
-    fwrite(data, length, 1, file);
-    fclose(file);
 
     /* Cleanup */
     gpgme_release(context);
-    gpgme_data_release(encrypted);
-
-    gpgme_free(buffer);
-    buffer = NULL;
-
-    free(data);
-    data = NULL;
-
-    return true;
-}
-
-/**** Sign ****/
-
-/**
- * This function signs a file using a GPG key.
- *
- * @param input_path Path to the file to sign
- * @param output_path Path to write the signed file to
- *
- * @return Success
- */
-bool sign_file(const char *input_path, const char *output_path)
-{
-    /* Overwritng */
-    FILE *file = fopen(output_path, "r");
-    if (file != NULL) {
-        fclose(file);
-        remove(output_path);
-        g_message(_("Removed %s to prepare overwriting"), output_path);
-    }
-
-    gpgme_ctx_t context;
-    gpgme_data_t plain;
-    gpgme_data_t sign;
-
-    gpgme_error_t error;
-
-    error = gpgme_new(&context);
-    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
-
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
-
-    error = gpgme_set_pinentry_mode(context, GPGME_PINENTRY_MODE_ASK);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error",
-                    "set pinentry mode of GPGME context to ask"), context,);
-
-    error = gpgme_data_new_from_file(&plain, input_path, 1);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new unsigned GPGME data from file"),
-                 context, gpgme_data_release(plain);
-        );
-
-    error = gpgme_data_new(&sign);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new signed GPGME data"), context,
-                 gpgme_data_release(plain);
-                 gpgme_data_release(sign);
-        );
-
-    error = gpgme_data_set_file_name(sign, output_path);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "set file path of signed GPGME data"),
-                 context, gpgme_data_release(plain);
-                 gpgme_data_release(sign);
-        );
-
-    error = gpgme_op_sign(context, plain, sign, GPGME_SIG_MODE_NORMAL);
-    HANDLE_ERROR(false, error, C_("GPGME Error", "sign GPGME data from file"),
-                 context, gpgme_data_release(plain);
-                 gpgme_data_release(sign);
-        );
-
-    /* Cleanup */
-    gpgme_release(context);
-    gpgme_data_release(plain);
-    gpgme_data_release(sign);
-
-    return true;
-}
-
-/**** Verify ****/
-
-/**
- * This function verifies a file.
- *
- * @param input_path Path to the file to verify
- * @param output_path Path to write the verified file to
- *
- * @return Success
- */
-bool verify_file(const char *input_path, const char *output_path)
-{
-    gpgme_ctx_t context;
-    gpgme_data_t sign;
-    gpgme_data_t plain;
-
-    gpgme_error_t error;
-
-    error = gpgme_new(&context);
-    HANDLE_ERROR(false, error, C_("GPGME Error", "create new GPGME context"),
-                 context,);
-
-    error = gpgme_set_protocol(context, GPGME_PROTOCOL_OpenPGP);
-    HANDLE_ERROR(NULL, error,
-                 C_("GPGME Error", "set protocol of GPGME context to OpenPGP"),
-                 context,);
-
-    error = gpgme_data_new(&sign);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new signed GPGME data"), context,
-                 gpgme_data_release(sign);
-        );
-
-    error = gpgme_data_set_file_name(sign, input_path);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "set file path of signed GPGME data"),
-                 context, gpgme_data_release(sign);
-        );
-
-    error = gpgme_data_new(&plain);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "create new unsigned GPGME data"), context,
-                 gpgme_data_release(sign);
-                 gpgme_data_release(plain);
-        );
-
-    error = gpgme_data_set_file_name(plain, output_path);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "set file path of unsigned GPGME data"),
-                 context, gpgme_data_release(sign);
-                 gpgme_data_release(plain);
-        );
-
-    error = gpgme_op_verify(context, sign, NULL, plain);
-    HANDLE_ERROR(false, error,
-                 C_("GPGME Error", "verify GPGME data from file"), context,
-                 gpgme_data_release(sign);
-                 gpgme_data_release(plain);
-        );
-
-    size_t length;
-    void *buffer = gpgme_data_release_and_get_mem(plain, &length);
-
-    void *data = malloc(length + 1);
-    memcpy(data, buffer, length);
-
-    FILE *file;
-
-    file = fopen(output_path, "w");
-    if (file == NULL) {
-        g_warning(_("Failed to open output file: %s"), strerror(errno));
-
-        /* Cleanup */
-        gpgme_release(context);
-        gpgme_data_release(sign);
-
-        gpgme_free(buffer);
-        buffer = NULL;
-
-        free(data);
-        data = NULL;
-
-        return false;
-    }
-
-    fwrite(data, length, 1, file);
-    fclose(file);
-
-    /* Cleanup */
-    gpgme_release(context);
-    gpgme_data_release(sign);
-
-    gpgme_free(buffer);
-    buffer = NULL;
-
-    free(data);
-    data = NULL;
+    gpgme_data_release(input);
+    // TODO: Remove free condition once GPGME 1.24.0 is released: gpgme_op_decrypt and gpgme_op_verify will be able to write output data directly to files
+    if (flags & ENCRYPT || flags & SIGN)
+        gpgme_data_release(output);
 
     return true;
 }

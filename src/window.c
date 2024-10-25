@@ -699,7 +699,7 @@ void lock_window_encrypt_file(LockWindow *window)
         lock_window_set_uid_used(window, key->subkeys->fpr);
     }
 
-    window->file_success = encrypt_file(input_path, output_path, key);
+    window->file_success = process_file(input_path, output_path, ENCRYPT, key);
 
     /* Cleanup */
     g_free(input_path);
@@ -826,7 +826,7 @@ void lock_window_decrypt_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    window->file_success = decrypt_file(input_path, output_path);
+    window->file_success = process_file(input_path, output_path, DECRYPT, NULL);
 
     /* Cleanup */
     g_free(input_path);
@@ -939,7 +939,7 @@ void lock_window_sign_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    window->file_success = sign_file(input_path, output_path);
+    window->file_success = process_file(input_path, output_path, SIGN, NULL);
 
     /* Cleanup */
     g_free(input_path);
@@ -1052,7 +1052,7 @@ void lock_window_verify_file(LockWindow *window)
     char *input_path = g_file_get_path(window->file_input);
     char *output_path = g_file_get_path(window->file_output);
 
-    window->file_success = verify_file(input_path, output_path);
+    window->file_success = process_file(input_path, output_path, VERIFY, NULL);
 
     /* Cleanup */
     g_free(input_path);

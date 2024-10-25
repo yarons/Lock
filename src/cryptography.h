@@ -24,18 +24,7 @@ bool key_remove(gpgme_key_t key);
 
 /* Operations */
 char *process_text(const char *text, cryptography_flags flags, gpgme_key_t key);
-
-// Encrypt
-bool encrypt_file(const char *input_path, const char *output_path,
-                  gpgme_key_t key);
-
-// Decrypt
-bool decrypt_file(const char *input_path, const char *output_path);
-
-// Sign
-bool sign_file(const char *input_path, const char *output_path);
-
-// Verify
-bool verify_file(const char *input_path, const char *output_path);
+bool process_file(const char *input_path, const char *output_path,
+                  cryptography_flags flags, gpgme_key_t key);
 
 #endif                          // CRYPTOGRAPHY_H
