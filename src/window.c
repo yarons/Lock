@@ -594,7 +594,9 @@ void lock_window_encrypt_text(LockWindow *window)
 
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_text_on_completed, window,
-                     g_free(plain); plain = NULL;);
+                     g_free(plain);
+                     plain = NULL;
+        );
     lock_window_set_uid(window, "");    // Mark email search as successful
     if (key->uids->name) {
         lock_window_set_uid_used(window, key->uids->name);
@@ -604,7 +606,7 @@ void lock_window_encrypt_text(LockWindow *window)
         lock_window_set_uid_used(window, key->subkeys->fpr);
     }
 
-    gchar *armor = encrypt_text(plain, key);
+    gchar *armor = process_text(plain, ENCRYPT, key);
     if (armor == NULL) {
         lock_window_text_queue_set_text(window, "");
     } else {
@@ -684,8 +686,10 @@ void lock_window_encrypt_file(LockWindow *window)
     gpgme_key_t key = key_search(window->uid);
     HANDLE_ERROR_UID(, key, lock_window_encrypt_file_on_completed, window,
                      /* Cleanup */
-                     g_free(input_path); input_path = NULL;
-                     g_free(output_path); output_path = NULL;);
+                     g_free(input_path);
+                     input_path = NULL; g_free(output_path);
+                     output_path = NULL;
+        );
     lock_window_set_uid(window, "");    // Mark email search as successful
     if (key->uids->name) {
         lock_window_set_uid_used(window, key->uids->name);
@@ -759,7 +763,7 @@ void lock_window_decrypt_text(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
 
-    gchar *plain = decrypt_text(armor);
+    gchar *plain = process_text(armor, DECRYPT, NULL);
     if (plain == NULL) {
         lock_window_text_queue_set_text(window, "");
     } else {
@@ -872,7 +876,7 @@ void lock_window_sign_text(LockWindow *window)
 {
     gchar *plain = lock_window_text_view_get_text(window);
 
-    gchar *armor = sign_text(plain);
+    gchar *armor = process_text(plain, SIGN, NULL);
     if (armor == NULL) {
         lock_window_text_queue_set_text(window, "");
     } else {
@@ -985,7 +989,7 @@ void lock_window_verify_text(LockWindow *window)
 {
     gchar *armor = lock_window_text_view_get_text(window);
 
-    gchar *plain = verify_text(armor);
+    gchar *plain = process_text(armor, VERIFY, NULL);
     if (plain == NULL) {
         lock_window_text_queue_set_text(window, "");
     } else {

@@ -5,6 +5,13 @@
 
 #include <stdbool.h>
 
+typedef enum {
+    ENCRYPT = 1 << 0,
+    DECRYPT = 1 << 1,
+    SIGN = 1 << 2,
+    VERIFY = 1 << 3
+} cryptography_flags;
+
 void cryptography_init();
 
 // Keys
@@ -15,21 +22,20 @@ bool key_generate(const char *userid, const char *sign_algorithm,
 bool key_export(const char *uid, const char *path);
 bool key_remove(gpgme_key_t key);
 
+/* Operations */
+char *process_text(const char *text, cryptography_flags flags, gpgme_key_t key);
+
 // Encrypt
-char *encrypt_text(const char *text, gpgme_key_t key);
 bool encrypt_file(const char *input_path, const char *output_path,
                   gpgme_key_t key);
 
 // Decrypt
-char *decrypt_text(const char *armor);
 bool decrypt_file(const char *input_path, const char *output_path);
 
 // Sign
-char *sign_text(const char *text);
 bool sign_file(const char *input_path, const char *output_path);
 
 // Verify
-char *verify_text(const char *armor);
 bool verify_file(const char *input_path, const char *output_path);
 
 #endif                          // CRYPTOGRAPHY_H
