@@ -5,7 +5,7 @@
 project(
      'Lock',
             'c',
-        version: '0.5.1',
+        version: '1.0.0',
         license: 'MIT',
   meson_version: '>= 1.3'
 )
