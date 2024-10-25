@@ -8,7 +8,7 @@
 
 /**
  * This function is the entry point of the program.
- * 
+ *
  * @param argc Number of arguments passed
  * @param argv Arguments passed
  *

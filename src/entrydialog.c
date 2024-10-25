@@ -93,7 +93,7 @@ LockEntryDialog *lock_entry_dialog_new(const gchar *title,
  * This function sets the title of a LockEntryDialog.
  *
  * @param dialog Dialog to update the title of
- * @param title Text to use as the title 
+ * @param title Text to use as the title
  */
 static void lock_entry_dialog_set_title(LockEntryDialog *dialog,
                                         const gchar *title)
