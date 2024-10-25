@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 21:12+0200\n"
+"POT-Creation-Date: 2024-10-25 09:37+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -612,7 +612,7 @@ msgstr "Platnost"
 
 #: data/ui/keyrow.blp:18
 #, fuzzy
-msgid "Remove key including subkeys"
+msgid "Remove key"
 msgstr "Obnovit klíče"
 
 #: data/ui/keyrow.blp:25
@@ -702,6 +702,10 @@ msgstr "Holý text"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Okno s ID uživatele"
+
+#, fuzzy
+#~ msgid "Remove key including subkeys"
+#~ msgstr "Obnovit klíče"
 
 #, fuzzy
 #~ msgid "Import key(s) from file"
