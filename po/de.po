@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 21:12+0200\n"
-"PO-Revision-Date: 2024-10-24 21:13+0200\n"
+"POT-Creation-Date: 2024-10-25 09:37+0200\n"
+"PO-Revision-Date: 2024-10-25 09:37+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -602,8 +602,8 @@ msgid "Expiry"
 msgstr "Ablauf"
 
 #: data/ui/keyrow.blp:18
-msgid "Remove key including subkeys"
-msgstr "Schlüssel inklusive Unterschlüssel entfernen"
+msgid "Remove key"
+msgstr "Schlüssel entfernen"
 
 #: data/ui/keyrow.blp:25
 msgid "Export public key to file"
@@ -692,6 +692,9 @@ msgstr "Klartext"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Nutzer ID Dialog"
+
+#~ msgid "Remove key including subkeys"
+#~ msgstr "Schlüssel inklusive Unterschlüssel entfernen"
 
 #~ msgid "Import key(s) from file"
 #~ msgstr "Schlüssel aus Datei importieren"
