@@ -13,7 +13,7 @@ Process text and files:
 - Signing
 - Verification
 
-Manage available keys in a list:
+Manage your GnuPG keyring:
 
 - View expiry dates
 - Export public keys to files

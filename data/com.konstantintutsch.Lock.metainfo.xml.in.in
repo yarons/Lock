@@ -14,7 +14,7 @@
             <li>Signing</li>
             <li>Verification</li>
         </ul>
-        <p>Manage available keys in a list:</p>
+        <p>Manage your GnuPG keyring:</p>
         <ul>
             <li>View expiry dates</li>
             <li>Export public keys to files</li>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:37+0200\n"
+"POT-Creation-Date: 2024-10-25 10:45+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -654,8 +654,8 @@ msgid "Verification"
 msgstr "Ověřovat"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
-msgid "Manage available keys in a list:"
-msgstr "Správa klíčů umožňuje:"
+msgid "Manage your GnuPG keyring:"
+msgstr ""
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
 msgid "View expiry dates"
@@ -702,6 +702,9 @@ msgstr "Holý text"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Okno s ID uživatele"
+
+#~ msgid "Manage available keys in a list:"
+#~ msgstr "Správa klíčů umožňuje:"
 
 #, fuzzy
 #~ msgid "Remove key including subkeys"

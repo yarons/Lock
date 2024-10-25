@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:37+0200\n"
-"PO-Revision-Date: 2024-10-25 09:37+0200\n"
+"POT-Creation-Date: 2024-10-25 10:45+0200\n"
+"PO-Revision-Date: 2024-10-25 10:45+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -646,8 +646,8 @@ msgid "Verification"
 msgstr "Verifikation"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:17
-msgid "Manage available keys in a list:"
-msgstr "Verwalten Sie verfügbare Schlüssel über eine Liste:"
+msgid "Manage your GnuPG keyring:"
+msgstr "Verwalten Sie Ihren GnuPG Schlüsselbund:"
 
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:19
 msgid "View expiry dates"
@@ -692,6 +692,9 @@ msgstr "Klartext"
 #: data/com.konstantintutsch.Lock.metainfo.xml.in.in:70
 msgid "User ID dialog"
 msgstr "Nutzer ID Dialog"
+
+#~ msgid "Manage available keys in a list:"
+#~ msgstr "Verwalten Sie verfügbare Schlüssel über eine Liste:"
 
 #~ msgid "Remove key including subkeys"
 #~ msgstr "Schlüssel inklusive Unterschlüssel entfernen"
