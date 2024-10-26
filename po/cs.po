@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 15:02+0200\n"
+"POT-Creation-Date: 2024-10-26 07:53+0200\n"
 "PO-Revision-Date: 2024-10-20 11:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -467,7 +467,8 @@ msgid "No keys available"
 msgstr "Žádné klíče k dispozici"
 
 #: data/ui/keydialog.blp:52
-msgid "Your system does not store any GnuPG keys."
+#, fuzzy
+msgid "Your GnuPG keyring does not contain any keys."
 msgstr "Ve vašem systému nejsou uloženy žádné GnuPG klíče."
 
 #: data/ui/keydialog.blp:71

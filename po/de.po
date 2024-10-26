@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 15:02+0200\n"
-"PO-Revision-Date: 2024-10-25 15:03+0200\n"
+"POT-Creation-Date: 2024-10-26 07:53+0200\n"
+"PO-Revision-Date: 2024-10-26 07:53+0200\n"
 "Last-Translator: Konstantin Tutsch <mail@konstantintutsch.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -457,8 +457,8 @@ msgid "No keys available"
 msgstr "Keine Schlüssel verfügbar"
 
 #: data/ui/keydialog.blp:52
-msgid "Your system does not store any GnuPG keys."
-msgstr "Ihr System speichert keine GnuPG Schlüssel."
+msgid "Your GnuPG keyring does not contain any keys."
+msgstr "Ihr GnuPG Schlüsselbund enthält keine Schlüssel."
 
 #: data/ui/keydialog.blp:71
 msgctxt "Import keys from files"
