@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.konstantintutsch.Lock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 15:02+0200\n"
+"POT-Creation-Date: 2024-10-26 08:02+0200\n"
 "PO-Revision-Date: 2024-10-26 12:12+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
@@ -453,7 +453,8 @@ msgid "No keys available"
 msgstr "无可用密钥"
 
 #: data/ui/keydialog.blp:52
-msgid "Your system does not store any GnuPG keys."
+#, fuzzy
+msgid "Your GnuPG keyring does not contain any keys."
 msgstr "您的系统未存储任何 GnuPG 密钥。"
 
 #: data/ui/keydialog.blp:71
