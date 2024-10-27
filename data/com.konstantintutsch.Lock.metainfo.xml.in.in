@@ -88,6 +88,13 @@
         <display_length compare="gt">350</display_length>
     </requires>
     <releases>
+        <release version="1.0.0+1" date="2024-10-28">
+            <description translate="no">
+                <ul>
+                    <li>New translations available: Simplified Chinese, Occitan</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.0" date="2024-10-25">
             <description translate="no">
                 <p>Lock is now officially ready and contains all essential functionality!</p>
